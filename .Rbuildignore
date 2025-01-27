@@ -11,3 +11,4 @@
 ^_beekeeper\.yml$
 ^_beekeeper_rapid\.rds$
 ^exploration$
+^_slackapi_rapid\.rds$

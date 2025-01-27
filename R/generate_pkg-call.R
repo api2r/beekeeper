@@ -1,19 +1,18 @@
-.generate_call <- function(config, api_definition, pkg_agent, security_data) {
+.generate_call <- function(config, api_definition, security_data) {
   touched_files <- c(
-    .generate_call_r(config, api_definition, pkg_agent, security_data),
+    .generate_call_r(config, api_definition, security_data),
     .generate_call_test(config$api_abbr)
   )
   return(touched_files)
 }
 
-.generate_call_r <- function(config, api_definition, pkg_agent, security_data) {
+.generate_call_r <- function(config, api_definition, security_data) {
   .bk_use_template(
     template = "010-call.R",
     data = list(
       api_title = config$api_title,
       api_abbr = config$api_abbr,
       base_url = api_definition@servers@url,
-      pkg_agent = pkg_agent,
       has_security = security_data$has_security,
       security_arg_helps = security_data$security_arg_helps,
       security_signature = security_data$security_signature,

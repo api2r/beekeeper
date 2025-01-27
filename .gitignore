@@ -8,3 +8,4 @@ inst/doc
 _beekeeper.yml
 exploration
 _beekeeper_rapid.rds
+_slackapi_rapid.rds

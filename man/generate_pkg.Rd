@@ -4,16 +4,10 @@
 \alias{generate_pkg}
 \title{Use a beekeeper config file to generate code}
 \usage{
-generate_pkg(
-  config_file = "_beekeeper.yml",
-  pkg_agent = generate_pkg_agent(config_file)
-)
+generate_pkg(config_file = "_beekeeper.yml")
 }
 \arguments{
 \item{config_file}{The path to a beekeeper yaml file.}
-
-\item{pkg_agent}{A string to identify this package, for use in the
-\code{user_agent} argument of \code{\link[nectar:req_setup]{nectar::req_setup()}}.}
 }
 \value{
 A character vector of paths to files that were added or updated,
