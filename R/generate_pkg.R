@@ -21,7 +21,7 @@ generate_pkg <- function(config_file = "_beekeeper.yml",
   .assert_is_pkg(pkg_dir)
   config <- .read_config(config_file)
   api_definition <- .read_api_definition(pkg_dir, config$rapid_file)
-  .prepare_r(pkg_dir)
+  .setup_r(pkg_dir)
   touched_files <- .generate_pkg_impl(config, api_definition)
   return(invisible(touched_files))
 }
@@ -31,13 +31,15 @@ generate_pkg <- function(config_file = "_beekeeper.yml",
     config$api_abbr,
     api_definition@components@security_schemes
   )
-  call_files <- .generate_call(config, api_definition, security_data)
+  prep_files <- .generate_prepare(config, api_definition, security_data)
+  # stop("Note: We do NOT need pagination before prepare; pagination is used in paths.")
+  # stop("But we DO need to sort out '030-pagination.R' before paths.")
   path_files <- .generate_paths(
     api_definition@paths,
     config$api_abbr,
     security_data,
     api_definition@servers@url
   )
-  touched_files <- c(call_files, security_data$security_file_path, path_files)
+  touched_files <- c(prep_files, security_data$security_file_path, path_files)
   return(invisible(touched_files))
 }

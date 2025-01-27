@@ -1,79 +1,21 @@
-test_that(".assert_is_pkg() errors informatively for non-packages", {
-  expect_snapshot(
-    .assert_is_pkg(tempdir()),
-    error = TRUE,
-    transform = scrub_tempdir
-  )
-})
-
-test_that("generate_pkg() adds nectar to import.", {
+test_that(".generate_prepare() generates prepare file.", {
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
+  config <- .read_config(test_path("_fixtures", "guru_beekeeper.yml"))
+  api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
+  prepare_expected <- readLines(test_path("_fixtures", "guru-010-prepare.R"))
+  t_prepare_expected <- readLines(test_path("_fixtures", "guru-test-010-prepare.R"))
 
   create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
+  usethis::use_testthat()
+  test_result <- .generate_prepare(config, api_definition, list())
 
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
-
-  dependencies <- desc::desc()$get_deps()
   expect_identical(
-    dependencies$package[dependencies$type == "Imports"],
-    "nectar"
+    basename(test_result),
+    c("010-prepare.R", "test-010-prepare.R")
   )
-})
 
-test_that("generate_pkg() adds beekeeper to suggests.", {
-  skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
-
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
-
-  dependencies <- desc::desc()$get_deps()
-  expect_contains(
-    dependencies$package[dependencies$type == "Suggests"],
-    "beekeeper"
-  )
-})
-
-test_that("generate_pkg() adds httptest2 to suggests.", {
-  skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
-
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
-
-  dependencies <- desc::desc()$get_deps()
-  expect_contains(
-    dependencies$package[dependencies$type == "Suggests"],
-    "httptest2"
-  )
-})
-
-test_that("generate_pkg() adds testthat to suggests.", {
-  skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
-
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
-
-  dependencies <- desc::desc()$get_deps()
-  expect_contains(
-    dependencies$package[dependencies$type == "Suggests"],
-    "testthat"
-  )
+  prepare_result <- scrub_testpkg(readLines("R/010-prepare.R"))
+  expect_identical(prepare_result, prepare_expected)
+  t_prepare_result <- scrub_testpkg(readLines("tests/testthat/test-010-prepare.R"))
+  expect_identical(t_prepare_result, t_prepare_expected)
 })

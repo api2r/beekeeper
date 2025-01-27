@@ -1,20 +1,32 @@
-test_that("generate_pkg() generates path functions for guru", {
+test_that(".generate_paths() generates path files", {
   # 1 tag, no security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-  expected_file_content <- readLines(
+  config <- .read_config(test_path("_fixtures", "guru_beekeeper.yml"))
+  api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
+  r_expected <- readLines(
     test_path("_fixtures", "guru-paths-apis.R")
   )
-
+  tests_expected <- readLines(
+    test_path("_fixtures", "guru-test-paths-apis.R")
+  )
   create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
+  usethis::use_testthat()
 
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
+  test_result <- .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = config$api_abbr,
+    security_data = list(),
+    base_url = api_definition@servers@url
+  )
+  expect_identical(
+    basename(test_result),
+    c("paths-apis.R", "test-paths-apis.R", "setup.R")
+  )
 
-  generated_file_content <- readLines("R/paths-apis.R")
-  expect_identical(generated_file_content, expected_file_content)
+  r_result <- readLines("R/paths-apis.R")
+  expect_identical(r_result, r_expected)
+  tests_result <- readLines("tests/testthat/test-paths-apis.R")
+  expect_identical(tests_result, tests_expected)
 })
 
 test_that("generate_pkg() generates path tests for guru", {
@@ -30,7 +42,7 @@ test_that("generate_pkg() generates path tests for guru", {
   writeLines(config, "_beekeeper.yml")
   saveRDS(guru_rapid, "guru_rapid.rds")
 
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
+  generate_pkg()
 
   generated_file_content <- readLines("tests/testthat/test-paths-apis.R")
   expect_identical(generated_file_content, expected_file_content)
@@ -49,7 +61,7 @@ test_that("generate_pkg() generates test setup file for guru", {
   writeLines(config, "_beekeeper.yml")
   saveRDS(guru_rapid, "guru_rapid.rds")
 
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
+  generate_pkg()
 
   generated_file_content <- readLines("tests/testthat/setup.R")
   expect_identical(generated_file_content, expected_file_content)

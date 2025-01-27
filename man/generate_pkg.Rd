@@ -4,10 +4,18 @@
 \alias{generate_pkg}
 \title{Use a beekeeper config file to generate code}
 \usage{
-generate_pkg(config_file = "_beekeeper.yml")
+generate_pkg(
+  config_file = "_beekeeper.yml",
+  pkg_dir = fs::path_dir(config_file)
+)
 }
 \arguments{
-\item{config_file}{The path to a beekeeper yaml file.}
+\item{config_file}{(\verb{length-1 character} or \code{fs_path}) The path to a
+beekeeper yaml file. All package files are created relative to this file.}
+
+\item{pkg_dir}{(\verb{length-1 character} or \code{fs_path}) The directory in which the
+package files will be created. Defaults to the directory of the config
+file.}
 }
 \value{
 A character vector of paths to files that were added or updated,

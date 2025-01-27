@@ -26,6 +26,10 @@
   glue_collapse(x, sep = ",\n")
 }
 
+.collapse_quote_comma <- function(x) {
+  stringr::str_flatten_comma(paste0('"', x, '"'))
+}
+
 .to_snake <- function(x) {
   to_snake_case(x, parsing_option = 3)
 }
@@ -40,7 +44,7 @@ S7::method(.flatten_df, class_data.frame) <- function(x) {
 }
 
 S7::method(.flatten_df, class_list) <- function(x) {
-  return(list_rbind(x))
+  return(purrr::list_rbind(x))
 }
 
 S7::method(.flatten_df, NULL) <- function(x) {
