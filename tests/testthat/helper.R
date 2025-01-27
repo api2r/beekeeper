@@ -9,9 +9,7 @@ create_local_package <- function(pkgname = "testpkg",
 
   usethis::create_package(
     dir,
-    # I need a url to check for it in user agent.
     fields = list(
-      "URL" = "https://example.com",
       "Config/testthat/edition" = "3"
     ),
     rstudio = TRUE,

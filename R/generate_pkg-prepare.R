@@ -49,13 +49,16 @@
   return(config)
 }
 
-.read_api_definition <- function(config_file, rapid_file) {
+.read_api_definition <- function(pkg_dir, rapid_file) {
   readRDS(
-    path(path_dir(config_file), rapid_file)
+    path(pkg_dir, rapid_file)
   )
 }
 
-.prepare_r <- function() {
+.prepare_r <- function(pkg_dir) {
+  if (as.character(pkg_dir) != ".") {
+    usethis::local_project(pkg_dir, quiet = TRUE)
+  }
   use_directory("R")
   use_testthat()
   quietly(use_httptest2)()
