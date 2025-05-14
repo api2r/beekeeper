@@ -1,0 +1,33 @@
+/*
+h1.title {
+  font-size: 2em !important;
+}
+*/
+.reveal .footer {
+  font-size: 30px !important;
+}
+
+.reveal .slide-logo {
+  max-height: unset !important;
+  height: 70px !important;
+}
+
+.reveal .title-slide {
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Horizontally space out content */
+}
+
+.title-slide img {
+  width: 40%;
+  float: right; /* Keeps the image to the right */
+}
+
+.title-slide .title-text {
+  width: 50%; /* Adjust width as necessary */
+  margin-left: 5%; /* Add some spacing between text and image */
+}
+
+strong {
+  color: #A0E9FF;
+}

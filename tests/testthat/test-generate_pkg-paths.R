@@ -80,7 +80,7 @@ test_that("generate_pkg() generates path functions for fec", {
   writeLines(config, "_beekeeper.yml")
   saveRDS(fec_rapid, "fec_subset_rapid.rds")
 
-  changed_files <- generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
+  changed_files <- generate_pkg()
   expect_snapshot(scrub_path(changed_files))
 
   generated_file_content <- readLines("R/paths-audit.R")
@@ -100,7 +100,7 @@ test_that("generate_pkg() generates path functions for trello", {
   writeLines(config, "_beekeeper.yml")
   saveRDS(trello_rapid, "trello_rapid.rds")
 
-  generate_pkg(pkg_agent = "TESTPKG (https://example.com)")
+  generate_pkg()
 
   generated_file_content <- readLines("R/paths-board.R")
   expect_identical(generated_file_content, expected_file_content)

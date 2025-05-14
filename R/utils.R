@@ -30,6 +30,23 @@
   stringr::str_flatten_comma(paste0('"', x, '"'))
 }
 
+.paste0_if <- function(original, test, addition) {
+  ifelse(
+    test,
+    paste0(original, addition),
+    original
+  )
+}
+
+.glue_pipe_brace <- function(..., .envir = rlang::caller_env()) {
+  glue::glue(
+    ...,
+    .open = "|{",
+    .close = "}|",
+    .envir = .envir
+  )
+}
+
 .to_snake <- function(x) {
   to_snake_case(x, parsing_option = 3)
 }

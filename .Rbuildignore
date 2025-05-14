@@ -12,3 +12,4 @@
 ^_beekeeper_rapid\.rds$
 ^exploration$
 ^_slackapi_rapid\.rds$
+^data-raw$

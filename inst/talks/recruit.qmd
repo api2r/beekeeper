@@ -1,0 +1,125 @@
+---
+title: |
+  Building the Hive: Collaborating on API Packages with {beekeeper}
+css: style.css
+format:
+  revealjs: 
+    theme: dark
+    # logo: images/robodeck-logo.png
+    footer: api2r.org/ghana2025 | Jon Harmon | @jonthegeek
+    link-external-newwindow: true
+    transition: slide
+    incremental: true
+---
+
+# Introduction and Motivation
+
+## How I Use APIs
+
+- 📊 Web APIs are powerful tools in R
+- 🤔 But wouldn't it be great to have them more accessible in R code?
+
+![Illustration of a person using a computer](person-computer.png)
+
+## API Developer Docs: Where's R?
+
+- 📚 Always referring back to the API documentation
+- 💡 Imagine if it was all in one neat R package
+
+![Stack of developer papers](developer-docs.png)
+
+## The Vision for {beekeeper}
+
+- 🐝 {beekeeper} simplifies API package creation
+- 🌟 Helps maintainers follow best practices
+- 🚀 Let's create user-friendly, reliable packages together
+
+![Illustration of bees buzzing around a hive](bees-hive.png)
+
+# Creating an API Package with {beekeeper}
+
+## Finding the API Spec
+
+- 👀 Locating the API documentation
+- 📝 Understanding the required endpoints and parameters
+
+![API documentation screenshot](api-docs.png)
+
+## usethis::create_package()
+
+- #install.packages("usethis")
+- 🧩 Setting up the R package structure
+- 🏗️ Organizing files and directories effortlessly
+
+## beekeeper::use_beekeeper()
+
+- #install.packages("beekeeper")
+- 🐝 Initializing {beekeeper} in our package
+- 🚦 Kickstarting the API package creation process
+
+![Illustration of a beekeeper creating a package](beekeeper-package.png)
+
+## beekeeper::generate_pkg()
+
+- 📦 Generating the initial package scaffolding
+- 🔍 Ensuring a consistent layout and structure
+
+# What Works Today
+
+## Raw generate_pkg() Output
+
+- 🚀 Initial package structure created
+- 🕵️‍♀️ Exploring the generated files and directories
+
+## Improving Parameter Documentation
+
+- 📋 Enhancing documentation for API parameters
+- 🌈 Making it easier for users to understand and interact
+
+![Document with highlighted text](parameter-docs.png)
+
+## Response Parsing with {tibblify}
+
+- #install.packages("tibblify")
+- 📊 Converting API responses to tidy data frames
+- 📈 Simplifying data manipulation and analysis tasks
+
+## Testing & Iterating
+
+- 🧪 Testing our package functionality
+- 🔁 Iterating on improvements and bug fixes
+
+# What's Next
+
+## What I Have Planned
+
+- 📅 Roadmap for {beekeeper} enhancements
+- 💡 Exciting features in the pipeline
+
+## What I Don't Know
+
+- 🤔 Seeking input and feedback from the community
+- 🤝 Collaborating to address unknown challenges
+
+# Collaboration and Community
+
+## Promoting Your Package
+
+- 📣 Showcasing your API package
+- 🎯 Reaching out to potential users and contributors
+
+## Feature Requests and Testing
+
+- 📝 Gathering feedback and feature requests
+- 🛠 Collaborating on testing and improving {beekeeper}
+
+## How You Can Contribute to {beekeeper}
+
+- ❓ Ways to get involved
+- 🐝 Help shape the future of API package development in R
+
+# Get In Touch Right Now!
+
+- [{beekeeper}: beekeeper.api2r.org/](https://beekeeper.api2r.org/)
+- [LinkedIn: @jonthegeek](https://www.linkedin.com/in/jonthegeek/)
+- [Data Science Learning Community](https://DSLC.io)
