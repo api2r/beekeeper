@@ -12,6 +12,47 @@ format:
     incremental: true
 ---
 
+# 🎯 What is a web API?
+
+## 📘 APIs are: {transition="slide-in none-out"}
+
+🤖↔️🤖 Services that enable communication between computer programs.
+
+::: notes
+-   "Application programming interface." (but almost always API)
+-   You might hear the arguments to a function referred to as the "API" of that function.
+:::
+
+## 📘 Web APIs are: {transition="none-in slide-out"}
+
+🤖↔️🤖 Services that enable communication between computer programs *on the internet.*
+
+::: notes
+-   For the rest of this talk, "API" = "web API".
+:::
+
+## 📆 You use web APIs every day!
+
+::: incremental
+-   "Login with ![](images/Google__G__Logo.svg){height="30"} \| ![](images/Apple_logo_white.svg){height="30" style="text-align: top;"}"
+-   "Create ![](images/Zoom_logo_2022.svg){height="20"} meeting" in work messenger
+-   "📅 Add to Calendar"
+-   *Technically: Load any web page == `GET`*
+-   Learn more about [Web APIs with R (DSLC.io/wapir)](https://DSLC.io/wapir)
+:::
+
+::: notes
+-   (don't comment on logo alignment)
+-   Zoom: Or similar app integrations.
+-   Button on a web page, goes to Google or Apple calendar, etc.
+-   For "technically":
+    -   When you fetch a web page, you're using the GET method to ask the server to send you the page.
+    -   There are 5 main methods for web apis.
+        -   GET, POST = create something new usually, PUT = replace, PATCH = edit, DELETE; often just GET and/or POST
+-   I'm writing a book! Slowly, but join DSLC.io to join the next cohort!
+:::
+
+
 # Introduction and Motivation
 
 ## How I Use APIs

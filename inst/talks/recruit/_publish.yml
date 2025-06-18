@@ -1,0 +1,4 @@
+- source: recruit.qmd
+  quarto-pub:
+    - id: 8f439c7b-183f-42e3-b9ed-c04c332f2607
+      url: https://jonthegeek.quarto.pub/building-the-hive
