@@ -19,11 +19,13 @@
 #'   written as a side effect of this function. The rapid object is also
 #'   written, and the path to that file is saved in the config file.
 #' @export
-use_beekeeper <- function(x,
-                          api_abbr,
-                          ...,
-                          config_file = "_beekeeper.yml",
-                          rapid_file = "_beekeeper_rapid.rds") {
+use_beekeeper <- function(
+  x,
+  api_abbr,
+  ...,
+  config_file = "_beekeeper.yml",
+  rapid_file = "_beekeeper_rapid.rds"
+) {
   x <- as_rapid(x)
   rapid_file <- .write_rapid(x, rapid_file)
   config_file <- .write_config(x, api_abbr, rapid_file, config_file)
@@ -32,19 +34,19 @@ use_beekeeper <- function(x,
 }
 
 .write_rapid <- function(x, rapid_file) {
-  rapid_file <- stabilize_string(rapid_file)
+  rapid_file <- stbl::stabilize_character_scalar(rapid_file)
   saveRDS(x, rapid_file)
   use_build_ignore(rapid_file)
   return(rapid_file)
 }
 
 .write_config <- function(x, api_abbr, rapid_file, config_file) {
-  config_file <- stabilize_string(config_file)
+  config_file <- stbl::stabilize_character_scalar(config_file)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
   write_yaml(
     list(
       api_title = x@info@title,
-      api_abbr = stabilize_string(api_abbr),
+      api_abbr = stbl::stabilize_character_scalar(api_abbr),
       api_version = x@info@version,
       rapid_file = path_rel(rapid_file, path_dir(config_file)),
       updated_on = as.character(update_time)

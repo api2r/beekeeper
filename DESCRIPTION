@@ -13,9 +13,9 @@ Description: Automatically generate R package skeletons from 'application
 License: MIT + file LICENSE
 URL: https://beekeeper.api2r.org, https://github.com/jonthegeek/beekeeper
 BugReports: https://github.com/jonthegeek/beekeeper/issues
-Depends: 
+Depends:
     R (>= 4.1.0)
-Imports: 
+Imports:
     cli,
     fs,
     glue,
@@ -35,7 +35,7 @@ Imports:
     usethis,
     utils,
     yaml
-Suggests: 
+Suggests:
     covr,
     desc,
     janitor,
@@ -43,7 +43,7 @@ Suggests:
     rmarkdown,
     rvest,
     withr
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Remotes:
     jonthegeek/nectar,
@@ -51,5 +51,5 @@ Remotes:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 LazyData: true

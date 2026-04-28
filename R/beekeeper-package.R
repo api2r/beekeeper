@@ -12,7 +12,6 @@
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom httptest2 use_httptest2
-#' @importFrom nectar stabilize_string
 #' @importFrom purrr discard
 #' @importFrom purrr imap
 #' @importFrom purrr map

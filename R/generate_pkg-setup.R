@@ -38,10 +38,10 @@
 # covr doesn't see the line above and a bunch below for some reason.
 # nocov start
 .stabilize_config <- function(config) {
-  config$api_title <- stabilize_string(config$api_title)
-  config$api_abbr <- stabilize_string(config$api_abbr)
-  config$api_version <- stabilize_string(config$api_version)
-  config$rapid_file <- stabilize_string(config$rapid_file)
+  config$api_title <- stbl::stabilize_character_scalar(config$api_title)
+  config$api_abbr <- stbl::stabilize_character_scalar(config$api_abbr)
+  config$api_version <- stbl::stabilize_character_scalar(config$api_version)
+  config$rapid_file <- stbl::stabilize_character_scalar(config$rapid_file)
   config$updated_on <- strptime(
     config$updated_on,
     format = "%Y-%m-%d %H:%M:%S",

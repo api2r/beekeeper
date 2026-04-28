@@ -13,3 +13,5 @@
 ^exploration$
 ^_slackapi_rapid\.rds$
 ^data-raw$
+^\.positai$
+^\.claude$
