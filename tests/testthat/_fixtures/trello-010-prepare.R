@@ -11,13 +11,16 @@
 #' @inheritParams nectar::req_prepare
 #' @inherit nectar::req_prepare return
 #' @keywords internal
-trello_req_prepare <- function(path,
-                               query = list(),
-                               body = NULL,
-                               method = NULL,
-                               tidy_fn = nectar::resp_tidy_unknown, key = Sys.getenv("TRELLO_KEY"),
-                               token = Sys.getenv("TRELLO_TOKEN"),
-                               call = rlang::caller_env()) {
+trello_req_prepare <- function(
+  path,
+  query = list(),
+  body = NULL,
+  method = NULL,
+  tidy_fn = nectar::resp_tidy_unknown,
+  key = Sys.getenv("TRELLO_KEY"),
+  token = Sys.getenv("TRELLO_TOKEN"),
+  call = rlang::caller_env()
+) {
   req <- nectar::req_prepare(
     "https://trello.com/1",
     path = path,

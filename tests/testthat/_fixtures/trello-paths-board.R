@@ -11,11 +11,13 @@
 #' @return BKTODO: Return descriptions are not yet implemented in beekeeper
 #' @export
 trello_add_boards <- function(
-    key = Sys.getenv("TRELLO_KEY"),
-    token = Sys.getenv("TRELLO_TOKEN")) {
+  key = Sys.getenv("TRELLO_KEY"),
+  token = Sys.getenv("TRELLO_TOKEN")
+) {
   trello_call_api(
     path = "/boards",
     method = "post",
-    key = key, token = token
+    key = key,
+    token = token
   )
 }

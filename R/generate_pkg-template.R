@@ -8,11 +8,13 @@
 #'
 #' @return The path to the generated or updated file, invisibly.
 #' @keywords internal
-.bk_use_template <- function(template,
-                             data,
-                             ...,
-                             target = template,
-                             dir = c("R", "tests/testthat")) {
+.bk_use_template <- function(
+  template,
+  data,
+  ...,
+  target = template,
+  dir = c("R", "tests/testthat")
+) {
   check_dots_empty()
   dir <- match.arg(dir)
   target <- .bk_use_template_impl(template, data, target, dir)

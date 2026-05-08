@@ -1,7 +1,6 @@
 # Inspired by https://github.com/r-lib/usethis tests/testthat/helper.R
 
-create_local_package <- function(pkgname = "testpkg",
-                                 env = parent.frame()) {
+create_local_package <- function(pkgname = "testpkg", env = parent.frame()) {
   withr::local_options(usethis.quiet = TRUE, .local_envir = env)
 
   dir <- withr::local_tempdir(pattern = pkgname, .local_envir = env)

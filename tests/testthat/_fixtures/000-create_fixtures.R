@@ -40,8 +40,12 @@ fec_rapid@paths <- rapid::as_paths({
   x$tags <- NULL
   x
 })
-rapid_write_path <- test_path(glue::glue("_fixtures/{api_abbr}_subset_rapid.rds"))
-config_path <- test_path(glue::glue("_fixtures/{api_abbr}_subset_beekeeper.yml"))
+rapid_write_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}_subset_rapid.rds"
+))
+config_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}_subset_beekeeper.yml"
+))
 fec_rapid |>
   use_beekeeper(
     api_abbr = api_abbr,

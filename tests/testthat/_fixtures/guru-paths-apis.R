@@ -68,7 +68,12 @@ guru_get_api <- function(provider, api) {
 #' @export
 guru_get_service_api <- function(provider, service, api) {
   guru_call_api(
-    path = c("/specs/{provider}/{service}/{api}.json", provider = provider, service = service, api = api),
+    path = c(
+      "/specs/{provider}/{service}/{api}.json",
+      provider = provider,
+      service = service,
+      api = api
+    ),
     method = "get"
   )
 }

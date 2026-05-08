@@ -22,7 +22,10 @@ test_that(".read_config() reads configs", {
 })
 
 test_that(".read_api_definition() reads api_definitions", {
-  api_definition <- .read_api_definition(test_path("_fixtures"), "guru_rapid.rds")
+  api_definition <- .read_api_definition(
+    test_path("_fixtures"),
+    "guru_rapid.rds"
+  )
   expect_s7_class(api_definition, rapid::class_rapid)
 })
 

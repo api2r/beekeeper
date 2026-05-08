@@ -10,12 +10,14 @@
 #' @inheritParams nectar::req_prepare
 #' @inherit nectar::req_prepare return
 #' @keywords internal
-guru_req_prepare <- function(path,
-                             query = list(),
-                             body = NULL,
-                             method = NULL,
-                             tidy_fn = nectar::resp_tidy_unknown,
-                             call = rlang::caller_env()) {
+guru_req_prepare <- function(
+  path,
+  query = list(),
+  body = NULL,
+  method = NULL,
+  tidy_fn = nectar::resp_tidy_unknown,
+  call = rlang::caller_env()
+) {
   req <- nectar::req_prepare(
     "https://api.apis.guru/v2",
     path = path,

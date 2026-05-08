@@ -1,4 +1,10 @@
-.generate_paths <- function(paths, api_abbr, security_data, pagination_data, base_url) {
+.generate_paths <- function(
+  paths,
+  api_abbr,
+  security_data,
+  pagination_data,
+  base_url
+) {
   paths_by_operation <- as_bk_data(paths)
   paths_file_paths <- character()
   if (length(paths_by_operation)) {
@@ -96,12 +102,14 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 ### create whisker data --------------------------------------------------------
 
-.paths_endpoint_to_list <- function(operation_id,
-                                    path,
-                                    summary,
-                                    description,
-                                    params_df,
-                                    method) {
+.paths_endpoint_to_list <- function(
+  operation_id,
+  path,
+  summary,
+  description,
+  params_df,
+  method
+) {
   params_df <- .prepare_params_df(params_df)
   return(
     list(
@@ -169,9 +177,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(str_squish(descriptions))
 }
 
-.describe_param_classes <- function(params_schema,
-                                    allow_empty,
-                                    required) {
+.describe_param_classes <- function(params_schema, allow_empty, required) {
   # TODO: Use enum and/or description when available.
   #
   # TODO: What should we do for `object` and `array`?
@@ -203,10 +209,12 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(r_class_descriptions)
 }
 
-.paths_complete_param_descriptions <- function(descriptions,
-                                               params_schema,
-                                               allow_empty,
-                                               required) {
+.paths_complete_param_descriptions <- function(
+  descriptions,
+  params_schema,
+  allow_empty,
+  required
+) {
   r_class_descriptions <- .describe_param_classes(
     params_schema,
     allow_empty,
@@ -247,10 +255,12 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 # generate files ----------------------------------------------------------
 
-.generate_paths_files <- function(paths_by_operation,
-                                  api_abbr,
-                                  security_data,
-                                  pagination_data) {
+.generate_paths_files <- function(
+  paths_by_operation,
+  api_abbr,
+  security_data,
+  pagination_data
+) {
   unlist(imap(
     paths_by_operation,
     function(path_operation, path_operation_id) {
@@ -265,11 +275,13 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   ))
 }
 
-.generate_paths_operation_files <- function(path_operation,
-                                            path_operation_id,
-                                            api_abbr,
-                                            security_data,
-                                            pagination_data) {
+.generate_paths_operation_files <- function(
+  path_operation,
+  path_operation_id,
+  api_abbr,
+  security_data,
+  pagination_data
+) {
   stop("Everything should be prepped before this, I think.")
   path_operation <- .prepare_path_operation(
     path_operation,
@@ -292,7 +304,9 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .prepare_path_operation <- function(path_operation, security_args) {
-  stop("Do this all in initial parsing? Everything is by operation now, which means 1 path per file; no need to map.")
+  stop(
+    "Do this all in initial parsing? Everything is by operation now, which means 1 path per file; no need to map."
+  )
   path_operation <- map(
     path_operation,
     function(path) {
@@ -324,10 +338,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   .collapse_comma_self_equal(setdiff(params, security_args)) %|"|% character()
 }
 
-.generate_paths_file <- function(path,
-                                 path_tag_name,
-                                 api_abbr,
-                                 security_data) {
+.generate_paths_file <- function(path, path_tag_name, api_abbr, security_data) {
   .bk_use_template(
     template = "paths.R",
     data = c(

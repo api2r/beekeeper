@@ -3,7 +3,10 @@ test_that(".generate_prepare() generates prepare file.", {
   config <- .read_config(test_path("_fixtures", "guru_beekeeper.yml"))
   api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
   prepare_expected <- readLines(test_path("_fixtures", "guru-010-prepare.R"))
-  t_prepare_expected <- readLines(test_path("_fixtures", "guru-test-010-prepare.R"))
+  t_prepare_expected <- readLines(test_path(
+    "_fixtures",
+    "guru-test-010-prepare.R"
+  ))
 
   create_local_package()
   usethis::use_testthat()
@@ -16,6 +19,8 @@ test_that(".generate_prepare() generates prepare file.", {
 
   prepare_result <- scrub_testpkg(readLines("R/010-prepare.R"))
   expect_identical(prepare_result, prepare_expected)
-  t_prepare_result <- scrub_testpkg(readLines("tests/testthat/test-010-prepare.R"))
+  t_prepare_result <- scrub_testpkg(readLines(
+    "tests/testthat/test-010-prepare.R"
+  ))
   expect_identical(t_prepare_result, t_prepare_expected)
 })

@@ -6,7 +6,8 @@
       data = c(security_data, api_abbr = api_abbr)
     )
     security_data$security_signature <- .generate_security_signature(
-      security_data$security_arg_names, api_abbr
+      security_data$security_arg_names,
+      api_abbr
     )
   }
   return(security_data)
@@ -58,7 +59,8 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
 .security_scheme_description_fill <- function(description, type) {
   if (is.na(description)) {
     return(
-      switch(type,
+      switch(
+        type,
         api_key = .security_scheme_description_api_key,
         NA_character_
       )

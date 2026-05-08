@@ -13,8 +13,10 @@
 #' @return A character vector of paths to files that were added or updated,
 #'   invisibly.
 #' @export
-generate_pkg <- function(config_file = "_beekeeper.yml",
-                         pkg_dir = fs::path_dir(config_file)) {
+generate_pkg <- function(
+  config_file = "_beekeeper.yml",
+  pkg_dir = fs::path_dir(config_file)
+) {
   # TODO: Confirm that they use github & everything is committed. Error or warn
   # if not, letting them know that this can be destructive. Skip this check in
   # tests.
