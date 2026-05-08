@@ -48,8 +48,8 @@ VignetteBuilder:
 Remotes:
     jonthegeek/nectar,
     jonthegeek/rapid
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
 LazyData: true
-Config/roxygen2/version: 8.0.0
+Roxygen: list(markdown = TRUE)
