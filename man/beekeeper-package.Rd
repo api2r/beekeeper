@@ -6,6 +6,8 @@
 \alias{beekeeper-package}
 \title{beekeeper: Rapidly Scaffold API Client Packages}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 Automatically generate R package skeletons from 'application programming interfaces (APIs)' that follow the 'OpenAPI Specification (OAS)'. The skeletons implement best practices to streamline package development.
 }
 \seealso{
@@ -19,6 +21,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Jon Harmon \email{jonthegeek@gmail.com} (\href{https://orcid.org/0000-0003-4781-4346}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Jon Harmon \email{jonthegeek@gmail.com} (\href{https://orcid.org/0000-0003-4781-4346}{ORCID}) [copyright holder]
+}
 
 Other contributors:
 \itemize{
