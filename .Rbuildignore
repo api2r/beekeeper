@@ -17,3 +17,4 @@
 ^\.claude$
 ^[.]?air[.]toml$
 ^\.vscode$
+^AGENTS\.md$
