@@ -18,7 +18,7 @@
   check_dots_empty()
   dir <- match.arg(dir)
   target <- .bk_use_template_impl(template, data, target, dir)
-  capture.output(style_file(target))
+  capture.output(styler::style_file(target))
   return(invisible(target))
 }
 

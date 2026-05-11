@@ -43,7 +43,7 @@ use_beekeeper <- function(
 .write_config <- function(x, api_abbr, rapid_file, config_file) {
   config_file <- stbl::stabilize_character_scalar(config_file)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-  write_yaml(
+  yaml::write_yaml(
     list(
       api_title = x@info@title,
       api_abbr = stbl::stabilize_character_scalar(api_abbr),

@@ -48,7 +48,7 @@
 }
 
 .to_snake <- function(x) {
-  to_snake_case(x, parsing_option = 3)
+  snakecase::to_snake_case(x, parsing_option = 3)
 }
 
 .flatten_df <- S7::new_generic(

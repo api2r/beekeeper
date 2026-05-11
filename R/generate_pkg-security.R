@@ -131,7 +131,7 @@ S7::method(as_bk_data, class_api_key_security_scheme) <- function(x) {
     return(
       list(
         parameter_name = x@parameter_name,
-        arg_name = str_remove(.to_snake(x@parameter_name), "^x_"),
+        arg_name = stringr::str_remove(.to_snake(x@parameter_name), "^x_"),
         location = x@location,
         type = "api_key",
         api_key = TRUE

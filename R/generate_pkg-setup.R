@@ -24,14 +24,14 @@
 #' @keywords internal
 .is_pkg <- function(base_path = proj_get()) {
   root_file <- try_fetch(
-    find_package_root_file(path = base_path),
+    rprojroot::find_package_root_file(path = base_path),
     error = function(cnd) NULL
   )
   !is.null(root_file)
 }
 
 .read_config <- function(config_file = "_beekeeper.yml") {
-  config <- read_yaml(config_file)
+  config <- yaml::read_yaml(config_file)
   return(.stabilize_config(config)) # nocov
 }
 
@@ -63,7 +63,7 @@
   }
   use_directory("R")
   use_testthat()
-  quietly(use_httptest2)()
+  purrr::quietly(use_httptest2)()
   use_package("nectar")
   use_package("beekeeper", type = "Suggests")
 }

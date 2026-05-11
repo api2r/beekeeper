@@ -93,10 +93,10 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .paths_fill_summary <- function(summary, endpoint, method) {
-  endpoint_spaced <- str_replace_all(.to_snake(endpoint), "_", " ")
+  endpoint_spaced <- stringr::str_replace_all(.to_snake(endpoint), "_", " ")
   .coalesce(
-    str_squish(summary),
-    str_to_sentence(glue("{method} {endpoint_spaced}"))
+    stringr::str_squish(summary),
+    stringr::str_to_sentence(glue("{method} {endpoint_spaced}"))
   )
 }
 
@@ -174,7 +174,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 .paths_fill_descriptions <- function(descriptions, summaries) {
   descriptions[is.na(descriptions)] <- summaries[is.na(descriptions)]
   descriptions[is.na(descriptions)] <- ""
-  return(str_squish(descriptions))
+  return(stringr::str_squish(descriptions))
 }
 
 .describe_param_classes <- function(params_schema, allow_empty, required) {
