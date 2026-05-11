@@ -21,19 +21,19 @@
     max_reqs = max_reqs, # Should only include this with pagination.
     max_tries_per_req = max_tries_per_req
   )
-  return(nectar::resp_tidy(resps))
+  return(nectar::resp_parse(resps))
 }
 
 #' @rdname {{operation_id}}
 #' @returns `req_{{operation_id}}()`: A `httr2_request` request object.
 req_{{operation_id}} <- function({{{args}}}{{#has_security}}{{#args}},{{/args}}{{{security_signature}}}{{/has_security}}) {
-  slack_req_prepare(
+  {{api_abbr}}_req_prepare(
     path = "{{{path}}}",
     method = "{{method}}"{{#has_security}},
     {{security_arg_list}}{{/has_security}}{{#params_query}},
     query = list({{params_query}}){{/params_query}}{{#params_header}},
     body = list({{params_header}}){{/params_header}}{{#pagination}},
     pagination_fn = {{pagination_fn}}{{/pagination}}{{#tidy}},
-    tidy_fn = {{tidy_fn}}{{/tidy}}
+    tidy_policy = {{tidy_policy}}{{/tidy}}
   )
 }

@@ -15,7 +15,7 @@
                               query = list(),
                               body = NULL,
                               method = NULL,
-                              tidy_fn = nectar::resp_tidy_unknown,{{#has_security}}{{{security_signature}}},{{/has_security}}
+                              tidy_policy = nectar::resp_tidy_unknown,{{#has_security}}{{{security_signature}}},{{/has_security}}
                               call = rlang::caller_env()) {
   req <- nectar::req_prepare(
     "{{base_url}}",
@@ -23,7 +23,7 @@
     query = query,
     body = body,
     method = method,
-    tidy_fn = tidy_fn,
+    tidy_policy = tidy_policy,
     call = call
   )
   {{#has_security}}req <- .{{api_abbr}}_req_auth(req, {{security_arg_list}}){{/has_security}}
