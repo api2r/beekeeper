@@ -1,3 +1,4 @@
 .generate_pagination <- function() {
-  stop("TODO: FIGURE THIS OUT")
+  # TODO: Accept pagination config and generate 030-pagination.R (#63)
+  list()
 }
