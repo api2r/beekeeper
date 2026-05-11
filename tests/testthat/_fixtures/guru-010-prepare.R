@@ -15,7 +15,7 @@ guru_req_prepare <- function(
   query = list(),
   body = NULL,
   method = NULL,
-  tidy_fn = nectar::resp_tidy_unknown,
+  tidy_policy = nectar::tidy_policy_unknown(),
   call = rlang::caller_env()
 ) {
   req <- nectar::req_prepare(
@@ -24,7 +24,7 @@ guru_req_prepare <- function(
     query = query,
     body = body,
     method = method,
-    tidy_fn = tidy_fn,
+    tidy_policy = tidy_policy,
     call = call
   )
 
