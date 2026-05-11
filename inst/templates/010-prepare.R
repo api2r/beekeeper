@@ -11,12 +11,13 @@
 #' @inheritParams nectar::req_prepare
 #' @inherit nectar::req_prepare return
 #' @keywords internal
-{{api_abbr}}_req_prepare <- function(path,
-                              query = list(),
-                              body = NULL,
-                              method = NULL,
-                              tidy_policy = nectar::resp_tidy_unknown,{{#has_security}}{{{security_signature}}},{{/has_security}}
-                              call = rlang::caller_env()) {
+{{api_abbr}}_req_prepare <- function(
+  path,
+  query = list(),
+  body = NULL,
+  method = NULL,
+  tidy_policy = nectar::tidy_policy_unknown(),{{#has_security}}{{{security_signature}}},{{/has_security}}
+  call = rlang::caller_env()) {
   req <- nectar::req_prepare(
     "{{base_url}}",
     path = path,
