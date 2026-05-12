@@ -1,11 +1,15 @@
 test_that("generate_pkg() returns a vector of created files", {
   skip_on_cran()
-  config_text <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
+  config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "guru",
+    "_beekeeper_rapid.rds"
+  ))
 
   test_dir <- create_local_package()
   writeLines(config_text, "_beekeeper.yml")
-  saveRDS(api_definition, "guru_rapid.rds")
+  saveRDS(api_definition, "_beekeeper_rapid.rds")
 
   test_result <- generate_pkg()
   test_result <- scrub_path(test_result)
@@ -29,18 +33,31 @@ test_that("generate_pkg() returns a vector of created files", {
 
 test_that("generate_pkg() generates call function with API keys", {
   skip_on_cran()
+  skip_on_covr()
   local_mocked_bindings(
     .generate_paths = function(...) {
       character()
     }
   )
-  config_text <- readLines(test_path("_fixtures", "trello_beekeeper.yml"))
-  api_definition <- readRDS(test_path("_fixtures", "trello_rapid.rds"))
-  prepare_expected <- readLines(test_path("_fixtures", "trello-010-prepare.R"))
+  config_text <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "_beekeeper.yml"
+  ))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "trello",
+    "_beekeeper_rapid.rds"
+  ))
+  prepare_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "010-prepare.R"
+  ))
 
   create_local_package()
   writeLines(config_text, "_beekeeper.yml")
-  saveRDS(api_definition, "trello_rapid.rds")
+  saveRDS(api_definition, "_beekeeper_rapid.rds")
 
   generate_pkg()
 

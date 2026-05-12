@@ -1,8 +1,20 @@
 test_that(".generate_security() generates security file", {
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "trello_beekeeper.yml"))
-  api_definition <- readRDS(test_path("_fixtures", "trello_rapid.rds"))
-  security_expected <- readLines(test_path("_fixtures", "trello-020-auth.R"))
+  config <- .read_config(test_path(
+    "_fixtures",
+    "trello",
+    "_beekeeper.yml"
+  ))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "trello",
+    "_beekeeper_rapid.rds"
+  ))
+  security_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "020-auth.R"
+  ))
   create_local_package()
 
   test_result <- .generate_security(

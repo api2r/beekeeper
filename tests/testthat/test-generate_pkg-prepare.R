@@ -1,11 +1,21 @@
 test_that(".generate_prepare() generates prepare file.", {
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "guru_beekeeper.yml"))
-  api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-  prepare_expected <- readLines(test_path("_fixtures", "guru-010-prepare.R"))
+  skip_on_covr()
+  config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "guru",
+    "_beekeeper_rapid.rds"
+  ))
+  prepare_expected <- readLines(test_path(
+    "_fixtures",
+    "guru",
+    "010-prepare.R"
+  ))
   t_prepare_expected <- readLines(test_path(
     "_fixtures",
-    "guru-test-010-prepare.R"
+    "guru",
+    "test-010-prepare.R"
   ))
 
   create_local_package()

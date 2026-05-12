@@ -39,7 +39,9 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 .paths_to_clean_df <- function(x) {
   x <- tibble::as_tibble(x) |>
     tidyr::unnest("operations")
-  x <- x[!x$deprecated, ]
+  if (length(x$deprecated)) {
+    x <- x[!x$deprecated, ]
+  }
   x$deprecated <- NULL
   x$tags <- .paths_fill_tags(x$tags)
   x$operation_id <- .paths_fill_operation_id(

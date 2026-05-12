@@ -1,14 +1,24 @@
 test_that(".generate_paths() generates path files", {
   # 1 tag, no security
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "guru_beekeeper.yml"))
-  api_definition <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-  # r_expected <- readLines(
-  #   test_path("_fixtures", "guru-paths-apis.R")
-  # )
-  # tests_expected <- readLines(
-  #   test_path("_fixtures", "guru-test-paths-apis.R")
-  # )
+  skip_on_covr()
+  config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "guru",
+    "_beekeeper_rapid.rds"
+  ))
+
+  api_abbr <- "guru"
+  expected_path_contents <- load_expected_files(
+    api_abbr,
+    paste0("/paths-.+\\.R$")
+  )
+  expected_test_contents <- load_expected_files(
+    api_abbr,
+    paste0("/test-paths-.+\\.R$")
+  )
+
   create_local_package()
   usethis::use_testthat()
 
@@ -34,46 +44,46 @@ test_that(".generate_paths() generates path files", {
     )
   )
 
-  # Phase 4: update guru-paths-apis-*.R fixtures and re-enable content checks
-  # Phase 4: update guru-test-paths-apis.R fixture and re-enable content check
-  # r_result <- readLines("R/paths-apis.R")
-  # expect_identical(r_result, r_expected)
-  # tests_result <- readLines("tests/testthat/test-paths-apis.R")
-  # expect_identical(tests_result, tests_expected)
+  purrr::iwalk(expected_path_contents, \(expected, name) {
+    expect_identical(readLines(file.path("R", name)), expected)
+  })
+
+  purrr::iwalk(expected_test_contents, \(expected, name) {
+    expect_identical(readLines(file.path("tests", "testthat", name)), expected)
+  })
 })
 
 test_that("generate_pkg() generates path tests for guru", {
   # 1 tag, no security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
-  # expected_file_content <- readLines(
-  #   test_path("_fixtures", "guru-test-paths-apis.R")
-  # )
+  skip_on_covr()
+  config <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  guru_rapid <- readRDS(test_path("_fixtures", "guru", "_beekeeper_rapid.rds"))
+  expected_file_content <- readLines(
+    test_path("_fixtures", "guru", "test-paths-apis.R")
+  )
 
   create_local_package()
   writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
+  saveRDS(guru_rapid, "_beekeeper_rapid.rds")
   generate_pkg()
 
-  expect_true(file.exists("tests/testthat/test-paths-apis.R"))
-  # Phase 4: update guru-test-paths-apis.R fixture and re-enable content check
-  # generated_file_content <- readLines("tests/testthat/test-paths-apis.R")
-  # expect_identical(generated_file_content, expected_file_content)
+  generated_file_content <- readLines("tests/testthat/test-paths-apis.R")
+  expect_identical(generated_file_content, expected_file_content)
 })
 
 test_that("generate_pkg() generates test setup file for guru", {
   # 1 tag, no security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru_rapid.rds"))
+  config <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  guru_rapid <- readRDS(test_path("_fixtures", "guru", "_beekeeper_rapid.rds"))
   expected_file_content <- readLines(
-    test_path("_fixtures", "guru-setup.R")
+    test_path("_fixtures", "guru", "setup.R")
   )
 
   create_local_package()
   writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "guru_rapid.rds")
+  saveRDS(guru_rapid, "_beekeeper_rapid.rds")
   generate_pkg()
   generated_file_content <- readLines("tests/testthat/setup.R")
   expect_identical(generated_file_content, expected_file_content)
@@ -82,11 +92,15 @@ test_that("generate_pkg() generates test setup file for guru", {
 test_that("generate_pkg() generates path functions for fec", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "fec_subset_beekeeper.yml"))
-  fec_rapid <- readRDS(test_path("_fixtures", "fec_subset_rapid.rds"))
-  # expected_file_content <- readLines(
-  #   test_path("_fixtures", "fec-paths-audit.R")
-  # )
+  config <- readLines(test_path("_fixtures", "fec", "fec_subset_beekeeper.yml"))
+  fec_rapid <- readRDS(test_path("_fixtures", "fec", "fec_subset_rapid.rds"))
+  expected_file_content <- readLines(
+    test_path(
+      "_fixtures",
+      "fec",
+      "paths-audit-get_names_audit_candidates.R"
+    )
+  )
 
   create_local_package()
   writeLines(config, "_beekeeper.yml")
@@ -95,28 +109,31 @@ test_that("generate_pkg() generates path functions for fec", {
   changed_files <- generate_pkg()
   expect_snapshot(scrub_path(changed_files))
 
-  # Phase 4: update fec per-operation fixtures and re-enable content checks
-  # generated_file_content <- readLines("R/paths-audit.R")
-  # expect_identical(generated_file_content, expected_file_content)
+  generated_file_content <- readLines(
+    "R/paths-audit-get_names_audit_candidates.R"
+  )
+  expect_identical(generated_file_content, expected_file_content)
 })
 
 test_that("generate_pkg() generates path functions for trello", {
   # some tags failed before this, more complicated security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "trello_beekeeper.yml"))
-  trello_rapid <- readRDS(test_path("_fixtures", "trello_rapid.rds"))
-  # expected_file_content <- readLines(
-  #   test_path("_fixtures", "trello-paths-board.R")
-  # )
+  skip_on_covr()
+  config <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  trello_rapid <- readRDS(test_path(
+    "_fixtures",
+    "trello",
+    "_beekeeper_rapid.rds"
+  ))
+  expected_file_content <- readLines(
+    test_path("_fixtures", "trello", "paths-board-add_boards.R")
+  )
 
   create_local_package()
   writeLines(config, "_beekeeper.yml")
-  saveRDS(trello_rapid, "trello_rapid.rds")
+  saveRDS(trello_rapid, "_beekeeper_rapid.rds")
 
   generate_pkg()
-  expect_true(file.exists("R/paths-board-add_boards.R"))
-
-  # Phase 4: update trello per-operation fixtures and re-enable content checks
-  # generated_file_content <- readLines("R/paths-board.R")
-  # expect_identical(generated_file_content, expected_file_content)
+  generated_file_content <- readLines("R/paths-board-add_boards.R")
+  expect_identical(generated_file_content, expected_file_content)
 })

@@ -22,9 +22,9 @@
       [1] "2.2.0"
       
       $rapid_file
-      [1] "guru_rapid.rds"
+      [1] "_beekeeper_rapid.rds"
       
       $updated_on
-      [1] "2024-03-27 19:14:00 UTC"
+      [1] "2026-05-12 07:57:02 UTC"
       
 

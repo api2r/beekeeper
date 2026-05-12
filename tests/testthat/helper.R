@@ -58,3 +58,13 @@ scrub_path <- function(input, keep_dirs = c("R", "tests")) {
     "\\1"
   )
 }
+
+# Find all fixture files matching a regexp and read their contents.
+# Returns a named list of character vectors, where names are the fixture
+# filenames with the "{api_abbr}-" prefix stripped.
+load_expected_files <- function(api_abbr, regexp) {
+  test_dir <- test_path("_fixtures", api_abbr)
+  files <- fs::dir_ls(test_dir, regexp = regexp)
+  names(files) <- fs::path_file(files)
+  purrr::map(files, readLines)
+}

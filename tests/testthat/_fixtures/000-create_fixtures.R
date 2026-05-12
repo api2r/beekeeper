@@ -1,7 +1,11 @@
 apid_url <- "https://api.apis.guru/v2/specs/apis.guru/2.2.0/openapi.yaml"
 api_abbr <- "guru"
-rapid_write_path <- test_path(glue::glue("_fixtures/{api_abbr}_rapid.rds"))
-config_path <- test_path(glue::glue("_fixtures/{api_abbr}_beekeeper.yml"))
+rapid_write_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper_rapid.rds"
+))
+config_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper.yml"
+))
 apid_url |>
   url() |>
   use_beekeeper(
@@ -12,8 +16,12 @@ apid_url |>
 
 apid_url <- "https://api.apis.guru/v2/specs/fec.gov/1.0/openapi.yaml"
 api_abbr <- "fec"
-rapid_write_path <- test_path(glue::glue("_fixtures/{api_abbr}_rapid.rds"))
-config_path <- test_path(glue::glue("_fixtures/{api_abbr}_beekeeper.yml"))
+rapid_write_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper_rapid.rds"
+))
+config_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper.yml"
+))
 fec_apid <- apid_url |>
   url() |>
   yaml::read_yaml()
@@ -41,10 +49,10 @@ fec_rapid@paths <- rapid::as_paths({
   x
 })
 rapid_write_path <- test_path(glue::glue(
-  "_fixtures/{api_abbr}_subset_rapid.rds"
+  "_fixtures/{api_abbr}/{api_abbr}_subset_rapid.rds"
 ))
 config_path <- test_path(glue::glue(
-  "_fixtures/{api_abbr}_subset_beekeeper.yml"
+  "_fixtures/{api_abbr}/{api_abbr}_subset_beekeeper.yml"
 ))
 fec_rapid |>
   use_beekeeper(
@@ -55,8 +63,12 @@ fec_rapid |>
 
 apid_url <- "https://api.apis.guru/v2/specs/trello.com/1.0/openapi.yaml"
 api_abbr <- "trello"
-rapid_write_path <- test_path(glue::glue("_fixtures/{api_abbr}_rapid.rds"))
-config_path <- test_path(glue::glue("_fixtures/{api_abbr}_beekeeper.yml"))
+rapid_write_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper_rapid.rds"
+))
+config_path <- test_path(glue::glue(
+  "_fixtures/{api_abbr}/_beekeeper.yml"
+))
 trello_rapid <- apid_url |>
   url() |>
   rapid::as_rapid()
