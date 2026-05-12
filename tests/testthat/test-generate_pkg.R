@@ -15,6 +15,7 @@ test_that("generate_pkg() returns a vector of created files", {
   test_result <- scrub_path(test_result)
   # 7 guru operations all in "apis" tag: 7 R files + 1 test file + setup
   expected_result <- c(
+    "/R/000-shared.R",
     "/R/010-prepare.R",
     "/tests/testthat/test-010-prepare.R",
     "/R/paths-apis-list_apis.R",

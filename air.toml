@@ -1,2 +1,2 @@
 [format]
-exclude = ["inst/templates", "tests/testthat/_fixtures/trello"]
+exclude = ["inst/templates", "tests/testthat/_fixtures"]

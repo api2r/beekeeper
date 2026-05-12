@@ -42,7 +42,9 @@ generate_pkg <- function(
     pagination_data = pagination_data,
     base_url = api_definition@servers@url
   )
+  shared_file_path <- .generate_shared_params(security_data)
   touched_files <- c(
+    shared_file_path,
     prep_files,
     security_data$security_file_path,
     pagination_data$pagination_file_path,
