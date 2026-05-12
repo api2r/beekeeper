@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/jonthegeek/beekeeper/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/api2r/beekeeper/blob/main/DESCRIPTION)
 
 Harmon J (2026). *beekeeper: Rapidly Scaffold API Client Packages*. R
 package version 0.4.0.9000, <https://beekeeper.api2r.org>.

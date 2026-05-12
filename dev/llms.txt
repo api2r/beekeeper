@@ -95,7 +95,7 @@ Install the development version of beekeeper from
 
 ``` r
 # install.packages("pak")
-pak::pak("jonthegeek/beekeeper")
+pak::pak("api2r/beekeeper")
 ```
 
 ## Usage

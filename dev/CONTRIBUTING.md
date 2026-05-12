@@ -24,7 +24,7 @@ help you write a unit test, if needed).
 
 - Fork the package and clone onto your computer. If you haven’t done
   this before, we recommend using
-  `usethis::create_from_github("jonthegeek/beekeeper", fork = TRUE)`.
+  `usethis::create_from_github("api2r/beekeeper", fork = TRUE)`.
 
 - Install all development dependencies with
   [`devtools::install_dev_deps()`](https://devtools.r-lib.org/reference/install_deps.html),

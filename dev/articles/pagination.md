@@ -141,5 +141,5 @@ Within `010-call.R`, I apply the function like this:
 
 If you find a pattern in pagination implementation from the API
 description and/or endpoint function parameters, please [submit an issue
-or a pull request](https://github.com/jonthegeek/beekeeper/issues) to
-help us improve the output of this package.
+or a pull request](https://github.com/api2r/beekeeper/issues) to help us
+improve the output of this package.

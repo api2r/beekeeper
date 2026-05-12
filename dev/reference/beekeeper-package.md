@@ -10,9 +10,9 @@ Useful links:
 
 - <https://beekeeper.api2r.org>
 
-- <https://github.com/jonthegeek/beekeeper>
+- <https://github.com/api2r/beekeeper>
 
-- Report bugs at <https://github.com/jonthegeek/beekeeper/issues>
+- Report bugs at <https://github.com/api2r/beekeeper/issues>
 
 ## Author
 
