@@ -30,7 +30,6 @@ Imports:
     snakecase,
     stbl (>= 0.3.0),
     stringr,
-    styler,
     testthat,
     tibble,
     tidyr,

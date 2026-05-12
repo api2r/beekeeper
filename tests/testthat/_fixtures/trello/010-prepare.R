@@ -17,10 +17,9 @@ trello_req_prepare <- function(
   body = NULL,
   method = NULL,
   tidy_policy = nectar::tidy_policy_unknown(),
-  key = Sys.getenv("TRELLO_KEY"),
-  token = Sys.getenv("TRELLO_TOKEN"),
-  call = rlang::caller_env()
-) {
+key = Sys.getenv("TRELLO_KEY"),
+token = Sys.getenv("TRELLO_TOKEN"),
+  call = rlang::caller_env()) {
   req <- nectar::req_prepare(
     "https://trello.com/1",
     path = path,

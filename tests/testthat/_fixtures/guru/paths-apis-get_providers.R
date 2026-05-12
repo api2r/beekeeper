@@ -5,7 +5,7 @@
 #' List all providers
 #'
 #' List all the providers in the directory
-#'
+#' 
 #' @inheritParams .shared-params
 #'
 #' @returns `guru_get_providers()`: The API response.

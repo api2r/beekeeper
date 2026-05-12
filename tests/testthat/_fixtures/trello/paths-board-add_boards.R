@@ -5,17 +5,15 @@
 #' addBoards()
 #'
 #' addBoards()
-#'
+#' 
 #' @param key (length-1 \code{\link[base:character]{character}}) <a href="https://trello.com/1/appKey/generate" target="_blank">Generate your application key</a>
 #' @param token (length-1 \code{\link[base:character]{character}}) <a href="https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user" target="_blank">Getting a token from a user</a>
 #' @inheritParams .shared-params
 #'
 #' @returns `trello_add_boards()`: The API response.
 #' @export
-trello_add_boards <- function(
-  key = Sys.getenv("TRELLO_KEY"),
-  token = Sys.getenv("TRELLO_TOKEN"), max_reqs = Inf, max_tries_per_req = 3
-) {
+trello_add_boards <- function(key = Sys.getenv("TRELLO_KEY"),
+token = Sys.getenv("TRELLO_TOKEN"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_trello_add_boards(key = key, token = token)
   resps <- nectar::req_perform_opinionated(
     req,
@@ -27,10 +25,8 @@ trello_add_boards <- function(
 
 #' @rdname trello_add_boards
 #' @returns `req_trello_add_boards()`: A `httr2_request` request object.
-req_trello_add_boards <- function(
-  key = Sys.getenv("TRELLO_KEY"),
-  token = Sys.getenv("TRELLO_TOKEN")
-) {
+req_trello_add_boards <- function(key = Sys.getenv("TRELLO_KEY"),
+token = Sys.getenv("TRELLO_TOKEN")) {
   trello_req_prepare(
     path = "/boards",
     method = "post",

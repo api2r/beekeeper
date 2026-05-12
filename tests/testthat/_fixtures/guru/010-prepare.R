@@ -16,8 +16,7 @@ guru_req_prepare <- function(
   body = NULL,
   method = NULL,
   tidy_policy = nectar::tidy_policy_unknown(),
-  call = rlang::caller_env()
-) {
+  call = rlang::caller_env()) {
   req <- nectar::req_prepare(
     "https://api.apis.guru/v2",
     path = path,
@@ -27,6 +26,6 @@ guru_req_prepare <- function(
     tidy_policy = tidy_policy,
     call = call
   )
-
+  
   return(req)
 }

@@ -1,7 +1,6 @@
 test_that(".generate_paths() generates path files (#65)", {
   # 1 tag, no security
   skip_on_cran()
-  skip_on_covr()
   config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
   api_definition <- readRDS(test_path(
     "_fixtures",
@@ -56,7 +55,6 @@ test_that(".generate_paths() generates path files (#65)", {
 test_that("generate_pkg() generates path tests for guru (#65)", {
   # 1 tag, no security
   skip_on_cran()
-  skip_on_covr()
   config <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   guru_rapid <- readRDS(test_path("_fixtures", "guru", "_beekeeper_rapid.rds"))
   expected_file_content <- readLines(
@@ -118,7 +116,6 @@ test_that("generate_pkg() generates path functions for fec (#65)", {
 test_that("generate_pkg() generates path functions for trello (#65)", {
   # some tags failed before this, more complicated security
   skip_on_cran()
-  skip_on_covr()
   config <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
   trello_rapid <- readRDS(test_path(
     "_fixtures",
