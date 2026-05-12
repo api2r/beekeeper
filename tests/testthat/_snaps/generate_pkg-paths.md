@@ -3,9 +3,19 @@
     Code
       scrub_path(changed_files)
     Output
-       [1] "/R/010-call.R"                      "/tests/testthat/test-010-call.R"   
-       [3] "/R/020-auth.R"                      "/R/paths-audit.R"                  
-       [5] "/tests/testthat/test-paths-audit.R" "/R/paths-legal.R"                  
-       [7] "/tests/testthat/test-paths-legal.R" "/R/paths-debts.R"                  
-       [9] "/tests/testthat/test-paths-debts.R" "/tests/testthat/setup.R"           
+       [1] "/R/010-prepare.R"                                
+       [2] "/tests/testthat/test-010-prepare.R"              
+       [3] "/R/020-auth.R"                                   
+       [4] "/R/paths-audit-get_audit_case.R"                 
+       [5] "/R/paths-audit-get_audit_category.R"             
+       [6] "/R/paths-audit-get_audit_primary_category.R"     
+       [7] "/R/paths-legal-get_legal_search.R"               
+       [8] "/R/paths-audit-get_names_audit_candidates.R"     
+       [9] "/R/paths-audit-get_names_audit_committees.R"     
+      [10] "/R/paths-debts-get_schedules_schedule_d.R"       
+      [11] "/R/paths-debts-get_schedules_schedule_d_sub_id.R"
+      [12] "/tests/testthat/test-paths-audit.R"              
+      [13] "/tests/testthat/test-paths-legal.R"              
+      [14] "/tests/testthat/test-paths-debts.R"              
+      [15] "/tests/testthat/setup.R"                         
 
