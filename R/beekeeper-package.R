@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+# Needed for installation: nectar (likely others, TBD)
 #' @importFrom cli cli_abort
 #' @importFrom cli cli_warn
 #' @importFrom fs file_delete
@@ -12,6 +13,7 @@
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom httptest2 use_httptest2
+#' @importFrom nectar req_prepare
 #' @importFrom purrr discard
 #' @importFrom purrr imap
 #' @importFrom purrr map

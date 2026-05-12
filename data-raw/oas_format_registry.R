@@ -64,7 +64,7 @@ oas_format_registry <-
       # TODO: Add more specific string formats.
       .default = "stabilize_chr"
     ),
-    r_class_name = dplyr::case_match(
+    r_class_name = dplyr::replace_values(
       .data$to_r,
       "stabilize_base64_to_chr" ~ "character",
       "stabilize_base64url_to_chr" ~ "character",
@@ -82,20 +82,20 @@ oas_format_registry <-
       "stabilize_time" ~ "hms",
       "stabilize_uuid" ~ "UUID"
     ),
-    r_class_package = dplyr::case_match(
+    r_class_package = dplyr::recode_values(
       .data$r_class_name,
       "Duration" ~ "lubridate",
       "integer64" ~ "bit64",
       "hms" ~ "hms",
       "UUID" ~ "uuid",
-      .default = "base"
+      default = "base"
     ),
-    r_class_link = dplyr::case_match(
+    r_class_link = dplyr::recode_values(
       .data$r_class_name,
       "Duration" ~ "Duration-class",
-      .default = .data$r_class_name
+      default = .data$r_class_name
     )
   )
 
-usethis::use_data(oas_format_registry, overwrite = TRUE)
+usethis::use_data(oas_format_registry, overwrite = TRUE, internal = TRUE)
 rm(oas_format_registry_raw, oas_format_registry)
