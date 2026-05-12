@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://beekeeper.api2r.org/404.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/AGENTS.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/CODE_OF_CONDUCT.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/CONTRIBUTING.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/LICENSE-text.html</loc></url>
@@ -9,12 +10,15 @@
 <url><loc>https://beekeeper.api2r.org/articles/index.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/articles/pagination.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/authors.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/copilot-instructions.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/index.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/as_bk_data.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/beekeeper-package.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/dot-assert_is_pkg.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/dot-bk_use_template.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/dot-is_pkg.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/reference/dot-pkg_abort.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/reference/dot-shared-params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/generate_pkg.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/index.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/reference/use_beekeeper.html</loc></url>
