@@ -10,8 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/beekeeper)](https://CRAN.R-project.org/package=beekeeper)
 [![Codecov test
-coverage](https://codecov.io/gh/jonthegeek/beekeeper/branch/main/graph/badge.svg)](https://app.codecov.io/gh/jonthegeek/beekeeper?branch=main)
-[![R-CMD-check](https://github.com/jonthegeek/beekeeper/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jonthegeek/beekeeper/actions/workflows/R-CMD-check.yaml)
+coverage](https://codecov.io/gh/api2r/beekeeper/branch/main/graph/badge.svg)](https://app.codecov.io/gh/api2r/beekeeper?branch=main)
+[![R-CMD-check](https://github.com/api2r/beekeeper/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/api2r/beekeeper/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Use beekeeper to create and maintain R packages that wrap APIs. The
@@ -111,7 +111,7 @@ Install the released version of beekeeper from
 ``` r
 # (not yet, so instead install the dev version)
 # install.packages("pak")
-pak::pak("jonthegeek/beekeeper")
+pak::pak("api2r/beekeeper")
 ```
 
 </div>
@@ -123,7 +123,7 @@ Install the development version of beekeeper from
 
 ``` r
 # install.packages("pak")
-pak::pak("jonthegeek/beekeeper")
+pak::pak("api2r/beekeeper")
 ```
 
 </div>

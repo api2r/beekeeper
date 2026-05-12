@@ -9,7 +9,7 @@ Automatically generate R package skeletons from 'application
     (OAS)'. The skeletons implement best practices to streamline package
     development.
 
-https://beekeeper.api2r.org, https://github.com/jonthegeek/beekeeper
+https://beekeeper.api2r.org, https://github.com/api2r/beekeeper
 
 ### Overall structure
 
