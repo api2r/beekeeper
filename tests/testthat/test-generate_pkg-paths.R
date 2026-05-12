@@ -1,4 +1,15 @@
-test_that(".generate_paths() generates path files (#65)", {
+test_that(".generate_paths() returns empty character for empty paths (#65)", {
+  skip_on_cran()
+  result <- .generate_paths(
+    paths = rapid::class_paths(),
+    api_abbr = "test",
+    security_data = list(),
+    base_url = "https://example.com"
+  )
+  expect_identical(result, character())
+})
+
+test_that(".generate_paths() calls correct templates for guru (#65)", {
   # 1 tag, no security
   skip_on_cran()
   config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
@@ -7,29 +18,20 @@ test_that(".generate_paths() generates path files (#65)", {
     "guru",
     "_beekeeper_rapid.rds"
   ))
+  spy <- make_spy_impl()
+  local_mocked_bindings(.bk_use_template_impl = spy$mock)
 
-  api_abbr <- "guru"
-  expected_path_contents <- load_expected_files(
-    api_abbr,
-    paste0("/paths-.+\\.R$")
-  )
-  expected_test_contents <- load_expected_files(
-    api_abbr,
-    paste0("/test-paths-.+\\.R$")
-  )
-
-  create_local_package()
-  usethis::use_testthat()
-
-  # 7 operations all in "apis" tag -> 7 R files + 1 test file + setup
-  test_result <- .generate_paths(
+  result <- .generate_paths(
     paths = api_definition@paths,
     api_abbr = config$api_abbr,
     security_data = list(),
     base_url = api_definition@servers@url
   )
+
+  calls <- spy$calls()
+
   expect_identical(
-    basename(test_result),
+    basename(result),
     c(
       "paths-apis-list_apis.R",
       "paths-apis-get_metrics.R",
@@ -43,81 +45,174 @@ test_that(".generate_paths() generates path files (#65)", {
     )
   )
 
+  # 7 paths.R calls + 1 test-paths.R call + 1 setup.R call
+  expect_length(calls, 9L)
+  expect_identical(
+    purrr::map_chr(calls, "template"),
+    c(rep("paths.R", 7L), "test-paths.R", "setup.R")
+  )
+
+  # Spot-check data for the first (simplest) path call
+  first <- calls[[1]]$data
+  expect_identical(first$operation_id, "list_apis")
+  expect_identical(first$tag, "apis")
+  expect_identical(first$method, "get")
+  expect_false(first$has_security)
+
+  # Spot-check a path call that has path parameters
+  get_api <- calls[[4]]$data
+  expect_identical(get_api$operation_id, "get_api")
+  expect_length(get_api$params, 2L)
+
+  # Check test-paths.R data
+  test_call <- calls[[8]]
+  expect_identical(test_call$dir, "tests/testthat")
+  expect_identical(test_call$target, "test-paths-apis.R")
+  expect_length(test_call$data$paths, 7L)
+
+  # Check setup.R data
+  setup_call <- calls[[9]]
+  expect_identical(setup_call$dir, "tests/testthat")
+  expect_identical(setup_call$data$base_url, api_definition@servers@url)
+})
+
+test_that(".generate_paths() writes correct templates for guru (#65)", {
+  # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
+  skip_on_cran()
+  config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "guru",
+    "_beekeeper_rapid.rds"
+  ))
+  expected_path_contents <- load_expected_files("guru", "/paths-.+\\.R$")
+  expected_test_contents <- load_expected_files("guru", "/test-paths-.+\\.R$")
+  expected_setup_content <- readLines(test_path("_fixtures", "guru", "setup.R"))
+
+  tmp <- withr::local_tempdir()
+  local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
+
+  .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = config$api_abbr,
+    security_data = list(),
+    base_url = api_definition@servers@url
+  )
+
   purrr::iwalk(expected_path_contents, \(expected, name) {
-    expect_identical(readLines(file.path("R", name)), expected)
+    expect_identical(readLines(file.path(tmp, "R", name)), expected)
   })
-
   purrr::iwalk(expected_test_contents, \(expected, name) {
-    expect_identical(readLines(file.path("tests", "testthat", name)), expected)
+    expect_identical(
+      readLines(file.path(tmp, "tests", "testthat", name)),
+      expected
+    )
   })
-})
-
-test_that("generate_pkg() generates path tests for guru (#65)", {
-  # 1 tag, no security
-  skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru", "_beekeeper_rapid.rds"))
-  expected_file_content <- readLines(
-    test_path("_fixtures", "guru", "test-paths-apis.R")
+  expect_identical(
+    readLines(file.path(tmp, "tests", "testthat", "setup.R")),
+    expected_setup_content
   )
-
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "_beekeeper_rapid.rds")
-  generate_pkg()
-
-  generated_file_content <- readLines("tests/testthat/test-paths-apis.R")
-  expect_identical(generated_file_content, expected_file_content)
 })
 
-test_that("generate_pkg() generates test setup file for guru", {
-  # 1 tag, no security
-  skip_on_cran()
-  config <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
-  guru_rapid <- readRDS(test_path("_fixtures", "guru", "_beekeeper_rapid.rds"))
-  expected_file_content <- readLines(
-    test_path("_fixtures", "guru", "setup.R")
-  )
-
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(guru_rapid, "_beekeeper_rapid.rds")
-  generate_pkg()
-  generated_file_content <- readLines("tests/testthat/setup.R")
-  expect_identical(generated_file_content, expected_file_content)
-})
-
-test_that("generate_pkg() generates path functions for fec (#65)", {
+test_that(".generate_paths() calls correct templates for fec (#65)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "fec", "fec_subset_beekeeper.yml"))
-  fec_rapid <- readRDS(test_path("_fixtures", "fec", "fec_subset_rapid.rds"))
-  expected_file_content <- readLines(
-    test_path(
-      "_fixtures",
-      "fec",
-      "paths-audit-get_names_audit_candidates.R"
+  config <- .read_config(test_path(
+    "_fixtures",
+    "fec",
+    "fec_subset_beekeeper.yml"
+  ))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "fec",
+    "fec_subset_rapid.rds"
+  ))
+  spy <- make_spy_impl()
+  local_mocked_bindings(.bk_use_template_impl = spy$mock)
+
+  security_data <- .generate_security(
+    config$api_abbr,
+    api_definition@components@security_schemes
+  )
+  result <- .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = config$api_abbr,
+    security_data = security_data,
+    base_url = api_definition@servers@url
+  )
+
+  calls <- spy$calls()
+
+  expect_identical(
+    basename(result),
+    c(
+      "paths-audit-get_audit_case.R",
+      "paths-audit-get_audit_category.R",
+      "paths-audit-get_audit_primary_category.R",
+      "paths-legal-get_legal_search.R",
+      "paths-audit-get_names_audit_candidates.R",
+      "paths-audit-get_names_audit_committees.R",
+      "paths-debts-get_schedules_schedule_d.R",
+      "paths-debts-get_schedules_schedule_d_sub_id.R",
+      "test-paths-audit.R",
+      "test-paths-legal.R",
+      "test-paths-debts.R",
+      "setup.R"
     )
   )
 
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(fec_rapid, "fec_subset_rapid.rds")
+  # 1 auth + 8 path R files + 3 test files + 1 setup = 13 calls
+  expect_length(calls, 13L)
 
-  changed_files <- generate_pkg()
-  expect_snapshot(scrub_path(changed_files))
-
-  generated_file_content <- readLines(
-    "R/paths-audit-get_names_audit_candidates.R"
-  )
-  expect_identical(generated_file_content, expected_file_content)
+  # Security data should be threaded through to paths (.generate_security()
+  # wrote the auth file as calls[[1]], so paths start at calls[[2]])
+  first_path <- calls[[2]]$data
+  expect_true(first_path$has_security)
+  expect_identical(first_path$api_abbr, "fec")
 })
 
-test_that("generate_pkg() generates path functions for trello (#65)", {
-  # some tags failed before this, more complicated security
+test_that(".generate_paths() writes correct paths.R for fec (#65)", {
+  # Visual confirmation: 3 tags, complicated security
   skip_on_cran()
-  config <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
-  trello_rapid <- readRDS(test_path(
+  config <- .read_config(test_path(
+    "_fixtures",
+    "fec",
+    "fec_subset_beekeeper.yml"
+  ))
+  api_definition <- readRDS(test_path(
+    "_fixtures",
+    "fec",
+    "fec_subset_rapid.rds"
+  ))
+  expected_file_content <- readLines(
+    test_path("_fixtures", "fec", "paths-audit-get_names_audit_candidates.R")
+  )
+
+  tmp <- withr::local_tempdir()
+  local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
+
+  security_data <- .generate_security(
+    config$api_abbr,
+    api_definition@components@security_schemes
+  )
+  .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = config$api_abbr,
+    security_data = security_data,
+    base_url = api_definition@servers@url
+  )
+
+  expect_identical(
+    readLines(file.path(tmp, "R", "paths-audit-get_names_audit_candidates.R")),
+    expected_file_content
+  )
+})
+
+test_that(".generate_paths() writes correct paths.R for trello (#65)", {
+  # Visual confirmation: more complicated security
+  skip_on_cran()
+  config <- .read_config(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  api_definition <- readRDS(test_path(
     "_fixtures",
     "trello",
     "_beekeeper_rapid.rds"
@@ -126,11 +221,22 @@ test_that("generate_pkg() generates path functions for trello (#65)", {
     test_path("_fixtures", "trello", "paths-board-add_boards.R")
   )
 
-  create_local_package()
-  writeLines(config, "_beekeeper.yml")
-  saveRDS(trello_rapid, "_beekeeper_rapid.rds")
+  tmp <- withr::local_tempdir()
+  local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
 
-  generate_pkg()
-  generated_file_content <- readLines("R/paths-board-add_boards.R")
-  expect_identical(generated_file_content, expected_file_content)
+  security_data <- .generate_security(
+    config$api_abbr,
+    api_definition@components@security_schemes
+  )
+  .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = config$api_abbr,
+    security_data = security_data,
+    base_url = api_definition@servers@url
+  )
+
+  expect_identical(
+    readLines(file.path(tmp, "R", "paths-board-add_boards.R")),
+    expected_file_content
+  )
 })

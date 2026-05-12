@@ -1,22 +1,37 @@
-test_that(".generate_security() generates security file", {
-  skip_on_cran()
-  config <- .read_config(test_path(
+test_that(".generate_security() returns empty list for no security", {
+  result <- .generate_security("test", rapid::class_security_schemes())
+  expect_identical(result, list())
+})
+
+test_that("as_bk_data() dispatches correctly for security_scheme_details", {
+  trello_rapid <- readRDS(test_path(
     "_fixtures",
     "trello",
-    "_beekeeper.yml"
+    "_beekeeper_rapid.rds"
   ))
+  details <- trello_rapid@components@security_schemes@details
+  result <- as_bk_data(details)
+  expect_length(result, 2L)
+  expect_identical(result[[1]]$type, "api_key")
+  expect_identical(result[[1]]$arg_name, "key")
+  expect_identical(result[[2]]$arg_name, "token")
+})
+
+test_that("as_bk_data() returns empty list for empty api_key_security_scheme", {
+  expect_identical(as_bk_data(rapid::class_api_key_security_scheme()), list())
+})
+
+test_that(".generate_security() generates security file for trello", {
+  skip_on_cran()
+  config <- .read_config(test_path("_fixtures", "trello", "_beekeeper.yml"))
   api_definition <- readRDS(test_path(
     "_fixtures",
     "trello",
     "_beekeeper_rapid.rds"
   ))
-  security_expected <- readLines(test_path(
-    "_fixtures",
-    "trello",
-    "020-auth.R"
-  ))
-  create_local_package()
-
+  security_expected <- readLines(test_path("_fixtures", "trello", "020-auth.R"))
+  tmp <- withr::local_tempdir()
+  local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
   test_result <- .generate_security(
     config$api_abbr,
     api_definition@components@security_schemes
@@ -34,7 +49,8 @@ test_that(".generate_security() generates security file", {
       "security_signature"
     )
   )
-
-  security_result <- scrub_testpkg(readLines("R/020-auth.R"))
-  expect_identical(security_result, security_expected)
+  expect_identical(
+    readLines(file.path(tmp, "R", "020-auth.R")),
+    security_expected
+  )
 })

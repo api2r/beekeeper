@@ -33,7 +33,6 @@ test_that("generate_pkg() returns a vector of created files", {
 
 test_that("generate_pkg() generates call function with API keys", {
   skip_on_cran()
-  skip_on_covr()
   local_mocked_bindings(
     .generate_paths = function(...) {
       character()

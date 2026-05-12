@@ -68,3 +68,38 @@ load_expected_files <- function(api_abbr, regexp) {
   names(files) <- fs::path_file(files)
   purrr::map(files, readLines)
 }
+
+# A mock for .bk_use_template_impl() that records calls and returns a
+# predictable path, without writing any files or needing a usethis project.
+make_spy_impl <- function() {
+  calls <- list()
+  list(
+    mock = function(template, data, target, dir) {
+      calls[[length(calls) + 1]] <<- list(
+        template = template,
+        data = data,
+        target = target,
+        dir = dir
+      )
+      file.path(dir, target)
+    },
+    calls = function() calls
+  )
+}
+
+# A mock that renders templates to a temp dir using whisker directly, so the
+# output can be visually confirmed against fixture files.
+make_writing_impl <- function(tmp) {
+  function(template, data, target, dir) {
+    template_path <- system.file("templates", template, package = "beekeeper")
+    rendered <- whisker::whisker.render(
+      readLines(template_path, warn = FALSE),
+      data
+    )
+    out_dir <- file.path(tmp, dir)
+    fs::dir_create(out_dir)
+    out_path <- file.path(out_dir, target)
+    writeLines(strsplit(rendered, "\n", fixed = TRUE)[[1]], out_path)
+    out_path
+  }
+}

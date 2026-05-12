@@ -1,6 +1,5 @@
 test_that(".generate_prepare() generates prepare file.", {
   skip_on_cran()
-  skip_on_covr()
   config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
   api_definition <- readRDS(test_path(
     "_fixtures",
