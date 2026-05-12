@@ -6,26 +6,26 @@
 #'
 #' This endpoint contains Final Audit Reports approved by the Commission since inception. The search can be based on information about the audited committee (Name, FEC ID Number, Type, Election Cycle) or the issues covered in the report.
 #'
-#' @param audit_case_id (length-1 \code{\link[base:list]{list}}, optional) Primary/foreign key for audit tables
-#' @param cycle (length-1 \code{\link[base:list]{list}}, optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
-#' @param sub_category_id (length-1 \code{\link[base:character]{character}}, optional) The finding id of an audit. Finding are a category of broader issues. Each category has an unique ID.
-#' @param sort_nulls_last (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that sorts null values last
-#' @param sort_hide_null (length-1 \code{\link[base:logical]{logical}}, optional) Hide null values on sorted column(s).
-#' @param min_election_cycle (length-1 \code{\link[base:list]{list}}, optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
-#' @param audit_id (length-1 \code{\link[base:list]{list}}, optional) The audit issue. Each subcategory has an unique ID
-#' @param q (length-1 \code{\link[base:list]{list}}, optional) The name of the committee. If a committee changes its name, the most recent name will be shown. Committee names are not unique. Use committee_id for looking up records.
-#' @param per_page (length-1 \code{\link[base:list]{list}}, optional) The number of results returned per page. Defaults to 20.
-#' @param max_election_cycle (length-1 \code{\link[base:list]{list}}, optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
-#' @param candidate_id (length-1 \code{\link[base:list]{list}}, optional) A unique identifier assigned to each candidate registered with the FEC. If a person runs for several offices, that person will have separate candidate IDs for each office.
-#' @param committee_type (length-1 \code{\link[base:list]{list}}, optional) The one-letter type code of the organization: - C communication cost - D delegate - E electioneering communication - H House - I independent expenditure filer (not a committee) - N PAC - nonqualified - O independent expenditure-only (super PACs) - P presidential - Q PAC - qualified - S Senate - U single candidate independent expenditure - V PAC with non-contribution account, nonqualified - W PAC with non-contribution account, qualified - X party, nonqualified - Y party, qualified - Z national party non-federal account
-#' @param qq (length-1 \code{\link[base:list]{list}}, optional) Name of candidate running for office
-#' @param page (length-1 \code{\link[base:list]{list}}, optional) For paginating through results, starting at page 1
-#' @param committee_id (length-1 \code{\link[base:list]{list}}, optional) A unique identifier assigned to each committee or filer registered with the FEC. In general committee id's begin with the letter C which is followed by eight digits.
-#' @param api_key (length-1 \code{\link[base:character]{character}}) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param committee_designation (length-1 \code{\link[base:character]{character}}, optional) Type of committee: - H or S - Congressional - P - Presidential - X or Y or Z - Party - N or Q - PAC - I - Independent expenditure - O - Super PAC
-#' @param primary_category_id (length-1 \code{\link[base:character]{character}}, optional) Audit category ID (table PK)
-#' @param sort_null_only (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that filters out all rows having sort column that is non-null
-#' @param sort (length-1 \code{\link[base:list]{list}}, optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
+#' @param audit_case_id (length-1 [base::list()], optional) Primary/foreign key for audit tables
+#' @param cycle (length-1 [base::list()], optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
+#' @param sub_category_id (length-1 [base::character()], optional) The finding id of an audit. Finding are a category of broader issues. Each category has an unique ID.
+#' @param sort_nulls_last (length-1 [base::logical()], optional) Toggle that sorts null values last
+#' @param sort_hide_null (length-1 [base::logical()], optional) Hide null values on sorted column(s).
+#' @param min_election_cycle (length-1 [base::list()], optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
+#' @param audit_id (length-1 [base::list()], optional) The audit issue. Each subcategory has an unique ID
+#' @param q (length-1 [base::list()], optional) The name of the committee. If a committee changes its name, the most recent name will be shown. Committee names are not unique. Use committee_id for looking up records.
+#' @param per_page (length-1 [base::list()], optional) The number of results returned per page. Defaults to 20.
+#' @param max_election_cycle (length-1 [base::list()], optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
+#' @param candidate_id (length-1 [base::list()], optional) A unique identifier assigned to each candidate registered with the FEC. If a person runs for several offices, that person will have separate candidate IDs for each office.
+#' @param committee_type (length-1 [base::list()], optional) The one-letter type code of the organization: - C communication cost - D delegate - E electioneering communication - H House - I independent expenditure filer (not a committee) - N PAC - nonqualified - O independent expenditure-only (super PACs) - P presidential - Q PAC - qualified - S Senate - U single candidate independent expenditure - V PAC with non-contribution account, nonqualified - W PAC with non-contribution account, qualified - X party, nonqualified - Y party, qualified - Z national party non-federal account
+#' @param qq (length-1 [base::list()], optional) Name of candidate running for office
+#' @param page (length-1 [base::list()], optional) For paginating through results, starting at page 1
+#' @param committee_id (length-1 [base::list()], optional) A unique identifier assigned to each committee or filer registered with the FEC. In general committee id's begin with the letter C which is followed by eight digits.
+#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param committee_designation (length-1 [base::character()], optional) Type of committee: - H or S - Congressional - P - Presidential - X or Y or Z - Party - N or Q - PAC - I - Independent expenditure - O - Super PAC
+#' @param primary_category_id (length-1 [base::character()], optional) Audit category ID (table PK)
+#' @param sort_null_only (length-1 [base::logical()], optional) Toggle that filters out all rows having sort column that is non-null
+#' @param sort (length-1 [base::list()], optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_audit_case()`: The API response.

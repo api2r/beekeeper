@@ -184,11 +184,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 .compile_param_class_descriptions <- function(type, allow_empty, required) {
   r_class_descriptions <- .glue_pipe_brace(
-    "length-1 \\code{\\link[|{type$r_class_package}|:|{type$r_class_link}|]{|{type$r_class_name_display}|}}"
+    "length-1 [|{type$r_class_package}|::|{type$r_class_link}|()]"
   ) |>
     .paste0_if(
       allow_empty,
-      " or \\code{\\link[base:NULL]{NULL}}"
+      " or `NULL`"
     ) |>
     .paste0_if(
       !required,
@@ -246,7 +246,8 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     .generate_paths_file(op, op_id, api_abbr, security_data)
   })))
 
-  # One test file per tag (operations grouped by tag, preserving encounter order)
+  # One test file per tag (operations grouped by tag, preserving encounter
+  # order)
   tags <- map_chr(prepped, "tag")
   unique_tags <- unique(tags)
   test_files <- unname(unlist(lapply(unique_tags, function(tag_name) {

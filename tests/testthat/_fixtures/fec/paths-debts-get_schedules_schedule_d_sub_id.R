@@ -6,14 +6,14 @@
 #'
 #' Schedule D, it shows debts and obligations owed to or by the committee that are required to be disclosed.
 #'
-#' @param sort_nulls_last (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that sorts null values last
-#' @param per_page (length-1 \code{\link[base:list]{list}}, optional) The number of results returned per page. Defaults to 20.
-#' @param sort_null_only (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that filters out all rows having sort column that is non-null
-#' @param sort_hide_null (length-1 \code{\link[base:logical]{logical}}, optional) Hide null values on sorted column(s).
-#' @param sort (length-1 \code{\link[base:character]{character}}, optional) Provide a field to sort by. Use `-` for descending order.
-#' @param api_key (length-1 \code{\link[base:character]{character}}) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param page (length-1 \code{\link[base:list]{list}}, optional) For paginating through results, starting at page 1
-#' @param sub_id (length-1 \code{\link[base:character]{character}})
+#' @param sort_nulls_last (length-1 [base::logical()], optional) Toggle that sorts null values last
+#' @param per_page (length-1 [base::list()], optional) The number of results returned per page. Defaults to 20.
+#' @param sort_null_only (length-1 [base::logical()], optional) Toggle that filters out all rows having sort column that is non-null
+#' @param sort_hide_null (length-1 [base::logical()], optional) Hide null values on sorted column(s).
+#' @param sort (length-1 [base::character()], optional) Provide a field to sort by. Use `-` for descending order.
+#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param page (length-1 [base::list()], optional) For paginating through results, starting at page 1
+#' @param sub_id (length-1 [base::character()])
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_schedules_schedule_d_sub_id()`: The API response.

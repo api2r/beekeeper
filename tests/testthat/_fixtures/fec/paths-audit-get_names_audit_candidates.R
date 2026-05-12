@@ -6,8 +6,8 @@
 #'
 #' Search for candidates or committees by name. If you're looking for information on a particular person or group, using a name to find the `candidate_id` or `committee_id` on this endpoint can be a helpful first step.
 #' 
-#' @param api_key (length-1 \code{\link[base:character]{character}}) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param q (length-1 \code{\link[base:list]{list}}) Name (candidate or committee) to search for
+#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param q (length-1 [base::list()]) Name (candidate or committee) to search for
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_names_audit_candidates()`: The API response.

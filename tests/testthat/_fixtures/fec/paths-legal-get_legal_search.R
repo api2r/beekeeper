@@ -6,49 +6,49 @@
 #'
 #' Search legal documents by document type, or across all document types using keywords, parameter values and ranges.
 #'
-#' @param hits_returned (length-1 \code{\link[base:list]{list}}, optional) Number of results to return (max 10)
-#' @param af_report_year (length-1 \code{\link[base:character]{character}}, optional) Admin fine report year
-#' @param case_max_open_date (length-1 \code{\link[base:Date]{Date}}, optional) The latest date opened of case
-#' @param ao_max_issue_date (length-1 \code{\link[base:Date]{Date}}, optional) Latest issue date of advisory opinion
-#' @param case_statutory_citation (length-1 \code{\link[base:list]{list}}, optional) Statutory citations
-#' @param case_respondents (length-1 \code{\link[base:character]{character}}, optional) Cases respondents
-#' @param q (length-1 \code{\link[base:character]{character}}, optional) Text to search legal documents for
-#' @param ao_min_issue_date (length-1 \code{\link[base:Date]{Date}}, optional) Earliest issue date of advisory opinion
-#' @param af_max_fd_date (length-1 \code{\link[base:Date]{Date}}, optional) The latest Final Determination date
-#' @param from_hit (length-1 \code{\link[base:list]{list}}, optional) Get results starting from this index
-#' @param af_fd_fine_amount (length-1 \code{\link[base:list]{list}}, optional) Final Determination fine amount
-#' @param type (length-1 \code{\link[base:character]{character}}, optional) Legal Document type to refine search by - statutes - regulations - advisory_opinions - murs - admin_fines
-#' @param api_key (length-1 \code{\link[base:character]{character}}) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param af_name (length-1 \code{\link[base:list]{list}}, optional) Admin fine committee name
-#' @param ao_requestor_type (length-1 \code{\link[base:list]{list}}, optional) Code of the advisory opinion requestor type.
-#' @param ao_statutory_citation (length-1 \code{\link[base:list]{list}}, optional) Statutory citations
-#' @param ao_entity_name (length-1 \code{\link[base:list]{list}}, optional) Name of commenter or representative
-#' @param mur_type (length-1 \code{\link[base:character]{character}}, optional) Type of MUR : current or archived
-#' @param ao_regulatory_citation (length-1 \code{\link[base:list]{list}}, optional) Regulatory citations
-#' @param af_committee_id (length-1 \code{\link[base:character]{character}}, optional) Admin fine committee ID
-#' @param ao_requestor (length-1 \code{\link[base:character]{character}}, optional) The requestor of the advisory opinion
-#' @param case_citation_require_all (length-1 \code{\link[base:logical]{logical}}, optional) Require all citations to be in document (default behavior is any)
-#' @param af_min_fd_date (length-1 \code{\link[base:Date]{Date}}, optional) The earliest Final Determination date
-#' @param ao_is_pending (length-1 \code{\link[base:logical]{logical}}, optional) AO is pending
-#' @param af_rtb_fine_amount (length-1 \code{\link[base:list]{list}}, optional) Reason to Believe fine amount
-#' @param case_election_cycles (length-1 \code{\link[base:list]{list}}, optional) Cases election cycles
-#' @param ao_category (length-1 \code{\link[base:list]{list}}, optional) Category of the document
-#' @param ao_citation_require_all (length-1 \code{\link[base:logical]{logical}}, optional) Require all citations to be in document (default behavior is any)
-#' @param case_dispositions (length-1 \code{\link[base:list]{list}}, optional) Cases dispositions
-#' @param af_max_rtb_date (length-1 \code{\link[base:Date]{Date}}, optional) The latest Reason to Believe date
-#' @param case_min_open_date (length-1 \code{\link[base:Date]{Date}}, optional) The earliest date opened of case
-#' @param case_max_close_date (length-1 \code{\link[base:Date]{Date}}, optional) The latest date closed of case
-#' @param ao_min_request_date (length-1 \code{\link[base:Date]{Date}}, optional) Earliest request date of advisory opinion
-#' @param ao_status (length-1 \code{\link[base:character]{character}}, optional) Status of AO (pending, withdrawn, or final)
-#' @param case_doc_category_id (length-1 \code{\link[base:list]{list}}, optional) Select one or more case_doc_category_id to filter by corresponding CASE_DOCUMENT_CATEGORY: - 1 - Conciliation Agreements - 2 - Complaint, Responses, Designation of Counsel and Extensions of Timee - 3 - General Counsel Reports, Briefs, Notifications and Responses - 4 - Certifications - 5 - Civil Penalties, Disgorgements and Other Payments - 6 - Statements of Reasons
-#' @param af_min_rtb_date (length-1 \code{\link[base:Date]{Date}}, optional) The earliest Reason to Believe date
-#' @param ao_name (length-1 \code{\link[base:list]{list}}, optional) Force advisory opinion name
-#' @param case_regulatory_citation (length-1 \code{\link[base:list]{list}}, optional) Regulatory citations
-#' @param ao_no (length-1 \code{\link[base:list]{list}}, optional) Force advisory opinion number
-#' @param case_min_close_date (length-1 \code{\link[base:Date]{Date}}, optional) The earliest date closed of case
-#' @param sort (length-1 \code{\link[base:character]{character}}, optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
-#' @param ao_max_request_date (length-1 \code{\link[base:Date]{Date}}, optional) Latest request date of advisory opinion
-#' @param case_no (length-1 \code{\link[base:list]{list}}, optional) Enforcement matter case number
+#' @param hits_returned (length-1 [base::list()], optional) Number of results to return (max 10)
+#' @param af_report_year (length-1 [base::character()], optional) Admin fine report year
+#' @param case_max_open_date (length-1 [base::Date()], optional) The latest date opened of case
+#' @param ao_max_issue_date (length-1 [base::Date()], optional) Latest issue date of advisory opinion
+#' @param case_statutory_citation (length-1 [base::list()], optional) Statutory citations
+#' @param case_respondents (length-1 [base::character()], optional) Cases respondents
+#' @param q (length-1 [base::character()], optional) Text to search legal documents for
+#' @param ao_min_issue_date (length-1 [base::Date()], optional) Earliest issue date of advisory opinion
+#' @param af_max_fd_date (length-1 [base::Date()], optional) The latest Final Determination date
+#' @param from_hit (length-1 [base::list()], optional) Get results starting from this index
+#' @param af_fd_fine_amount (length-1 [base::list()], optional) Final Determination fine amount
+#' @param type (length-1 [base::character()], optional) Legal Document type to refine search by - statutes - regulations - advisory_opinions - murs - admin_fines
+#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param af_name (length-1 [base::list()], optional) Admin fine committee name
+#' @param ao_requestor_type (length-1 [base::list()], optional) Code of the advisory opinion requestor type.
+#' @param ao_statutory_citation (length-1 [base::list()], optional) Statutory citations
+#' @param ao_entity_name (length-1 [base::list()], optional) Name of commenter or representative
+#' @param mur_type (length-1 [base::character()], optional) Type of MUR : current or archived
+#' @param ao_regulatory_citation (length-1 [base::list()], optional) Regulatory citations
+#' @param af_committee_id (length-1 [base::character()], optional) Admin fine committee ID
+#' @param ao_requestor (length-1 [base::character()], optional) The requestor of the advisory opinion
+#' @param case_citation_require_all (length-1 [base::logical()], optional) Require all citations to be in document (default behavior is any)
+#' @param af_min_fd_date (length-1 [base::Date()], optional) The earliest Final Determination date
+#' @param ao_is_pending (length-1 [base::logical()], optional) AO is pending
+#' @param af_rtb_fine_amount (length-1 [base::list()], optional) Reason to Believe fine amount
+#' @param case_election_cycles (length-1 [base::list()], optional) Cases election cycles
+#' @param ao_category (length-1 [base::list()], optional) Category of the document
+#' @param ao_citation_require_all (length-1 [base::logical()], optional) Require all citations to be in document (default behavior is any)
+#' @param case_dispositions (length-1 [base::list()], optional) Cases dispositions
+#' @param af_max_rtb_date (length-1 [base::Date()], optional) The latest Reason to Believe date
+#' @param case_min_open_date (length-1 [base::Date()], optional) The earliest date opened of case
+#' @param case_max_close_date (length-1 [base::Date()], optional) The latest date closed of case
+#' @param ao_min_request_date (length-1 [base::Date()], optional) Earliest request date of advisory opinion
+#' @param ao_status (length-1 [base::character()], optional) Status of AO (pending, withdrawn, or final)
+#' @param case_doc_category_id (length-1 [base::list()], optional) Select one or more case_doc_category_id to filter by corresponding CASE_DOCUMENT_CATEGORY: - 1 - Conciliation Agreements - 2 - Complaint, Responses, Designation of Counsel and Extensions of Timee - 3 - General Counsel Reports, Briefs, Notifications and Responses - 4 - Certifications - 5 - Civil Penalties, Disgorgements and Other Payments - 6 - Statements of Reasons
+#' @param af_min_rtb_date (length-1 [base::Date()], optional) The earliest Reason to Believe date
+#' @param ao_name (length-1 [base::list()], optional) Force advisory opinion name
+#' @param case_regulatory_citation (length-1 [base::list()], optional) Regulatory citations
+#' @param ao_no (length-1 [base::list()], optional) Force advisory opinion number
+#' @param case_min_close_date (length-1 [base::Date()], optional) The earliest date closed of case
+#' @param sort (length-1 [base::character()], optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
+#' @param ao_max_request_date (length-1 [base::Date()], optional) Latest request date of advisory opinion
+#' @param case_no (length-1 [base::list()], optional) Enforcement matter case number
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_legal_search()`: The API response.
