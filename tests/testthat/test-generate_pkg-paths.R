@@ -1,4 +1,4 @@
-test_that(".generate_paths() generates path files", {
+test_that(".generate_paths() generates path files (#65)", {
   # 1 tag, no security
   skip_on_cran()
   skip_on_covr()
@@ -53,7 +53,7 @@ test_that(".generate_paths() generates path files", {
   })
 })
 
-test_that("generate_pkg() generates path tests for guru", {
+test_that("generate_pkg() generates path tests for guru (#65)", {
   # 1 tag, no security
   skip_on_cran()
   skip_on_covr()
@@ -89,7 +89,7 @@ test_that("generate_pkg() generates test setup file for guru", {
   expect_identical(generated_file_content, expected_file_content)
 })
 
-test_that("generate_pkg() generates path functions for fec", {
+test_that("generate_pkg() generates path functions for fec (#65)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
   config <- readLines(test_path("_fixtures", "fec", "fec_subset_beekeeper.yml"))
@@ -115,7 +115,7 @@ test_that("generate_pkg() generates path functions for fec", {
   expect_identical(generated_file_content, expected_file_content)
 })
 
-test_that("generate_pkg() generates path functions for trello", {
+test_that("generate_pkg() generates path functions for trello (#65)", {
   # some tags failed before this, more complicated security
   skip_on_cran()
   skip_on_covr()

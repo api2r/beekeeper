@@ -1,4 +1,4 @@
-# generate_pkg() generates path functions for fec
+# generate_pkg() generates path functions for fec (#65)
 
     Code
       scrub_path(changed_files)
