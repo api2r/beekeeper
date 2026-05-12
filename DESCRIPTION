@@ -11,8 +11,8 @@ Description: Automatically generate R package skeletons from 'application
     (OAS)'. The skeletons implement best practices to streamline package
     development.
 License: MIT + file LICENSE
-URL: https://beekeeper.api2r.org, https://github.com/jonthegeek/beekeeper
-BugReports: https://github.com/jonthegeek/beekeeper/issues
+URL: https://beekeeper.api2r.org, https://github.com/api2r/beekeeper
+BugReports: https://github.com/api2r/beekeeper/issues
 Depends:
     R (>= 4.1.0)
 Imports:

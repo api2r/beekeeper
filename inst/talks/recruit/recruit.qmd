@@ -275,7 +275,7 @@ beekeeper::generate_pkg()
 # 🙏 Thanks!
 
 ::: nonincremental
-- 🐙 GitHub: [github.com/jonthegeek/beekeeper](https://github.com/jonthegeek/beekeeper)
+- 🐙 GitHub: [github.com/api2r/beekeeper](https://github.com/api2r/beekeeper)
 - 🐝 Website: [beekeeper.api2r.org](https://beekeeper.api2r.org)
 - 📬 Contact: [@jonthegeek](https://bsky.app/profile/jonthegeek.com), [DSLC.io](https://DSLC.io)
 :::
