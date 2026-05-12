@@ -10,3 +10,4 @@ exploration
 _beekeeper_rapid.rds
 _slackapi_rapid.rds
 .positai
+conversation-export.json
