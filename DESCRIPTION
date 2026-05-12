@@ -43,6 +43,7 @@ Suggests:
     knitr,
     rmarkdown,
     rvest,
+    whisker,
     withr
 VignetteBuilder:
     knitr
