@@ -16,7 +16,7 @@
   req <- req_{{api_abbr}}_{{operation_id}}({{#args_named}}{{{args_named}}}{{/args_named}}{{#has_security}}{{#args_named}}, {{/args_named}}{{{security_arg_list}}}{{/has_security}})
   resps <- nectar::req_perform_opinionated(
     req,
-    max_reqs = max_reqs, # Should only include this with pagination.
+    max_reqs = max_reqs,
     max_tries_per_req = max_tries_per_req
   )
   return(nectar::resp_parse(resps))
