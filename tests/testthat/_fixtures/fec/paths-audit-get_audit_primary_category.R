@@ -6,8 +6,6 @@
 #'
 #' This lists the options for the primary categories available in the /audit-search/ endpoint.
 #'
-#' @inheritParams .shared-params
-#'
 #' @param sort_nulls_last (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that sorts null values last
 #' @param page (length-1 \code{\link[base:list]{list}}, optional) For paginating through results, starting at page 1
 #' @param primary_category_name (length-1 \code{\link[base:list]{list}}, optional) Primary Audit Category - No Findings or Issues/Not a Committee - Net Outstanding Campaign/Convention Expenditures/Obligations - Payments/Disgorgements - Allocation Issues - Prohibited Contributions - Disclosure - Recordkeeping - Repayment to US Treasury - Other - Misstatement of Financial Activity - Excessive Contributions - Failure to File Reports/Schedules/Notices - Loans - Referred Findings Not Listed
@@ -17,6 +15,7 @@
 #' @param sort_null_only (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that filters out all rows having sort column that is non-null
 #' @param per_page (length-1 \code{\link[base:list]{list}}, optional) The number of results returned per page. Defaults to 20.
 #' @param sort (length-1 \code{\link[base:character]{character}}, optional) Provide a field to sort by. Use `-` for descending order.
+#' @inheritParams .shared-params
 #'
 #' @returns `fec_get_audit_primary_category()`: The API response.
 #' @export

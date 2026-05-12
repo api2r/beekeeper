@@ -6,10 +6,9 @@
 #'
 #' addBoards()
 #'
-#' @inheritParams .shared-params
-#'
 #' @param key (length-1 \code{\link[base:character]{character}}) <a href="https://trello.com/1/appKey/generate" target="_blank">Generate your application key</a>
 #' @param token (length-1 \code{\link[base:character]{character}}) <a href="https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user" target="_blank">Getting a token from a user</a>
+#' @inheritParams .shared-params
 #'
 #' @returns `trello_add_boards()`: The API response.
 #' @export

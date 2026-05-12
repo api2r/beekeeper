@@ -6,8 +6,6 @@
 #'
 #' Search legal documents by document type, or across all document types using keywords, parameter values and ranges.
 #'
-#' @inheritParams .shared-params
-#'
 #' @param hits_returned (length-1 \code{\link[base:list]{list}}, optional) Number of results to return (max 10)
 #' @param af_report_year (length-1 \code{\link[base:character]{character}}, optional) Admin fine report year
 #' @param case_max_open_date (length-1 \code{\link[base:Date]{Date}}, optional) The latest date opened of case
@@ -51,6 +49,7 @@
 #' @param sort (length-1 \code{\link[base:character]{character}}, optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
 #' @param ao_max_request_date (length-1 \code{\link[base:Date]{Date}}, optional) Latest request date of advisory opinion
 #' @param case_no (length-1 \code{\link[base:list]{list}}, optional) Enforcement matter case number
+#' @inheritParams .shared-params
 #'
 #' @returns `fec_get_legal_search()`: The API response.
 #' @export

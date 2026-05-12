@@ -6,8 +6,8 @@
 #'
 #' List all APIs in the directory for a particular providerName Returns links to the individual API entry for each API.
 #'
-#'
 #' @param provider (length-1 \code{\link[base:character]{character}})
+#' @inheritParams .shared-params
 #'
 #' @returns `guru_get_provider()`: The API response.
 #' @export

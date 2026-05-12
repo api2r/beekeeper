@@ -6,8 +6,8 @@
 #'
 #' List all serviceNames in the directory for a particular providerName
 #'
-#'
 #' @param provider (length-1 \code{\link[base:character]{character}})
+#' @inheritParams .shared-params
 #'
 #' @returns `guru_get_services()`: The API response.
 #' @export

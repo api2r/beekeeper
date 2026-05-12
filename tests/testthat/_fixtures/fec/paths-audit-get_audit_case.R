@@ -6,8 +6,6 @@
 #'
 #' This endpoint contains Final Audit Reports approved by the Commission since inception. The search can be based on information about the audited committee (Name, FEC ID Number, Type, Election Cycle) or the issues covered in the report.
 #'
-#' @inheritParams .shared-params
-#'
 #' @param audit_case_id (length-1 \code{\link[base:list]{list}}, optional) Primary/foreign key for audit tables
 #' @param cycle (length-1 \code{\link[base:list]{list}}, optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
 #' @param sub_category_id (length-1 \code{\link[base:character]{character}}, optional) The finding id of an audit. Finding are a category of broader issues. Each category has an unique ID.
@@ -28,6 +26,7 @@
 #' @param primary_category_id (length-1 \code{\link[base:character]{character}}, optional) Audit category ID (table PK)
 #' @param sort_null_only (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that filters out all rows having sort column that is non-null
 #' @param sort (length-1 \code{\link[base:list]{list}}, optional) Provide a field to sort by. Use `-` for descending order. ex: `-case_no`
+#' @inheritParams .shared-params
 #'
 #' @returns `fec_get_audit_case()`: The API response.
 #' @export

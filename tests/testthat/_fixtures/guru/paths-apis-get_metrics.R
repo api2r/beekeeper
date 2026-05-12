@@ -6,7 +6,7 @@
 #'
 #' Some basic metrics for the entire directory. Just stunning numbers to put on a front page and are intended purely for WoW effect :)
 #'
-#'
+#' @inheritParams .shared-params
 #'
 #' @returns `guru_get_metrics()`: The API response.
 #' @export

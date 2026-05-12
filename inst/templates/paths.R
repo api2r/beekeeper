@@ -5,10 +5,9 @@
 #' {{summary}}
 #'
 #' {{description}}
-#'{{#has_security}}
-#' @inheritParams .shared-params{{/has_security}}
 #' {{#params}}
 #' @param {{name}} ({{{class}}}) {{{description}}}{{/params}}
+#' @inheritParams .shared-params
 #'
 #' @returns `{{api_abbr}}_{{operation_id}}()`: The API response.
 #' @export

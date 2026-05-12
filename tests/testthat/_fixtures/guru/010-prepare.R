@@ -1,8 +1,8 @@
 #' Generate a request for the APIs.guru API
 #'
-#' Prepare a request for the Slack API, using the opinionated framework defined
-#' in [nectar::req_init()], [nectar::req_modify()], [nectar::req_tidy_policy()],
-#' and [nectar::req_pagination_policy()].
+#' Prepare a request for the APIs.guru API, using the opinionated framework
+#' defined in [nectar::req_init()], [nectar::req_modify()],
+#' [nectar::req_tidy_policy()], and [nectar::req_pagination_policy()].
 #'
 #' You may wish to export this function (if the API changes often or you do not
 #' fully implement the API, for example).

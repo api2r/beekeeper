@@ -6,8 +6,6 @@
 #'
 #' Schedule D, it shows debts and obligations owed to or by the committee that are required to be disclosed.
 #'
-#' @inheritParams .shared-params
-#'
 #' @param creditor_debtor_name (length-1 \code{\link[base:list]{list}}, optional)
 #' @param max_image_number (length-1 \code{\link[base:character]{character}}, optional) Maxium image number of the page where the schedule item is reported
 #' @param sort_nulls_last (length-1 \code{\link[base:logical]{logical}}, optional) Toggle that sorts null values last
@@ -32,6 +30,7 @@
 #' @param sort (length-1 \code{\link[base:character]{character}}, optional) Provide a field to sort by. Use `-` for descending order.
 #' @param min_amount_outstanding_beginning (length-1 \code{\link[base:double]{double}}, optional)
 #' @param max_date (length-1 \code{\link[base:Date]{Date}}, optional) Maximum load date
+#' @inheritParams .shared-params
 #'
 #' @returns `fec_get_schedules_schedule_d()`: The API response.
 #' @export

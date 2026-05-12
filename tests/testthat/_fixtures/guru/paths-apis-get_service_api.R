@@ -6,10 +6,10 @@
 #'
 #' Returns the API entry for one specific version of an API where there is a serviceName.
 #'
-#'
 #' @param provider (length-1 \code{\link[base:character]{character}})
 #' @param service (length-1 \code{\link[base:character]{character}})
 #' @param api (length-1 \code{\link[base:character]{character}})
+#' @inheritParams .shared-params
 #'
 #' @returns `guru_get_service_api()`: The API response.
 #' @export
