@@ -4,7 +4,7 @@ test_that("config writes a yml", {
       invisible(TRUE)
     }
   )
-  rapid_path <- test_path("_fixtures/guru_rapid.rds")
+  rapid_path <- test_path("_fixtures/guru/_beekeeper_rapid.rds")
   guru_rapid <- readRDS(rapid_path)
   config_path <- withr::local_tempfile(fileext = ".yml")
   rapid_write_path <- withr::local_tempfile(fileext = ".rds")
@@ -19,7 +19,7 @@ test_that("config writes a yml", {
   expect_identical(guru_rapid, reread_rapid)
   test_result_file <- scrub_config(readLines(config_path))
   expected_result_file <- scrub_config(
-    readLines(test_path("_fixtures", "guru_beekeeper.yml"))
+    readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   )
   expect_identical(
     test_result_file,

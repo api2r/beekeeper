@@ -14,7 +14,7 @@ License: MIT + file LICENSE
 URL: https://beekeeper.api2r.org,
     https://github.com/jonthegeek/beekeeper
 BugReports: https://github.com/jonthegeek/beekeeper/issues
-Imports: 
+Imports:
     cli,
     desc,
     fs,
@@ -25,18 +25,17 @@ Imports:
     rlang (>= 1.1.0),
     rprojroot,
     S7,
-    styler,
     usethis,
     utils,
     yaml
-Suggests: 
+Suggests:
     covr,
     knitr,
     rmarkdown,
     stringr,
     testthat,
     withr
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Remotes:
     jonthegeek/nectar,

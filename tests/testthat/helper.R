@@ -1,7 +1,6 @@
 # Inspired by https://github.com/r-lib/usethis tests/testthat/helper.R
 
-create_local_package <- function(pkgname = "testpkg",
-                                 env = parent.frame()) {
+create_local_package <- function(pkgname = "testpkg", env = parent.frame()) {
   withr::local_options(usethis.quiet = TRUE, .local_envir = env)
 
   dir <- withr::local_tempdir(pattern = pkgname, .local_envir = env)
@@ -9,9 +8,7 @@ create_local_package <- function(pkgname = "testpkg",
 
   usethis::create_package(
     dir,
-    # I need a url to check for it in user agent.
     fields = list(
-      "URL" = "https://example.com",
       "Config/testthat/edition" = "3"
     ),
     rstudio = TRUE,
@@ -60,4 +57,49 @@ scrub_path <- function(input, keep_dirs = c("R", "tests")) {
     search,
     "\\1"
   )
+}
+
+# Find all fixture files matching a regexp and read their contents.
+# Returns a named list of character vectors, where names are the fixture
+# filenames.
+load_expected_files <- function(api_abbr, regexp) {
+  test_dir <- test_path("_fixtures", api_abbr)
+  files <- fs::dir_ls(test_dir, regexp = regexp)
+  names(files) <- fs::path_file(files)
+  purrr::map(files, readLines)
+}
+
+# A mock for .bk_use_template_impl() that records calls and returns a
+# predictable path, without writing any files or needing a usethis project.
+make_spy_impl <- function() {
+  calls <- list()
+  list(
+    mock = function(template, data, target, dir) {
+      calls[[length(calls) + 1]] <<- list(
+        template = template,
+        data = data,
+        target = target,
+        dir = dir
+      )
+      file.path(dir, target)
+    },
+    calls = function() calls
+  )
+}
+
+# A mock that renders templates to a temp dir using whisker directly, so the
+# output can be visually confirmed against fixture files.
+make_writing_impl <- function(tmp) {
+  function(template, data, target, dir) {
+    template_path <- system.file("templates", template, package = "beekeeper")
+    rendered <- whisker::whisker.render(
+      readLines(template_path, warn = FALSE),
+      data
+    )
+    out_dir <- file.path(tmp, dir)
+    fs::dir_create(out_dir)
+    out_path <- file.path(out_dir, target)
+    writeLines(strsplit(rendered, "\n", fixed = TRUE)[[1]], out_path)
+    out_path
+  }
 }

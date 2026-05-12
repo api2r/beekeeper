@@ -26,8 +26,29 @@
   glue_collapse(x, sep = ",\n")
 }
 
+.collapse_quote_comma <- function(x) {
+  stringr::str_flatten_comma(paste0('"', x, '"'))
+}
+
+.paste0_if <- function(original, test, addition) {
+  ifelse(
+    test,
+    paste0(original, addition),
+    original
+  )
+}
+
+.glue_pipe_brace <- function(..., .envir = rlang::caller_env()) {
+  glue::glue(
+    ...,
+    .open = "|{",
+    .close = "}|",
+    .envir = .envir
+  )
+}
+
 .to_snake <- function(x) {
-  to_snake_case(x, parsing_option = 3)
+  snakecase::to_snake_case(x, parsing_option = 3)
 }
 
 .flatten_df <- S7::new_generic(
@@ -40,7 +61,7 @@ S7::method(.flatten_df, class_data.frame) <- function(x) {
 }
 
 S7::method(.flatten_df, class_list) <- function(x) {
-  return(list_rbind(x))
+  return(purrr::list_rbind(x))
 }
 
 S7::method(.flatten_df, NULL) <- function(x) {

@@ -1,13 +1,18 @@
-.generate_paths <- function(paths, api_abbr, security_data, base_url) {
-  # TODO: Do any APIDs lack tags?
-  # TODO: Do any APIDs have multiple tags?
-  paths_by_tag <- as_bk_data(paths)
+.generate_paths <- function(
+  paths,
+  api_abbr,
+  security_data,
+  pagination_data = list(),
+  base_url
+) {
+  paths_by_operation <- as_bk_data(paths)
   paths_file_paths <- character()
-  if (length(paths_by_tag)) {
+  if (length(paths_by_operation)) {
     paths_file_paths <- .generate_paths_files(
-      paths_by_tag,
+      paths_by_operation,
       api_abbr,
-      security_data
+      security_data,
+      pagination_data
     )
     setup_file <- .bk_use_template(
       template = "setup.R",
@@ -25,95 +30,110 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   if (!length(x)) {
     return(list())
   }
-  paths_tags_df <- .paths_to_tags_df(as_tibble(x))
-  return(.paths_to_tag_list(paths_tags_df))
+  paths_df <- .paths_to_clean_df(x)
+  result <- purrr::pmap(paths_df, .path_row_to_list)
+  names(result) <- paths_df$operation_id
+  result
 }
 
-.paths_to_tags_df <- function(x) {
-  x <- unnest(x, "operations")
-  x <- x[!x$deprecated, ]
-  nest(
-    x,
-    .by = "tags", .key = "endpoints"
+.paths_to_clean_df <- function(x) {
+  x <- tibble::as_tibble(x) |>
+    tidyr::unnest("operations")
+  if (length(x$deprecated)) {
+    x <- x[!x$deprecated, ]
+  }
+  x$deprecated <- NULL
+  x$tags <- .paths_fill_tags(x$tags)
+  x$operation_id <- .paths_fill_operation_id(
+    x$operation_id,
+    x$endpoint,
+    x$operation
   )
-}
-
-## to tag list -----------------------------------------------------------------
-.paths_to_tag_list <- function(paths_tags_df) {
-  set_names(
-    map(
-      paths_tags_df$endpoints,
-      .paths_endpoints_to_lists
-    ),
-    .to_snake(paths_tags_df$tags)
+  x$summary <- .paths_fill_summary(
+    x$summary,
+    x$endpoint,
+    x$operation
   )
-}
-
-.paths_endpoints_to_lists <- function(endpoints) {
-  pmap(
-    list(
-      operation_id = .paths_fill_operation_id(
-        endpoints$operation_id,
-        endpoints$endpoint,
-        endpoints$operation
-      ),
-      path = endpoints$endpoint,
-      summary = .paths_fill_summary(
-        endpoints$summary,
-        endpoints$endpoint,
-        endpoints$operation
-      ),
-      description = .paths_fill_descriptions(endpoints$description),
-      params_df = endpoints$parameters,
-      method = endpoints$operation
-    ),
-    .paths_endpoint_to_list
-  )
+  x$description <- .paths_fill_descriptions(x$description, x$summary)
+  # TODO: Deal with x$global_parameters if present
+  x$parameters <- purrr::map(x$parameters, .prepare_params_df)
+  return(x)
 }
 
 ### fill data ------------------------------------------------------------------
+
+.paths_fill_tags <- function(tags) {
+  tags[lengths(tags) == 0] <- "general"
+  tags <- purrr::map_chr(tags, 1)
+  return(.to_snake(tags))
+}
 
 .paths_fill_operation_id <- function(operation_id, endpoint, method) {
   .coalesce(.to_snake(operation_id), glue("{method}_{.to_snake(endpoint)}"))
 }
 
 .paths_fill_summary <- function(summary, endpoint, method) {
-  endpoint_spaced <- str_replace_all(.to_snake(endpoint), "_", " ")
+  endpoint_spaced <- stringr::str_replace_all(.to_snake(endpoint), "_", " ")
   .coalesce(
-    str_squish(summary),
-    str_to_sentence(glue("{method} {endpoint_spaced}"))
+    stringr::str_squish(summary),
+    stringr::str_to_sentence(glue("{method} {endpoint_spaced}"))
   )
 }
 
-### create whisker data --------------------------------------------------------
+.paths_fill_descriptions <- function(descriptions, summaries) {
+  descriptions[is.na(descriptions)] <- summaries[is.na(descriptions)]
+  descriptions[is.na(descriptions)] <- ""
+  return(stringr::str_squish(descriptions))
+}
 
-.paths_endpoint_to_list <- function(operation_id,
-                                    path,
-                                    summary,
-                                    description,
-                                    params_df,
-                                    method) {
-  params_df <- .prepare_paths_df(params_df)
-  return(
-    list(
-      operation_id = operation_id,
-      path = .path_as_arg(path, params_df),
-      method = method,
-      summary = summary,
-      description = description,
-      params = .params_to_list(params_df),
-      params_query = .extract_params_type(params_df, "query"),
-      params_header = .extract_params_type(params_df, "header"),
-      params_cookie = .extract_params_type(params_df, "cookie")
+### create template data -------------------------------------------------------
+
+.path_row_to_list <- function(
+  operation_id,
+  endpoint,
+  operation,
+  summary,
+  description,
+  tags,
+  parameters,
+  ...
+) {
+  list(
+    operation_id = operation_id,
+    tag = tags,
+    path = .path_as_arg(endpoint, parameters),
+    method = operation,
+    summary = summary,
+    description = description,
+    params = .params_to_list(parameters),
+    params_query_raw = .extract_params_by_location(parameters, "query"),
+    params_header_raw = .extract_params_by_location(parameters, "header"),
+    params_cookie_raw = .extract_params_by_location(parameters, "cookie")
+  )
+}
+
+.prepare_params_df <- function(params_df) {
+  params_df <- .flatten_params_df(params_df)
+  if (nrow(params_df)) {
+    params_df$class <- .describe_param_classes(
+      params_df$schema,
+      params_df$allowEmptyValue,
+      params_df$required
     )
-  )
+    params_df$description <- .paths_fill_descriptions(
+      params_df$description,
+      params_df$schema$description
+    )
+  }
+  params_df$schema <- NULL
+  params_df$style <- NULL
+  return(params_df)
 }
 
-.prepare_paths_df <- function(params_df) {
+.flatten_params_df <- function(params_df) {
   params_df <- .flatten_df(params_df)
   if (nrow(params_df)) {
     params_df <- params_df[!params_df$deprecated, ]
-    params_df$description <- .paths_fill_descriptions(params_df$description)
   }
   return(params_df)
 }
@@ -122,34 +142,60 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   if (!nrow(params_df)) {
     return(list())
   }
-  # TODO: Deal with all the available data.
-  params <- pmap(
+  purrr::pmap(
     list(
       name = params_df$name,
+      class = params_df$class,
       description = params_df$description
     ),
-    .paths_param_to_list
+    function(name, class, description) {
+      list(name = name, class = class, description = description)
+    }
   )
-  return(params)
 }
 
-.extract_params_type <- function(params_df, filter_in) {
+.extract_params_by_location <- function(params_df, filter_in) {
   if (!nrow(params_df)) {
     return(character())
   }
   return(params_df$name[params_df$`in` == filter_in])
 }
 
-.paths_fill_descriptions <- function(descriptions) {
-  descriptions[is.na(descriptions)] <- "BKTODO: No description provided."
-  return(str_squish(descriptions))
+.describe_param_classes <- function(params_schema, allow_empty, required) {
+  # TODO: Use enum and/or description when available.
+  #
+  # TODO: What should we do for `object`? Currently falls back to list, same as
+  # array.
+  type <- dplyr::left_join(
+    dplyr::select(params_schema, "type", "format"),
+    oas_format_registry,
+    by = c("type", "format")
+  )
+  # Fall back to list for unknown types (array, object, etc.)
+  type$r_class_name <- dplyr::coalesce(type$r_class_name, "list")
+  type$r_class_package <- dplyr::coalesce(type$r_class_package, "base")
+  type$r_class_link <- dplyr::coalesce(type$r_class_link, "list")
+  type$r_class_name_display <- stringr::str_remove(
+    glue::glue("{type$r_class_package}::{type$r_class_name}"),
+    "^base::"
+  )
+  return(.compile_param_class_descriptions(type, allow_empty, required))
 }
 
-.paths_param_to_list <- function(name, description) {
-  list(
-    name = name,
-    description = description
-  )
+.compile_param_class_descriptions <- function(type, allow_empty, required) {
+  r_class_descriptions <- .glue_pipe_brace(
+    "length-1 [|{type$r_class_package}|::|{type$r_class_link}|()]"
+  ) |>
+    .paste0_if(
+      allow_empty,
+      " or `NULL`"
+    ) |>
+    .paste0_if(
+      !required,
+      ", optional"
+    )
+
+  return(r_class_descriptions)
 }
 
 .path_as_arg <- function(path, params_df) {
@@ -165,57 +211,59 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   .collapse_comma(glue("{x} = {x}"))
 }
 
-# generate files ----------------------------------------------------------
+# generate files ---------------------------------------------------------------
 
-.generate_paths_files <- function(paths_by_tag, api_abbr, security_data) {
-  unlist(imap(
-    paths_by_tag,
-    function(path_tag, path_tag_name) {
-      .generate_paths_tag_files(
-        path_tag,
-        path_tag_name,
-        api_abbr,
-        security_data
+.generate_paths_files <- function(
+  paths_by_operation,
+  api_abbr,
+  security_data,
+  pagination_data
+) {
+  security_arg_names <- security_data$security_arg_names %|0|% character()
+
+  # Prep each operation: remove security args, compile args strings
+  prepped <- imap(paths_by_operation, function(op, op_id) {
+    params <- .remove_security_args(op$params, security_arg_names)
+    params_query <- .prep_param_args(op$params_query_raw, security_arg_names)
+    params_header <- .prep_param_args(op$params_header_raw, security_arg_names)
+    args <- .params_to_args(params)
+    args_named <- .params_to_named_args(params)
+    c(
+      op,
+      list(
+        params = params,
+        params_query = params_query,
+        params_header = params_header,
+        args = args,
+        args_named = args_named,
+        test_args = args
       )
-    }
-  ))
-}
+    )
+  })
 
-.generate_paths_tag_files <- function(path_tag,
-                                      path_tag_name,
-                                      api_abbr,
-                                      security_data) {
-  path_tag <- .prepare_path_tag(
-    path_tag,
-    security_data$security_arg_names
-  )
-  file_path <- .generate_paths_file(
-    path_tag,
-    path_tag_name,
-    api_abbr,
-    security_data
-  )
-  test_path <- .generate_paths_test_file(path_tag, path_tag_name, api_abbr)
-  return(c(unname(file_path), unname(test_path)))
-}
+  # One R file per operation
+  r_files <- unname(unlist(imap(prepped, function(op, op_id) {
+    .generate_paths_file(op, op_id, api_abbr, security_data)
+  })))
 
-.prepare_path_tag <- function(path_tag, security_args) {
-  path_tag <- map(
-    path_tag,
-    function(path) {
-      path$params <- .remove_security_args(path$params, security_args)
-      path$params_cookie <- .prep_param_args(path$params_cookie, security_args)
-      path$params_header <- .prep_param_args(path$params_header, security_args)
-      path$params_query <- .prep_param_args(path$params_query, security_args)
-      path$args <- .params_to_args(path$params)
-      path$test_args <- path$args
-      return(path)
-    }
-  )
+  # One test file per tag (operations grouped by tag, preserving encounter
+  # order)
+  tags <- map_chr(prepped, "tag")
+  unique_tags <- unique(tags)
+  test_files <- unname(unlist(lapply(unique_tags, function(tag_name) {
+    tag_ops <- prepped[tags == tag_name]
+    .generate_paths_test_file(tag_ops, tag_name, api_abbr)
+  })))
+
+  return(c(r_files, test_files))
 }
 
 .params_to_args <- function(params) {
   .collapse_comma(map_chr(params, "name")) %|"|% character()
+}
+
+.params_to_named_args <- function(params) {
+  .collapse_comma_self_equal(map_chr(params, "name")) %|"|% character()
 }
 
 .remove_security_args <- function(params, security_args) {
@@ -231,32 +279,44 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   .collapse_comma_self_equal(setdiff(params, security_args)) %|"|% character()
 }
 
-.generate_paths_file <- function(path_tag,
-                                 path_tag_name,
-                                 api_abbr,
-                                 security_data) {
+.generate_paths_file <- function(
+  path_operation,
+  operation_id,
+  api_abbr,
+  security_data
+) {
   .bk_use_template(
     template = "paths.R",
-    data = list(
-      paths = path_tag,
-      api_abbr = api_abbr,
-      has_security = security_data$has_security,
-      security_signature = security_data$security_signature,
-      security_arg_list = security_data$security_arg_list
+    data = c(
+      path_operation,
+      list(
+        api_abbr = api_abbr,
+        has_security = security_data$has_security %|0|% FALSE,
+        security_signature = security_data$security_signature %|0|% "",
+        security_arg_list = security_data$security_arg_list %|0|% "",
+        pagination = FALSE,
+        pagination_fn = ""
+      )
     ),
-    target = glue("paths-{path_tag_name}.R")
+    target = glue("paths-{path_operation$tag}-{operation_id}.R")
   )
 }
 
-.generate_paths_test_file <- function(path_tag, path_tag_name, api_abbr) {
+.generate_paths_test_file <- function(tag_operations, tag_name, api_abbr) {
+  paths_list <- unname(imap(tag_operations, function(op, op_id) {
+    list(
+      operation_id = op_id,
+      test_args = op$test_args %|0|% ""
+    )
+  }))
   .bk_use_template(
     template = "test-paths.R",
     data = list(
-      paths = path_tag,
-      tag = path_tag_name,
+      paths = paths_list,
+      tag = tag_name,
       api_abbr = api_abbr
     ),
     dir = "tests/testthat",
-    target = glue("test-paths-{path_tag_name}.R")
+    target = glue("test-paths-{tag_name}.R")
   )
 }
