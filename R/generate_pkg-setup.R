@@ -32,11 +32,9 @@
 
 .read_config <- function(config_file = "_beekeeper.yml") {
   config <- yaml::read_yaml(config_file)
-  return(.stabilize_config(config)) # nocov
+  return(.stabilize_config(config))
 }
 
-# covr doesn't see the line above and a bunch below for some reason.
-# nocov start
 .stabilize_config <- function(config) {
   config$api_title <- stbl::stabilize_character_scalar(config$api_title)
   config$api_abbr <- stbl::stabilize_character_scalar(config$api_abbr)
@@ -49,7 +47,6 @@
   )
   return(config)
 }
-# nocov end
 
 .read_api_definition <- function(pkg_dir, rapid_file) {
   readRDS(
