@@ -271,7 +271,7 @@ test_that(".params_to_validations() only includes supported checks (#69)", {
   )
 })
 
-test_that(".paths_need_stbl() flags actionable validations", {
+test_that(".paths_need_stbl() flags actionable validations (#69)", {
   api_definition_true <- readRDS(test_path(
     "_fixtures",
     "guru",
@@ -286,7 +286,7 @@ test_that(".paths_need_stbl() flags actionable validations", {
   )
 })
 
-test_that(".paths_need_stbl() returns FALSE for empty paths", {
+test_that(".paths_need_stbl() returns FALSE for empty paths (#69)", {
   expect_false(.paths_need_stbl(rapid::class_paths(), character()))
 })
 

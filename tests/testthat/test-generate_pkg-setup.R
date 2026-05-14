@@ -54,7 +54,7 @@ test_that(".setup_r() sets up dependencies", {
   )
 })
 
-test_that(".setup_r() can include stbl in imports", {
+test_that(".setup_r() can include stbl in imports (#69)", {
   skip_on_cran()
 
   create_local_package()
