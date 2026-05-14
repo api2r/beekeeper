@@ -24,6 +24,7 @@ guru_get_services <- function(provider, max_reqs = Inf, max_tries_per_req = 3) {
 #' @rdname guru_get_services
 #' @returns `req_guru_get_services()`: A `httr2_request` request object.
 req_guru_get_services <- function(provider) {
+  provider <- stbl::to_chr_scalar(provider)
   guru_req_prepare(
     path = c("/{provider}/services.json", provider = provider),
     method = "get"

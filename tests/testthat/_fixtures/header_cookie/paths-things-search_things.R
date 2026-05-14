@@ -26,6 +26,9 @@ test_search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_
 #' @rdname test_search_things
 #' @returns `req_test_search_things()`: A `httr2_request` request object.
 req_test_search_things <- function(x_auth_token, session_id, q) {
+  x_auth_token <- stbl::to_chr_scalar(x_auth_token)
+  session_id <- stbl::to_chr_scalar(session_id)
+  q <- stbl::to_chr_scalar(q)
   test_req_prepare(
     path = "/things",
     method = "get",
