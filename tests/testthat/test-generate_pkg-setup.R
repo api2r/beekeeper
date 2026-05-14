@@ -53,3 +53,15 @@ test_that(".setup_r() sets up dependencies", {
     "testthat"
   )
 })
+
+test_that(".setup_r() can include stbl in imports", {
+  skip_on_cran()
+
+  create_local_package()
+  .setup_r(".", include_stbl = TRUE)
+
+  dependencies <- desc::desc()$get_deps()
+  imports <- dependencies$package[dependencies$type == "Imports"]
+  expect_contains(imports, "nectar")
+  expect_contains(imports, "stbl")
+})

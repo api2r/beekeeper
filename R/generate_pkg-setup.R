@@ -54,7 +54,7 @@
   )
 }
 
-.setup_r <- function(pkg_dir) {
+.setup_r <- function(pkg_dir, include_stbl = FALSE) {
   if (as.character(pkg_dir) != ".") {
     usethis::local_project(pkg_dir, quiet = TRUE) # nocov
   }
@@ -62,5 +62,8 @@
   use_testthat()
   purrr::quietly(use_httptest2)()
   use_package("nectar")
+  if (include_stbl) {
+    use_package("stbl")
+  }
   use_package("beekeeper", type = "Suggests")
 }

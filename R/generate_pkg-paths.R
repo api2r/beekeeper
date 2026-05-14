@@ -309,6 +309,17 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+.paths_need_stbl <- function(paths, security_arg_names = character()) {
+  ops <- as_bk_data(paths)
+  if (!length(ops)) {
+    return(FALSE)
+  }
+  any(purrr::map_lgl(ops, function(op) {
+    params <- .remove_security_args(op$params, security_arg_names)
+    length(.params_to_validations(params)) > 0
+  }))
+}
+
 .generate_paths_file <- function(
   path_operation,
   operation_id,

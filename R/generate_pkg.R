@@ -23,16 +23,23 @@ generate_pkg <- function(
   .assert_is_pkg(pkg_dir)
   config <- .read_config(config_file)
   api_definition <- .read_api_definition(pkg_dir, config$rapid_file)
-  .setup_r(pkg_dir)
-  touched_files <- .generate_pkg_impl(config, api_definition)
-  return(invisible(touched_files))
-}
-
-.generate_pkg_impl <- function(config, api_definition) {
   security_data <- .generate_security(
     config$api_abbr,
     api_definition@components@security_schemes
   )
+  security_arg_names <- security_data$security_arg_names %|0|% character()
+  .setup_r(
+    pkg_dir,
+    include_stbl = .paths_need_stbl(
+      api_definition@paths,
+      security_arg_names
+    )
+  )
+  touched_files <- .generate_pkg_impl(config, api_definition, security_data)
+  return(invisible(touched_files))
+}
+
+.generate_pkg_impl <- function(config, api_definition, security_data) {
   prep_files <- .generate_prepare(config, api_definition, security_data)
   pagination_data <- .generate_pagination()
   path_files <- .generate_paths(

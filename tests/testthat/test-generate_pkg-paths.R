@@ -271,6 +271,25 @@ test_that(".params_to_validations() only includes supported checks (#69)", {
   )
 })
 
+test_that(".paths_need_stbl() flags actionable validations", {
+  api_definition_true <- readRDS(test_path(
+    "_fixtures",
+    "guru",
+    "_beekeeper_rapid.rds"
+  ))
+
+  expect_true(
+    .paths_need_stbl(
+      api_definition_true@paths,
+      character()
+    )
+  )
+})
+
+test_that(".paths_need_stbl() returns FALSE for empty paths", {
+  expect_false(.paths_need_stbl(rapid::class_paths(), character()))
+})
+
 test_that(".generate_paths_file() renders header and cookie params correctly (#84, #69)", {
   skip_on_cran()
   expected_content <- readLines(
