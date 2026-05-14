@@ -25,7 +25,7 @@
 #' @returns `req_{{api_abbr}}_{{operation_id}}()`: A `httr2_request` request object.
 req_{{api_abbr}}_{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has_security}}{{#args}}, {{/args}}{{{security_signature}}}{{/has_security}}) {
 {{#validations}}
-  stbl::{{to_r}}({{name}})
+  {{name}} <- stbl::{{to_r}}({{name}})
 {{/validations}}
   {{api_abbr}}_req_prepare(
     path = {{{path}}},
