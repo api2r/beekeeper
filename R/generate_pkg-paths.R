@@ -224,6 +224,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     params <- .remove_security_args(op$params, security_arg_names)
     params_query <- .prep_param_args(op$params_query_raw, security_arg_names)
     params_header <- .prep_param_args(op$params_header_raw, security_arg_names)
+    params_cookie <- .prep_param_args(op$params_cookie_raw, security_arg_names)
     args <- .params_to_args(params)
     args_named <- .params_to_named_args(params)
     c(
@@ -232,6 +233,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
         params = params,
         params_query = params_query,
         params_header = params_header,
+        params_cookie = params_cookie,
         args = args,
         args_named = args_named,
         test_args = args

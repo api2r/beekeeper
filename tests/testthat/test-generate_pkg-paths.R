@@ -257,3 +257,53 @@ test_that(".compile_param_class_descriptions() uses class names (#85)", {
     )
   )
 })
+
+test_that(".generate_paths_file() renders header and cookie params correctly (#84)", {
+  skip_on_cran()
+  expected_content <- readLines(
+    test_path("_fixtures", "header_cookie", "paths-things-search_things.R")
+  )
+
+  tmp <- withr::local_tempdir()
+  local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
+
+  op <- list(
+    operation_id = "search_things",
+    tag = "things",
+    path = '"/things"',
+    method = "get",
+    summary = "Search things",
+    description = "Search for things.",
+    params = list(
+      list(
+        name = "x_auth_token",
+        class = "length-1 `character`",
+        description = "Authentication token"
+      ),
+      list(
+        name = "session_id",
+        class = "length-1 `character`",
+        description = "Session identifier"
+      ),
+      list(
+        name = "q",
+        class = "length-1 `character`",
+        description = "Search query"
+      )
+    ),
+    params_query = "q = q",
+    params_header = "x_auth_token = x_auth_token",
+    params_cookie = "session_id = session_id",
+    args = "x_auth_token, session_id, q",
+    args_named = "x_auth_token = x_auth_token, session_id = session_id, q = q",
+    test_args = "x_auth_token, session_id, q",
+    pagination = FALSE,
+    pagination_fn = ""
+  )
+  .generate_paths_file(op, "search_things", "test", list())
+
+  expect_identical(
+    readLines(file.path(tmp, "R", "paths-things-search_things.R")),
+    expected_content
+  )
+})

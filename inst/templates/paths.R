@@ -29,7 +29,8 @@ req_{{api_abbr}}_{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has
     method = "{{method}}"{{#has_security}},
     {{security_arg_list}}{{/has_security}}{{#params_query}},
     query = list({{params_query}}){{/params_query}}{{#params_header}},
-    body = list({{params_header}}){{/params_header}}{{#pagination}},
+    header = list({{params_header}}){{/params_header}}{{#params_cookie}},
+    cookie = list({{params_cookie}}){{/params_cookie}}{{#pagination}},
     pagination_fn = {{pagination_fn}}{{/pagination}}{{#tidy}},
     tidy_policy = {{tidy_policy}}{{/tidy}}
   )
