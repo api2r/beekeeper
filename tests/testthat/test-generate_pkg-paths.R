@@ -258,7 +258,20 @@ test_that(".compile_param_class_descriptions() uses class names (#85)", {
   )
 })
 
-test_that(".generate_paths_file() renders header and cookie params correctly (#84)", {
+test_that(".params_to_validations() only includes supported checks (#69)", {
+  params <- list(
+    list(name = "q", to_r = "to_chr_scalar"),
+    list(name = "from", to_r = "todo_to_date_scalar"),
+    list(name = "x", to_r = NA_character_)
+  )
+
+  expect_identical(
+    .params_to_validations(params),
+    list(list(name = "q", to_r = "to_chr_scalar"))
+  )
+})
+
+test_that(".generate_paths_file() renders header and cookie params correctly (#84, #69)", {
   skip_on_cran()
   expected_content <- readLines(
     test_path("_fixtures", "header_cookie", "paths-things-search_things.R")
@@ -278,17 +291,20 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
       list(
         name = "x_auth_token",
         class = "length-1 `character`",
-        description = "Authentication token"
+        description = "Authentication token",
+        to_r = "to_chr_scalar"
       ),
       list(
         name = "session_id",
         class = "length-1 `character`",
-        description = "Session identifier"
+        description = "Session identifier",
+        to_r = "to_chr_scalar"
       ),
       list(
         name = "q",
         class = "length-1 `character`",
-        description = "Search query"
+        description = "Search query",
+        to_r = "to_chr_scalar"
       )
     ),
     params_query = "q = q",
@@ -296,6 +312,11 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     params_cookie = "session_id = session_id",
     args = "x_auth_token, session_id, q",
     args_named = "x_auth_token = x_auth_token, session_id = session_id, q = q",
+    validations = list(
+      list(name = "x_auth_token", to_r = "to_chr_scalar"),
+      list(name = "session_id", to_r = "to_chr_scalar"),
+      list(name = "q", to_r = "to_chr_scalar")
+    ),
     test_args = "x_auth_token, session_id, q",
     pagination = FALSE,
     pagination_fn = ""

@@ -120,6 +120,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
       params_df$allowEmptyValue,
       params_df$required
     )
+    params_df$to_r <- .param_schema_to_r(params_df$schema)
     params_df$description <- .paths_fill_descriptions(
       params_df$description,
       params_df$schema$description
@@ -146,10 +147,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     list(
       name = params_df$name,
       class = params_df$class,
-      description = params_df$description
+      description = params_df$description,
+      to_r = params_df$to_r
     ),
-    function(name, class, description) {
-      list(name = name, class = class, description = description)
+    function(name, class, description, to_r) {
+      list(name = name, class = class, description = description, to_r = to_r)
     }
   )
 }
@@ -180,6 +182,15 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     "^base::"
   )
   return(.compile_param_class_descriptions(type, allow_empty, required))
+}
+
+.param_schema_to_r <- function(params_schema) {
+  type <- dplyr::left_join(
+    dplyr::select(params_schema, "type", "format"),
+    dplyr::select(oas_format_registry, "type", "format", "to_r"),
+    by = c("type", "format")
+  )
+  type$to_r
 }
 
 .compile_param_class_descriptions <- function(type, allow_empty, required) {
@@ -227,6 +238,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     params_cookie <- .prep_param_args(op$params_cookie_raw, security_arg_names)
     args <- .params_to_args(params)
     args_named <- .params_to_named_args(params)
+    validations <- .params_to_validations(params)
     c(
       op,
       list(
@@ -236,7 +248,8 @@ S7::method(as_bk_data, class_paths) <- function(x) {
         params_cookie = params_cookie,
         args = args,
         args_named = args_named,
-        test_args = args
+        test_args = args,
+        validations = validations
       )
     )
   })
@@ -277,6 +290,23 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 .prep_param_args <- function(params, security_args) {
   .collapse_comma_self_equal(setdiff(params, security_args)) %|"|% character()
+}
+
+.params_to_validations <- function(params) {
+  checks <- purrr::keep(
+    params,
+    function(param) {
+      !is.null(param$to_r) &&
+        !is.na(param$to_r) &&
+        !startsWith(param$to_r, "todo_")
+    }
+  )
+  purrr::map(
+    checks,
+    function(param) {
+      list(name = param$name, to_r = param$to_r)
+    }
+  )
 }
 
 .generate_paths_file <- function(
