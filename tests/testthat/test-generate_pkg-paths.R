@@ -241,7 +241,7 @@ test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   )
 })
 
-test_that(".compile_param_class_descriptions() uses class names", {
+test_that(".compile_param_class_descriptions() uses class names (#85)", {
   type <- tibble::tibble(r_class_name = c("character", "Date"))
   result <- .compile_param_class_descriptions(
     type = type,
