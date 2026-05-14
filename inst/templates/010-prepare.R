@@ -15,6 +15,8 @@
   path,
   query = list(),
   body = NULL,
+  header = list(),
+  cookie = list(),
   method = NULL,
   tidy_policy = nectar::tidy_policy_unknown(),{{#has_security}}
 {{{security_signature}}},{{/has_security}}
@@ -24,6 +26,8 @@
     path = path,
     query = query,
     body = body,
+    header = header,
+    cookie = cookie,
     method = method,
     tidy_policy = tidy_policy,
     call = call
