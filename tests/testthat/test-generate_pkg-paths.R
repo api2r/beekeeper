@@ -240,3 +240,20 @@ test_that(".generate_paths() writes correct paths.R for trello (#65)", {
     expected_file_content
   )
 })
+
+test_that(".compile_param_class_descriptions() uses class names", {
+  type <- tibble::tibble(r_class_name = c("character", "Date"))
+  result <- .compile_param_class_descriptions(
+    type = type,
+    allow_empty = c(FALSE, TRUE),
+    required = c(TRUE, FALSE)
+  )
+
+  expect_identical(
+    as.character(result),
+    c(
+      "length-1 `character`",
+      "length-1 `Date` or `NULL`, optional"
+    )
+  )
+})

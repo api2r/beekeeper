@@ -183,9 +183,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .compile_param_class_descriptions <- function(type, allow_empty, required) {
-  r_class_descriptions <- .glue_pipe_brace(
-    "length-1 [|{type$r_class_package}|::|{type$r_class_link}|()]"
-  ) |>
+  r_class_descriptions <- glue::glue("length-1 `{type$r_class_name}`") |>
     .paste0_if(
       allow_empty,
       " or `NULL`"

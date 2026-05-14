@@ -6,30 +6,30 @@
 #'
 #' Schedule D, it shows debts and obligations owed to or by the committee that are required to be disclosed.
 #'
-#' @param creditor_debtor_name (length-1 [base::list()], optional)
-#' @param max_image_number (length-1 [base::character()], optional) Maxium image number of the page where the schedule item is reported
-#' @param sort_nulls_last (length-1 [base::logical()], optional) Toggle that sorts null values last
-#' @param max_amount_outstanding_beginning (length-1 [base::double()], optional)
-#' @param sort_hide_null (length-1 [base::logical()], optional) Hide null values on sorted column(s).
-#' @param min_payment_period (length-1 [base::double()], optional)
-#' @param max_amount_incurred (length-1 [base::double()], optional)
-#' @param nature_of_debt (length-1 [base::character()], optional)
-#' @param per_page (length-1 [base::list()], optional) The number of results returned per page. Defaults to 20.
-#' @param max_amount_outstanding_close (length-1 [base::double()], optional)
-#' @param candidate_id (length-1 [base::list()], optional) A unique identifier assigned to each candidate registered with the FEC. If a person runs for several offices, that person will have separate candidate IDs for each office.
-#' @param page (length-1 [base::list()], optional) For paginating through results, starting at page 1
-#' @param min_date (length-1 [base::Date()], optional) Minimum load date
-#' @param committee_id (length-1 [base::list()], optional) A unique identifier assigned to each committee or filer registered with the FEC. In general committee id's begin with the letter C which is followed by eight digits.
-#' @param min_amount_outstanding_close (length-1 [base::double()], optional)
-#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param max_payment_period (length-1 [base::double()], optional)
-#' @param min_image_number (length-1 [base::character()], optional) Minium image number of the page where the schedule item is reported
-#' @param min_amount_incurred (length-1 [base::double()], optional)
-#' @param sort_null_only (length-1 [base::logical()], optional) Toggle that filters out all rows having sort column that is non-null
-#' @param image_number (length-1 [base::list()], optional) An unique identifier for each page where the electronic or paper filing is reported.
-#' @param sort (length-1 [base::character()], optional) Provide a field to sort by. Use `-` for descending order.
-#' @param min_amount_outstanding_beginning (length-1 [base::double()], optional)
-#' @param max_date (length-1 [base::Date()], optional) Maximum load date
+#' @param creditor_debtor_name (length-1 `list`, optional)
+#' @param max_image_number (length-1 `character`, optional) Maxium image number of the page where the schedule item is reported
+#' @param sort_nulls_last (length-1 `logical`, optional) Toggle that sorts null values last
+#' @param max_amount_outstanding_beginning (length-1 `double`, optional)
+#' @param sort_hide_null (length-1 `logical`, optional) Hide null values on sorted column(s).
+#' @param min_payment_period (length-1 `double`, optional)
+#' @param max_amount_incurred (length-1 `double`, optional)
+#' @param nature_of_debt (length-1 `character`, optional)
+#' @param per_page (length-1 `list`, optional) The number of results returned per page. Defaults to 20.
+#' @param max_amount_outstanding_close (length-1 `double`, optional)
+#' @param candidate_id (length-1 `list`, optional) A unique identifier assigned to each candidate registered with the FEC. If a person runs for several offices, that person will have separate candidate IDs for each office.
+#' @param page (length-1 `list`, optional) For paginating through results, starting at page 1
+#' @param min_date (length-1 `Date`, optional) Minimum load date
+#' @param committee_id (length-1 `list`, optional) A unique identifier assigned to each committee or filer registered with the FEC. In general committee id's begin with the letter C which is followed by eight digits.
+#' @param min_amount_outstanding_close (length-1 `double`, optional)
+#' @param api_key (length-1 `character`) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param max_payment_period (length-1 `double`, optional)
+#' @param min_image_number (length-1 `character`, optional) Minium image number of the page where the schedule item is reported
+#' @param min_amount_incurred (length-1 `double`, optional)
+#' @param sort_null_only (length-1 `logical`, optional) Toggle that filters out all rows having sort column that is non-null
+#' @param image_number (length-1 `list`, optional) An unique identifier for each page where the electronic or paper filing is reported.
+#' @param sort (length-1 `character`, optional) Provide a field to sort by. Use `-` for descending order.
+#' @param min_amount_outstanding_beginning (length-1 `double`, optional)
+#' @param max_date (length-1 `Date`, optional) Maximum load date
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_schedules_schedule_d()`: The API response.
