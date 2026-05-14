@@ -6,8 +6,8 @@
 #'
 #' Returns the API entry for one specific version of an API where there is no serviceName.
 #' 
-#' @param provider (length-1 [base::character()]) 
-#' @param api (length-1 [base::character()]) 
+#' @param provider (length-1 `character`) 
+#' @param api (length-1 `character`) 
 #' @inheritParams .shared-params
 #'
 #' @returns `guru_get_api()`: The API response.

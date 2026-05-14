@@ -6,15 +6,15 @@
 #'
 #' This lists the options for the categories and subcategories available in the /audit-search/ endpoint.
 #'
-#' @param sort_nulls_last (length-1 [base::logical()], optional) Toggle that sorts null values last
-#' @param page (length-1 [base::list()], optional) For paginating through results, starting at page 1
-#' @param primary_category_name (length-1 [base::list()], optional) Primary Audit Category - No Findings or Issues/Not a Committee - Net Outstanding Campaign/Convention Expenditures/Obligations - Payments/Disgorgements - Allocation Issues - Prohibited Contributions - Disclosure - Recordkeeping - Repayment to US Treasury - Other - Misstatement of Financial Activity - Excessive Contributions - Failure to File Reports/Schedules/Notices - Loans - Referred Findings Not Listed
-#' @param sort_hide_null (length-1 [base::logical()], optional) Hide null values on sorted column(s).
-#' @param api_key (length-1 [base::character()]) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
-#' @param primary_category_id (length-1 [base::list()], optional) Audit category ID (table PK)
-#' @param sort_null_only (length-1 [base::logical()], optional) Toggle that filters out all rows having sort column that is non-null
-#' @param per_page (length-1 [base::list()], optional) The number of results returned per page. Defaults to 20.
-#' @param sort (length-1 [base::character()], optional) Provide a field to sort by. Use `-` for descending order.
+#' @param sort_nulls_last (length-1 `logical`, optional) Toggle that sorts null values last
+#' @param page (length-1 `list`, optional) For paginating through results, starting at page 1
+#' @param primary_category_name (length-1 `list`, optional) Primary Audit Category - No Findings or Issues/Not a Committee - Net Outstanding Campaign/Convention Expenditures/Obligations - Payments/Disgorgements - Allocation Issues - Prohibited Contributions - Disclosure - Recordkeeping - Repayment to US Treasury - Other - Misstatement of Financial Activity - Excessive Contributions - Failure to File Reports/Schedules/Notices - Loans - Referred Findings Not Listed
+#' @param sort_hide_null (length-1 `logical`, optional) Hide null values on sorted column(s).
+#' @param api_key (length-1 `character`) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
+#' @param primary_category_id (length-1 `list`, optional) Audit category ID (table PK)
+#' @param sort_null_only (length-1 `logical`, optional) Toggle that filters out all rows having sort column that is non-null
+#' @param per_page (length-1 `list`, optional) The number of results returned per page. Defaults to 20.
+#' @param sort (length-1 `character`, optional) Provide a field to sort by. Use `-` for descending order.
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_audit_category()`: The API response.
