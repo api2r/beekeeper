@@ -51,7 +51,7 @@ test_that("generate_pkg() generates call function with API keys", {
   expect_identical(prepare_result, prepare_expected)
 })
 
-test_that("generate_pkg() can read values from config and rapid files", {
+test_that("generate_pkg() falls back to config file when arguments are NULL", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   create_local_package()
