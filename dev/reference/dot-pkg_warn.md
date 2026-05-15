@@ -1,11 +1,11 @@
-# Signal a package-scoped error
+# Signal a package-scoped warning
 
-Signal a package-scoped error
+Signal a package-scoped warning
 
 ## Usage
 
 ``` r
-.pkg_abort(
+.pkg_warn(
   message,
   subclass,
   parent = NULL,
@@ -19,14 +19,14 @@ Signal a package-scoped error
 
 - message:
 
-  (`character`) The message for the new error. Messages will be
+  (`character`) The message for the new warning. Messages will be
   formatted with
   [`cli::cli_bullets()`](https://cli.r-lib.org/reference/cli_bullets.html).
 
 - subclass:
 
-  (`character`) Class(es) to assign to the error. Will be prefixed by
-  "{package}-error-".
+  (`character`) Class(es) to assign to the warning. Will be prefixed by
+  "{package}-warning-".
 
 - parent:
 
@@ -47,10 +47,10 @@ Signal a package-scoped error
 - ...:
 
   Additional parameters passed to
-  [`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html)
+  [`cli::cli_warn()`](https://cli.r-lib.org/reference/cli_abort.html)
   and on to
-  [`rlang::abort()`](https://rlang.r-lib.org/reference/abort.html).
+  [`rlang::warn()`](https://rlang.r-lib.org/reference/abort.html).
 
 ## Value
 
-Does not return.
+`NULL`, invisibly (called for warning side effect).

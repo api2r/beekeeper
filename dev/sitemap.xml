@@ -17,6 +17,8 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-bk_use_template.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-is_pkg.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_abort.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_inform.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_warn.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/generate_pkg.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/index.html</loc></url>
