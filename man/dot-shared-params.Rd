@@ -4,7 +4,25 @@
 \alias{.shared-params}
 \title{Shared parameters}
 \arguments{
+\item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
+the API, for use in function names and environment variables.}
+
+\item{api_definition}{(\code{rapid::class_rapid}) The API definition to generate
+package code from.}
+
+\item{api_title}{(\code{character(1)}) The API title used in generated package
+files.}
+
 \item{call}{(\code{environment}) The caller environment for error messages.}
+
+\item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
+config file.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
+
+\item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
+definition (rapid) file.}
 }
 \description{
 These parameters are used in multiple functions. They are defined here to

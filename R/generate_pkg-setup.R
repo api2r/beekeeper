@@ -30,8 +30,14 @@
   !is.null(root_file)
 }
 
-.read_config <- function(config_file = "_beekeeper.yml") {
-  config <- yaml::read_yaml(config_file)
+#' Read a beekeeper config file
+#'
+#' @inheritParams .shared-params
+#' @returns A `list` of configuration information, with elements `api_title`,
+#'   `api_abbr`, `api_version`, `rapid_file`, and `updated_on`.
+#' @export
+read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
+  config <- yaml::read_yaml(path(pkg_dir, config_file))
   return(.stabilize_config(config))
 }
 
@@ -48,7 +54,15 @@
   return(config)
 }
 
-.read_api_definition <- function(pkg_dir, rapid_file) {
+#' Read an API definition file
+#'
+#' @inheritParams .shared-params
+#' @returns A [rapid::class_rapid()] with the definition of the API.
+#' @export
+read_api_definition <- function(
+  pkg_dir = ".",
+  rapid_file = "_beekeeper_rapid.rds"
+) {
   readRDS(
     path(pkg_dir, rapid_file)
   )

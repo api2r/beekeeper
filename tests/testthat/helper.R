@@ -103,3 +103,12 @@ make_writing_impl <- function(tmp) {
     out_path
   }
 }
+
+guru_config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
+guru_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "guru")
+)
+trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
+trello_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "trello")
+)

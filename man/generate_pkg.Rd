@@ -5,17 +5,28 @@
 \title{Use a beekeeper config file to generate code}
 \usage{
 generate_pkg(
+  api_abbr = NULL,
+  api_definition = NULL,
+  api_title = NULL,
   config_file = "_beekeeper.yml",
-  pkg_dir = fs::path_dir(config_file)
+  pkg_dir = "."
 )
 }
 \arguments{
-\item{config_file}{(\verb{length-1 character} or \code{fs_path}) The path to a
-beekeeper yaml file. All package files are created relative to this file.}
+\item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
+the API, for use in function names and environment variables.}
 
-\item{pkg_dir}{(\verb{length-1 character} or \code{fs_path}) The directory in which the
-package files will be created. Defaults to the directory of the config
-file.}
+\item{api_definition}{(\code{rapid::class_rapid}) The API definition to generate
+package code from.}
+
+\item{api_title}{(\code{character(1)}) The API title used in generated package
+files.}
+
+\item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
+config file.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 A character vector of paths to files that were added or updated,

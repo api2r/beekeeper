@@ -31,11 +31,7 @@ test_that(".generate_shared_params() writes security params for API with securit
     "trello",
     "_beekeeper_rapid.rds"
   ))
-  trello_config <- .read_config(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper.yml"
-  ))
+  trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
   security_data <- .generate_security(
     trello_config$api_abbr,
     trello_rapid@components@security_schemes

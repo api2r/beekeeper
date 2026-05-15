@@ -23,7 +23,7 @@ test_that("as_bk_data() returns empty list for empty api_key_security_scheme", {
 
 test_that(".generate_security() generates security file for trello", {
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
   api_definition <- readRDS(test_path(
     "_fixtures",
     "trello",
