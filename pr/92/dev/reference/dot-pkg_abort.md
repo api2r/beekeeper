@@ -9,8 +9,8 @@ Signal a package-scoped error
   message,
   subclass,
   parent = NULL,
-  call = caller_env(),
-  message_env = caller_env(),
+  call = rlang::caller_env(),
+  message_env = rlang::caller_env(),
   ...
 )
 ```
