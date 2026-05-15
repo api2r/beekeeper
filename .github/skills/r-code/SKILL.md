@@ -6,7 +6,7 @@ description: Guide for writing R code. Use when writing new functions, designing
 
 # R code
 
-This skill covers how to design and write R functions — including naming conventions, signatures, API conventions, input validation, error handling, and common pitfalls. For documenting functions, use the `document` skill. For tests, use the `tdd-workflow` skill.
+This skill covers how to design and write R functions — including naming conventions, signatures, API conventions, input validation, condition handling, and common pitfalls. For documenting functions, use the `document` skill. For tests, use the `tdd-workflow` skill.
 
 ## Naming conventions
 
@@ -184,9 +184,9 @@ Keep a function internal when:
 
 Internal helpers use a dot prefix (e.g. `.parse_response()`).
 
-## Error handling
+## Condition handling
 
-Use `.pkg_abort()` (defined in `R/aaa-conditions.R`) rather than calling `cli::cli_abort()` directly. This wraps `stbl::pkg_abort()` and ensures consistent error class formatting:
+Use `.pkg_abort()`, `.pkg_warn()`, and `.pkg_inform()` (defined in `R/aaa-conditions.R`) rather than calling `cli::cli_abort()`, `cli::cli_warn()`, or `cli::cli_inform()` directly. These wrap `stbl` condition helpers and ensure consistent class formatting:
 
 ```r
 .pkg_abort(

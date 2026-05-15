@@ -133,8 +133,31 @@ test_that("process_data() errors on empty input (#42)", {
 })
 ```
 
-Pass `transform = stbl::.transform_path(path)` to scrub volatile values (e.g. temp
-paths) from the snapshot before comparison.
+**Warnings thrown by this package** (via `.pkg_warn()`) should be tested with
+`stbl::expect_pkg_warning_snapshot()`:
+
+```r
+test_that("process_data() warns on dropped rows (#42)", {
+  stbl::expect_pkg_warning_snapshot(
+    process_data(data.frame(value = c(1, NA))),
+    "beekeeper",
+    "dropped_rows"
+  )
+})
+```
+
+**Messages thrown by this package** (via `.pkg_inform()`) should be tested with
+`stbl::expect_pkg_message_snapshot()`:
+
+```r
+test_that("process_data() informs on defaults used (#42)", {
+  stbl::expect_pkg_message_snapshot(
+    process_data(data.frame(value = 1)),
+    "beekeeper",
+    "used_defaults"
+  )
+})
+```
 
 **Errors thrown by `stbl`** (via `stbl::to_*()` / `stbl::stabilize_*()`)
 should be tested with `stbl::expect_pkg_error_classes()`. Since the message
