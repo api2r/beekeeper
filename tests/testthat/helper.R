@@ -112,3 +112,11 @@ trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
 trello_api_definition <- read_api_definition(
   pkg_dir = test_path("_fixtures", "trello")
 )
+fec_config <- read_config(
+  pkg_dir = test_path("_fixtures", "fec"),
+  config_file = "fec_subset_beekeeper.yml"
+)
+fec_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "fec"),
+  rapid_file = "fec_subset_rapid.rds"
+)

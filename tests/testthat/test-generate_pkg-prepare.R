@@ -1,11 +1,7 @@
 test_that(".generate_prepare() generates prepare file.", {
   skip_on_cran()
-  config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- guru_config
+  api_definition <- guru_api_definition
   prepare_expected <- readLines(test_path(
     "_fixtures",
     "guru",

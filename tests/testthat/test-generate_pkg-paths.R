@@ -12,12 +12,8 @@ test_that(".generate_paths() returns empty character for empty paths (#65)", {
 test_that(".generate_paths() calls correct templates for guru (#65)", {
   # 1 tag, no security
   skip_on_cran()
-  config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- guru_config
+  api_definition <- guru_api_definition
   spy <- make_spy_impl()
   local_mocked_bindings(.bk_use_template_impl = spy$mock)
 
@@ -79,12 +75,8 @@ test_that(".generate_paths() calls correct templates for guru (#65)", {
 test_that(".generate_paths() writes correct templates for guru (#65)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
-  config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- guru_config
+  api_definition <- guru_api_definition
   expected_path_contents <- load_expected_files("guru", "/paths-.+\\.R$")
   expected_test_contents <- load_expected_files("guru", "/test-paths-.+\\.R$")
   expected_setup_content <- readLines(test_path("_fixtures", "guru", "setup.R"))
@@ -117,15 +109,8 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
 test_that(".generate_paths() calls correct templates for fec (#65)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
-  config <- read_config(
-    pkg_dir = test_path("_fixtures", "fec"),
-    config_file = "fec_subset_beekeeper.yml"
-  )
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_rapid.rds"
-  ))
+  config <- fec_config
+  api_definition <- fec_api_definition
   spy <- make_spy_impl()
   local_mocked_bindings(.bk_use_template_impl = spy$mock)
 
@@ -173,15 +158,8 @@ test_that(".generate_paths() calls correct templates for fec (#65)", {
 test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   # Visual confirmation: 3 tags, complicated security
   skip_on_cran()
-  config <- read_config(
-    pkg_dir = test_path("_fixtures", "fec"),
-    config_file = "fec_subset_beekeeper.yml"
-  )
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_rapid.rds"
-  ))
+  config <- fec_config
+  api_definition <- fec_api_definition
   expected_file_content <- readLines(
     test_path("_fixtures", "fec", "paths-audit-get_names_audit_candidates.R")
   )
@@ -209,12 +187,8 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
 test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   # Visual confirmation: more complicated security
   skip_on_cran()
-  config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- trello_config
+  api_definition <- trello_api_definition
   expected_file_content <- readLines(
     test_path("_fixtures", "trello", "paths-board-add_boards.R")
   )
@@ -270,11 +244,7 @@ test_that(".params_to_validations() only includes supported checks (#69)", {
 })
 
 test_that(".paths_need_stbl() flags actionable validations (#69)", {
-  api_definition_true <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  api_definition_true <- guru_api_definition
 
   expect_true(
     .paths_need_stbl(

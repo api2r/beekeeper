@@ -26,15 +26,9 @@ test_that(".generate_shared_params() writes security params for API with securit
   skip_on_cran()
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
-  trello_rapid <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
-  trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
   security_data <- .generate_security(
     trello_config$api_abbr,
-    trello_rapid@components@security_schemes
+    trello_api_definition@components@security_schemes
   )
   shared_expected <- readLines(test_path("_fixtures", "trello", "000-shared.R"))
   .generate_shared_params(security_data)
