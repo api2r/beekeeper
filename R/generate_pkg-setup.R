@@ -62,13 +62,17 @@ read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
 .stabilize_config <- function(config) {
   config$api_title <- stbl::stabilize_character_scalar(config$api_title)
   config$api_abbr <- stbl::stabilize_character_scalar(config$api_abbr)
-  config$api_version <- stbl::stabilize_character_scalar(config$api_version)
-  config$rapid_file <- stbl::stabilize_character_scalar(config$rapid_file)
-  config$updated_on <- strptime(
-    config$updated_on,
-    format = "%Y-%m-%d %H:%M:%S",
-    tz = "UTC"
+  config$api_version <- stbl::stabilize_character_scalar(
+    config$api_version,
+    allow_null = TRUE
   )
+  config$rapid_file <- stbl::stabilize_character_scalar(config$rapid_file)
+  config$updated_on <- config$updated_on %&&%
+    strptime(
+      config$updated_on,
+      format = "%Y-%m-%d %H:%M:%S",
+      tz = "UTC"
+    )
   return(config)
 }
 

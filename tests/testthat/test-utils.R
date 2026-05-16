@@ -1,15 +1,27 @@
+test_that("%||% works (#noissue)", {
+  expect_identical(NULL %||% "foo", "foo")
+  expect_identical("foo" %||% "bar", "foo")
+})
+
+test_that("%&&% works (#noissue)", {
+  expect_null(NULL %&&% "foo")
+  expect_identical("foo" %&&% "bar", "bar")
+})
+
 test_that("%|0|% works (#noissue)", {
   expect_identical(character() %|0|% "foo", "foo")
   expect_identical("foo" %|0|% "bar", "foo")
 })
 
 test_that("%|\"|% works (#noissue)", {
-  expect_identical("" %|"|% "foo", "foo")
-  expect_identical("foo" %|"|% "bar", "foo")
+  expect_identical("" %|a|% "foo", "foo")
+  expect_identical("foo" %|a|% "bar", "foo")
 })
 
-test_that(".coalesce() works (#52)", {
-  expect_identical(.coalesce(c("a", NA), c("x", "y")), c("a", "y"))
+test_that("%|% works (#52)", {
+  expect_identical((c("a", NA) %|% "y"), c("a", "y"))
+  expect_identical((c(NA, NA) %|% "y"), c("y", "y"))
+  expect_identical((c(NA, NA) %|% c("x", "y")), c("x", "y"))
 })
 
 test_that(".collapse_comma() works (#noissue)", {
@@ -22,6 +34,10 @@ test_that(".collapse_comma_newline() works (#noissue)", {
 
 test_that(".collapse_quote_comma() works (#noissue)", {
   expect_identical(.collapse_quote_comma(c("a", "b")), '"a", "b"')
+})
+
+test_that(".collapse_comma_self_equal() works (#noissue)", {
+  expect_identical(.collapse_comma_self_equal(c("a", "b")), "a = a, b = b")
 })
 
 test_that(".paste0_if() works (#noissue)", {

@@ -26,47 +26,55 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   if (!length(x)) {
     return(list())
   }
-  security_schemes <- .security_schemes_collect(x)
-  return(.security_scheme_collection_finalize(security_schemes))
+  security_scheme_collection <- .security_schemes_collect(x)
+  return(.security_scheme_collection_finalize(security_scheme_collection))
 }
 
-.security_schemes_collect <- function(x) {
+.security_schemes_collect <- function(security_schemes) {
   purrr::pmap(
     list(
-      x@name,
-      x@details,
-      x@description %|0|% rep(NA_character_, length(x@name))
+      security_schemes@name,
+      security_schemes@details,
+      security_schemes@description %|0|%
+        rep(NA_character_, length(security_schemes@name))
     ),
     .security_scheme_rotate
   )
 }
 
-.security_scheme_rotate <- function(name, details, description) {
-  security_scheme <- c(
+.security_scheme_rotate <- function(
+  security_scheme_name,
+  security_scheme_details,
+  security_scheme_description
+) {
+  security_scheme_list <- c(
     list(
-      name = .to_snake(name),
-      description = description
+      name = .to_snake(security_scheme_name),
+      description = security_scheme_description
     ),
-    as_bk_data(details)
+    as_bk_data(security_scheme_details)
   )
-  security_scheme$description <- .security_scheme_description_fill(
-    description,
-    security_scheme$type
+  security_scheme_list$description <- .security_scheme_description_fill(
+    security_scheme_description,
+    security_scheme_list$type
   )
-  return(security_scheme)
+  return(security_scheme_list)
 }
 
-.security_scheme_description_fill <- function(description, type) {
-  if (is.na(description)) {
+.security_scheme_description_fill <- function(
+  security_scheme_description,
+  security_scheme_type
+) {
+  if (is.na(security_scheme_description)) {
     return(
       switch(
-        type,
+        security_scheme_type,
         api_key = .security_scheme_description_api_key,
         NA_character_
       )
     )
   }
-  return(description) # nocov
+  return(security_scheme_description) # nocov
 }
 
 .security_scheme_description_api_key <- paste(
@@ -75,49 +83,58 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   "Check the API documentation for details."
 )
 
-.security_scheme_collection_finalize <- function(security_schemes) {
+.security_scheme_collection_finalize <- function(security_scheme_collection) {
   security_scheme_data <- c(
     list(
       has_security = TRUE,
-      security_schemes = security_schemes
+      security_schemes = security_scheme_collection
     ),
-    .security_args_compile(security_schemes)
+    .security_args_compile(security_scheme_collection)
   )
   return(security_scheme_data)
 }
 
-.security_args_compile <- function(security_schemes) {
-  security_args <- sort(unique(purrr::map_chr(security_schemes, "arg_name")))
+.security_args_compile <- function(security_scheme_collection) {
+  security_args <- sort(unique(purrr::map_chr(
+    security_scheme_collection,
+    "arg_name"
+  )))
   return(list(
     security_arg_names = security_args,
     security_arg_list = .collapse_comma(glue::glue(
       "{security_args} = {security_args}"
     )),
     security_arg_helps = .generate_security_arg_help(
-      security_schemes,
+      security_scheme_collection,
       security_args
     ),
     security_arg_nulls = .collapse_comma(glue::glue("{security_args} = NULL"))
   ))
 }
 
-.generate_security_arg_help <- function(security_schemes, security_args) {
-  security_arg_description <- rlang::set_names(
-    purrr::map_chr(security_schemes, "description"),
-    purrr::map_chr(security_schemes, "arg_name")
+.generate_security_arg_help <- function(
+  security_scheme_collection,
+  security_args
+) {
+  security_arg_descriptions <- rlang::set_names(
+    purrr::map_chr(security_scheme_collection, "description"),
+    purrr::map_chr(security_scheme_collection, "arg_name")
   )
-  security_arg_description <- unname(security_arg_description[security_args])
+  security_arg_descriptions <- unname(security_arg_descriptions[security_args])
   return(
     purrr::map2(
-      security_arg_description,
+      security_arg_descriptions,
       security_args,
       .security_arg_description_clean
     )
   )
 }
 
-.security_arg_description_clean <- function(arg_description, arg_name) {
-  list(name = arg_name, description = arg_description)
+.security_arg_description_clean <- function(
+  security_arg_description,
+  security_arg_name
+) {
+  list(name = security_arg_name, description = security_arg_description)
 }
 
 S7::method(as_bk_data, class_security_scheme_details) <- function(x) {
