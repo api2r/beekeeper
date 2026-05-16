@@ -2,9 +2,9 @@
 # element from the source API description. You should carefully review these
 # functions.
 
-#' {{summary}}
+#' {{operation_summary}}
 #'
-#' {{description}}
+#' {{operation_description}}
 #' {{#params}}
 #' @param {{name}} ({{{class}}}) {{{description}}}{{/params}}
 #' @inheritParams .shared-params

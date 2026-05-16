@@ -30,34 +30,42 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   if (!length(x)) {
     return(list())
   }
-  paths_df <- .paths_to_clean_df(x)
-  result <- purrr::pmap(paths_df, .path_row_to_list)
-  names(result) <- paths_df$operation_id
+  operations_df <- .paths_to_clean_df(x)
+  result <- purrr::pmap(operations_df, .path_row_to_list)
+  names(result) <- operations_df$operation_id
   result
 }
 
-.paths_to_clean_df <- function(x) {
-  x <- tibble::as_tibble(x) |>
+.paths_to_clean_df <- function(paths) {
+  operations_df <- tibble::as_tibble(paths) |>
     tidyr::unnest("operations")
-  if (length(x$deprecated)) {
-    x <- x[!x$deprecated, ]
+  if (length(operations_df$deprecated)) {
+    operations_df <- operations_df[!operations_df$deprecated, ]
   }
-  x$deprecated <- NULL
-  x$tags <- .paths_fill_tags(x$tags)
-  x$operation_id <- .paths_fill_operation_id(
-    x$operation_id,
-    x$endpoint,
-    x$operation
+  operations_df$deprecated <- NULL
+  operations_df$tags <- .paths_fill_tags(operations_df$tags)
+  operations_df$operation_id <- .paths_fill_operation_id(
+    operations_df$operation_id,
+    operations_df$endpoint,
+    operations_df$operation
   )
-  x$summary <- .paths_fill_summary(
-    x$summary,
-    x$endpoint,
-    x$operation
+  operations_df$operation_summary <- .paths_fill_summary(
+    operations_df$summary,
+    operations_df$endpoint,
+    operations_df$operation
   )
-  x$description <- .paths_fill_descriptions(x$description, x$summary)
+  operations_df$summary <- NULL
+  operations_df$operation_description <- .paths_fill_descriptions(
+    operations_df$description,
+    operations_df$operation_summary
+  )
+  operations_df$description <- NULL
   # TODO: Deal with x$global_parameters if present
-  x$parameters <- purrr::map(x$parameters, .prepare_params_df)
-  return(x)
+  operations_df$parameters <- purrr::map(
+    operations_df$parameters,
+    .prepare_params_df
+  )
+  return(operations_df)
 }
 
 ### fill data ------------------------------------------------------------------
@@ -68,25 +76,27 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(.to_snake(tags))
 }
 
-.paths_fill_operation_id <- function(operation_id, endpoint, method) {
-  .coalesce(
-    .to_snake(operation_id),
-    glue::glue("{method}_{.to_snake(endpoint)}")
-  )
+.paths_fill_operation_id <- function(operation_ids, endpoints, methods) {
+  .to_snake(operation_ids) %|% glue::glue("{methods}_{.to_snake(endpoints)}")
 }
 
-.paths_fill_summary <- function(summary, endpoint, method) {
-  endpoint_spaced <- stringr::str_replace_all(.to_snake(endpoint), "_", " ")
-  .coalesce(
-    stringr::str_squish(summary),
-    stringr::str_to_sentence(glue::glue("{method} {endpoint_spaced}"))
-  )
+.paths_fill_summary <- function(operation_summaries, endpoints, methods) {
+  endpoints_spaced <- stringr::str_replace_all(.to_snake(endpoints), "_", " ")
+  stringr::str_squish(operation_summaries) %|%
+    stringr::str_to_sentence(glue::glue("{methods} {endpoints_spaced}"))
 }
 
-.paths_fill_descriptions <- function(descriptions, summaries) {
-  descriptions[is.na(descriptions)] <- summaries[is.na(descriptions)]
-  descriptions[is.na(descriptions)] <- ""
-  return(stringr::str_squish(descriptions))
+.paths_fill_descriptions <- function(
+  operation_descriptions,
+  operation_summaries
+) {
+  operation_descriptions[is.na(
+    operation_descriptions
+  )] <- operation_summaries[is.na(
+    operation_descriptions
+  )]
+  operation_descriptions[is.na(operation_descriptions)] <- ""
+  return(stringr::str_squish(operation_descriptions))
 }
 
 ### create template data -------------------------------------------------------
@@ -95,8 +105,8 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   operation_id,
   endpoint,
   operation,
-  summary,
-  description,
+  operation_summary,
+  operation_description,
   tags,
   parameters,
   ...
@@ -106,8 +116,8 @@ S7::method(as_bk_data, class_paths) <- function(x) {
     tag = tags,
     path = .path_as_arg(endpoint, parameters),
     method = operation,
-    summary = summary,
-    description = description,
+    operation_summary = operation_summary,
+    operation_description = operation_description,
     params = .params_to_list(parameters),
     params_query_raw = .extract_params_by_location(parameters, "query"),
     params_header_raw = .extract_params_by_location(parameters, "header"),
@@ -219,10 +229,6 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(glue::glue('c("{path}", {params})'))
 }
 
-.collapse_comma_self_equal <- function(x) {
-  .collapse_comma(glue::glue("{x} = {x}"))
-}
-
 # generate files ---------------------------------------------------------------
 
 .generate_paths_files <- function(
@@ -275,11 +281,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .params_to_args <- function(params) {
-  .collapse_comma(purrr::map_chr(params, "name")) %|"|% character()
+  .collapse_comma(purrr::map_chr(params, "name")) %|a|% character()
 }
 
 .params_to_named_args <- function(params) {
-  .collapse_comma_self_equal(purrr::map_chr(params, "name")) %|"|% character()
+  .collapse_comma_self_equal(purrr::map_chr(params, "name")) %|a|% character()
 }
 
 .remove_security_args <- function(params, security_args) {
@@ -292,7 +298,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .prep_param_args <- function(params, security_args) {
-  .collapse_comma_self_equal(setdiff(params, security_args)) %|"|% character()
+  .collapse_comma_self_equal(setdiff(params, security_args)) %|a|% character()
 }
 
 .params_to_validations <- function(params) {

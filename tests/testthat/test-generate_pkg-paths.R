@@ -272,8 +272,8 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     tag = "things",
     path = '"/things"',
     method = "get",
-    summary = "Search things",
-    description = "Search for things.",
+    operation_summary = "Search things",
+    operation_description = "Search for things.",
     params = list(
       list(
         name = "x_auth_token",

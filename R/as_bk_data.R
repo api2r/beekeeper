@@ -3,8 +3,7 @@
 #' Convert `rapid` objects to lists of properties to use in beekeeper templates.
 #'
 #' @inheritParams rlang::args_dots_empty
-#' @param x The object to coerce. Currently supports conversion of
-#'   [rapid::class_security_schemes()] objects.
+#' @param x The object to coerce.
 #'
 #' @returns A list.
 #' @keywords internal

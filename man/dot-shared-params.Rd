@@ -23,6 +23,8 @@ files.}
 
 \item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
 definition (rapid) file.}
+
+\item{to_collapse}{(\code{character}) The character vector to collapse.}
 }
 \description{
 These parameters are used in multiple functions. They are defined here to
