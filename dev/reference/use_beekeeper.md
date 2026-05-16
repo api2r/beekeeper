@@ -31,8 +31,8 @@ use_beekeeper(
 
 - api_abbr:
 
-  A short (about 2-5 letter) abbreviation for the API, for use in
-  function names and environment variables.
+  (`character(1)`) A short (about 2-5 letter) abbreviation for the API,
+  for use in function names and environment variables.
 
 - ...:
 
@@ -40,12 +40,13 @@ use_beekeeper(
 
 - config_file:
 
-  The path to which the configuration should be written.
+  (`character(1)` or `fs_path`) The path to a beekeeper yaml config
+  file.
 
 - rapid_file:
 
-  The path to which the R API definition (rapid) object should be
-  written.
+  (`character(1)` or `fs_path`) The path to the R API definition (rapid)
+  file.
 
 ## Value
 

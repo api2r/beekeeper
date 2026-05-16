@@ -10,22 +10,38 @@ packages.
 
 ``` r
 generate_pkg(
+  api_abbr = NULL,
+  api_definition = NULL,
+  api_title = NULL,
   config_file = "_beekeeper.yml",
-  pkg_dir = fs::path_dir(config_file)
+  pkg_dir = "."
 )
 ```
 
 ## Arguments
 
+- api_abbr:
+
+  (`character(1)`) A short (about 2-5 letter) abbreviation for the API,
+  for use in function names and environment variables.
+
+- api_definition:
+
+  ([`rapid::class_rapid`](https://rapid.api2r.org/reference/class_rapid.html))
+  The API definition to generate package code from.
+
+- api_title:
+
+  (`character(1)`) The API title used in generated package files.
+
 - config_file:
 
-  (`length-1 character` or `fs_path`) The path to a beekeeper yaml file.
-  All package files are created relative to this file.
+  (`character(1)` or `fs_path`) The path to a beekeeper yaml config
+  file.
 
 - pkg_dir:
 
-  (`length-1 character` or `fs_path`) The directory in which the package
-  files will be created. Defaults to the directory of the config file.
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 
