@@ -34,7 +34,7 @@
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_security_schemes) <- function(x) {
+S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
   if (!length(x)) {
     return(list())
   }
@@ -191,13 +191,13 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_security_scheme_details) <- function(x) {
+S7::method(as_bk_data, class_security_scheme_details) <- function(x, ...) {
   purrr::map(x, as_bk_data)
 }
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_api_key_security_scheme) <- function(x) {
+S7::method(as_bk_data, class_api_key_security_scheme) <- function(x, ...) {
   if (length(x)) {
     return(
       list(

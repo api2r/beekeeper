@@ -1,10 +1,15 @@
 test_that("internal helpers have roxygen docs (#noissue)", {
+  function_definition_pattern <- "^(`[^`]+`|[A-Za-z0-9._]+)\\s*<-\\s*function\\("
+  standalone_pattern <- "import-standalone-"
+  r_dir <- test_path("..", "..", "R")
+  skip_if_not(fs::dir_exists(r_dir), "R source files are not available.")
+
   r_files <- fs::dir_ls(
-    test_path("..", "..", "R"),
+    r_dir,
     glob = "*.R",
     recurse = FALSE
   )
-  r_files <- r_files[!grepl("import-standalone-", r_files)]
+  r_files <- r_files[!grepl(standalone_pattern, r_files)]
   missing_docs <- character()
 
   has_roxygen_block <- function(lines, line_number) {
@@ -20,23 +25,24 @@ test_that("internal helpers have roxygen docs (#noissue)", {
 
     for (line_number in seq_along(lines)) {
       line <- lines[[line_number]]
-      regular_match <- regexec(
-        "^(`[^`]+`|[A-Za-z0-9._]+)\\s*<-\\s*function\\(",
-        line
-      )[[1]]
-      method_match <- grepl(
-        "^S7::method\\([^\\n]+\\)\\s*<-\\s*function\\(",
-        line
-      )
+      regular_match <- regexec(function_definition_pattern, line)[[1]]
+      method_match <- FALSE
+      if (grepl("^S7::method\\(", line)) {
+        lookahead <- paste(
+          lines[line_number:min(line_number + 5L, length(lines))],
+          collapse = " "
+        )
+        method_match <- grepl(
+          "S7::method\\(.*\\)\\s*<-\\s*function\\(",
+          lookahead
+        )
+      }
 
       if (regular_match[1] != -1L) {
-        object_name <- regmatches(
-          line,
-          regexec(
-            "^(`[^`]+`|[A-Za-z0-9._]+)\\s*<-\\s*function\\(",
-            line
-          )
-        )[[1]][2]
+        object_name <- regmatches(line, regexec(
+          function_definition_pattern,
+          line
+        ))[[1]][2]
       } else {
         object_name <- NULL
       }

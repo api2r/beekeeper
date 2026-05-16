@@ -35,7 +35,7 @@
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_paths) <- function(x) {
+S7::method(as_bk_data, class_paths) <- function(x, ...) {
   if (!length(x)) {
     return(list())
   }

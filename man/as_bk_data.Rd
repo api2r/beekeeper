@@ -13,19 +13,19 @@
 as_bk_data(x, ...)
 
 ## S7 method for class <any>
-as_bk_data(x)
+as_bk_data(x, ...)
 
 ## S7 method for class <rapid::paths>
-as_bk_data(x)
+as_bk_data(x, ...)
 
 ## S7 method for class <rapid::security_schemes>
-as_bk_data(x)
+as_bk_data(x, ...)
 
 ## S7 method for class <rapid::security_scheme_details>
-as_bk_data(x)
+as_bk_data(x, ...)
 
 ## S7 method for class <rapid::api_key_security_scheme>
-as_bk_data(x)
+as_bk_data(x, ...)
 }
 \arguments{
 \item{x}{The object to coerce.}
