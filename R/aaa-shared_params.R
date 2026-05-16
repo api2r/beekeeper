@@ -17,8 +17,6 @@
 #' @param rapid_file (`character(1)` or `fs_path`) The path to the R API
 #'   definition (rapid) file.
 #' @param to_collapse (`character`) The character vector to collapse.
-#' @param x_arg (`character(1)`) The name of the `x` argument for error
-#'   messages.
 #'
 #' @name .shared-params
 #' @keywords internal

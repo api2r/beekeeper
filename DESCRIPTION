@@ -34,7 +34,6 @@ Imports:
     tibble,
     tidyr,
     usethis,
-    utils,
     yaml
 Suggests:
     covr,

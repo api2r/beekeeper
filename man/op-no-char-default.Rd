@@ -11,11 +11,6 @@ x \%|a|\% y
 \item{x}{(\code{any}) Object to check.}
 
 \item{y}{(\code{character}) Default value for \code{x}.}
-
-\item{x_arg}{(\code{character(1)}) The name of the \code{x} argument for error
-messages.}
-
-\item{call}{(\code{environment}) The caller environment for error messages.}
 }
 \value{
 If \code{!nzchar(x)}, will return \code{y}; otherwise returns \code{x}.

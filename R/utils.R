@@ -44,20 +44,14 @@ if (exists("%||%", envir = baseenv())) {
 #'
 #' @param x (`any`) Object to check.
 #' @param y (`character`) Default value for `x`.
-#' @inheritParams .shared-params
 #' @returns If `!nzchar(x)`, will return `y`; otherwise returns `x`.
 #' @keywords internal
 #' @name op-no-char-default
 #' @family empty operators
 #' @keywords internal
-`%|a|%` <- function(
-  x,
-  y,
-  x_arg = rlang::caller_arg(x),
-  call = rlang::caller_env()
-) {
+`%|a|%` <- function(x, y) {
   if (!is.character(x) || !nzchar(x)) {
-    stbl::to_chr(y, x_arg = x_arg, call = call)
+    stbl::to_chr(y)
   } else {
     x
   }
