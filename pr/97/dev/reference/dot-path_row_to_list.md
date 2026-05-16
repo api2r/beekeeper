@@ -42,7 +42,7 @@ Convert one operation row to template data
 
 - tags:
 
-  (`character(1)`) The operation tag.
+  (`character` or `list`) Tags for all operations.
 
 - parameters:
 

@@ -17,7 +17,7 @@ Build security argument help entries
 - security_args:
 
   (`character`) Security argument names to remove from operation
-  parameters.
+  parameters (because they are defined once, separately).
 
 ## Value
 

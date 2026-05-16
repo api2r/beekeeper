@@ -24,9 +24,6 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-describe_param_classes.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-extract_params_by_location.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df_data_frame.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df_list.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df_null.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_params_df.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_pagination.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_paths.html</loc></url>
@@ -43,7 +40,6 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_shared_params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-glue_pipe_brace.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-is_pkg.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-onLoad.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-param_schema_to_r.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-params_to_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-params_to_list.html</loc></url>

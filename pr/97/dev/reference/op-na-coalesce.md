@@ -12,7 +12,7 @@ x %|% y
 
 - x:
 
-  (`any`) A vector that may contain `NA` elements.
+  (`any`) The object to check or coerce.
 
 - y:
 

@@ -13,7 +13,7 @@ Generate a security argument signature
 - security_arg_names:
 
   (`character`) Security argument names to exclude from generated
-  operation signatures.
+  operation signatures (because they are defined once, separately).
 
 - api_abbr:
 

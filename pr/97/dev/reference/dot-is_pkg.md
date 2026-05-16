@@ -5,14 +5,8 @@ Inspired by usethis:::is_package.
 ## Usage
 
 ``` r
-.is_pkg(base_path = usethis::proj_get())
+.is_pkg(pkg_dir = usethis::proj_get())
 ```
-
-## Arguments
-
-- base_path:
-
-  The root URL of the current project.
 
 ## Value
 

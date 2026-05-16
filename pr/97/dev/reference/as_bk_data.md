@@ -28,7 +28,7 @@ as_bk_data(x, ...)
 
 - x:
 
-  The object to coerce.
+  (`any`) The object to check or coerce.
 
 - ...:
 

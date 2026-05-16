@@ -6,6 +6,12 @@ Flatten a data frame or list of data frames
 
 ``` r
 .flatten_df(x, ...)
+
+## S7 method for class <data.frame>
+.flatten_df(x)
+
+## S7 method for class <list>
+.flatten_df(x)
 ```
 
 ## Arguments

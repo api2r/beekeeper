@@ -12,7 +12,7 @@ Fill missing operation tags
 
 - tags:
 
-  (`list`) Operation tags from the API definition.
+  (`character` or `list`) Tags for all operations.
 
 ## Value
 

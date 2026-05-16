@@ -12,11 +12,11 @@ x %|a|% y
 
 - x:
 
-  (`any`) Object to check.
+  (`any`) The object to check or coerce.
 
 - y:
 
-  (`character`) Default value for `x`.
+  (`character`) The default value.
 
 ## Value
 

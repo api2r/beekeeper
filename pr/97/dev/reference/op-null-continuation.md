@@ -12,11 +12,11 @@ x %&&% y
 
 - x:
 
-  (`any`) Object to check.
+  (`any`) The object to check or coerce.
 
 - y:
 
-  (`any`) Default value for non-`NULL` `x`.
+  (`any`) The default value.
 
 ## Value
 

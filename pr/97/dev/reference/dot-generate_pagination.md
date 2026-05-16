@@ -10,4 +10,4 @@ Generate pagination files
 
 ## Value
 
-An empty `list`.
+A `list` of pagination metadata used while generating path files.
