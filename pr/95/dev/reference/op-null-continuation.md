@@ -26,5 +26,6 @@ If `x` is `NULL`, will return `x`; otherwise returns `y`.
 
 Other empty operators:
 [`op-lengthless-default`](https://beekeeper.api2r.org/dev/reference/op-lengthless-default.md),
+[`op-na-coalesce`](https://beekeeper.api2r.org/dev/reference/op-na-coalesce.md),
 [`op-no-char-default`](https://beekeeper.api2r.org/dev/reference/op-no-char-default.md),
 [`op-null-default`](https://beekeeper.api2r.org/dev/reference/op-null-default.md)

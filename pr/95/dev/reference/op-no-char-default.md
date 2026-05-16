@@ -2,38 +2,38 @@
 
 Default value for empty strings
 
-Default value for NA elements in vectors
-
 ## Usage
 
 ``` r
 x %|a|% y
-
-x %|% y
 ```
 
 ## Arguments
 
 - x:
 
-  (`any`) A vector that may contain `NA` elements.
+  (`any`) Object to check.
 
 - y:
 
-  (`any`, coercible to the same class as `x`) A value or vector to
-  replace `NA` elements in `x`. Will be recycled to the same length as
-  `x`.
+  (`character`) Default value for `x`.
+
+- x_arg:
+
+  (`character(1)`) The name of the `x` argument for error messages.
+
+- call:
+
+  (`environment`) The caller environment for error messages.
 
 ## Value
 
 If `!nzchar(x)`, will return `y`; otherwise returns `x`.
 
-A vector of the same length as `x`, where each `NA` element in `x` is
-replaced by the corresponding element in `y`.
-
 ## See also
 
 Other empty operators:
 [`op-lengthless-default`](https://beekeeper.api2r.org/dev/reference/op-lengthless-default.md),
+[`op-na-coalesce`](https://beekeeper.api2r.org/dev/reference/op-na-coalesce.md),
 [`op-null-continuation`](https://beekeeper.api2r.org/dev/reference/op-null-continuation.md),
 [`op-null-default`](https://beekeeper.api2r.org/dev/reference/op-null-default.md)
