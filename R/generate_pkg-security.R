@@ -14,9 +14,9 @@
 }
 
 .generate_security_signature <- function(security_arg_names, api_abbr) {
-  env_vars <- toupper(glue("{api_abbr}_{security_arg_names}"))
+  env_vars <- toupper(glue::glue("{api_abbr}_{security_arg_names}"))
   return(
-    .collapse_comma_newline(glue(
+    .collapse_comma_newline(glue::glue(
       "{security_arg_names} = Sys.getenv(\"{env_vars}\")"
     ))
   )
@@ -31,7 +31,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
 }
 
 .security_schemes_collect <- function(x) {
-  pmap(
+  purrr::pmap(
     list(
       x@name,
       x@details,
@@ -87,30 +87,28 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
 }
 
 .security_args_compile <- function(security_schemes) {
-  security_args <- sort(unique(map_chr(security_schemes, "arg_name")))
+  security_args <- sort(unique(purrr::map_chr(security_schemes, "arg_name")))
   return(list(
     security_arg_names = security_args,
-    security_arg_list = .collapse_comma(
-      glue("{security_args} = {security_args}")
-    ),
+    security_arg_list = .collapse_comma(glue::glue(
+      "{security_args} = {security_args}"
+    )),
     security_arg_helps = .generate_security_arg_help(
       security_schemes,
       security_args
     ),
-    security_arg_nulls = .collapse_comma(
-      glue("{security_args} = NULL")
-    )
+    security_arg_nulls = .collapse_comma(glue::glue("{security_args} = NULL"))
   ))
 }
 
 .generate_security_arg_help <- function(security_schemes, security_args) {
-  security_arg_description <- set_names(
-    map_chr(security_schemes, "description"),
-    map_chr(security_schemes, "arg_name")
+  security_arg_description <- rlang::set_names(
+    purrr::map_chr(security_schemes, "description"),
+    purrr::map_chr(security_schemes, "arg_name")
   )
   security_arg_description <- unname(security_arg_description[security_args])
   return(
-    map2(
+    purrr::map2(
       security_arg_description,
       security_args,
       .security_arg_description_clean
@@ -123,7 +121,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
 }
 
 S7::method(as_bk_data, class_security_scheme_details) <- function(x) {
-  map(x, as_bk_data)
+  purrr::map(x, as_bk_data)
 }
 
 S7::method(as_bk_data, class_api_key_security_scheme) <- function(x) {

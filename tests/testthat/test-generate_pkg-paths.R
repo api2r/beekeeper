@@ -12,12 +12,8 @@ test_that(".generate_paths() returns empty character for empty paths (#65)", {
 test_that(".generate_paths() calls correct templates for guru (#65)", {
   # 1 tag, no security
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- guru_config
+  api_definition <- guru_api_definition
   spy <- make_spy_impl()
   local_mocked_bindings(.bk_use_template_impl = spy$mock)
 
@@ -79,12 +75,8 @@ test_that(".generate_paths() calls correct templates for guru (#65)", {
 test_that(".generate_paths() writes correct templates for guru (#65)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "guru", "_beekeeper.yml"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- guru_config
+  api_definition <- guru_api_definition
   expected_path_contents <- load_expected_files("guru", "/paths-.+\\.R$")
   expected_test_contents <- load_expected_files("guru", "/test-paths-.+\\.R$")
   expected_setup_content <- readLines(test_path("_fixtures", "guru", "setup.R"))
@@ -100,16 +92,16 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
   )
 
   purrr::iwalk(expected_path_contents, \(expected, name) {
-    expect_identical(readLines(file.path(tmp, "R", name)), expected)
+    expect_identical(readLines(fs::path(tmp, "R", name)), expected)
   })
   purrr::iwalk(expected_test_contents, \(expected, name) {
     expect_identical(
-      readLines(file.path(tmp, "tests", "testthat", name)),
+      readLines(fs::path(tmp, "tests", "testthat", name)),
       expected
     )
   })
   expect_identical(
-    readLines(file.path(tmp, "tests", "testthat", "setup.R")),
+    readLines(fs::path(tmp, "tests", "testthat", "setup.R")),
     expected_setup_content
   )
 })
@@ -117,16 +109,8 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
 test_that(".generate_paths() calls correct templates for fec (#65)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
-  config <- .read_config(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_beekeeper.yml"
-  ))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_rapid.rds"
-  ))
+  config <- fec_config
+  api_definition <- fec_api_definition
   spy <- make_spy_impl()
   local_mocked_bindings(.bk_use_template_impl = spy$mock)
 
@@ -174,16 +158,8 @@ test_that(".generate_paths() calls correct templates for fec (#65)", {
 test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   # Visual confirmation: 3 tags, complicated security
   skip_on_cran()
-  config <- .read_config(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_beekeeper.yml"
-  ))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "fec",
-    "fec_subset_rapid.rds"
-  ))
+  config <- fec_config
+  api_definition <- fec_api_definition
   expected_file_content <- readLines(
     test_path("_fixtures", "fec", "paths-audit-get_names_audit_candidates.R")
   )
@@ -203,7 +179,7 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   )
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-audit-get_names_audit_candidates.R")),
+    readLines(fs::path(tmp, "R", "paths-audit-get_names_audit_candidates.R")),
     expected_file_content
   )
 })
@@ -211,12 +187,8 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
 test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   # Visual confirmation: more complicated security
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "trello", "_beekeeper.yml"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- trello_config
+  api_definition <- trello_api_definition
   expected_file_content <- readLines(
     test_path("_fixtures", "trello", "paths-board-add_boards.R")
   )
@@ -236,7 +208,7 @@ test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   )
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-board-add_boards.R")),
+    readLines(fs::path(tmp, "R", "paths-board-add_boards.R")),
     expected_file_content
   )
 })
@@ -272,11 +244,7 @@ test_that(".params_to_validations() only includes supported checks (#69)", {
 })
 
 test_that(".paths_need_stbl() flags actionable validations (#69)", {
-  api_definition_true <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  api_definition_true <- guru_api_definition
 
   expect_true(
     .paths_need_stbl(
@@ -343,7 +311,7 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
   .generate_paths_file(op, "search_things", "test", list())
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-things-search_things.R")),
+    readLines(fs::path(tmp, "R", "paths-things-search_things.R")),
     expected_content
   )
 })

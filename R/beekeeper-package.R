@@ -2,44 +2,18 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-# Needed for installation: nectar (likely others, TBD)
-#' @importFrom cli cli_abort
-#' @importFrom cli cli_warn
-#' @importFrom fs file_delete
-#' @importFrom fs file_exists
-#' @importFrom fs path
-#' @importFrom fs path_dir
-#' @importFrom fs path_rel
-#' @importFrom glue glue
-#' @importFrom glue glue_collapse
-#' @importFrom httptest2 use_httptest2
+## Force installation
 #' @importFrom nectar req_prepare
-#' @importFrom purrr discard
-#' @importFrom purrr imap
-#' @importFrom purrr map
-#' @importFrom purrr map_chr
-#' @importFrom purrr map2
-#' @importFrom purrr pmap
-#' @importFrom rapid as_rapid
+#' @importFrom testthat test_that
+## S7 classes
 #' @importFrom rapid class_api_key_security_scheme
 #' @importFrom rapid class_paths
 #' @importFrom rapid class_security_scheme_details
 #' @importFrom rapid class_security_schemes
-#' @importFrom rlang .data
-#' @importFrom rlang check_dots_empty
-#' @importFrom rlang set_names
-#' @importFrom rlang try_fetch
 #' @importFrom S7 class_any
 #' @importFrom S7 class_data.frame
 #' @importFrom S7 class_list
-#' @importFrom testthat test_that
-#' @importFrom usethis proj_get
-#' @importFrom usethis proj_path
-#' @importFrom usethis use_build_ignore
-#' @importFrom usethis use_directory
-#' @importFrom usethis use_package
-#' @importFrom usethis use_template
-#' @importFrom usethis use_testthat
-#' @importFrom utils capture.output
+## Use as pronoun
+#' @importFrom rlang .data
 ## usethis namespace: end
 NULL

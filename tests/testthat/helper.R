@@ -51,12 +51,8 @@ scrub_tempdir <- function(input) {
 
 scrub_path <- function(input, keep_dirs = c("R", "tests")) {
   dirs_string <- paste0(keep_dirs, collapse = "|")
-  search <- glue("^.*(/({dirs_string})/)")
-  stringr::str_replace(
-    input,
-    search,
-    "\\1"
-  )
+  search <- glue::glue("^.*(/({dirs_string})/)")
+  stringr::str_replace(input, search, "\\1")
 }
 
 # Find all fixture files matching a regexp and read their contents.
@@ -81,7 +77,7 @@ make_spy_impl <- function() {
         target = target,
         dir = dir
       )
-      file.path(dir, target)
+      fs::path(dir, target)
     },
     calls = function() calls
   )
@@ -96,10 +92,27 @@ make_writing_impl <- function(tmp) {
       readLines(template_path, warn = FALSE),
       data
     )
-    out_dir <- file.path(tmp, dir)
+    out_dir <- fs::path(tmp, dir)
     fs::dir_create(out_dir)
-    out_path <- file.path(out_dir, target)
+    out_path <- fs::path(out_dir, target)
     writeLines(strsplit(rendered, "\n", fixed = TRUE)[[1]], out_path)
     out_path
   }
 }
+
+guru_config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
+guru_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "guru")
+)
+trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
+trello_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "trello")
+)
+fec_config <- read_config(
+  pkg_dir = test_path("_fixtures", "fec"),
+  config_file = "fec_subset_beekeeper.yml"
+)
+fec_api_definition <- read_api_definition(
+  pkg_dir = test_path("_fixtures", "fec"),
+  rapid_file = "fec_subset_rapid.rds"
+)

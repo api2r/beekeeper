@@ -7,7 +7,7 @@
       ! Can't generate package files outside of a package.
       TMPDIR is not inside a package.
 
-# .read_config() reads configs
+# read_config() reads configs
 
     Code
       config

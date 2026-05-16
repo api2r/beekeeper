@@ -1,17 +1,12 @@
-test_that("generate_pkg() returns a vector of created files", {
+test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82)", {
   skip_on_cran()
-  config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "guru",
-    "_beekeeper_rapid.rds"
-  ))
+  create_local_package()
 
-  test_dir <- create_local_package()
-  writeLines(config_text, "_beekeeper.yml")
-  saveRDS(api_definition, "_beekeeper_rapid.rds")
-
-  test_result <- generate_pkg()
+  test_result <- generate_pkg(
+    api_abbr = guru_config$api_abbr,
+    api_definition = guru_api_definition,
+    api_title = guru_config$api_title
+  )
   test_result <- scrub_path(test_result)
   # 7 guru operations all in "apis" tag: 7 R files + 1 test file + setup
   expected_result <- c(
@@ -32,23 +27,13 @@ test_that("generate_pkg() returns a vector of created files", {
   expect_identical(test_result, expected_result)
 })
 
-test_that("generate_pkg() generates call function with API keys", {
+test_that("generate_pkg() generates call function with API keys (#17, #82)", {
   skip_on_cran()
   local_mocked_bindings(
     .generate_paths = function(...) {
       character()
     }
   )
-  config_text <- readLines(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper.yml"
-  ))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
   prepare_expected <- readLines(test_path(
     "_fixtures",
     "trello",
@@ -56,11 +41,22 @@ test_that("generate_pkg() generates call function with API keys", {
   ))
 
   create_local_package()
-  writeLines(config_text, "_beekeeper.yml")
-  saveRDS(api_definition, "_beekeeper_rapid.rds")
-
-  generate_pkg()
+  generate_pkg(
+    api_abbr = trello_config$api_abbr,
+    api_definition = trello_api_definition,
+    api_title = trello_config$api_title
+  )
 
   prepare_result <- scrub_testpkg(readLines("R/010-prepare.R"))
   expect_identical(prepare_result, prepare_expected)
+})
+
+test_that("generate_pkg() falls back to config file when arguments are NULL (#82)", {
+  skip_on_cran()
+  config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  create_local_package()
+  writeLines(config_text, "_beekeeper.yml")
+  saveRDS(guru_api_definition, "_beekeeper_rapid.rds")
+
+  expect_no_error(generate_pkg())
 })

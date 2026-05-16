@@ -15,20 +15,20 @@
   target = template,
   dir = c("R", "tests/testthat")
 ) {
-  check_dots_empty()
+  rlang::check_dots_empty()
   dir <- match.arg(dir)
   target <- .bk_use_template_impl(template, data, target, dir)
   return(invisible(target))
 }
 
 .bk_use_template_impl <- function(template, data, target, dir) {
-  target <- proj_path(dir, target)
-  save_as <- path_rel(target, proj_path())
-  if (file_exists(target)) {
+  target <- usethis::proj_path(dir, target)
+  save_as <- fs::path_rel(target, usethis::proj_path())
+  if (fs::file_exists(target)) {
     # TODO: Intelligently prompt about this.
-    file_delete(target)
+    fs::file_delete(target)
   }
-  use_template(
+  usethis::use_template(
     template = template,
     save_as = save_as,
     data = data,

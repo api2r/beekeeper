@@ -4,12 +4,7 @@ test_that(".generate_security() returns empty list for no security", {
 })
 
 test_that("as_bk_data() dispatches correctly for security_scheme_details", {
-  trello_rapid <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
-  details <- trello_rapid@components@security_schemes@details
+  details <- trello_api_definition@components@security_schemes@details
   result <- as_bk_data(details)
   expect_length(result, 2L)
   expect_identical(result[[1]]$type, "api_key")
@@ -23,12 +18,8 @@ test_that("as_bk_data() returns empty list for empty api_key_security_scheme", {
 
 test_that(".generate_security() generates security file for trello", {
   skip_on_cran()
-  config <- .read_config(test_path("_fixtures", "trello", "_beekeeper.yml"))
-  api_definition <- readRDS(test_path(
-    "_fixtures",
-    "trello",
-    "_beekeeper_rapid.rds"
-  ))
+  config <- trello_config
+  api_definition <- trello_api_definition
   security_expected <- readLines(test_path("_fixtures", "trello", "020-auth.R"))
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
@@ -50,7 +41,7 @@ test_that(".generate_security() generates security file for trello", {
     )
   )
   expect_identical(
-    readLines(file.path(tmp, "R", "020-auth.R")),
+    readLines(fs::path(tmp, "R", "020-auth.R")),
     security_expected
   )
 })
