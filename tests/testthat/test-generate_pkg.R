@@ -1,4 +1,4 @@
-test_that("generate_pkg() returns a vector of created files", {
+test_that("generate_pkg() returns a vector of created files (#15, #82)", {
   skip_on_cran()
   create_local_package()
 
@@ -27,7 +27,7 @@ test_that("generate_pkg() returns a vector of created files", {
   expect_identical(test_result, expected_result)
 })
 
-test_that("generate_pkg() generates call function with API keys", {
+test_that("generate_pkg() generates call function with API keys (#17, #82)", {
   skip_on_cran()
   local_mocked_bindings(
     .generate_paths = function(...) {
@@ -51,7 +51,7 @@ test_that("generate_pkg() generates call function with API keys", {
   expect_identical(prepare_result, prepare_expected)
 })
 
-test_that("generate_pkg() falls back to config file when arguments are NULL", {
+test_that("generate_pkg() falls back to config file when arguments are NULL (#82)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   create_local_package()
