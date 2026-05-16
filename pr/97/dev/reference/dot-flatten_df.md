@@ -20,6 +20,10 @@ Flatten a data frame or list of data frames
 
   (`data.frame`, `list`, or `NULL`) The object to flatten.
 
+- ...:
+
+  Not used.
+
 ## Value
 
 A single `data.frame`. Lists of data frames are flattened with
