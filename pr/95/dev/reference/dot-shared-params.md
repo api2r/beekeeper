@@ -40,7 +40,3 @@ to make them easier to import and to find.
 - to_collapse:
 
   (`character`) The character vector to collapse.
-
-- x_arg:
-
-  (`character(1)`) The name of the `x` argument for error messages.

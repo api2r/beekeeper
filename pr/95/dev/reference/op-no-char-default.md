@@ -18,14 +18,6 @@ x %|a|% y
 
   (`character`) Default value for `x`.
 
-- x_arg:
-
-  (`character(1)`) The name of the `x` argument for error messages.
-
-- call:
-
-  (`environment`) The caller environment for error messages.
-
 ## Value
 
 If `!nzchar(x)`, will return `y`; otherwise returns `x`.
