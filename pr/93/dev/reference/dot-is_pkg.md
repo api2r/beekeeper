@@ -5,7 +5,7 @@ Inspired by usethis:::is_package.
 ## Usage
 
 ``` r
-.is_pkg(base_path = proj_get())
+.is_pkg(base_path = usethis::proj_get())
 ```
 
 ## Arguments
