@@ -8,7 +8,7 @@ test_that("%|\"|% works (#noissue)", {
   expect_identical("foo" %|"|% "bar", "foo")
 })
 
-test_that(".coalesce() works (#noissue)", {
+test_that(".coalesce() works (#52)", {
   expect_identical(.coalesce(c("a", NA), c("x", "y")), c("a", "y"))
 })
 

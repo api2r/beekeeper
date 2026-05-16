@@ -1,4 +1,4 @@
-test_that("generate_pkg() returns a vector of created files (#15, #82)", {
+test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82)", {
   skip_on_cran()
   create_local_package()
 

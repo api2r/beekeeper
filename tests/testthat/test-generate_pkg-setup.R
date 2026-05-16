@@ -28,7 +28,7 @@ test_that("read_api_definition() reads api_definitions", {
   expect_s7_class(api_definition, rapid::class_rapid)
 })
 
-test_that(".setup_r() sets up dependencies", {
+test_that(".setup_r() sets up dependencies (#16)", {
   skip_on_cran()
 
   create_local_package()

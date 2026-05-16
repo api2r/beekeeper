@@ -1,4 +1,4 @@
-test_that("config writes a yml", {
+test_that("use_beekeeper writes a yml config (#10)", {
   local_mocked_bindings(
     use_build_ignore = function(...) {
       invisible(TRUE)
