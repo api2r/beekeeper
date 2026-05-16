@@ -1,7 +1,6 @@
 #' Default value for `NULL`
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for `x`.
+#' @inheritParams .shared-params
 #' @returns If `x` is `NULL`, will return `y`; otherwise returns `x`.
 #' @name op-null-default
 #' @family empty operators
@@ -17,8 +16,7 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for non-`NULL`
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for non-`NULL` `x`.
+#' @inheritParams .shared-params
 #' @returns If `x` is `NULL`, will return `x`; otherwise returns `y`.
 #' @name op-null-continuation
 #' @family empty operators
@@ -29,8 +27,7 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for length 0
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for `x`.
+#' @inheritParams .shared-params
 #' @returns If `!length(x)`, will return `x`; otherwise returns `y`.
 #' @keywords internal
 #' @name op-lengthless-default
@@ -42,8 +39,8 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for empty strings
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`character`) Default value for `x`.
+#' @param y (`character`) The default value.
+#' @inheritParams .shared-params
 #' @returns If `!nzchar(x)`, will return `y`; otherwise returns `x`.
 #' @keywords internal
 #' @name op-no-char-default
@@ -59,9 +56,9 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for NA elements in vectors
 #'
-#' @param x (`any`) A vector that may contain `NA` elements.
 #' @param y (`any`, coercible to the same class as `x`) A value or vector to
 #'   replace `NA` elements in `x`. Will be recycled to the same length as `x`.
+#' @inheritParams .shared-params
 #' @returns A vector of the same length as `x`, where each `NA` element in `x`
 #'   is replaced by the corresponding element in `y`.
 #' @keywords internal
@@ -104,15 +101,13 @@ if (exists("%||%", envir = baseenv())) {
 #' @inheritParams .shared-params
 #' @returns A length-1, comma-separated glue object.
 #' @keywords internal
-.collapse_comma_self_equal <- function(x) {
-  .collapse_comma(glue::glue("{x} = {x}"))
+.collapse_comma_self_equal <- function(to_collapse) {
+  .collapse_comma(glue::glue("{to_collapse} = {to_collapse}"))
 }
 
 #' Append text conditionally
 #'
-#' @param original (`character`) The original text.
-#' @param test (`logical`) A condition for each element of `original`.
-#' @param addition (`character`) Text to append when `test` is `TRUE`.
+#' @inheritParams .shared-params
 #' @returns (`character`) The updated text.
 #' @keywords internal
 .paste0_if <- function(original, test, addition) {
@@ -147,29 +142,12 @@ if (exists("%||%", envir = baseenv())) {
 #' @keywords internal
 .flatten_df <- S7::new_generic(".flatten_df", dispatch_args = "x")
 
-#' Flatten a data frame method
-#'
-#' @param x (`data.frame`) The object to return unchanged.
-#' @returns A `data.frame`.
+#' @rdname dot-flatten_df
 #' @keywords internal
-.flatten_df_data_frame <- function(x) x
+S7::method(.flatten_df, class_data.frame) <- function(x) x
 
-S7::method(.flatten_df, class_data.frame) <- .flatten_df_data_frame
-
-#' Flatten a list method
-#'
-#' @param x (`list`) The objects to row-bind.
-#' @returns A `data.frame`.
+#' @rdname dot-flatten_df
 #' @keywords internal
-.flatten_df_list <- function(x) purrr::list_rbind(x)
+S7::method(.flatten_df, class_list) <- function(x) purrr::list_rbind(x)
 
-S7::method(.flatten_df, class_list) <- .flatten_df_list
-
-#' Flatten a `NULL` method
-#'
-#' @param x (`NULL`) The object to convert.
-#' @returns A `data.frame`.
-#' @keywords internal
-.flatten_df_null <- function(x) data.frame()
-
-S7::method(.flatten_df, NULL) <- .flatten_df_null
+S7::method(.flatten_df, NULL) <- function(x) data.frame()

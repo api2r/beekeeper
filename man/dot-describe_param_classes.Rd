@@ -7,8 +7,7 @@
 .describe_param_classes(params_schema, allow_empty, required)
 }
 \arguments{
-\item{params_schema}{(\code{data.frame}) Schema metadata for operation
-parameters.}
+\item{params_schema}{(\code{data.frame}) Schema metadata for operation parameters.}
 
 \item{allow_empty}{(\code{logical}) Whether empty parameter values may be
 represented as \code{NULL}.}

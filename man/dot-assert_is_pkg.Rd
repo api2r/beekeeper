@@ -4,10 +4,7 @@
 \alias{.assert_is_pkg}
 \title{Error if not in package}
 \usage{
-.assert_is_pkg(base_path = usethis::proj_get())
-}
-\arguments{
-\item{base_path}{The root URL of the current project.}
+.assert_is_pkg(pkg_dir = usethis::proj_get())
 }
 \value{
 \code{NULL}, invisibly.

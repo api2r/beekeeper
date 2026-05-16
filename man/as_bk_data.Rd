@@ -28,7 +28,7 @@ as_bk_data(x, ...)
 as_bk_data(x, ...)
 }
 \arguments{
-\item{x}{The object to coerce.}
+\item{x}{(\code{any}) The object to check or coerce.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 }

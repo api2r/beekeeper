@@ -7,7 +7,7 @@
 .paths_fill_tags(tags)
 }
 \arguments{
-\item{tags}{(\code{list}) Operation tags from the API definition.}
+\item{tags}{(\code{character} or \code{list}) Tags for all operations.}
 }
 \value{
 (\code{character}) Snake-case tag names.

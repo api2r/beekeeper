@@ -8,7 +8,8 @@
 }
 \arguments{
 \item{security_arg_names}{(\code{character}) Security argument names to exclude
-from generated operation signatures.}
+from generated operation signatures (because they are defined once,
+separately).}
 
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.}

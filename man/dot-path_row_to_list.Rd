@@ -27,7 +27,7 @@ generated file names.}
 
 \item{operation_description}{(\code{character(1)}) The operation description.}
 
-\item{tags}{(\code{character(1)}) The operation tag.}
+\item{tags}{(\code{character} or \code{list}) Tags for all operations.}
 
 \item{parameters}{(\code{data.frame}) Operation parameters.}
 

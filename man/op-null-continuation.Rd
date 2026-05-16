@@ -8,9 +8,9 @@
 x \%&&\% y
 }
 \arguments{
-\item{x}{(\code{any}) Object to check.}
+\item{x}{(\code{any}) The object to check or coerce.}
 
-\item{y}{(\code{any}) Default value for non-\code{NULL} \code{x}.}
+\item{y}{(\code{any}) The default value.}
 }
 \value{
 If \code{x} is \code{NULL}, will return \code{x}; otherwise returns \code{y}.

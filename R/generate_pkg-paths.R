@@ -1,7 +1,5 @@
 #' Generate files for API paths
 #'
-#' @param base_url (`character(1)`) The base URL used in generated test
-#'   helpers.
 #' @inheritParams .shared-params
 #' @returns A `character` vector of generated file paths.
 #' @keywords internal
@@ -86,7 +84,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Fill missing operation tags
 #'
-#' @param tags (`list`) Operation tags from the API definition.
+#' @inheritParams .shared-params
 #' @returns (`character`) Snake-case tag names.
 #' @keywords internal
 .paths_fill_tags <- function(tags) {
@@ -97,8 +95,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Fill missing operation identifiers
 #'
-#' @param operation_ids (`character`) Operation identifiers from the API
-#'   definition.
 #' @inheritParams .shared-params
 #' @returns (`character`) Operation identifiers.
 #' @keywords internal
@@ -119,8 +115,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Fill missing operation descriptions
 #'
-#' @param operation_descriptions (`character`) Operation descriptions from the
-#'   API definition.
 #' @inheritParams .shared-params
 #' @returns (`character`) Operation descriptions.
 #' @keywords internal
@@ -141,12 +135,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Convert one operation row to template data
 #'
-#' @param endpoint (`character(1)`) The operation endpoint.
-#' @param operation (`character(1)`) The HTTP method.
-#' @param operation_summary (`character(1)`) The operation summary.
-#' @param operation_description (`character(1)`) The operation description.
-#' @param tags (`character(1)`) The operation tag.
-#' @param parameters (`data.frame`) Operation parameters.
 #' @param ... Additional columns, ignored.
 #' @inheritParams .shared-params
 #' @returns A `list` describing one operation.
@@ -236,7 +224,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Extract parameter names by location
 #'
-#' @param filter_in (`character(1)`) The parameter location to keep.
 #' @inheritParams .shared-params
 #' @returns (`character`) Parameter names for the requested location.
 #' @keywords internal
@@ -289,7 +276,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Compile parameter class descriptions
 #'
-#' @param type (`data.frame`) Joined parameter type metadata.
 #' @inheritParams .shared-params
 #' @returns (`character`) Parameter class descriptions.
 #' @keywords internal
@@ -309,7 +295,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Convert a path to a request argument
 #'
-#' @param path (`character(1)`) The path template.
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) Code for the request path argument.
 #' @keywords internal
@@ -326,8 +311,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Generate files for all operations
 #'
-#' @param paths_by_operation (`list`) Template-ready operations keyed by
-#'   operation identifier.
 #' @inheritParams .shared-params
 #' @returns A `character` vector of generated file paths.
 #' @keywords internal
@@ -461,7 +444,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Generate one operation file
 #'
-#' @param path_operation (`list`) Template data for one operation.
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated file path.
 #' @keywords internal
@@ -490,8 +472,6 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
 #' Generate one tag-level test file
 #'
-#' @param tag_operations (`list`) Operations grouped under one tag.
-#' @param tag_name (`character(1)`) The tag name.
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated test file path.
 #' @keywords internal

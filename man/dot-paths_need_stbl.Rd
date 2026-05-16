@@ -10,7 +10,8 @@
 \item{paths}{(\code{rapid::class_paths}) API path definitions.}
 
 \item{security_arg_names}{(\code{character}) Security argument names to exclude
-from generated operation signatures.}
+from generated operation signatures (because they are defined once,
+separately).}
 }
 \value{
 (\code{logical(1)}) \code{TRUE} if any path needs \code{stbl}.

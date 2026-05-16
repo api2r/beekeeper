@@ -7,8 +7,7 @@
 .param_schema_to_r(params_schema)
 }
 \arguments{
-\item{params_schema}{(\code{data.frame}) Schema metadata for operation
-parameters.}
+\item{params_schema}{(\code{data.frame}) Schema metadata for operation parameters.}
 }
 \value{
 (\code{character}) Coercion helper names.

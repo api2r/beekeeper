@@ -2,9 +2,8 @@
 #'
 #' Convert `rapid` objects to lists of properties to use in beekeeper templates.
 #'
+#' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @param x The object to coerce.
-#'
 #' @returns A list.
 #' @keywords internal
 as_bk_data <- S7::new_generic("as_bk_data", dispatch_args = "x")

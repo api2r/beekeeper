@@ -4,7 +4,10 @@
 \alias{.collapse_comma_self_equal}
 \title{Collapse to a comma-separated x = x string}
 \usage{
-.collapse_comma_self_equal(x)
+.collapse_comma_self_equal(to_collapse)
+}
+\arguments{
+\item{to_collapse}{(\code{character}) The character vector to collapse.}
 }
 \value{
 A length-1, comma-separated glue object.

@@ -4,13 +4,13 @@
 #'
 #' @returns `NULL`, invisibly.
 #' @keywords internal
-.assert_is_pkg <- function(base_path = usethis::proj_get()) {
-  if (.is_pkg(base_path)) {
+.assert_is_pkg <- function(pkg_dir = usethis::proj_get()) {
+  if (.is_pkg(pkg_dir)) {
     return(invisible(NULL))
   }
   cli::cli_abort(c(
     "Can't generate package files outside of a package.",
-    x = "{.path {base_path}} is not inside a package."
+    x = "{.path {pkg_dir}} is not inside a package."
   ))
 }
 
@@ -18,13 +18,11 @@
 #'
 #' Inspired by usethis:::is_package.
 #'
-#' @param base_path The root URL of the current project.
-#'
 #' @returns `TRUE` if the project is a package, `FALSE` if not.
 #' @keywords internal
-.is_pkg <- function(base_path = usethis::proj_get()) {
+.is_pkg <- function(pkg_dir = usethis::proj_get()) {
   root_file <- rlang::try_fetch(
-    rprojroot::find_package_root_file(path = base_path),
+    rprojroot::find_package_root_file(path = pkg_dir),
     error = function(cnd) NULL
   )
   !is.null(root_file)
@@ -99,7 +97,6 @@ read_api_definition <- function(
 
 #' Set up package directories and dependencies
 #'
-#' @param include_stbl (`logical(1)`) Whether to add `stbl` to Imports.
 #' @inheritParams .shared-params
 #' @returns `NULL` (invisibly).
 #' @keywords internal

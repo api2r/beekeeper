@@ -10,7 +10,7 @@
 \item{params}{(\code{list}) Parameter metadata for a single operation.}
 
 \item{security_args}{(\code{character}) Security argument names to remove from
-operation parameters.}
+operation parameters (because they are defined once, separately).}
 }
 \value{
 A \code{list} of non-security parameters.

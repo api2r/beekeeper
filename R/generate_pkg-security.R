@@ -61,9 +61,6 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 
 #' Convert one security scheme to a list
 #'
-#' @param security_scheme_name (`character(1)`) The security scheme name.
-#' @param security_scheme_details (`rapid::class_security_scheme_details`) The
-#'   security scheme details.
 #' @inheritParams .shared-params
 #' @returns A `list` describing one security scheme.
 #' @keywords internal
@@ -88,7 +85,6 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 
 #' Fill a missing security scheme description
 #'
-#' @param security_scheme_type (`character(1)`) The security scheme type.
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) A security scheme description.
 #' @keywords internal
@@ -178,8 +174,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 
 #' Format one security argument help entry
 #'
-#' @param security_arg_description (`character(1)`) The argument description.
-#' @param security_arg_name (`character(1)`) The argument name.
+#' @inheritParams .shared-params
 #' @returns A named `list` with `name` and `description`.
 #' @keywords internal
 .security_arg_description_clean <- function(

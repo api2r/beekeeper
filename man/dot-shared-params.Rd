@@ -4,6 +4,8 @@
 \alias{.shared-params}
 \title{Shared parameters}
 \arguments{
+\item{addition}{(\code{character}) Text to append when \code{test} is \code{TRUE}.}
+
 \item{allow_empty}{(\code{logical}) Whether empty parameter values may be
 represented as \code{NULL}.}
 
@@ -15,6 +17,11 @@ package code from.}
 
 \item{api_title}{(\code{character(1)}) The API title used in generated package
 files.}
+
+\item{base_path}{The root URL of the current project.}
+
+\item{base_url}{(\code{character(1)}) The base URL used in generated test
+helpers.}
 
 \item{call}{(\code{environment}) The caller environment for error messages.}
 
@@ -28,27 +35,55 @@ config file.}
 \item{dir}{(\code{character(1)}) The directory where a generated file should be
 written.}
 
+\item{endpoint}{(\code{character(1)}) The operation endpoint.}
+
 \item{endpoints}{(\code{character}) Endpoint paths paired with operations.}
 
+\item{filter_in}{(\code{character(1)}) The parameter location to keep.}
+
+\item{include_stbl}{(\code{logical(1)}) Whether to add \code{stbl} to Imports.}
+
 \item{methods}{(\code{character}) HTTP methods paired with endpoints.}
+
+\item{operation}{(\code{character(1)}) The HTTP method.}
+
+\item{operation_description}{(\code{character(1)}) The operation description.}
+
+\item{operation_descriptions}{(\code{character}) Operation descriptions from the
+API definition.}
 
 \item{operation_id}{(\code{character(1)}) The operation identifier used in
 generated file names.}
 
+\item{operation_ids}{(\code{character}) Operation identifiers from the API
+definition.}
+
 \item{operation_summaries}{(\code{character}) Operation summaries from the API
 definition.}
 
+\item{operation_summary}{(\code{character(1)}) The operation summary.}
+
+\item{original}{(\code{character}) The original text.}
+
 \item{pagination_data}{(\code{list}) Pagination metadata used while generating
 path files.}
+
+\item{parameters}{(\code{data.frame}) Operation parameters.}
 
 \item{params}{(\code{list}) Parameter metadata for a single operation.}
 
 \item{params_df}{(\code{data.frame}) Parameter metadata in tabular form.}
 
-\item{params_schema}{(\code{data.frame}) Schema metadata for operation
-parameters.}
+\item{params_schema}{(\code{data.frame}) Schema metadata for operation parameters.}
+
+\item{path}{(\code{character(1)}) The path template.}
+
+\item{path_operation}{(\code{list}) Template data for one operation.}
 
 \item{paths}{(\code{rapid::class_paths}) API path definitions.}
+
+\item{paths_by_operation}{(\code{list}) Template-ready operations keyed by
+operation identifier.}
 
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
@@ -58,11 +93,16 @@ definition (rapid) file.}
 
 \item{required}{(\code{logical}) Whether each parameter is required.}
 
+\item{security_arg_description}{(\code{character(1)}) The argument description.}
+
+\item{security_arg_name}{(\code{character(1)}) The argument name.}
+
 \item{security_arg_names}{(\code{character}) Security argument names to exclude
-from generated operation signatures.}
+from generated operation signatures (because they are defined once,
+separately).}
 
 \item{security_args}{(\code{character}) Security argument names to remove from
-operation parameters.}
+operation parameters (because they are defined once, separately).}
 
 \item{security_data}{(\code{list}) Generated security metadata.}
 
@@ -72,14 +112,35 @@ metadata.}
 \item{security_scheme_description}{(\code{character(1)}) A security scheme
 description from the API definition.}
 
+\item{security_scheme_details}{(\code{rapid::class_security_scheme_details}) The
+security scheme details.}
+
+\item{security_scheme_name}{(\code{character(1)}) The security scheme name.}
+
+\item{security_scheme_type}{(\code{character(1)}) The security scheme type.}
+
 \item{security_schemes}{(\code{rapid::class_security_schemes}) Security schemes
 from the API definition.}
+
+\item{tag_operations}{(\code{list}) Operations grouped under one tag.}
+
+\item{tag_name}{(\code{character(1)}) The tag name.}
+
+\item{tags}{(\code{character} or \code{list}) Tags for all operations.}
 
 \item{target}{(\code{character(1)}) The name of the generated file.}
 
 \item{template}{(\code{character(1)}) The template file name to render.}
 
+\item{test}{(\code{logical}) A condition for each element of \code{original}.}
+
 \item{to_collapse}{(\code{character}) The character vector to collapse.}
+
+\item{type}{(\code{data.frame}) Joined parameter type metadata.}
+
+\item{x}{(\code{any}) The object to check or coerce.}
+
+\item{y}{(\code{any}) The default value.}
 }
 \description{
 These parameters are used in multiple functions. They are defined here to
