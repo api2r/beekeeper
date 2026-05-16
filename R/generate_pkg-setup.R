@@ -2,7 +2,7 @@
 #'
 #' @inheritParams .is_pkg
 #'
-#' @return `NULL`, invisibly.
+#' @returns `NULL`, invisibly.
 #' @keywords internal
 .assert_is_pkg <- function(base_path = usethis::proj_get()) {
   if (.is_pkg(base_path)) {
@@ -20,7 +20,7 @@
 #'
 #' @param base_path The root URL of the current project.
 #'
-#' @return `TRUE` if the project is a package, `FALSE` if not.
+#' @returns `TRUE` if the project is a package, `FALSE` if not.
 #' @keywords internal
 .is_pkg <- function(base_path = usethis::proj_get()) {
   root_file <- rlang::try_fetch(
