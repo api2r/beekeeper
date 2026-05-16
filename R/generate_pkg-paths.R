@@ -69,14 +69,17 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .paths_fill_operation_id <- function(operation_id, endpoint, method) {
-  .coalesce(.to_snake(operation_id), glue("{method}_{.to_snake(endpoint)}"))
+  .coalesce(
+    .to_snake(operation_id),
+    glue::glue("{method}_{.to_snake(endpoint)}")
+  )
 }
 
 .paths_fill_summary <- function(summary, endpoint, method) {
   endpoint_spaced <- stringr::str_replace_all(.to_snake(endpoint), "_", " ")
   .coalesce(
     stringr::str_squish(summary),
-    stringr::str_to_sentence(glue("{method} {endpoint_spaced}"))
+    stringr::str_to_sentence(glue::glue("{method} {endpoint_spaced}"))
   )
 }
 
@@ -209,15 +212,15 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 .path_as_arg <- function(path, params_df) {
   if (!nrow(params_df) || !any(params_df$`in` == "path")) {
-    return(glue('"{path}"'))
+    return(glue::glue('"{path}"'))
   }
   params_path <- params_df$name[params_df$`in` == "path"]
   params <- .collapse_comma_self_equal(params_path)
-  return(glue('c("{path}", {params})'))
+  return(glue::glue('c("{path}", {params})'))
 }
 
 .collapse_comma_self_equal <- function(x) {
-  .collapse_comma(glue("{x} = {x}"))
+  .collapse_comma(glue::glue("{x} = {x}"))
 }
 
 # generate files ---------------------------------------------------------------
@@ -231,7 +234,7 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   security_arg_names <- security_data$security_arg_names %|0|% character()
 
   # Prep each operation: remove security args, compile args strings
-  prepped <- imap(paths_by_operation, function(op, op_id) {
+  prepped <- purrr::imap(paths_by_operation, function(op, op_id) {
     params <- .remove_security_args(op$params, security_arg_names)
     params_query <- .prep_param_args(op$params_query_raw, security_arg_names)
     params_header <- .prep_param_args(op$params_header_raw, security_arg_names)
@@ -255,13 +258,13 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   })
 
   # One R file per operation
-  r_files <- unname(unlist(imap(prepped, function(op, op_id) {
+  r_files <- unname(unlist(purrr::imap(prepped, function(op, op_id) {
     .generate_paths_file(op, op_id, api_abbr, security_data)
   })))
 
   # One test file per tag (operations grouped by tag, preserving encounter
   # order)
-  tags <- map_chr(prepped, "tag")
+  tags <- purrr::map_chr(prepped, "tag")
   unique_tags <- unique(tags)
   test_files <- unname(unlist(lapply(unique_tags, function(tag_name) {
     tag_ops <- prepped[tags == tag_name]
@@ -272,15 +275,15 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 }
 
 .params_to_args <- function(params) {
-  .collapse_comma(map_chr(params, "name")) %|"|% character()
+  .collapse_comma(purrr::map_chr(params, "name")) %|"|% character()
 }
 
 .params_to_named_args <- function(params) {
-  .collapse_comma_self_equal(map_chr(params, "name")) %|"|% character()
+  .collapse_comma_self_equal(purrr::map_chr(params, "name")) %|"|% character()
 }
 
 .remove_security_args <- function(params, security_args) {
-  discard(
+  purrr::discard(
     params,
     function(param) {
       param$name %in% security_args
@@ -339,12 +342,12 @@ S7::method(as_bk_data, class_paths) <- function(x) {
         pagination_fn = ""
       )
     ),
-    target = glue("paths-{path_operation$tag}-{operation_id}.R")
+    target = glue::glue("paths-{path_operation$tag}-{operation_id}.R")
   )
 }
 
 .generate_paths_test_file <- function(tag_operations, tag_name, api_abbr) {
-  paths_list <- unname(imap(tag_operations, function(op, op_id) {
+  paths_list <- unname(purrr::imap(tag_operations, function(op, op_id) {
     list(
       operation_id = op_id,
       test_args = op$test_args %|0|% ""
@@ -358,6 +361,6 @@ S7::method(as_bk_data, class_paths) <- function(x) {
       api_abbr = api_abbr
     ),
     dir = "tests/testthat",
-    target = glue("test-paths-{tag_name}.R")
+    target = glue::glue("test-paths-{tag_name}.R")
   )
 }

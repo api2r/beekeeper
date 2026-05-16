@@ -22,7 +22,7 @@ use_beekeeper <- function(
   config_file = "_beekeeper.yml",
   rapid_file = "_beekeeper_rapid.rds"
 ) {
-  x <- as_rapid(x)
+  x <- rapid::as_rapid(x)
   rapid_file <- .write_rapid(x, rapid_file)
   config_file <- .write_config(x, api_abbr, rapid_file, config_file)
 
@@ -32,7 +32,7 @@ use_beekeeper <- function(
 .write_rapid <- function(x, rapid_file) {
   rapid_file <- stbl::stabilize_character_scalar(rapid_file)
   saveRDS(x, rapid_file)
-  use_build_ignore(rapid_file)
+  usethis::use_build_ignore(rapid_file)
   return(rapid_file)
 }
 
@@ -44,11 +44,11 @@ use_beekeeper <- function(
       api_title = x@info@title,
       api_abbr = stbl::stabilize_character_scalar(api_abbr),
       api_version = x@info@version,
-      rapid_file = path_rel(rapid_file, path_dir(config_file)),
+      rapid_file = fs::path_rel(rapid_file, fs::path_dir(config_file)),
       updated_on = as.character(update_time)
     ),
     file = config_file
   )
-  use_build_ignore(config_file)
+  usethis::use_build_ignore(config_file)
   return(config_file)
 }

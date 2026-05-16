@@ -2,7 +2,8 @@ test_that("config writes a yml", {
   local_mocked_bindings(
     use_build_ignore = function(...) {
       invisible(TRUE)
-    }
+    },
+    .package = "usethis"
   )
   config_path <- withr::local_tempfile(fileext = ".yml")
   rapid_write_path <- withr::local_tempfile(fileext = ".rds")

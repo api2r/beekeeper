@@ -51,12 +51,8 @@ scrub_tempdir <- function(input) {
 
 scrub_path <- function(input, keep_dirs = c("R", "tests")) {
   dirs_string <- paste0(keep_dirs, collapse = "|")
-  search <- glue("^.*(/({dirs_string})/)")
-  stringr::str_replace(
-    input,
-    search,
-    "\\1"
-  )
+  search <- glue::glue("^.*(/({dirs_string})/)")
+  stringr::str_replace(input, search, "\\1")
 }
 
 # Find all fixture files matching a regexp and read their contents.
@@ -81,7 +77,7 @@ make_spy_impl <- function() {
         target = target,
         dir = dir
       )
-      file.path(dir, target)
+      fs::path(dir, target)
     },
     calls = function() calls
   )
@@ -96,9 +92,9 @@ make_writing_impl <- function(tmp) {
       readLines(template_path, warn = FALSE),
       data
     )
-    out_dir <- file.path(tmp, dir)
+    out_dir <- fs::path(tmp, dir)
     fs::dir_create(out_dir)
-    out_path <- file.path(out_dir, target)
+    out_path <- fs::path(out_dir, target)
     writeLines(strsplit(rendered, "\n", fixed = TRUE)[[1]], out_path)
     out_path
   }

@@ -92,16 +92,16 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
   )
 
   purrr::iwalk(expected_path_contents, \(expected, name) {
-    expect_identical(readLines(file.path(tmp, "R", name)), expected)
+    expect_identical(readLines(fs::path(tmp, "R", name)), expected)
   })
   purrr::iwalk(expected_test_contents, \(expected, name) {
     expect_identical(
-      readLines(file.path(tmp, "tests", "testthat", name)),
+      readLines(fs::path(tmp, "tests", "testthat", name)),
       expected
     )
   })
   expect_identical(
-    readLines(file.path(tmp, "tests", "testthat", "setup.R")),
+    readLines(fs::path(tmp, "tests", "testthat", "setup.R")),
     expected_setup_content
   )
 })
@@ -179,7 +179,7 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   )
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-audit-get_names_audit_candidates.R")),
+    readLines(fs::path(tmp, "R", "paths-audit-get_names_audit_candidates.R")),
     expected_file_content
   )
 })
@@ -208,7 +208,7 @@ test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   )
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-board-add_boards.R")),
+    readLines(fs::path(tmp, "R", "paths-board-add_boards.R")),
     expected_file_content
   )
 })
@@ -311,7 +311,7 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
   .generate_paths_file(op, "search_things", "test", list())
 
   expect_identical(
-    readLines(file.path(tmp, "R", "paths-things-search_things.R")),
+    readLines(fs::path(tmp, "R", "paths-things-search_things.R")),
     expected_content
   )
 })

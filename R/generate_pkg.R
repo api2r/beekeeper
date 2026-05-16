@@ -20,29 +20,13 @@ generate_pkg <- function(
   # if not, letting them know that this can be destructive. Skip this check in
   # tests.
   .assert_is_pkg(pkg_dir)
-  if (
-    is.null(api_abbr) ||
-      is.null(api_definition) ||
-      is.null(api_title)
-  ) {
+  if (purrr::some(list(api_abbr, api_definition, api_title), is.null)) {
     config <- read_config(pkg_dir = pkg_dir, config_file = config_file)
   }
-  if (is.null(api_abbr)) {
-    api_abbr <- config$api_abbr
-  } else {
-    api_abbr <- stbl::stabilize_character_scalar(api_abbr)
-  }
-  if (is.null(api_title)) {
-    api_title <- config$api_title
-  } else {
-    api_title <- stbl::stabilize_character_scalar(api_title)
-  }
-  if (is.null(api_definition)) {
-    api_definition <- read_api_definition(
-      pkg_dir = pkg_dir,
-      rapid_file = config$rapid_file
-    )
-  }
+  api_abbr <- stbl::stabilize_character_scalar(api_abbr %||% config$api_abbr)
+  api_title <- stbl::stabilize_character_scalar(api_title %||% config$api_title)
+  api_definition <- api_definition %||%
+    read_api_definition(pkg_dir, config$rapid_file)
   config <- list(api_abbr = api_abbr, api_title = api_title)
   security_data <- .generate_security(
     api_abbr,
@@ -51,10 +35,7 @@ generate_pkg <- function(
   security_arg_names <- security_data$security_arg_names %|0|% character()
   .setup_r(
     pkg_dir,
-    include_stbl = .paths_need_stbl(
-      api_definition@paths,
-      security_arg_names
-    )
+    include_stbl = .paths_need_stbl(api_definition@paths, security_arg_names)
   )
   touched_files <- .generate_pkg_impl(config, api_definition, security_data)
   return(invisible(touched_files))

@@ -41,7 +41,7 @@ test_that(".generate_security() generates security file for trello", {
     )
   )
   expect_identical(
-    readLines(file.path(tmp, "R", "020-auth.R")),
+    readLines(fs::path(tmp, "R", "020-auth.R")),
     security_expected
   )
 })
