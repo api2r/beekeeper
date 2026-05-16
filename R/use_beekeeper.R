@@ -34,6 +34,11 @@ use_beekeeper <- function(
   return(invisible(config_file))
 }
 
+#' Write the rapid definition file
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The written file path.
+#' @keywords internal
 .write_rapid <- function(api_definition, rapid_file) {
   rapid_file <- stbl::stabilize_character_scalar(rapid_file)
   saveRDS(api_definition, rapid_file)
@@ -41,6 +46,11 @@ use_beekeeper <- function(
   return(rapid_file)
 }
 
+#' Write the beekeeper config file
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The written config file path.
+#' @keywords internal
 .write_config <- function(api_definition, api_abbr, rapid_file, config_file) {
   config_file <- stbl::stabilize_character_scalar(config_file)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")

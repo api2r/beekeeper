@@ -4,6 +4,9 @@
 \alias{.shared-params}
 \title{Shared parameters}
 \arguments{
+\item{allow_empty}{(\code{logical}) Whether empty parameter values may be
+represented as \code{NULL}.}
+
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.}
 
@@ -15,14 +18,66 @@ files.}
 
 \item{call}{(\code{environment}) The caller environment for error messages.}
 
+\item{config}{(\code{list}) Package-generation configuration data.}
+
 \item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
 config file.}
+
+\item{data}{(\code{list}) Data passed to a template.}
+
+\item{dir}{(\code{character(1)}) The directory where a generated file should be
+written.}
+
+\item{endpoints}{(\code{character}) Endpoint paths paired with operations.}
+
+\item{methods}{(\code{character}) HTTP methods paired with endpoints.}
+
+\item{operation_id}{(\code{character(1)}) The operation identifier used in
+generated file names.}
+
+\item{operation_summaries}{(\code{character}) Operation summaries from the API
+definition.}
+
+\item{pagination_data}{(\code{list}) Pagination metadata used while generating
+path files.}
+
+\item{params}{(\code{list}) Parameter metadata for a single operation.}
+
+\item{params_df}{(\code{data.frame}) Parameter metadata in tabular form.}
+
+\item{params_schema}{(\code{data.frame}) Schema metadata for operation
+parameters.}
+
+\item{paths}{(\code{rapid::class_paths}) API path definitions.}
 
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
 
 \item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
 definition (rapid) file.}
+
+\item{required}{(\code{logical}) Whether each parameter is required.}
+
+\item{security_arg_names}{(\code{character}) Security argument names to exclude
+from generated operation signatures.}
+
+\item{security_args}{(\code{character}) Security argument names to remove from
+operation parameters.}
+
+\item{security_data}{(\code{list}) Generated security metadata.}
+
+\item{security_scheme_collection}{(\code{list}) Collected security scheme
+metadata.}
+
+\item{security_scheme_description}{(\code{character(1)}) A security scheme
+description from the API definition.}
+
+\item{security_schemes}{(\code{rapid::class_security_schemes}) Security schemes
+from the API definition.}
+
+\item{target}{(\code{character(1)}) The name of the generated file.}
+
+\item{template}{(\code{character(1)}) The template file name to render.}
 
 \item{to_collapse}{(\code{character}) The character vector to collapse.}
 }

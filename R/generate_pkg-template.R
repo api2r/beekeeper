@@ -21,6 +21,11 @@
   return(invisible(target))
 }
 
+#' Write a rendered template to disk
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated file path.
+#' @keywords internal
 .bk_use_template_impl <- function(template, data, target, dir) {
   target <- usethis::proj_path(dir, target)
   save_as <- fs::path_rel(target, usethis::proj_path())

@@ -1,3 +1,8 @@
+#' Generate shared parameter docs
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated file path.
+#' @keywords internal
 .generate_shared_params <- function(security_data) {
   shared_file_path <- .bk_use_template(
     template = "000-shared.R",

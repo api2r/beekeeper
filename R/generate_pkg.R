@@ -41,6 +41,11 @@ generate_pkg <- function(
   return(invisible(touched_files))
 }
 
+#' Generate package files from prepared inputs
+#'
+#' @inheritParams .shared-params
+#' @returns A `character` vector of generated file paths, invisibly.
+#' @keywords internal
 .generate_pkg_impl <- function(config, api_definition, security_data) {
   prep_files <- .generate_prepare(config, api_definition, security_data)
   pagination_data <- .generate_pagination()

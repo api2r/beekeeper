@@ -59,6 +59,11 @@ read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
   return(.stabilize_config(config))
 }
 
+#' Stabilize beekeeper config values
+#'
+#' @inheritParams .shared-params
+#' @returns A stabilized `list`.
+#' @keywords internal
 .stabilize_config <- function(config) {
   config$api_title <- stbl::stabilize_character_scalar(config$api_title)
   config$api_abbr <- stbl::stabilize_character_scalar(config$api_abbr)
@@ -92,6 +97,12 @@ read_api_definition <- function(
   readRDS(fs::path(pkg_dir, rapid_file))
 }
 
+#' Set up package directories and dependencies
+#'
+#' @param include_stbl (`logical(1)`) Whether to add `stbl` to Imports.
+#' @inheritParams .shared-params
+#' @returns `NULL` (invisibly).
+#' @keywords internal
 .setup_r <- function(pkg_dir, include_stbl = FALSE) {
   if (as.character(pkg_dir) != ".") {
     usethis::local_project(pkg_dir, quiet = TRUE) # nocov

@@ -108,14 +108,32 @@ if (exists("%||%", envir = baseenv())) {
   .collapse_comma(glue::glue("{x} = {x}"))
 }
 
+#' Append text conditionally
+#'
+#' @param original (`character`) The original text.
+#' @param test (`logical`) A condition for each element of `original`.
+#' @param addition (`character`) Text to append when `test` is `TRUE`.
+#' @returns (`character`) The updated text.
+#' @keywords internal
 .paste0_if <- function(original, test, addition) {
   ifelse(test, paste0(original, addition), original)
 }
 
+#' Interpolate glue with pipe braces
+#'
+#' @param ... Expressions passed to [glue::glue()].
+#' @param .envir (`environment`) The environment in which to evaluate `...`.
+#' @returns A glue object.
+#' @keywords internal
 .glue_pipe_brace <- function(..., .envir = rlang::caller_env()) {
   glue::glue(..., .open = "|{", .close = "}|", .envir = .envir)
 }
 
+#' Convert text to snake case
+#'
+#' @param x (`character`) Text to convert.
+#' @returns (`character`) Snake-case text.
+#' @keywords internal
 .to_snake <- function(x) {
   snakecase::to_snake_case(x, parsing_option = 3)
 }
@@ -129,8 +147,29 @@ if (exists("%||%", envir = baseenv())) {
 #' @keywords internal
 .flatten_df <- S7::new_generic(".flatten_df", dispatch_args = "x")
 
-S7::method(.flatten_df, class_data.frame) <- function(x) x
+#' Flatten a data frame method
+#'
+#' @param x (`data.frame`) The object to return unchanged.
+#' @returns A `data.frame`.
+#' @keywords internal
+.flatten_df_data_frame <- function(x) x
 
-S7::method(.flatten_df, class_list) <- function(x) purrr::list_rbind(x)
+S7::method(.flatten_df, class_data.frame) <- .flatten_df_data_frame
 
-S7::method(.flatten_df, NULL) <- function(x) data.frame()
+#' Flatten a list method
+#'
+#' @param x (`list`) The objects to row-bind.
+#' @returns A `data.frame`.
+#' @keywords internal
+.flatten_df_list <- function(x) purrr::list_rbind(x)
+
+S7::method(.flatten_df, class_list) <- .flatten_df_list
+
+#' Flatten a `NULL` method
+#'
+#' @param x (`NULL`) The object to convert.
+#' @returns A `data.frame`.
+#' @keywords internal
+.flatten_df_null <- function(x) data.frame()
+
+S7::method(.flatten_df, NULL) <- .flatten_df_null

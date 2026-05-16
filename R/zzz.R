@@ -1,3 +1,8 @@
+#' Register package methods on load
+#'
+#' @param ... Additional arguments passed by R during package loading.
+#' @returns `NULL` (invisibly).
+#' @keywords internal
 .onLoad <- function(...) {
   S7::methods_register() # nocov
 }

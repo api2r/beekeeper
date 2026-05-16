@@ -1,3 +1,8 @@
+#' Generate prepare files
+#'
+#' @inheritParams .shared-params
+#' @returns A `character` vector of generated file paths.
+#' @keywords internal
 .generate_prepare <- function(config, api_definition, security_data) {
   c(
     .generate_prepare_r(config, api_definition, security_data),
@@ -5,6 +10,11 @@
   )
 }
 
+#' Generate the prepare helper
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated file path.
+#' @keywords internal
 .generate_prepare_r <- function(config, api_definition, security_data) {
   .bk_use_template(
     template = "010-prepare.R",
@@ -20,6 +30,11 @@
   )
 }
 
+#' Generate prepare tests
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated test file path.
+#' @keywords internal
 .generate_prepare_test <- function(api_abbr) {
   .bk_use_template(
     template = "test-010-prepare.R",
