@@ -6,7 +6,7 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @return A character vector of paths to files that were added or updated,
+#' @returns A character vector of paths to files that were added or updated,
 #'   invisibly.
 #' @export
 generate_pkg <- function(

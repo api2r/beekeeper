@@ -6,7 +6,7 @@
 #' @param x The object to coerce. Currently supports conversion of
 #'   [rapid::class_security_schemes()] objects.
 #'
-#' @return A list.
+#' @returns A list.
 #' @keywords internal
 as_bk_data <- S7::new_generic("as_bk_data", dispatch_args = "x")
 
