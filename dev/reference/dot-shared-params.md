@@ -36,3 +36,7 @@ to make them easier to import and to find.
 
   (`character(1)` or `fs_path`) The path to the R API definition (rapid)
   file.
+
+- to_collapse:
+
+  (`character`) The character vector to collapse.

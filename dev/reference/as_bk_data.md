@@ -13,9 +13,7 @@ as_bk_data(x, ...)
 
 - x:
 
-  The object to coerce. Currently supports conversion of
-  [`rapid::class_security_schemes()`](https://rapid.api2r.org/reference/class_security_schemes.html)
-  objects.
+  The object to coerce.
 
 - ...:
 
