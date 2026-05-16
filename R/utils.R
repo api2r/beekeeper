@@ -136,6 +136,7 @@ if (exists("%||%", envir = baseenv())) {
 #' Flatten a data frame or list of data frames
 #'
 #' @param x (`data.frame`, `list`, or `NULL`) The object to flatten.
+#' @param ... Not used.
 #' @returns A single `data.frame`. Lists of data frames are flattened with
 #'   [purrr::list_rbind()], and `NULL` values are converted to empty data
 #'   frames.
