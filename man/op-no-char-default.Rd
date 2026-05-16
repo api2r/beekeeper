@@ -3,33 +3,30 @@
 \name{op-no-char-default}
 \alias{op-no-char-default}
 \alias{\%|a|\%}
-\alias{\%|\%}
 \title{Default value for empty strings}
 \usage{
 x \%|a|\% y
-
-x \%|\% y
 }
 \arguments{
-\item{x}{(\code{any}) A vector that may contain \code{NA} elements.}
+\item{x}{(\code{any}) Object to check.}
 
-\item{y}{(\code{any}, coercible to the same class as \code{x}) A value or vector to
-replace \code{NA} elements in \code{x}. Will be recycled to the same length as \code{x}.}
+\item{y}{(\code{character}) Default value for \code{x}.}
+
+\item{x_arg}{(\code{character(1)}) The name of the \code{x} argument for error
+messages.}
+
+\item{call}{(\code{environment}) The caller environment for error messages.}
 }
 \value{
 If \code{!nzchar(x)}, will return \code{y}; otherwise returns \code{x}.
-
-A vector of the same length as \code{x}, where each \code{NA} element in \code{x}
-is replaced by the corresponding element in \code{y}.
 }
 \description{
 Default value for empty strings
-
-Default value for NA elements in vectors
 }
 \seealso{
 Other empty operators:
 \code{\link{op-lengthless-default}},
+\code{\link{op-na-coalesce}},
 \code{\link{op-null-continuation}},
 \code{\link{op-null-default}}
 }

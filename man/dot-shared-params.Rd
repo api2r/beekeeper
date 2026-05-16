@@ -25,6 +25,9 @@ files.}
 definition (rapid) file.}
 
 \item{to_collapse}{(\code{character}) The character vector to collapse.}
+
+\item{x_arg}{(\code{character(1)}) The name of the \code{x} argument for error
+messages.}
 }
 \description{
 These parameters are used in multiple functions. They are defined here to

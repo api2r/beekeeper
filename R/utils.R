@@ -44,6 +44,7 @@ if (exists("%||%", envir = baseenv())) {
 #'
 #' @param x (`any`) Object to check.
 #' @param y (`character`) Default value for `x`.
+#' @inheritParams .shared-params
 #' @returns If `!nzchar(x)`, will return `y`; otherwise returns `x`.
 #' @keywords internal
 #' @name op-no-char-default
@@ -70,7 +71,7 @@ if (exists("%||%", envir = baseenv())) {
 #' @returns A vector of the same length as `x`, where each `NA` element in `x`
 #'   is replaced by the corresponding element in `y`.
 #' @keywords internal
-#' @name op-no-char-default
+#' @name op-na-coalesce
 #' @family empty operators
 #' @keywords internal
 `%|%` <- function(x, y) {

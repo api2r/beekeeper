@@ -21,6 +21,7 @@ Default value for non-\code{NULL}
 \seealso{
 Other empty operators:
 \code{\link{op-lengthless-default}},
+\code{\link{op-na-coalesce}},
 \code{\link{op-no-char-default}},
 \code{\link{op-null-default}}
 }

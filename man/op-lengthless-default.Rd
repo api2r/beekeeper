@@ -20,6 +20,7 @@ Default value for length 0
 }
 \seealso{
 Other empty operators:
+\code{\link{op-na-coalesce}},
 \code{\link{op-no-char-default}},
 \code{\link{op-null-continuation}},
 \code{\link{op-null-default}}
