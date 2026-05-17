@@ -12,15 +12,15 @@ x %|a|% y
 
 - x:
 
-  (`any`) Object to check.
+  (`any`) The object to check or coerce.
 
 - y:
 
-  (`character`) Default value for `x`.
+  (`character`) The default value.
 
 ## Value
 
-If `!nzchar(x)`, will return `y`; otherwise returns `x`.
+(`character`) If `!nzchar(x)`, returns `y`; otherwise returns `x`.
 
 ## See also
 

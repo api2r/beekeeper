@@ -16,4 +16,4 @@ Collapse to a comma-separated vertical string
 
 ## Value
 
-A length-1, comma-separated glue object with newlines.
+(`glue`) A length-1, comma-separated glue object with newlines.

@@ -50,6 +50,7 @@ use_beekeeper(
 
 ## Value
 
-The path to the configuration file, invisibly. The config file is
-written as a side effect of this function. The rapid object is also
-written, and the path to that file is saved in the config file.
+(`character(1)`, invisibly) The path to the configuration file. The
+config file is written as a side effect of this function. The rapid
+object is also written, and the path to that file is saved in the config
+file.

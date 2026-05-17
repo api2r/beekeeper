@@ -26,6 +26,5 @@ read_api_definition(pkg_dir = ".", rapid_file = "_beekeeper_rapid.rds")
 
 ## Value
 
-A
-[`rapid::class_rapid()`](https://rapid.api2r.org/reference/class_rapid.html)
-with the definition of the API.
+([`rapid::class_rapid`](https://rapid.api2r.org/reference/class_rapid.html))
+The definition of the API.

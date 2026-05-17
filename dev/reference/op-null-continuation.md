@@ -12,15 +12,15 @@ x %&&% y
 
 - x:
 
-  (`any`) Object to check.
+  (`any`) The object to check or coerce.
 
 - y:
 
-  (`any`) Default value for non-`NULL` `x`.
+  (`any`) The default value.
 
 ## Value
 
-If `x` is `NULL`, will return `x`; otherwise returns `y`.
+(`any`) If `x` is `NULL`, returns `x`; otherwise returns `y`.
 
 ## See also
 

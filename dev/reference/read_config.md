@@ -24,7 +24,7 @@ read_config(pkg_dir = ".", config_file = "_beekeeper.yml")
 
 ## Value
 
-A `list` of configuration information, with elements `api_title`,
+(`list`) Configuration information, with elements `api_title`,
 `api_abbr`, `api_version`, `rapid_file`, and `updated_on`.
 
 ## Details

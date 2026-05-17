@@ -45,5 +45,4 @@ generate_pkg(
 
 ## Value
 
-A character vector of paths to files that were added or updated,
-invisibly.
+(`character`, invisibly) Paths to files that were added or updated.

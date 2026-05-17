@@ -5,15 +5,15 @@ Inspired by usethis:::is_package.
 ## Usage
 
 ``` r
-.is_pkg(base_path = usethis::proj_get())
+.is_pkg(pkg_dir = usethis::proj_get())
 ```
 
 ## Arguments
 
-- base_path:
+- pkg_dir:
 
-  The root URL of the current project.
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 
-`TRUE` if the project is a package, `FALSE` if not.
+(`logical(1)`) `TRUE` if the project is a package, `FALSE` if not.

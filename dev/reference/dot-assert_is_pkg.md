@@ -5,15 +5,15 @@ Error if not in package
 ## Usage
 
 ``` r
-.assert_is_pkg(base_path = usethis::proj_get())
+.assert_is_pkg(pkg_dir = usethis::proj_get())
 ```
 
 ## Arguments
 
-- base_path:
+- pkg_dir:
 
-  The root URL of the current project.
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 
-`NULL`, invisibly.
+(`NULL`, invisibly) Called for error side effect.

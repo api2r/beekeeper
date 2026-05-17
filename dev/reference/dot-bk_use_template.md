@@ -18,11 +18,11 @@ Use a template in this package
 
 - template:
 
-  The name of the template.
+  (`character(1)`) The template file name to render.
 
 - data:
 
-  A list of variables to apply to the template.
+  (`list`) Data passed to a template.
 
 - ...:
 
@@ -30,12 +30,13 @@ Use a template in this package
 
 - target:
 
-  The name of the file to create.
+  (`character(1)`) The name of the generated file.
 
 - dir:
 
-  The directory where the file should be created.
+  (`character(1)`) The directory where a generated file should be
+  written.
 
 ## Value
 
-The path to the generated or updated file, invisibly.
+(`character(1)`, invisibly) The path to the generated or updated file.

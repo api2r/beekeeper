@@ -16,4 +16,4 @@ Collapse to a comma-separated string
 
 ## Value
 
-A length-1, comma-separated glue object.
+(`glue`) A length-1, comma-separated glue object.

@@ -53,4 +53,4 @@ Signal a package-scoped error
 
 ## Value
 
-Does not return.
+(`NULL`) Does not return.
