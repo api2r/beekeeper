@@ -1,5 +1,14 @@
 #' Generate authentication helpers
 #'
+#' Generate the authentication helper file for a package under development from
+#' the API security schemes stored in the OpenAPI definition. This supports
+#' incremental package scaffolding when you want to review or customize auth
+#' handling before generating the rest of the package files.
+#'
+#' When `save_security_data` is `TRUE`, the generated security metadata is saved
+#' to `security_data_filename` and that filename is recorded in the beekeeper
+#' config so later generation steps can reuse it.
+#'
 #' @inheritParams .shared-params
 #' @returns (`list`) Generated security metadata.
 #' @export

@@ -23,5 +23,11 @@ files.}
 (\code{character(1)}) The generated file path.
 }
 \description{
-Generate shared parameter docs
+Generate the shared roxygen parameter definitions used across scaffolded
+functions. This lets you regenerate or customize the shared parameter topic
+independently while iterating on the rest of the generated package files.
+}
+\details{
+Saved security metadata from \code{\link[=generate_pkg_auth]{generate_pkg_auth()}} is used, when available,
+to include auth-related shared parameter documentation.
 }

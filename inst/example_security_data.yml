@@ -1,0 +1,33 @@
+has_security: yes
+security_schemes:
+- name: api_key
+  description: An API key provided by the API provider. This key is not clearly documented
+    in the API description. Check the API documentation for details.
+  parameter_name: key
+  arg_name: key
+  location: query
+  type: api_key
+  api_key: yes
+- name: api_token
+  description: An API key provided by the API provider. This key is not clearly documented
+    in the API description. Check the API documentation for details.
+  parameter_name: token
+  arg_name: token
+  location: query
+  type: api_key
+  api_key: yes
+security_arg_names:
+- key
+- token
+security_arg_list: key = key, token = token
+security_arg_helps:
+- name: key
+  description: An API key provided by the API provider. This key is not clearly documented
+    in the API description. Check the API documentation for details.
+- name: token
+  description: An API key provided by the API provider. This key is not clearly documented
+    in the API description. Check the API documentation for details.
+security_arg_nulls: key = NULL, token = NULL
+security_signature: |-
+  key = Sys.getenv("TRELLO_KEY"),
+  token = Sys.getenv("TRELLO_TOKEN")

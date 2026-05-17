@@ -1,5 +1,13 @@
 #' Generate files for API paths
 #'
+#' Generate operation functions and their tests from the API paths stored in the
+#' OpenAPI definition. This is useful when you want to scaffold endpoint
+#' wrappers separately from the auth, request-preparation, or shared-parameter
+#' steps.
+#'
+#' The generated files include one or more `paths-*.R` files plus any required
+#' test helpers under `tests/testthat/`.
+#'
 #' @inheritParams .shared-params
 #' @returns (`character`) Generated file paths.
 #' @export

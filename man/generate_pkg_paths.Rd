@@ -32,5 +32,12 @@ files.}
 (\code{character}) Generated file paths.
 }
 \description{
-Generate files for API paths
+Generate operation functions and their tests from the API paths stored in the
+OpenAPI definition. This is useful when you want to scaffold endpoint
+wrappers separately from the auth, request-preparation, or shared-parameter
+steps.
+}
+\details{
+The generated files include one or more \verb{paths-*.R} files plus any required
+test helpers under \verb{tests/testthat/}.
 }

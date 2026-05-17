@@ -142,6 +142,11 @@ read_api_title <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
 #' @returns (`character(1)`) The configured security metadata file path.
 #' @export
 #' @family config readers
+#' @examples
+#' read_security_data_filename(
+#'   pkg_dir = fs::path_package("beekeeper"),
+#'   config_filename = "example_config.yml"
+#' )
 read_security_data_filename <- function(
   pkg_dir = ".",
   config_filename = "_beekeeper.yml"
@@ -206,6 +211,11 @@ read_security_schemes <- function(
 #' @returns (`list`) Saved security metadata.
 #' @export
 #' @family config readers
+#' @examples
+#' read_security_data(
+#'   pkg_dir = fs::path_package("beekeeper"),
+#'   config_filename = "example_config.yml"
+#' )
 read_security_data <- function(
   pkg_dir = ".",
   config_filename = "_beekeeper.yml",

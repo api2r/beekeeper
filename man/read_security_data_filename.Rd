@@ -19,6 +19,12 @@ yaml config file (relative to the package root).}
 \description{
 Read the \code{security_data_filename} field from a beekeeper config file.
 }
+\examples{
+read_security_data_filename(
+  pkg_dir = fs::path_package("beekeeper"),
+  config_filename = "example_config.yml"
+)
+}
 \seealso{
 Other config readers:
 \code{\link[=read_api_abbr]{read_api_abbr()}},

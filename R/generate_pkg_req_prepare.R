@@ -1,5 +1,13 @@
 #' Generate request-prepare helpers
 #'
+#' Generate the `*_req_prepare()` helper and its initial test file for a package
+#' under development. This scaffolds the central request-construction helper
+#' used by generated endpoint wrappers, allowing you to inspect or customize it
+#' before generating path functions.
+#'
+#' Saved security metadata from [generate_pkg_auth()] is used, when available,
+#' to include auth parameters in the generated request helper.
+#'
 #' @inheritParams .shared-params
 #' @returns (`character`) Generated file paths.
 #' @export
