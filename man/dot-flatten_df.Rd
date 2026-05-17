@@ -17,7 +17,7 @@
 \arguments{
 \item{x}{(\code{data.frame}, \code{list}, or \code{NULL}) The object to flatten.}
 
-\item{...}{Not used.}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 A single \code{data.frame}. Lists of data frames are flattened with
