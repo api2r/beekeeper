@@ -33,16 +33,47 @@
 #' @inheritParams .shared-params
 #' @returns (`NULL`, invisibly) Called for setup side effects.
 #' @keywords internal
-.setup_r <- function(pkg_dir, include_stbl = FALSE) {
-  if (as.character(pkg_dir) != ".") {
-    usethis::local_project(pkg_dir, quiet = TRUE) # nocov
+.setup_r <- function(pkg_dir) {
+  usethis::with_project(
+    pkg_dir,
+    {
+      usethis::use_directory("R")
+      withr::with_options(list(usethis.quiet = TRUE), usethis::use_testthat())
+      purrr::quietly(httptest2::use_httptest2)()
+    },
+    quiet = TRUE
+  )
+  .use_package("nectar", "Imports", pkg_dir)
+  .use_package("beekeeper", "Suggests", pkg_dir)
+}
+
+#' Add a package dependency to the DESCRIPTION file
+#'
+#' @param pkg (`character(1)`) The package name.
+#' @param type (`character(1)`) The dependency type, one of "Imports",
+#'   "Suggests", or "Depends".
+#' @inheritParams .shared-params
+#' @returns (`character(1)`, invisibly) The package name.
+#' @keywords internal
+.use_package <- function(pkg, type = "Imports", pkg_dir = ".") {
+  usethis::with_project(
+    pkg_dir,
+    {
+      usethis::use_package(pkg, type = type)
+    },
+    quiet = TRUE
+  )
+  invisible(pkg)
+}
+
+#' Add stbl to dependencies if needed
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)` or `NULL`, invisibly) "stbl" if stbl is used, `NULL`
+#'   otherwise.
+#' @keywords internal
+.maybe_setup_stbl <- function(pkg_dir, paths, security_arg_names) {
+  if (.paths_need_stbl(paths, security_arg_names)) {
+    .use_package("stbl", "Imports", pkg_dir)
   }
-  usethis::use_directory("R")
-  withr::with_options(list(usethis.quiet = TRUE), usethis::use_testthat())
-  purrr::quietly(httptest2::use_httptest2)()
-  usethis::use_package("nectar")
-  if (include_stbl) {
-    usethis::use_package("stbl")
-  }
-  usethis::use_package("beekeeper", type = "Suggests")
 }

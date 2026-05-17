@@ -25,7 +25,6 @@
 #' @param endpoint (`character(1)`) The operation endpoint.
 #' @param endpoints (`character`) Endpoint paths paired with operations.
 #' @param filter_in (`character(1)`) The parameter location to keep.
-#' @param include_stbl (`logical(1)`) Whether to add `stbl` to Imports.
 #' @param methods (`character`) HTTP methods paired with endpoints.
 #' @param operation (`character(1)`) The HTTP method.
 #' @param operation_description (`character(1)`) The operation description.

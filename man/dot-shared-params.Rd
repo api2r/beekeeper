@@ -41,8 +41,6 @@ written.}
 
 \item{filter_in}{(\code{character(1)}) The parameter location to keep.}
 
-\item{include_stbl}{(\code{logical(1)}) Whether to add \code{stbl} to Imports.}
-
 \item{methods}{(\code{character}) HTTP methods paired with endpoints.}
 
 \item{operation}{(\code{character(1)}) The HTTP method.}
