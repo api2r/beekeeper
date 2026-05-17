@@ -1,11 +1,17 @@
-# Read rapid_filename config field
+# Read saved security metadata
 
-Read the `rapid_filename` field from a beekeeper config file.
+Read prepared security metadata from a YAML file (default name
+`_beekeeper_security.yml`) generated via
+[`generate_pkg_auth()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_auth.md).
 
 ## Usage
 
 ``` r
-read_rapid_filename(pkg_dir = ".", config_filename = "_beekeeper.yml")
+read_security_data(
+  pkg_dir = ".",
+  config_filename = "_beekeeper.yml",
+  security_data_filename = read_security_data_filename(pkg_dir, config_filename)
+)
 ```
 
 ## Arguments
@@ -19,10 +25,14 @@ read_rapid_filename(pkg_dir = ".", config_filename = "_beekeeper.yml")
   (`character(1)` or `fs_path`) The path to a beekeeper yaml config file
   (relative to the package root).
 
+- security_data_filename:
+
+  (`character(1)` or `fs_path`) The path to the saved security metadata
+  file (relative to the package root).
+
 ## Value
 
-(`character(1)`) The `rapid_filename` field from the beekeeper config
-file.
+(`list`) Saved security metadata.
 
 ## See also
 
@@ -31,16 +41,6 @@ Other config readers:
 [`read_api_definition()`](https://beekeeper.api2r.org/dev/reference/read_api_definition.md),
 [`read_api_title()`](https://beekeeper.api2r.org/dev/reference/read_api_title.md),
 [`read_config()`](https://beekeeper.api2r.org/dev/reference/read_config.md),
-[`read_security_data()`](https://beekeeper.api2r.org/dev/reference/read_security_data.md),
+[`read_rapid_filename()`](https://beekeeper.api2r.org/dev/reference/read_rapid_filename.md),
 [`read_security_data_filename()`](https://beekeeper.api2r.org/dev/reference/read_security_data_filename.md),
 [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
-
-## Examples
-
-``` r
-read_rapid_filename(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
-#> [1] "example_beekeeper_rapid.rds"
-```

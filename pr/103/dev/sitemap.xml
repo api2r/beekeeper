@@ -60,8 +60,6 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_warn.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-prep_param_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-prepare_params_df.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-read_security_data.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-read_security_data_filename.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-remove_security_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-security_arg_description_clean.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-security_args_compile.html</loc></url>
@@ -73,10 +71,10 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-stabilize_config.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-to_snake.html</loc></url>
-<url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_beekeeper.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_httptest2.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_nectar.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_package.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_pkg_beekeeper.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_r_directory.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_testthat.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-without_security_file_path.html</loc></url>
@@ -100,6 +98,8 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_api_title.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_config.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_rapid_filename.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/read_security_data.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/read_security_data_filename.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_security_schemes.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/use_beekeeper.html</loc></url>
 </urlset>

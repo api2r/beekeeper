@@ -22,6 +22,10 @@
   : Read a beekeeper config file
 - [`read_rapid_filename()`](https://beekeeper.api2r.org/dev/reference/read_rapid_filename.md)
   : Read rapid_filename config field
+- [`read_security_data()`](https://beekeeper.api2r.org/dev/reference/read_security_data.md)
+  : Read saved security metadata
+- [`read_security_data_filename()`](https://beekeeper.api2r.org/dev/reference/read_security_data_filename.md)
+  : Read saved security metadata filename
 - [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
   : Read security schemes from an API definition
 - [`use_beekeeper()`](https://beekeeper.api2r.org/dev/reference/use_beekeeper.md)

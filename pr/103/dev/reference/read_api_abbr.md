@@ -30,6 +30,8 @@ Other config readers:
 [`read_api_title()`](https://beekeeper.api2r.org/dev/reference/read_api_title.md),
 [`read_config()`](https://beekeeper.api2r.org/dev/reference/read_config.md),
 [`read_rapid_filename()`](https://beekeeper.api2r.org/dev/reference/read_rapid_filename.md),
+[`read_security_data()`](https://beekeeper.api2r.org/dev/reference/read_security_data.md),
+[`read_security_data_filename()`](https://beekeeper.api2r.org/dev/reference/read_security_data_filename.md),
 [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
 
 ## Examples
