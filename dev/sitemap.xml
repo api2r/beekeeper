@@ -40,6 +40,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_shared_params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-glue_pipe_brace.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-is_pkg.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-maybe_use_stbl.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-param_schema_to_r.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-params_to_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-params_to_list.html</loc></url>
@@ -70,6 +71,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-shared-params.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-stabilize_config.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-to_snake.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_package.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-write_config.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-write_rapid.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/generate_pkg.html</loc></url>
