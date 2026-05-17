@@ -9,7 +9,7 @@ generate_pkg_paths(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   api_definition = read_api_definition(pkg_dir, read_rapid_filename(pkg_dir,
     config_filename)),
-  security_data = .read_security_data(pkg_dir, config_filename),
+  security_data = read_security_data(pkg_dir, config_filename),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )

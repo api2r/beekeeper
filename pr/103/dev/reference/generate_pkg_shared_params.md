@@ -6,7 +6,7 @@ Generate shared parameter docs
 
 ``` r
 generate_pkg_shared_params(
-  security_data = .read_security_data(pkg_dir, config_filename),
+  security_data = read_security_data(pkg_dir, config_filename),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )
