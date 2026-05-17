@@ -29,8 +29,7 @@ config file.}
 files.}
 }
 \value{
-A character vector of paths to files that were added or updated,
-invisibly.
+(\code{character}, invisibly) Paths to files that were added or updated.
 }
 \description{
 Creates or updates package files based on the information in a beekeeper

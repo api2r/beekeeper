@@ -11,7 +11,7 @@
 metadata.}
 }
 \value{
-A \code{list} of finalized security metadata.
+(\code{list}) Finalized security metadata.
 }
 \description{
 Finalize collected security scheme data

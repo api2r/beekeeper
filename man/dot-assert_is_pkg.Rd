@@ -7,7 +7,7 @@
 .assert_is_pkg(pkg_dir = usethis::proj_get())
 }
 \value{
-\code{NULL}, invisibly.
+(\code{NULL}, invisibly) Called for error side effect.
 }
 \description{
 Error if not in package

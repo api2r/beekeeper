@@ -15,7 +15,7 @@ package code from.}
 \item{security_data}{(\code{list}) Generated security metadata.}
 }
 \value{
-A \code{character} vector of generated file paths.
+(\code{character}) Generated file paths.
 }
 \description{
 Generate prepare files

@@ -12,7 +12,7 @@
 \item{security_arg_name}{(\code{character(1)}) The argument name.}
 }
 \value{
-A named \code{list} with \code{name} and \code{description}.
+(\code{list}) A named list with \code{name} and \code{description}.
 }
 \description{
 Format one security argument help entry

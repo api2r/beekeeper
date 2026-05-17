@@ -14,7 +14,7 @@ files.}
 config file.}
 }
 \value{
-A \code{list} of configuration information, with elements \code{api_title},
+(\code{list}) Configuration information, with elements \code{api_title},
 \code{api_abbr}, \code{api_version}, \code{rapid_file}, and \code{updated_on}.
 }
 \description{

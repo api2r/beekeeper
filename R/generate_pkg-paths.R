@@ -1,7 +1,7 @@
 #' Generate files for API paths
 #'
 #' @inheritParams .shared-params
-#' @returns A `character` vector of generated file paths.
+#' @returns (`character`) Generated file paths.
 #' @keywords internal
 .generate_paths <- function(
   paths,
@@ -46,7 +46,8 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Convert API paths to an operations data frame
 #'
 #' @inheritParams .shared-params
-#' @returns A [tibble::tibble()] with one row per non-deprecated operation.
+#' @returns (`tibble`) A [tibble::tibble()] with one row per non-deprecated
+#'   operation.
 #' @keywords internal
 .paths_to_clean_df <- function(paths) {
   operations_df <- tibble::as_tibble(paths) |>
@@ -137,7 +138,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #'
 #' @param ... Additional columns, ignored.
 #' @inheritParams .shared-params
-#' @returns A `list` describing one operation.
+#' @returns (`list`) One operation description.
 #' @keywords internal
 .path_row_to_list <- function(
   operation_id,
@@ -166,7 +167,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Prepare parameter metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `data.frame` of prepared parameter metadata.
+#' @returns (`data.frame`) Prepared parameter metadata.
 #' @keywords internal
 .prepare_params_df <- function(params_df) {
   params_df <- .flatten_params_df(params_df)
@@ -190,7 +191,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Flatten parameter metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `data.frame` of flattened parameter metadata.
+#' @returns (`data.frame`) Flattened parameter metadata.
 #' @keywords internal
 .flatten_params_df <- function(params_df) {
   params_df <- .flatten_df(params_df)
@@ -203,7 +204,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Convert parameter rows to a list
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of parameter metadata entries.
+#' @returns (`list`) Parameter metadata entries.
 #' @keywords internal
 .params_to_list <- function(params_df) {
   if (!nrow(params_df)) {
@@ -312,7 +313,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Generate files for all operations
 #'
 #' @inheritParams .shared-params
-#' @returns A `character` vector of generated file paths.
+#' @returns (`character`) Generated file paths.
 #' @keywords internal
 .generate_paths_files <- function(
   paths_by_operation,
@@ -384,7 +385,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Remove security parameters
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of non-security parameters.
+#' @returns (`list`) Non-security parameters.
 #' @keywords internal
 .remove_security_args <- function(params, security_args) {
   purrr::discard(
@@ -407,7 +408,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' Convert parameters to validation metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of validation metadata.
+#' @returns (`list`) Validation metadata.
 #' @keywords internal
 .params_to_validations <- function(params) {
   checks <- purrr::keep(

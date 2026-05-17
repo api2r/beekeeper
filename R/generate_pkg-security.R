@@ -1,7 +1,7 @@
 #' Generate security files and metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of generated security metadata.
+#' @returns (`list`) Generated security metadata.
 #' @keywords internal
 .generate_security <- function(api_abbr, security_schemes) {
   security_data <- as_bk_data(security_schemes)
@@ -45,7 +45,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Collect security scheme metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of security scheme metadata.
+#' @returns (`list`) Security scheme metadata.
 #' @keywords internal
 .security_schemes_collect <- function(security_schemes) {
   purrr::pmap(
@@ -62,7 +62,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Convert one security scheme to a list
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` describing one security scheme.
+#' @returns (`list`) One security scheme description.
 #' @keywords internal
 .security_scheme_rotate <- function(
   security_scheme_name,
@@ -113,7 +113,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Finalize collected security scheme data
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of finalized security metadata.
+#' @returns (`list`) Finalized security metadata.
 #' @keywords internal
 .security_scheme_collection_finalize <- function(security_scheme_collection) {
   security_scheme_data <- c(
@@ -129,7 +129,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Compile security argument metadata
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of compiled security argument values.
+#' @returns (`list`) Compiled security argument values.
 #' @keywords internal
 .security_args_compile <- function(security_scheme_collection) {
   security_args <- sort(unique(purrr::map_chr(
@@ -152,7 +152,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Build security argument help entries
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of template-ready parameter help entries.
+#' @returns (`list`) Template-ready parameter help entries.
 #' @keywords internal
 .generate_security_arg_help <- function(
   security_scheme_collection,
@@ -175,7 +175,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 #' Format one security argument help entry
 #'
 #' @inheritParams .shared-params
-#' @returns A named `list` with `name` and `description`.
+#' @returns (`list`) A named list with `name` and `description`.
 #' @keywords internal
 .security_arg_description_clean <- function(
   security_arg_description,

@@ -10,7 +10,7 @@
 \item{config}{(\code{list}) Package-generation configuration data.}
 }
 \value{
-A stabilized \code{list}.
+(\code{list}) A stabilized config list.
 }
 \description{
 Stabilize beekeeper config values

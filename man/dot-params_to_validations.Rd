@@ -10,7 +10,7 @@
 \item{params}{(\code{list}) Parameter metadata for a single operation.}
 }
 \value{
-A \code{list} of validation metadata.
+(\code{list}) Validation metadata.
 }
 \description{
 Convert parameters to validation metadata

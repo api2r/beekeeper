@@ -14,7 +14,7 @@ files.}
 definition (rapid) file.}
 }
 \value{
-A \code{\link[rapid:class_rapid]{rapid::class_rapid()}} with the definition of the API.
+(\code{rapid::class_rapid}) The definition of the API.
 }
 \description{
 Reads an RDS file (default name \verb{_beekeeper_rapid.rds}) with the API

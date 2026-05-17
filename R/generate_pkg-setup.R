@@ -2,7 +2,7 @@
 #'
 #' @inheritParams .is_pkg
 #'
-#' @returns `NULL`, invisibly.
+#' @returns (`NULL`, invisibly) Called for error side effect.
 #' @keywords internal
 .assert_is_pkg <- function(pkg_dir = usethis::proj_get()) {
   if (.is_pkg(pkg_dir)) {
@@ -18,7 +18,7 @@
 #'
 #' Inspired by usethis:::is_package.
 #'
-#' @returns `TRUE` if the project is a package, `FALSE` if not.
+#' @returns (`logical(1)`) `TRUE` if the project is a package, `FALSE` if not.
 #' @keywords internal
 .is_pkg <- function(pkg_dir = usethis::proj_get()) {
   root_file <- rlang::try_fetch(
@@ -49,7 +49,7 @@
 #' last updated, in the format "YYYY-MM-DD HH:MM:SS" (UTC).
 #'
 #' @inheritParams .shared-params
-#' @returns A `list` of configuration information, with elements `api_title`,
+#' @returns (`list`) Configuration information, with elements `api_title`,
 #'   `api_abbr`, `api_version`, `rapid_file`, and `updated_on`.
 #' @export
 read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
@@ -60,7 +60,7 @@ read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
 #' Stabilize beekeeper config values
 #'
 #' @inheritParams .shared-params
-#' @returns A stabilized `list`.
+#' @returns (`list`) A stabilized config list.
 #' @keywords internal
 .stabilize_config <- function(config) {
   config$api_title <- stbl::stabilize_character_scalar(config$api_title)
@@ -86,7 +86,7 @@ read_config <- function(pkg_dir = ".", config_file = "_beekeeper.yml") {
 #' by [use_beekeeper()] based on an OpenAPI definition file.
 #'
 #' @inheritParams .shared-params
-#' @returns A [rapid::class_rapid()] with the definition of the API.
+#' @returns (`rapid::class_rapid`) The definition of the API.
 #' @export
 read_api_definition <- function(
   pkg_dir = ".",
@@ -98,7 +98,7 @@ read_api_definition <- function(
 #' Set up package directories and dependencies
 #'
 #' @inheritParams .shared-params
-#' @returns `NULL` (invisibly).
+#' @returns (`NULL`, invisibly) Called for setup side effects.
 #' @keywords internal
 .setup_r <- function(pkg_dir, include_stbl = FALSE) {
   if (as.character(pkg_dir) != ".") {

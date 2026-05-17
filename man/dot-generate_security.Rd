@@ -14,7 +14,7 @@ the API, for use in function names and environment variables.}
 from the API definition.}
 }
 \value{
-A \code{list} of generated security metadata.
+(\code{list}) Generated security metadata.
 }
 \description{
 Generate security files and metadata

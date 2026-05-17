@@ -10,7 +10,7 @@
 \item{params_df}{(\code{data.frame}) Parameter metadata in tabular form.}
 }
 \value{
-A \code{data.frame} of prepared parameter metadata.
+(\code{data.frame}) Prepared parameter metadata.
 }
 \description{
 Prepare parameter metadata

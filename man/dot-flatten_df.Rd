@@ -20,9 +20,9 @@
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-A single \code{data.frame}. Lists of data frames are flattened with
-\code{\link[purrr:list_rbind]{purrr::list_rbind()}}, and \code{NULL} values are converted to empty data
-frames.
+(\code{data.frame}) A single data frame. Lists of data frames are
+flattened with \code{\link[purrr:list_rbind]{purrr::list_rbind()}}, and \code{NULL} values are converted to
+empty data frames.
 }
 \description{
 Flatten a data frame or list of data frames

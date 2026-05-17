@@ -27,7 +27,7 @@ path files.}
 helpers.}
 }
 \value{
-A \code{character} vector of generated file paths.
+(\code{character}) Generated file paths.
 }
 \description{
 Generate files for API paths

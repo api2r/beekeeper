@@ -33,7 +33,7 @@ as_bk_data(x, ...)
 \item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-A list.
+(\code{list}) A list.
 }
 \description{
 Convert \code{rapid} objects to lists of properties to use in beekeeper templates.

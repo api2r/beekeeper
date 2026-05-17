@@ -11,7 +11,7 @@
 metadata.}
 }
 \value{
-A \code{list} of compiled security argument values.
+(\code{list}) Compiled security argument values.
 }
 \description{
 Compile security argument metadata

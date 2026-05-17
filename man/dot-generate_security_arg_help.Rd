@@ -14,7 +14,7 @@ metadata.}
 operation parameters (because they are defined once, separately).}
 }
 \value{
-A \code{list} of template-ready parameter help entries.
+(\code{list}) Template-ready parameter help entries.
 }
 \description{
 Build security argument help entries

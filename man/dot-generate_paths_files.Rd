@@ -24,7 +24,7 @@ the API, for use in function names and environment variables.}
 path files.}
 }
 \value{
-A \code{character} vector of generated file paths.
+(\code{character}) Generated file paths.
 }
 \description{
 Generate files for all operations

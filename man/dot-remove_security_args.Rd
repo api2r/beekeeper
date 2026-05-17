@@ -13,7 +13,7 @@
 operation parameters (because they are defined once, separately).}
 }
 \value{
-A \code{list} of non-security parameters.
+(\code{list}) Non-security parameters.
 }
 \description{
 Remove security parameters

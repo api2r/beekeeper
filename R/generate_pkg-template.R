@@ -2,7 +2,8 @@
 #'
 #' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @returns The path to the generated or updated file, invisibly.
+#' @returns (`character(1)`, invisibly) The path to the generated or updated
+#'   file.
 #' @keywords internal
 .bk_use_template <- function(
   template,

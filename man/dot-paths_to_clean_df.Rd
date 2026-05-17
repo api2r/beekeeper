@@ -10,7 +10,8 @@
 \item{paths}{(\code{rapid::class_paths}) API path definitions.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with one row per non-deprecated operation.
+(\code{tibble}) A \code{\link[tibble:tibble]{tibble::tibble()}} with one row per non-deprecated
+operation.
 }
 \description{
 Convert API paths to an operations data frame

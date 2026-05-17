@@ -34,7 +34,7 @@ generated file names.}
 \item{...}{Additional columns, ignored.}
 }
 \value{
-A \code{list} describing one operation.
+(\code{list}) One operation description.
 }
 \description{
 Convert one operation row to template data

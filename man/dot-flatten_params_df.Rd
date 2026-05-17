@@ -10,7 +10,7 @@
 \item{params_df}{(\code{data.frame}) Parameter metadata in tabular form.}
 }
 \value{
-A \code{data.frame} of flattened parameter metadata.
+(\code{data.frame}) Flattened parameter metadata.
 }
 \description{
 Flatten parameter metadata

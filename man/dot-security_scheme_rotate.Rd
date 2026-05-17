@@ -20,7 +20,7 @@ security scheme details.}
 description from the API definition.}
 }
 \value{
-A \code{list} describing one security scheme.
+(\code{list}) One security scheme description.
 }
 \description{
 Convert one security scheme to a list

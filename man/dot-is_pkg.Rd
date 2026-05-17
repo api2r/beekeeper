@@ -7,7 +7,7 @@
 .is_pkg(pkg_dir = usethis::proj_get())
 }
 \value{
-\code{TRUE} if the project is a package, \code{FALSE} if not.
+(\code{logical(1)}) \code{TRUE} if the project is a package, \code{FALSE} if not.
 }
 \description{
 Inspired by usethis:::is_package.

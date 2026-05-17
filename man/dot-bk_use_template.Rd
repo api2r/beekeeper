@@ -25,7 +25,8 @@
 written.}
 }
 \value{
-The path to the generated or updated file, invisibly.
+(\code{character(1)}, invisibly) The path to the generated or updated
+file.
 }
 \description{
 Use a template in this package

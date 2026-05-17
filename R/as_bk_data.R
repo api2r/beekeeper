@@ -4,7 +4,7 @@
 #'
 #' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @returns A list.
+#' @returns (`list`) A list.
 #' @keywords internal
 as_bk_data <- S7::new_generic("as_bk_data", dispatch_args = "x")
 

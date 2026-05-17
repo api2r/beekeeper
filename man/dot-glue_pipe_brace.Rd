@@ -12,7 +12,7 @@
 \item{.envir}{(\code{environment}) The environment in which to evaluate \code{...}.}
 }
 \value{
-A glue object.
+(\code{glue}) A glue object.
 }
 \description{
 Interpolate glue with pipe braces

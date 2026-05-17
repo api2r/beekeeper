@@ -1,7 +1,7 @@
 #' Generate prepare files
 #'
 #' @inheritParams .shared-params
-#' @returns A `character` vector of generated file paths.
+#' @returns (`character`) Generated file paths.
 #' @keywords internal
 .generate_prepare <- function(config, api_definition, security_data) {
   c(

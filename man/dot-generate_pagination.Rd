@@ -7,7 +7,7 @@
 .generate_pagination()
 }
 \value{
-A \code{list} of pagination metadata used while generating path files.
+(\code{list}) Pagination metadata used while generating path files.
 }
 \description{
 Generate pagination files

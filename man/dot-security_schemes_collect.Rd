@@ -11,7 +11,7 @@
 from the API definition.}
 }
 \value{
-A \code{list} of security scheme metadata.
+(\code{list}) Security scheme metadata.
 }
 \description{
 Collect security scheme metadata

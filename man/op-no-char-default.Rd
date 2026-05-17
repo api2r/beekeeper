@@ -13,7 +13,7 @@ x \%|a|\% y
 \item{y}{(\code{character}) The default value.}
 }
 \value{
-If \code{!nzchar(x)}, will return \code{y}; otherwise returns \code{x}.
+(\code{character}) If \code{!nzchar(x)}, returns \code{y}; otherwise returns \code{x}.
 }
 \description{
 Default value for empty strings

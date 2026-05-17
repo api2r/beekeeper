@@ -14,8 +14,8 @@ x \%|\% y
 replace \code{NA} elements in \code{x}. Will be recycled to the same length as \code{x}.}
 }
 \value{
-A vector of the same length as \code{x}, where each \code{NA} element in \code{x}
-is replaced by the corresponding element in \code{y}.
+(\code{vector}) A vector of the same length as \code{x}, where each \code{NA}
+element in \code{x} is replaced by the corresponding element in \code{y}.
 }
 \description{
 Default value for NA elements in vectors

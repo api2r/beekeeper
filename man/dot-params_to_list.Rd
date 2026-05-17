@@ -10,7 +10,7 @@
 \item{params_df}{(\code{data.frame}) Parameter metadata in tabular form.}
 }
 \value{
-A \code{list} of parameter metadata entries.
+(\code{list}) Parameter metadata entries.
 }
 \description{
 Convert parameter rows to a list

@@ -13,7 +13,7 @@ files.}
 \item{include_stbl}{(\code{logical(1)}) Whether to add \code{stbl} to Imports.}
 }
 \value{
-\code{NULL} (invisibly).
+(\code{NULL}, invisibly) Called for setup side effects.
 }
 \description{
 Set up package directories and dependencies

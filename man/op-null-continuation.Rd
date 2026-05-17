@@ -13,7 +13,7 @@ x \%&&\% y
 \item{y}{(\code{any}) The default value.}
 }
 \value{
-If \code{x} is \code{NULL}, will return \code{x}; otherwise returns \code{y}.
+(\code{any}) If \code{x} is \code{NULL}, returns \code{x}; otherwise returns \code{y}.
 }
 \description{
 Default value for non-\code{NULL}
