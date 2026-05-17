@@ -32,6 +32,8 @@ Other config readers:
 \code{\link[=read_api_definition]{read_api_definition()}},
 \code{\link[=read_api_title]{read_api_title()}},
 \code{\link[=read_config]{read_config()}},
+\code{\link[=read_security_data]{read_security_data()}},
+\code{\link[=read_security_data_filename]{read_security_data_filename()}},
 \code{\link[=read_security_schemes]{read_security_schemes()}}
 }
 \concept{config readers}

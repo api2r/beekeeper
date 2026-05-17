@@ -20,7 +20,7 @@ generate_pkg_req_prepare <- function(
   .use_r_directory(pkg_dir)
   .use_testthat(pkg_dir)
   .use_nectar(pkg_dir)
-  .use_beekeeper(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
   .generate_prepare(
     config = list(api_abbr = api_abbr, api_title = api_title),
     api_definition = api_definition,

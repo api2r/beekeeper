@@ -21,7 +21,8 @@ definition (rapid) file (relative to the package root).}
 definition.
 }
 \description{
-Read security schemes from an API definition
+Read the security schemes from an API definition stored as a
+\code{\link[rapid:class_rapid]{rapid::class_rapid()}} object.
 }
 \seealso{
 Other config readers:
@@ -29,6 +30,8 @@ Other config readers:
 \code{\link[=read_api_definition]{read_api_definition()}},
 \code{\link[=read_api_title]{read_api_title()}},
 \code{\link[=read_config]{read_config()}},
-\code{\link[=read_rapid_filename]{read_rapid_filename()}}
+\code{\link[=read_rapid_filename]{read_rapid_filename()}},
+\code{\link[=read_security_data]{read_security_data()}},
+\code{\link[=read_security_data_filename]{read_security_data_filename()}}
 }
 \concept{config readers}

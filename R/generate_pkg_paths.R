@@ -19,7 +19,7 @@ generate_pkg_paths <- function(
   .use_testthat(pkg_dir)
   .use_httptest2(pkg_dir)
   .use_nectar(pkg_dir)
-  .use_beekeeper(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
   security_arg_names <- security_data$security_arg_names %|0|% character()
   .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
   .generate_paths(

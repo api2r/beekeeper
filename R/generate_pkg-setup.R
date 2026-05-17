@@ -38,7 +38,7 @@
   .use_testthat(pkg_dir)
   .use_httptest2(pkg_dir)
   .use_nectar(pkg_dir)
-  .use_beekeeper(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
 }
 
 #' Ensure the R directory exists
@@ -116,7 +116,7 @@
 #' @inheritParams .shared-params
 #' @returns (`character(1)`, invisibly) The package name.
 #' @keywords internal
-.use_beekeeper <- function(pkg_dir = ".") {
+.use_pkg_beekeeper <- function(pkg_dir = ".") {
   .use_package("beekeeper", "Suggests", pkg_dir)
 }
 

@@ -20,7 +20,7 @@ generate_pkg_auth <- function(
   security_data_filename <- stbl::stabilize_chr_scalar(security_data_filename)
   .use_r_directory(pkg_dir)
   .use_nectar(pkg_dir)
-  .use_beekeeper(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
   security_data <- .generate_security(api_abbr, security_schemes)
   if (save_security_data) {
     .write_security_data(

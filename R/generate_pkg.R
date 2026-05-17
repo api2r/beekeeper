@@ -24,7 +24,7 @@ generate_pkg <- function(
   .assert_is_pkg(pkg_dir)
   api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
   api_title <- stbl::stabilize_chr_scalar(api_title)
-  save_security_data <- file.exists(fs::path(pkg_dir, config_filename))
+  save_security_data <- fs::file_exists(fs::path(pkg_dir, config_filename))
   security_data <- generate_pkg_auth(
     api_abbr = api_abbr,
     security_schemes = api_definition@components@security_schemes,
@@ -33,23 +33,20 @@ generate_pkg <- function(
     pkg_dir = pkg_dir
   )
   shared_file_path <- generate_pkg_shared_params(
-    security_data = .without_security_file_path(security_data),
-    config_filename = config_filename,
+    security_data = security_data,
     pkg_dir = pkg_dir
   )
   prep_files <- generate_pkg_req_prepare(
     api_abbr = api_abbr,
     api_definition = api_definition,
     api_title = api_title,
-    security_data = .without_security_file_path(security_data),
-    config_filename = config_filename,
+    security_data = security_data,
     pkg_dir = pkg_dir
   )
   path_files <- generate_pkg_paths(
     api_abbr = api_abbr,
     api_definition = api_definition,
-    security_data = .without_security_file_path(security_data),
-    config_filename = config_filename,
+    security_data = security_data,
     pkg_dir = pkg_dir
   )
   touched_files <- c(

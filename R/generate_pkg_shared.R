@@ -11,7 +11,7 @@ generate_pkg_shared_params <- function(
   .assert_is_pkg(pkg_dir)
   .use_r_directory(pkg_dir)
   .use_nectar(pkg_dir)
-  .use_beekeeper(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
   .generate_shared_params(security_data)
 }
 

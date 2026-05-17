@@ -62,7 +62,7 @@ test_that("generate_pkg_auth() writes auth files and saved security data (#101)"
     "020-auth.R"
   )
   expect_identical(scrub_testpkg(readLines("R/020-auth.R")), security_expected)
-  expect_true(file.exists("_beekeeper_security.yml"))
+  expect_true(fs::file_exists("_beekeeper_security.yml"))
   expect_identical(
     read_config()$security_data_filename,
     "_beekeeper_security.yml"
