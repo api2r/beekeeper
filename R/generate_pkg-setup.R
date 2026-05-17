@@ -38,7 +38,7 @@
     usethis::local_project(pkg_dir, quiet = TRUE) # nocov
   }
   usethis::use_directory("R")
-  usethis::use_testthat()
+  withr::with_options(list(usethis.quiet = TRUE), usethis::use_testthat())
   purrr::quietly(httptest2::use_httptest2)()
   usethis::use_package("nectar")
   if (include_stbl) {
