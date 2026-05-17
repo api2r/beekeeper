@@ -4,7 +4,7 @@
 #' @returns (`character(1)`) The generated file path.
 #' @export
 generate_pkg_shared_params <- function(
-  security_data = .read_security_data(pkg_dir, config_filename),
+  security_data = read_security_data(pkg_dir, config_filename),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {

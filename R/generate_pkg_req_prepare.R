@@ -10,7 +10,7 @@ generate_pkg_req_prepare <- function(
     read_rapid_filename(pkg_dir, config_filename)
   ),
   api_title = read_api_title(pkg_dir, config_filename),
-  security_data = .read_security_data(pkg_dir, config_filename),
+  security_data = read_security_data(pkg_dir, config_filename),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {

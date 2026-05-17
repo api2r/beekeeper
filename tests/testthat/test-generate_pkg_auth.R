@@ -68,7 +68,7 @@ test_that("generate_pkg_auth() writes auth files and saved security data (#101)"
     "_beekeeper_security.yml"
   )
 
-  saved_security_data <- .read_security_data()
+  saved_security_data <- read_security_data()
   expect_identical(
     saved_security_data$security_arg_names,
     result$security_arg_names

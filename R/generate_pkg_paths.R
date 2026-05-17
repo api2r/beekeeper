@@ -9,7 +9,7 @@ generate_pkg_paths <- function(
     pkg_dir,
     read_rapid_filename(pkg_dir, config_filename)
   ),
-  security_data = .read_security_data(pkg_dir, config_filename),
+  security_data = read_security_data(pkg_dir, config_filename),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
