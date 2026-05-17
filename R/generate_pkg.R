@@ -9,23 +9,21 @@
 #' @returns (`character`, invisibly) Paths to files that were added or updated.
 #' @export
 generate_pkg <- function(
-  api_abbr = NULL,
-  api_definition = NULL,
-  api_title = NULL,
-  config_file = "_beekeeper.yml",
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  api_definition = read_api_definition(
+    pkg_dir,
+    read_rapid_filename(pkg_dir, config_filename)
+  ),
+  api_title = read_api_title(pkg_dir, config_filename),
+  config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
   # TODO: Confirm that they use github & everything is committed. Error or warn
   # if not, letting them know that this can be destructive. Skip this check in
   # tests.
   .assert_is_pkg(pkg_dir)
-  if (purrr::some(list(api_abbr, api_definition, api_title), is.null)) {
-    config <- read_config(pkg_dir = pkg_dir, config_file = config_file)
-  }
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr %||% config$api_abbr)
-  api_title <- stbl::stabilize_character_scalar(api_title %||% config$api_title)
-  api_definition <- api_definition %||%
-    read_api_definition(pkg_dir, config$rapid_file)
+  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
+  api_title <- stbl::stabilize_character_scalar(api_title)
   config <- list(api_abbr = api_abbr, api_title = api_title)
   security_data <- .generate_security(
     api_abbr,

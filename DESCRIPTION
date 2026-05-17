@@ -21,6 +21,7 @@ Imports:
     fs,
     glue,
     httptest2,
+    memoise,
     nectar,
     purrr,
     rapid (>= 0.0.0.9003),

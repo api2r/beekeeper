@@ -1,4 +1,4 @@
-# read_config() reads configs
+# read_config() reads configs (#82)
 
     Code
       config
@@ -12,7 +12,7 @@
       $api_version
       [1] "2.2.0"
       
-      $rapid_file
+      $rapid_filename
       [1] "_beekeeper_rapid.rds"
       
       $updated_on

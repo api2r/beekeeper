@@ -4,14 +4,17 @@
 \alias{read_api_definition}
 \title{Read an API definition file}
 \usage{
-read_api_definition(pkg_dir = ".", rapid_file = "_beekeeper_rapid.rds")
+read_api_definition(
+  pkg_dir = ".",
+  rapid_filename = read_rapid_filename(pkg_dir)
+)
 }
 \arguments{
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
 
-\item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
-definition (rapid) file.}
+\item{rapid_filename}{(\code{character(1)} or \code{fs_path}) The path to the R API
+definition (rapid) file (relative to the package root).}
 }
 \value{
 (\code{rapid::class_rapid}) The definition of the API.
@@ -21,3 +24,19 @@ Reads an RDS file (default name \verb{_beekeeper_rapid.rds}) with the API
 definition stored as a \code{\link[rapid:class_rapid]{rapid::class_rapid()}} object. This file is generated
 by \code{\link[=use_beekeeper]{use_beekeeper()}} based on an OpenAPI definition file.
 }
+\examples{
+api_definition <- read_api_definition(
+  pkg_dir = fs::path_package("beekeeper"),
+  rapid_filename = "example_beekeeper_rapid.rds"
+)
+class(api_definition)
+api_definition@info@origin@url
+}
+\seealso{
+Other config readers:
+\code{\link[=read_api_abbr]{read_api_abbr()}},
+\code{\link[=read_api_title]{read_api_title()}},
+\code{\link[=read_config]{read_config()}},
+\code{\link[=read_rapid_filename]{read_rapid_filename()}}
+}
+\concept{config readers}

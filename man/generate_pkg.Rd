@@ -5,10 +5,11 @@
 \title{Use a beekeeper config file to generate code}
 \usage{
 generate_pkg(
-  api_abbr = NULL,
-  api_definition = NULL,
-  api_title = NULL,
-  config_file = "_beekeeper.yml",
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  api_definition = read_api_definition(pkg_dir, read_rapid_filename(pkg_dir,
+    config_filename)),
+  api_title = read_api_title(pkg_dir, config_filename),
+  config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )
 }
@@ -22,8 +23,8 @@ package code from.}
 \item{api_title}{(\code{character(1)}) The API title used in generated package
 files.}
 
-\item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
-config file.}
+\item{config_filename}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper
+yaml config file (relative to the package root).}
 
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}

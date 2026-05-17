@@ -23,8 +23,7 @@ the API, for use in function names and environment variables.}
 \item{pagination_data}{(\code{list}) Pagination metadata used while generating
 path files.}
 
-\item{base_url}{(\code{character(1)}) The base URL used in generated test
-helpers.}
+\item{base_url}{(\code{character(1)}) The base URL used in generated test helpers.}
 }
 \value{
 (\code{character}) Generated file paths.

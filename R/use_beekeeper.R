@@ -13,25 +13,29 @@
 #'
 #' @returns (`character(1)`, invisibly) The path to the configuration file. The
 #'   config file is written as a side effect of this function. The rapid object
-#'   is also written, and the path to that file is saved in the config file.
+#'   is also written, and the path to that file (relative to `pkg_dir`) is saved
+#'   in the config file.
 #' @export
 use_beekeeper <- function(
   x,
   api_abbr,
   ...,
-  config_file = "_beekeeper.yml",
-  rapid_file = "_beekeeper_rapid.rds"
+  pkg_dir = ".",
+  config_filename = "_beekeeper.yml",
+  rapid_filename = "_beekeeper_rapid.rds"
 ) {
+  .assert_is_pkg(pkg_dir)
   api_definition <- rapid::as_rapid(x)
-  rapid_file <- .write_rapid(api_definition, rapid_file)
-  config_file <- .write_config(
+  rapid_filename <- .write_rapid(api_definition, rapid_filename, pkg_dir)
+  config_filename <- .write_config(
     api_definition,
     api_abbr,
-    rapid_file,
-    config_file
+    rapid_filename,
+    config_filename,
+    pkg_dir
   )
 
-  return(invisible(config_file))
+  return(invisible(fs::path(pkg_dir, config_filename)))
 }
 
 #' Write the rapid definition file
@@ -39,11 +43,11 @@ use_beekeeper <- function(
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The written file path.
 #' @keywords internal
-.write_rapid <- function(api_definition, rapid_file) {
-  rapid_file <- stbl::stabilize_character_scalar(rapid_file)
-  saveRDS(api_definition, rapid_file)
-  usethis::use_build_ignore(rapid_file)
-  return(rapid_file)
+.write_rapid <- function(api_definition, rapid_filename, pkg_dir) {
+  rapid_filename <- stbl::stabilize_character_scalar(rapid_filename)
+  saveRDS(api_definition, fs::path(pkg_dir, rapid_filename))
+  usethis::use_build_ignore(rapid_filename)
+  return(rapid_filename)
 }
 
 #' Write the beekeeper config file
@@ -51,19 +55,26 @@ use_beekeeper <- function(
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The written config file path.
 #' @keywords internal
-.write_config <- function(api_definition, api_abbr, rapid_file, config_file) {
-  config_file <- stbl::stabilize_character_scalar(config_file)
+.write_config <- function(
+  api_definition,
+  api_abbr,
+  rapid_filename,
+  config_filename,
+  pkg_dir
+) {
+  config_filename <- stbl::stabilize_character_scalar(config_filename)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
   yaml::write_yaml(
     list(
       api_title = api_definition@info@title,
       api_abbr = stbl::stabilize_character_scalar(api_abbr),
       api_version = api_definition@info@version,
-      rapid_file = fs::path_rel(rapid_file, fs::path_dir(config_file)),
+      rapid_filename = rapid_filename,
       updated_on = as.character(update_time)
     ),
-    file = config_file
+    file = fs::path(pkg_dir, config_filename)
   )
-  usethis::use_build_ignore(config_file)
-  return(config_file)
+  memoise::forget(read_config)
+  usethis::use_build_ignore(config_filename)
+  return(config_filename)
 }
