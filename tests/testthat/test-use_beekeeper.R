@@ -4,6 +4,9 @@ test_that("use_beekeeper writes a yml config (#10)", {
     use_build_ignore = function(...) {
       invisible(TRUE)
     },
+    with_project = function(...) {
+      invisible(NULL)
+    },
     .package = "usethis"
   )
   local_mocked_bindings(

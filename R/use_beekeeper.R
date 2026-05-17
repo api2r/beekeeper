@@ -24,6 +24,7 @@ use_beekeeper <- function(
   config_filename = "_beekeeper.yml",
   rapid_filename = "_beekeeper_rapid.rds"
 ) {
+  rlang::check_dots_empty()
   .assert_is_pkg(pkg_dir)
   api_definition <- rapid::as_rapid(x)
   rapid_filename <- .write_rapid(api_definition, rapid_filename, pkg_dir)
@@ -46,7 +47,7 @@ use_beekeeper <- function(
 .write_rapid <- function(api_definition, rapid_filename, pkg_dir) {
   rapid_filename <- stbl::stabilize_character_scalar(rapid_filename)
   saveRDS(api_definition, fs::path(pkg_dir, rapid_filename))
-  usethis::use_build_ignore(rapid_filename)
+  usethis::with_project(pkg_dir, usethis::use_build_ignore(rapid_filename))
   return(rapid_filename)
 }
 
@@ -75,6 +76,6 @@ use_beekeeper <- function(
     file = fs::path(pkg_dir, config_filename)
   )
   memoise::forget(read_config)
-  usethis::use_build_ignore(config_filename)
+  usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
   return(config_filename)
 }

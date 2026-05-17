@@ -4,7 +4,7 @@ apid_url |>
   url() |>
   use_beekeeper(
     api_abbr = api_abbr,
-    pkg_path = test_path("_fixtures", api_abbr),
+    pkg_dir = test_path("_fixtures", api_abbr),
     config_filename = "_beekeeper.yml",
     rapid_filename = "_beekeeper_rapid.rds"
   )
@@ -26,7 +26,7 @@ fec_rapid <- rapid::as_rapid(fec_apid)
 fec_rapid |>
   use_beekeeper(
     api_abbr = api_abbr,
-    pkg_path = test_path("_fixtures", api_abbr),
+    pkg_dir = test_path("_fixtures", api_abbr),
     config_filename = "_beekeeper.yml",
     rapid_filename = "_beekeeper_rapid.rds"
   )
@@ -41,7 +41,7 @@ fec_rapid@paths <- rapid::as_paths({
 fec_rapid |>
   use_beekeeper(
     api_abbr = api_abbr,
-    pkg_path = test_path("_fixtures", api_abbr),
+    pkg_dir = test_path("_fixtures", api_abbr),
     config_filename = "fec_subset_beekeeper.yml",
     rapid_filename = "fec_subset_rapid.rds"
   )
@@ -62,7 +62,7 @@ trello_rapid@paths <- rapid::as_paths({
 trello_rapid |>
   use_beekeeper(
     api_abbr = api_abbr,
-    pkg_path = test_path("_fixtures", api_abbr),
+    pkg_dir = test_path("_fixtures", api_abbr),
     config_filename = "_beekeeper.yml",
     rapid_filename = "_beekeeper_rapid.rds"
   )

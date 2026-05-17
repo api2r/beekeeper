@@ -24,6 +24,7 @@
 #' @export
 #' @family config readers
 read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
+  .assert_is_pkg(pkg_dir)
   config <- yaml::read_yaml(fs::path(pkg_dir, config_filename))
   return(.stabilize_config(config))
 }
@@ -137,5 +138,6 @@ read_api_definition <- function(
   pkg_dir = ".",
   rapid_filename = read_rapid_filename(pkg_dir)
 ) {
+  .assert_is_pkg(pkg_dir)
   readRDS(fs::path(pkg_dir, rapid_filename))
 }
