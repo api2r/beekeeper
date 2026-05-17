@@ -70,10 +70,6 @@ to make them easier to import and to find.
 
   (`character(1)`) The parameter location to keep.
 
-- include_stbl:
-
-  (`logical(1)`) Whether to add `stbl` to Imports.
-
 - methods:
 
   (`character`) HTTP methods paired with endpoints.
