@@ -145,10 +145,10 @@ if (exists("%||%", envir = baseenv())) {
 
 #' @rdname dot-flatten_df
 #' @keywords internal
-S7::method(.flatten_df, class_data.frame) <- function(x) x
+S7::method(.flatten_df, class_data.frame) <- function(x, ...) x
 
 #' @rdname dot-flatten_df
 #' @keywords internal
-S7::method(.flatten_df, class_list) <- function(x) purrr::list_rbind(x)
+S7::method(.flatten_df, class_list) <- function(x, ...) purrr::list_rbind(x)
 
-S7::method(.flatten_df, NULL) <- function(x) data.frame()
+S7::method(.flatten_df, NULL) <- function(x, ...) data.frame()

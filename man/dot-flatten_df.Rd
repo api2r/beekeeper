@@ -9,10 +9,10 @@
 .flatten_df(x, ...)
 
 ## S7 method for class <data.frame>
-.flatten_df(x)
+.flatten_df(x, ...)
 
 ## S7 method for class <list>
-.flatten_df(x)
+.flatten_df(x, ...)
 }
 \arguments{
 \item{x}{(\code{data.frame}, \code{list}, or \code{NULL}) The object to flatten.}
