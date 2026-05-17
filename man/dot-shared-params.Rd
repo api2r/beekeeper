@@ -90,6 +90,9 @@ definition (rapid) file (relative to the package root).}
 
 \item{required}{(\code{logical}) Whether each parameter is required.}
 
+\item{save_security_data}{(\code{logical(1)}) Whether to save generated security
+metadata to a file and record that file in the beekeeper config.}
+
 \item{security_arg_description}{(\code{character(1)}) The argument description.}
 
 \item{security_arg_name}{(\code{character(1)}) The argument name.}
@@ -118,6 +121,9 @@ security scheme details.}
 
 \item{security_schemes}{(\code{rapid::class_security_schemes}) Security schemes
 from the API definition.}
+
+\item{security_data_filename}{(\code{character(1)} or \code{fs_path}) The path to the
+saved security metadata file (relative to the package root).}
 
 \item{tag_operations}{(\code{list}) Operations grouped under one tag.}
 

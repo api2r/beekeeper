@@ -24,9 +24,11 @@ generate_pkg <- function(
   .assert_is_pkg(pkg_dir)
   api_abbr <- stbl::stabilize_character_scalar(api_abbr)
   api_title <- stbl::stabilize_character_scalar(api_title)
+  save_security_data <- file.exists(fs::path(pkg_dir, config_filename))
   security_data <- generate_pkg_auth(
     api_abbr = api_abbr,
     security_schemes = api_definition@components@security_schemes,
+    save_security_data = save_security_data,
     config_filename = config_filename,
     pkg_dir = pkg_dir
   )
