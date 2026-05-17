@@ -37,3 +37,19 @@ test_that(".generate_shared_params() writes security params for API with securit
     shared_expected
   )
 })
+
+test_that("generate_pkg_shared_params() reads saved security data (#101)", {
+  skip_on_cran()
+  config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  shared_expected <- readLines(test_path("_fixtures", "trello", "000-shared.R"))
+
+  create_local_package()
+  writeLines(config_text, "_beekeeper.yml")
+  saveRDS(trello_api_definition, "_beekeeper_rapid.rds")
+  generate_pkg_auth()
+
+  result <- generate_pkg_shared_params()
+
+  expect_identical(basename(result), "000-shared.R")
+  expect_identical(readLines("R/000-shared.R"), shared_expected)
+})

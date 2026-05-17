@@ -24,39 +24,36 @@ generate_pkg <- function(
   .assert_is_pkg(pkg_dir)
   api_abbr <- stbl::stabilize_character_scalar(api_abbr)
   api_title <- stbl::stabilize_character_scalar(api_title)
-  config <- list(api_abbr = api_abbr, api_title = api_title)
-  security_data <- .generate_security(
-    api_abbr,
-    api_definition@components@security_schemes
+  security_data <- generate_pkg_auth(
+    api_abbr = api_abbr,
+    security_schemes = api_definition@components@security_schemes,
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
   )
-  security_arg_names <- security_data$security_arg_names %|0|% character()
-  .setup_r(pkg_dir)
-  .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
-  touched_files <- .generate_pkg_impl(config, api_definition, security_data)
-  return(invisible(touched_files))
-}
-
-#' Generate package files from prepared inputs
-#'
-#' @inheritParams .shared-params
-#' @returns (`character`, invisibly) Generated file paths.
-#' @keywords internal
-.generate_pkg_impl <- function(config, api_definition, security_data) {
-  prep_files <- .generate_prepare(config, api_definition, security_data)
-  pagination_data <- .generate_pagination()
-  path_files <- .generate_paths(
-    paths = api_definition@paths,
-    api_abbr = config$api_abbr,
-    security_data = security_data,
-    pagination_data = pagination_data,
-    base_url = api_definition@servers@url
+  shared_file_path <- generate_pkg_shared_params(
+    security_data = .without_security_file_path(security_data),
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
   )
-  shared_file_path <- .generate_shared_params(security_data)
+  prep_files <- generate_pkg_req_prepare(
+    api_abbr = api_abbr,
+    api_definition = api_definition,
+    api_title = api_title,
+    security_data = .without_security_file_path(security_data),
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
+  )
+  path_files <- generate_pkg_paths(
+    api_abbr = api_abbr,
+    api_definition = api_definition,
+    security_data = .without_security_file_path(security_data),
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
+  )
   touched_files <- c(
     shared_file_path,
     prep_files,
     security_data$security_file_path,
-    pagination_data$pagination_file_path,
     path_files
   )
   return(invisible(touched_files))

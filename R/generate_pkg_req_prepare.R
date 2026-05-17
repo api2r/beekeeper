@@ -1,3 +1,33 @@
+#' Generate request-prepare helpers
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Generated file paths.
+#' @export
+generate_pkg_req_prepare <- function(
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  api_definition = read_api_definition(
+    pkg_dir,
+    read_rapid_filename(pkg_dir, config_filename)
+  ),
+  api_title = read_api_title(pkg_dir, config_filename),
+  security_data = .read_security_data(pkg_dir, config_filename),
+  config_filename = "_beekeeper.yml",
+  pkg_dir = "."
+) {
+  .assert_is_pkg(pkg_dir)
+  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
+  api_title <- stbl::stabilize_character_scalar(api_title)
+  .use_r_directory(pkg_dir)
+  .use_testthat(pkg_dir)
+  .use_nectar(pkg_dir)
+  .use_beekeeper(pkg_dir)
+  .generate_prepare(
+    config = list(api_abbr = api_abbr, api_title = api_title),
+    api_definition = api_definition,
+    security_data = security_data
+  )
+}
+
 #' Generate prepare files
 #'
 #' @inheritParams .shared-params

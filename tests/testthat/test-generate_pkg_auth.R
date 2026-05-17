@@ -45,3 +45,33 @@ test_that(".generate_security() generates security file for trello", {
     security_expected
   )
 })
+
+test_that("generate_pkg_auth() writes auth files and saved security data (#101)", {
+  skip_on_cran()
+  config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  security_expected <- readLines(test_path("_fixtures", "trello", "020-auth.R"))
+
+  create_local_package()
+  writeLines(config_text, "_beekeeper.yml")
+  saveRDS(trello_api_definition, "_beekeeper_rapid.rds")
+
+  result <- generate_pkg_auth()
+
+  expect_identical(
+    basename(result$security_file_path),
+    "020-auth.R"
+  )
+  expect_identical(scrub_testpkg(readLines("R/020-auth.R")), security_expected)
+  expect_true(file.exists("_beekeeper_security.yml"))
+  expect_identical(
+    read_config()$security_data_filename,
+    "_beekeeper_security.yml"
+  )
+
+  saved_security_data <- .read_security_data()
+  expect_identical(
+    saved_security_data$security_arg_names,
+    result$security_arg_names
+  )
+  expect_false("security_file_path" %in% names(saved_security_data))
+})

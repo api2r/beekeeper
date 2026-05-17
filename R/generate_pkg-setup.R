@@ -34,17 +34,53 @@
 #' @returns (`NULL`, invisibly) Called for setup side effects.
 #' @keywords internal
 .setup_r <- function(pkg_dir) {
+  .use_r_directory(pkg_dir)
+  .use_testthat(pkg_dir)
+  .use_httptest2(pkg_dir)
+  .use_nectar(pkg_dir)
+  .use_beekeeper(pkg_dir)
+}
+
+#' Ensure the R directory exists
+#'
+#' @inheritParams .shared-params
+#' @returns (`NULL`, invisibly) Called for setup side effects.
+#' @keywords internal
+.use_r_directory <- function(pkg_dir) {
   usethis::with_project(
     pkg_dir,
-    {
-      usethis::use_directory("R")
-      withr::with_options(list(usethis.quiet = TRUE), usethis::use_testthat())
-      purrr::quietly(httptest2::use_httptest2)()
-    },
+    usethis::use_directory("R"),
     quiet = TRUE
   )
-  .use_package("nectar", "Imports", pkg_dir)
-  .use_package("beekeeper", "Suggests", pkg_dir)
+  invisible(NULL)
+}
+
+#' Ensure testthat is configured
+#'
+#' @inheritParams .shared-params
+#' @returns (`NULL`, invisibly) Called for setup side effects.
+#' @keywords internal
+.use_testthat <- function(pkg_dir) {
+  usethis::with_project(
+    pkg_dir,
+    withr::with_options(list(usethis.quiet = TRUE), usethis::use_testthat()),
+    quiet = TRUE
+  )
+  invisible(NULL)
+}
+
+#' Ensure httptest2 is configured
+#'
+#' @inheritParams .shared-params
+#' @returns (`NULL`, invisibly) Called for setup side effects.
+#' @keywords internal
+.use_httptest2 <- function(pkg_dir) {
+  usethis::with_project(
+    pkg_dir,
+    purrr::quietly(httptest2::use_httptest2)(),
+    quiet = TRUE
+  )
+  invisible(NULL)
 }
 
 #' Add a package dependency to the DESCRIPTION file
@@ -64,6 +100,24 @@
     quiet = TRUE
   )
   invisible(pkg)
+}
+
+#' Add nectar to imports
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`, invisibly) The package name.
+#' @keywords internal
+.use_nectar <- function(pkg_dir = ".") {
+  .use_package("nectar", "Imports", pkg_dir)
+}
+
+#' Add beekeeper to suggests
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`, invisibly) The package name.
+#' @keywords internal
+.use_beekeeper <- function(pkg_dir = ".") {
+  .use_package("beekeeper", "Suggests", pkg_dir)
 }
 
 #' Add stbl to dependencies if needed

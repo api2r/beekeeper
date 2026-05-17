@@ -53,6 +53,8 @@
 #' @param rapid_filename (`character(1)` or `fs_path`) The path to the R API
 #'   definition (rapid) file (relative to the package root).
 #' @param required (`logical`) Whether each parameter is required.
+#' @param save_security_data (`logical(1)`) Whether to save generated security
+#'   metadata to a file and record that file in the beekeeper config.
 #' @param security_arg_description (`character(1)`) The argument description.
 #' @param security_arg_name (`character(1)`) The argument name.
 #' @param security_arg_names (`character`) Security argument names to exclude
@@ -71,6 +73,8 @@
 #' @param security_scheme_type (`character(1)`) The security scheme type.
 #' @param security_schemes (`rapid::class_security_schemes`) Security schemes
 #'   from the API definition.
+#' @param security_data_filename (`character(1)` or `fs_path`) The path to the
+#'   saved security metadata file (relative to the package root).
 #' @param tag_operations (`list`) Operations grouped under one tag.
 #' @param tag_name (`character(1)`) The tag name.
 #' @param tags (`character` or `list`) Tags for all operations.

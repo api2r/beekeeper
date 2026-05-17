@@ -24,3 +24,15 @@ test_that("read_api_title() reads api titles (#99)", {
   withr::defer(memoise::forget(read_config))
   expect_equal(read_api_title(test_path("_fixtures", "guru")), "APIs.guru")
 })
+
+test_that("read_security_schemes() reads security schemes (#101)", {
+  withr::defer(memoise::forget(read_config))
+
+  result <- read_security_schemes(test_path("_fixtures", "trello"))
+
+  expect_s7_class(result, rapid::class_security_schemes)
+  expect_identical(
+    result@name,
+    trello_api_definition@components@security_schemes@name
+  )
+})
