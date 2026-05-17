@@ -5,7 +5,7 @@ Write the rapid definition file
 ## Usage
 
 ``` r
-.write_rapid(api_definition, rapid_file)
+.write_rapid(api_definition, rapid_filename, pkg_dir)
 ```
 
 ## Arguments
@@ -15,10 +15,14 @@ Write the rapid definition file
   ([`rapid::class_rapid`](https://rapid.api2r.org/reference/class_rapid.html))
   The API definition to generate package code from.
 
-- rapid_file:
+- rapid_filename:
 
   (`character(1)` or `fs_path`) The path to the R API definition (rapid)
-  file.
+  file (relative to the package root).
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

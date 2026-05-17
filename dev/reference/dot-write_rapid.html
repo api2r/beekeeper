@@ -42,7 +42,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.write_rapid</span><span class="op">(</span><span class="va">api_definition</span>, <span class="va">rapid_file</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.write_rapid</span><span class="op">(</span><span class="va">api_definition</span>, <span class="va">rapid_filename</span>, <span class="va">pkg_dir</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -54,9 +54,14 @@
 package code from.</p></dd>
 
 
-<dt id="arg-rapid-file">rapid_file<a class="anchor" aria-label="anchor" href="#arg-rapid-file"></a></dt>
+<dt id="arg-rapid-filename">rapid_filename<a class="anchor" aria-label="anchor" href="#arg-rapid-filename"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>fs_path</code>) The path to the R API
-definition (rapid) file.</p></dd>
+definition (rapid) file (relative to the package root).</p></dd>
+
+
+<dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The directory containing package
+files.</p></dd>
 
 </dl></div>
     <div class="section level2">

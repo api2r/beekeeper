@@ -10,10 +10,11 @@ packages.
 
 ``` r
 generate_pkg(
-  api_abbr = NULL,
-  api_definition = NULL,
-  api_title = NULL,
-  config_file = "_beekeeper.yml",
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  api_definition = read_api_definition(pkg_dir, read_rapid_filename(pkg_dir,
+    config_filename)),
+  api_title = read_api_title(pkg_dir, config_filename),
+  config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )
 ```
@@ -34,10 +35,10 @@ generate_pkg(
 
   (`character(1)`) The API title used in generated package files.
 
-- config_file:
+- config_filename:
 
-  (`character(1)` or `fs_path`) The path to a beekeeper yaml config
-  file.
+  (`character(1)` or `fs_path`) The path to a beekeeper yaml config file
+  (relative to the package root).
 
 - pkg_dir:
 

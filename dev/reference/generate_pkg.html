@@ -49,10 +49,11 @@ an opinionated framework for API packages.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_pkg</span><span class="op">(</span></span>
-<span>  api_abbr <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  api_definition <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  api_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  config_file <span class="op">=</span> <span class="st">"_beekeeper.yml"</span>,</span>
+<span>  api_abbr <span class="op">=</span> <span class="fu"><a href="read_api_abbr.html">read_api_abbr</a></span><span class="op">(</span><span class="va">pkg_dir</span>, <span class="va">config_filename</span><span class="op">)</span>,</span>
+<span>  api_definition <span class="op">=</span> <span class="fu"><a href="read_api_definition.html">read_api_definition</a></span><span class="op">(</span><span class="va">pkg_dir</span>, <span class="fu"><a href="read_rapid_filename.html">read_rapid_filename</a></span><span class="op">(</span><span class="va">pkg_dir</span>,</span>
+<span>    <span class="va">config_filename</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  api_title <span class="op">=</span> <span class="fu"><a href="read_api_title.html">read_api_title</a></span><span class="op">(</span><span class="va">pkg_dir</span>, <span class="va">config_filename</span><span class="op">)</span>,</span>
+<span>  config_filename <span class="op">=</span> <span class="st">"_beekeeper.yml"</span>,</span>
 <span>  pkg_dir <span class="op">=</span> <span class="st">"."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -76,9 +77,9 @@ package code from.</p></dd>
 files.</p></dd>
 
 
-<dt id="arg-config-file">config_file<a class="anchor" aria-label="anchor" href="#arg-config-file"></a></dt>
-<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The path to a beekeeper yaml
-config file.</p></dd>
+<dt id="arg-config-filename">config_filename<a class="anchor" aria-label="anchor" href="#arg-config-filename"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The path to a beekeeper
+yaml config file (relative to the package root).</p></dd>
 
 
 <dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>

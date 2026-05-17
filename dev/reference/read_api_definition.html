@@ -48,7 +48,10 @@ by <code><a href="use_beekeeper.html">use_beekeeper()</a></code> based on an Ope
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_api_definition</span><span class="op">(</span>pkg_dir <span class="op">=</span> <span class="st">"."</span>, rapid_file <span class="op">=</span> <span class="st">"_beekeeper_rapid.rds"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_api_definition</span><span class="op">(</span></span>
+<span>  pkg_dir <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  rapid_filename <span class="op">=</span> <span class="fu"><a href="read_rapid_filename.html">read_rapid_filename</a></span><span class="op">(</span><span class="va">pkg_dir</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,16 +63,36 @@ by <code><a href="use_beekeeper.html">use_beekeeper()</a></code> based on an Ope
 files.</p></dd>
 
 
-<dt id="arg-rapid-file">rapid_file<a class="anchor" aria-label="anchor" href="#arg-rapid-file"></a></dt>
+<dt id="arg-rapid-filename">rapid_filename<a class="anchor" aria-label="anchor" href="#arg-rapid-filename"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>fs_path</code>) The path to the R API
-definition (rapid) file.</p></dd>
+definition (rapid) file (relative to the package root).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>(<code><a href="https://rapid.api2r.org/reference/class_rapid.html" class="external-link">rapid::class_rapid</a></code>) The definition of the API.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other config readers:
+<code><a href="read_api_abbr.html">read_api_abbr()</a></code>,
+<code><a href="read_api_title.html">read_api_title()</a></code>,
+<code><a href="read_config.html">read_config()</a></code>,
+<code><a href="read_rapid_filename.html">read_rapid_filename()</a></code></p></div>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">api_definition</span> <span class="op">&lt;-</span> <span class="fu">read_api_definition</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  pkg_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span><span class="st">"beekeeper"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  rapid_filename <span class="op">=</span> <span class="st">"example_beekeeper_rapid.rds"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">api_definition</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rapid::rapid" "S7_object"   </span>
+<span class="r-in"><span><span class="va">api_definition</span><span class="op">@</span><span class="va">info</span><span class="op">@</span><span class="va">origin</span><span class="op">@</span><span class="va">url</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://api.apis.guru/v2/openapi.yaml"</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -44,10 +44,10 @@ to make them easier to import and to find.
 
   (`list`) Package-generation configuration data.
 
-- config_file:
+- config_filename:
 
-  (`character(1)` or `fs_path`) The path to a beekeeper yaml config
-  file.
+  (`character(1)` or `fs_path`) The path to a beekeeper yaml config file
+  (relative to the package root).
 
 - data:
 
@@ -148,10 +148,10 @@ to make them easier to import and to find.
 
   (`character(1)` or `fs_path`) The directory containing package files.
 
-- rapid_file:
+- rapid_filename:
 
   (`character(1)` or `fs_path`) The path to the R API definition (rapid)
-  file.
+  file (relative to the package root).
 
 - required:
 

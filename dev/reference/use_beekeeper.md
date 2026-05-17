@@ -12,8 +12,9 @@ use_beekeeper(
   x,
   api_abbr,
   ...,
-  config_file = "_beekeeper.yml",
-  rapid_file = "_beekeeper_rapid.rds"
+  pkg_dir = ".",
+  config_filename = "_beekeeper.yml",
+  rapid_filename = "_beekeeper_rapid.rds"
 )
 ```
 
@@ -38,19 +39,23 @@ use_beekeeper(
 
   These dots are for future extensions and must be empty.
 
-- config_file:
+- pkg_dir:
 
-  (`character(1)` or `fs_path`) The path to a beekeeper yaml config
-  file.
+  (`character(1)` or `fs_path`) The directory containing package files.
 
-- rapid_file:
+- config_filename:
+
+  (`character(1)` or `fs_path`) The path to a beekeeper yaml config file
+  (relative to the package root).
+
+- rapid_filename:
 
   (`character(1)` or `fs_path`) The path to the R API definition (rapid)
-  file.
+  file (relative to the package root).
 
 ## Value
 
 (`character(1)`, invisibly) The path to the configuration file. The
 config file is written as a side effect of this function. The rapid
-object is also written, and the path to that file is saved in the config
-file.
+object is also written, and the path to that file (relative to
+`pkg_dir`) is saved in the config file.
