@@ -14,7 +14,7 @@ generate_pkg_paths <- function(
   pkg_dir = "."
 ) {
   .assert_is_pkg(pkg_dir)
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
   .use_r_directory(pkg_dir)
   .use_testthat(pkg_dir)
   .use_httptest2(pkg_dir)

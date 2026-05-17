@@ -45,7 +45,7 @@ use_beekeeper <- function(
 #' @returns (`character(1)`) The written file path.
 #' @keywords internal
 .write_rapid <- function(api_definition, rapid_filename, pkg_dir) {
-  rapid_filename <- stbl::stabilize_character_scalar(rapid_filename)
+  rapid_filename <- stbl::stabilize_chr_scalar(rapid_filename)
   saveRDS(api_definition, fs::path(pkg_dir, rapid_filename))
   usethis::with_project(pkg_dir, usethis::use_build_ignore(rapid_filename))
   return(rapid_filename)
@@ -63,12 +63,12 @@ use_beekeeper <- function(
   config_filename,
   pkg_dir
 ) {
-  config_filename <- stbl::stabilize_character_scalar(config_filename)
+  config_filename <- stbl::stabilize_chr_scalar(config_filename)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
   yaml::write_yaml(
     list(
       api_title = api_definition@info@title,
-      api_abbr = stbl::stabilize_character_scalar(api_abbr),
+      api_abbr = stbl::stabilize_chr_scalar(api_abbr),
       api_version = api_definition@info@version,
       rapid_filename = rapid_filename,
       updated_on = as.character(update_time)

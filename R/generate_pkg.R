@@ -22,8 +22,8 @@ generate_pkg <- function(
   # if not, letting them know that this can be destructive. Skip this check in
   # tests.
   .assert_is_pkg(pkg_dir)
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
-  api_title <- stbl::stabilize_character_scalar(api_title)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
+  api_title <- stbl::stabilize_chr_scalar(api_title)
   save_security_data <- file.exists(fs::path(pkg_dir, config_filename))
   security_data <- generate_pkg_auth(
     api_abbr = api_abbr,

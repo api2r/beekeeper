@@ -15,11 +15,9 @@ generate_pkg_auth <- function(
   pkg_dir = "."
 ) {
   .assert_is_pkg(pkg_dir)
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
   save_security_data <- stbl::to_lgl_scalar(save_security_data)
-  security_data_filename <- stbl::stabilize_character_scalar(
-    security_data_filename
-  )
+  security_data_filename <- stbl::stabilize_chr_scalar(security_data_filename)
   .use_r_directory(pkg_dir)
   .use_nectar(pkg_dir)
   .use_beekeeper(pkg_dir)

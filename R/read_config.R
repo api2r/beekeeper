@@ -38,15 +38,13 @@ read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
 #' @returns (`list`) A stabilized config list.
 #' @keywords internal
 .stabilize_config <- function(config) {
-  config$api_title <- stbl::stabilize_character_scalar(config$api_title)
-  config$api_abbr <- stbl::stabilize_character_scalar(config$api_abbr)
-  config$api_version <- stbl::stabilize_character_scalar(
+  config$api_title <- stbl::stabilize_chr_scalar(config$api_title)
+  config$api_abbr <- stbl::stabilize_chr_scalar(config$api_abbr)
+  config$api_version <- stbl::stabilize_chr_scalar(
     config$api_version,
     allow_null = TRUE
   )
-  config$rapid_filename <- stbl::stabilize_character_scalar(
-    config$rapid_filename
-  )
+  config$rapid_filename <- stbl::stabilize_chr_scalar(config$rapid_filename)
   config$updated_on <- config$updated_on %&&%
     strptime(
       config$updated_on,
@@ -54,7 +52,7 @@ read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
       tz = "UTC"
     )
   if ("security_data_filename" %in% names(config)) {
-    config$security_data_filename <- stbl::stabilize_character_scalar(
+    config$security_data_filename <- stbl::stabilize_chr_scalar(
       config$security_data_filename
     )
   }

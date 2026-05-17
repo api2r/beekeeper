@@ -15,8 +15,8 @@ generate_pkg_req_prepare <- function(
   pkg_dir = "."
 ) {
   .assert_is_pkg(pkg_dir)
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
-  api_title <- stbl::stabilize_character_scalar(api_title)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
+  api_title <- stbl::stabilize_chr_scalar(api_title)
   .use_r_directory(pkg_dir)
   .use_testthat(pkg_dir)
   .use_nectar(pkg_dir)
