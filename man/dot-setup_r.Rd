@@ -4,13 +4,11 @@
 \alias{.setup_r}
 \title{Set up package directories and dependencies}
 \usage{
-.setup_r(pkg_dir, include_stbl = FALSE)
+.setup_r(pkg_dir)
 }
 \arguments{
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
-
-\item{include_stbl}{(\code{logical(1)}) Whether to add \code{stbl} to Imports.}
 }
 \value{
 (\code{NULL}, invisibly) Called for setup side effects.

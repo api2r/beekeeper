@@ -38,14 +38,25 @@ test_that(".setup_r() sets up dependencies (#16)", {
   )
 })
 
-test_that(".setup_r() can include stbl in imports (#69)", {
-  skip_on_cran()
-
-  create_local_package()
-  .setup_r(".", include_stbl = TRUE)
-
-  dependencies <- desc::desc()$get_deps()
-  imports <- dependencies$package[dependencies$type == "Imports"]
-  expect_contains(imports, "nectar")
-  expect_contains(imports, "stbl")
+test_that(".maybe_use_stbl() can add stbl to imports (#69)", {
+  local_mocked_bindings(
+    .use_package = function(pkg, type, pkg_dir) {
+      if (pkg == "stbl") {
+        expect_equal(type, "Imports")
+        expect_equal(pkg_dir, "DIR")
+      }
+      return(pkg)
+    },
+    .paths_need_stbl = function(paths, security_arg_names) {
+      expect_equal(security_arg_names, "SECURITY_ARG_NAMES")
+      return(paths == "INSTALL")
+    }
+  )
+  expect_equal(
+    .maybe_use_stbl("DIR", "INSTALL", "SECURITY_ARG_NAMES"),
+    "stbl"
+  )
+  expect_null(
+    .maybe_use_stbl("DIR", "DONOTINSTALL", "SECURITY_ARG_NAMES")
+  )
 })
