@@ -13,12 +13,11 @@
 #' @param api_title (`character(1)`) The API title used in generated package
 #'   files.
 #' @param base_path The root URL of the current project.
-#' @param base_url (`character(1)`) The base URL used in generated test
-#'   helpers.
+#' @param base_url (`character(1)`) The base URL used in generated test helpers.
 #' @param call (`environment`) The caller environment for error messages.
 #' @param config (`list`) Package-generation configuration data.
-#' @param config_file (`character(1)` or `fs_path`) The path to a beekeeper yaml
-#'   config file.
+#' @param config_filename (`character(1)` or `fs_path`) The path to a beekeeper
+#'   yaml config file (relative to the package root).
 #' @param data (`list`) Data passed to a template.
 #' @param dir (`character(1)`) The directory where a generated file should be
 #'   written.
@@ -51,8 +50,8 @@
 #'   operation identifier.
 #' @param pkg_dir (`character(1)` or `fs_path`) The directory containing package
 #'   files.
-#' @param rapid_file (`character(1)` or `fs_path`) The path to the R API
-#'   definition (rapid) file.
+#' @param rapid_filename (`character(1)` or `fs_path`) The path to the R API
+#'   definition (rapid) file (relative to the package root).
 #' @param required (`logical`) Whether each parameter is required.
 #' @param security_arg_description (`character(1)`) The argument description.
 #' @param security_arg_name (`character(1)`) The argument name.

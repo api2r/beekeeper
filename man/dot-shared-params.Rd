@@ -20,15 +20,14 @@ files.}
 
 \item{base_path}{The root URL of the current project.}
 
-\item{base_url}{(\code{character(1)}) The base URL used in generated test
-helpers.}
+\item{base_url}{(\code{character(1)}) The base URL used in generated test helpers.}
 
 \item{call}{(\code{environment}) The caller environment for error messages.}
 
 \item{config}{(\code{list}) Package-generation configuration data.}
 
-\item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
-config file.}
+\item{config_filename}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper
+yaml config file (relative to the package root).}
 
 \item{data}{(\code{list}) Data passed to a template.}
 
@@ -86,8 +85,8 @@ operation identifier.}
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
 
-\item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
-definition (rapid) file.}
+\item{rapid_filename}{(\code{character(1)} or \code{fs_path}) The path to the R API
+definition (rapid) file (relative to the package root).}
 
 \item{required}{(\code{logical}) Whether each parameter is required.}
 

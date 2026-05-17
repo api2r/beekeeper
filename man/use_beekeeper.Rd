@@ -8,8 +8,9 @@ use_beekeeper(
   x,
   api_abbr,
   ...,
-  config_file = "_beekeeper.yml",
-  rapid_file = "_beekeeper_rapid.rds"
+  pkg_dir = ".",
+  config_filename = "_beekeeper.yml",
+  rapid_filename = "_beekeeper_rapid.rds"
 )
 }
 \arguments{
@@ -23,16 +24,20 @@ the API, for use in function names and environment variables.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{config_file}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper yaml
-config file.}
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 
-\item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
-definition (rapid) file.}
+\item{config_filename}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper
+yaml config file (relative to the package root).}
+
+\item{rapid_filename}{(\code{character(1)} or \code{fs_path}) The path to the R API
+definition (rapid) file (relative to the package root).}
 }
 \value{
 (\code{character(1)}, invisibly) The path to the configuration file. The
 config file is written as a side effect of this function. The rapid object
-is also written, and the path to that file is saved in the config file.
+is also written, and the path to that file (relative to \code{pkg_dir}) is saved
+in the config file.
 }
 \description{
 Create a configuration file for a package to use beekeeper. The configuration

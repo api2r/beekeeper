@@ -4,14 +4,17 @@
 \alias{.write_rapid}
 \title{Write the rapid definition file}
 \usage{
-.write_rapid(api_definition, rapid_file)
+.write_rapid(api_definition, rapid_filename, pkg_dir)
 }
 \arguments{
 \item{api_definition}{(\code{rapid::class_rapid}) The API definition to generate
 package code from.}
 
-\item{rapid_file}{(\code{character(1)} or \code{fs_path}) The path to the R API
-definition (rapid) file.}
+\item{rapid_filename}{(\code{character(1)} or \code{fs_path}) The path to the R API
+definition (rapid) file (relative to the package root).}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character(1)}) The written file path.

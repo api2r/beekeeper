@@ -35,8 +35,8 @@ scrub_updated <- function(input) {
 
 scrub_rapid_file_location <- function(input) {
   sub(
-    "rapid_file: .*$",
-    "rapid_file: RAPID_FILE_PATH",
+    "rapid_filename: .*$",
+    "rapid_filename: RAPID_FILE_PATH",
     input
   )
 }
@@ -104,15 +104,20 @@ guru_config <- read_config(pkg_dir = test_path("_fixtures", "guru"))
 guru_api_definition <- read_api_definition(
   pkg_dir = test_path("_fixtures", "guru")
 )
+memoise::forget(read_config)
+
 trello_config <- read_config(pkg_dir = test_path("_fixtures", "trello"))
 trello_api_definition <- read_api_definition(
   pkg_dir = test_path("_fixtures", "trello")
 )
+memoise::forget(read_config)
+
 fec_config <- read_config(
   pkg_dir = test_path("_fixtures", "fec"),
-  config_file = "fec_subset_beekeeper.yml"
+  config_filename = "fec_subset_beekeeper.yml"
 )
 fec_api_definition <- read_api_definition(
   pkg_dir = test_path("_fixtures", "fec"),
-  rapid_file = "fec_subset_rapid.rds"
+  rapid_filename = "fec_subset_rapid.rds"
 )
+memoise::forget(read_config)
