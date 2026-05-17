@@ -8,10 +8,10 @@ Flatten a data frame or list of data frames
 .flatten_df(x, ...)
 
 ## S7 method for class <data.frame>
-.flatten_df(x)
+.flatten_df(x, ...)
 
 ## S7 method for class <list>
-.flatten_df(x)
+.flatten_df(x, ...)
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ Flatten a data frame or list of data frames
 
 - ...:
 
-  Not used.
+  These dots are for future extensions and must be empty.
 
 ## Value
 
