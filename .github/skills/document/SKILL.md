@@ -66,19 +66,19 @@ When a parameter takes one of a fixed set of values, document them with a bullet
 
 ## Returns
 
-Use `@returns` (not `@return`). Include a type when it's informative:
+Use `@returns` (not `@return`). Include a type or types:
 
 ```r
-#' @returns A summary tibble.
+#' @returns (`tibble`) A summary tibble.
 #' @returns (`logical(1)`) `TRUE` if `x` is a valid record.
-#' @returns Either a tibble or a list, depending on the input.
-#' @returns `NULL` (invisibly).
+#' @returns (`tibble` or `list`) Either a tibble or a list, depending on the input.
+#' @returns (`NULL`, invisibly) Called for warning side effect.
 ```
 
 **Structured returns with columns:**
 
 ```r
-#' @returns A [tibble::tibble()] with columns:
+#' @returns (`tibble`) A [tibble::tibble()] with columns:
 #'   - `name`: Record name.
 #'   - `value`: Numeric value.
 #'   - `status`: Status (`"active"` or `"inactive"`).
@@ -94,7 +94,7 @@ Use `@returns` (not `@return`). Include a type when it's informative:
 #' @param param_name (`TYPE`) Description.
 #' @inheritParams .shared-params
 #'
-#' @returns Description of return value.
+#' @returns (`TYPE`) Description of return value.
 #' @seealso [related_function()]
 #' @export
 #'
@@ -132,7 +132,7 @@ Use `@rdname` to group related functions under one help page. This applies to:
 #'
 #' @param x (`any`) The object to format.
 #' @param ... Additional arguments passed to methods.
-#' @returns A formatted character string.
+#' @returns (`character(1)`) A formatted summary string.
 #' @keywords internal
 .format_summary <- function(x, ...) {
   UseMethod(".format_summary")
@@ -152,7 +152,7 @@ Use `@rdname` to group related functions under one help page. This applies to:
 #'
 #' @param x (`TYPE`) Description.
 #' @param ... Additional arguments (ignored).
-#' @returns Description.
+#' @returns (`TYPE`) Description.
 #' @exportS3Method pkg::generic
 method.class <- function(x, ...) { ... }
 ```
