@@ -4,13 +4,14 @@
 \alias{.is_pkg}
 \title{Check whether we're in a package}
 \usage{
-.is_pkg(base_path = usethis::proj_get())
+.is_pkg(pkg_dir = usethis::proj_get())
 }
 \arguments{
-\item{base_path}{The root URL of the current project.}
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
-\code{TRUE} if the project is a package, \code{FALSE} if not.
+(\code{logical(1)}) \code{TRUE} if the project is a package, \code{FALSE} if not.
 }
 \description{
 Inspired by usethis:::is_package.

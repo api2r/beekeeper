@@ -24,7 +24,7 @@ test_search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_
 }
 
 #' @rdname test_search_things
-#' @returns `req_test_search_things()`: A `httr2_request` request object.
+#' @returns `req_test_search_things()`: (`httr2_request`) A [httr2::request()] object.
 req_test_search_things <- function(x_auth_token, session_id, q) {
   x_auth_token <- stbl::to_chr_scalar(x_auth_token)
   session_id <- stbl::to_chr_scalar(session_id)

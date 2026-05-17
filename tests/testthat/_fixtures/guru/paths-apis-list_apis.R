@@ -21,7 +21,7 @@ guru_list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
 }
 
 #' @rdname guru_list_apis
-#' @returns `req_guru_list_apis()`: A `httr2_request` request object.
+#' @returns `req_guru_list_apis()`: (`httr2_request`) A [httr2::request()] object.
 req_guru_list_apis <- function() {
   guru_req_prepare(
     path = "/list.json",

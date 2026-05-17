@@ -10,7 +10,7 @@
 \item{to_collapse}{(\code{character}) The character vector to collapse.}
 }
 \value{
-A length-1, comma-separated glue object with newlines.
+(\code{glue}) A length-1, comma-separated glue object with newlines.
 }
 \description{
 Collapse to a comma-separated vertical string

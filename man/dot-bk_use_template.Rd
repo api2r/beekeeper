@@ -13,18 +13,20 @@
 )
 }
 \arguments{
-\item{template}{The name of the template.}
+\item{template}{(\code{character(1)}) The template file name to render.}
 
-\item{data}{A list of variables to apply to the template.}
+\item{data}{(\code{list}) Data passed to a template.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{target}{The name of the file to create.}
+\item{target}{(\code{character(1)}) The name of the generated file.}
 
-\item{dir}{The directory where the file should be created.}
+\item{dir}{(\code{character(1)}) The directory where a generated file should be
+written.}
 }
 \value{
-The path to the generated or updated file, invisibly.
+(\code{character(1)}, invisibly) The path to the generated or updated
+file.
 }
 \description{
 Use a template in this package

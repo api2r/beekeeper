@@ -32,7 +32,7 @@ evaluate variables in error messages.}
 \code{\link[rlang:abort]{rlang::abort()}}.}
 }
 \value{
-Does not return.
+(\code{NULL}) Does not return.
 }
 \description{
 Signal a package-scoped error

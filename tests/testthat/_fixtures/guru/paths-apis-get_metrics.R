@@ -21,7 +21,7 @@ guru_get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
 }
 
 #' @rdname guru_get_metrics
-#' @returns `req_guru_get_metrics()`: A `httr2_request` request object.
+#' @returns `req_guru_get_metrics()`: (`httr2_request`) A [httr2::request()] object.
 req_guru_get_metrics <- function() {
   guru_req_prepare(
     path = "/metrics.json",

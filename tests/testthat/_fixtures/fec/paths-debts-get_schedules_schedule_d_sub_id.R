@@ -49,7 +49,7 @@ fec_get_schedules_schedule_d_sub_id <- function(
 }
 
 #' @rdname fec_get_schedules_schedule_d_sub_id
-#' @returns `req_fec_get_schedules_schedule_d_sub_id()`: A `httr2_request` request object.
+#' @returns `req_fec_get_schedules_schedule_d_sub_id()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_schedules_schedule_d_sub_id <- function(
   sort_nulls_last,
   per_page,

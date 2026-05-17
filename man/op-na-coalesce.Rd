@@ -8,14 +8,14 @@
 x \%|\% y
 }
 \arguments{
-\item{x}{(\code{any}) A vector that may contain \code{NA} elements.}
+\item{x}{(\code{any}) The object to check or coerce.}
 
 \item{y}{(\code{any}, coercible to the same class as \code{x}) A value or vector to
 replace \code{NA} elements in \code{x}. Will be recycled to the same length as \code{x}.}
 }
 \value{
-A vector of the same length as \code{x}, where each \code{NA} element in \code{x}
-is replaced by the corresponding element in \code{y}.
+(\code{vector}) A vector of the same length as \code{x}, where each \code{NA}
+element in \code{x} is replaced by the corresponding element in \code{y}.
 }
 \description{
 Default value for NA elements in vectors

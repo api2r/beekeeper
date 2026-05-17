@@ -4,13 +4,14 @@
 \alias{.assert_is_pkg}
 \title{Error if not in package}
 \usage{
-.assert_is_pkg(base_path = usethis::proj_get())
+.assert_is_pkg(pkg_dir = usethis::proj_get())
 }
 \arguments{
-\item{base_path}{The root URL of the current project.}
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
-\code{NULL}, invisibly.
+(\code{NULL}, invisibly) Called for error side effect.
 }
 \description{
 Error if not in package

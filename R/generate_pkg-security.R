@@ -1,3 +1,8 @@
+#' Generate security files and metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Generated security metadata.
+#' @keywords internal
 .generate_security <- function(api_abbr, security_schemes) {
   security_data <- as_bk_data(security_schemes)
   if (length(security_data)) {
@@ -13,6 +18,11 @@
   return(security_data)
 }
 
+#' Generate a security argument signature
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) A function-signature fragment.
+#' @keywords internal
 .generate_security_signature <- function(security_arg_names, api_abbr) {
   env_vars <- toupper(glue::glue("{api_abbr}_{security_arg_names}"))
   return(
@@ -22,7 +32,9 @@
   )
 }
 
-S7::method(as_bk_data, class_security_schemes) <- function(x) {
+#' @rdname as_bk_data
+#' @keywords internal
+S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
   if (!length(x)) {
     return(list())
   }
@@ -30,6 +42,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   return(.security_scheme_collection_finalize(security_scheme_collection))
 }
 
+#' Collect security scheme metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Security scheme metadata.
+#' @keywords internal
 .security_schemes_collect <- function(security_schemes) {
   purrr::pmap(
     list(
@@ -42,6 +59,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   )
 }
 
+#' Convert one security scheme to a list
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) One security scheme description.
+#' @keywords internal
 .security_scheme_rotate <- function(
   security_scheme_name,
   security_scheme_details,
@@ -61,6 +83,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   return(security_scheme_list)
 }
 
+#' Fill a missing security scheme description
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) A security scheme description.
+#' @keywords internal
 .security_scheme_description_fill <- function(
   security_scheme_description,
   security_scheme_type
@@ -83,6 +110,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   "Check the API documentation for details."
 )
 
+#' Finalize collected security scheme data
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Finalized security metadata.
+#' @keywords internal
 .security_scheme_collection_finalize <- function(security_scheme_collection) {
   security_scheme_data <- c(
     list(
@@ -94,6 +126,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   return(security_scheme_data)
 }
 
+#' Compile security argument metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Compiled security argument values.
+#' @keywords internal
 .security_args_compile <- function(security_scheme_collection) {
   security_args <- sort(unique(purrr::map_chr(
     security_scheme_collection,
@@ -112,6 +149,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   ))
 }
 
+#' Build security argument help entries
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Template-ready parameter help entries.
+#' @keywords internal
 .generate_security_arg_help <- function(
   security_scheme_collection,
   security_args
@@ -130,6 +172,11 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   )
 }
 
+#' Format one security argument help entry
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) A named list with `name` and `description`.
+#' @keywords internal
 .security_arg_description_clean <- function(
   security_arg_description,
   security_arg_name
@@ -137,11 +184,15 @@ S7::method(as_bk_data, class_security_schemes) <- function(x) {
   list(name = security_arg_name, description = security_arg_description)
 }
 
-S7::method(as_bk_data, class_security_scheme_details) <- function(x) {
+#' @rdname as_bk_data
+#' @keywords internal
+S7::method(as_bk_data, class_security_scheme_details) <- function(x, ...) {
   purrr::map(x, as_bk_data)
 }
 
-S7::method(as_bk_data, class_api_key_security_scheme) <- function(x) {
+#' @rdname as_bk_data
+#' @keywords internal
+S7::method(as_bk_data, class_api_key_security_scheme) <- function(x, ...) {
   if (length(x)) {
     return(
       list(

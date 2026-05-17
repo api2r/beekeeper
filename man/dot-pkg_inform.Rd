@@ -32,7 +32,7 @@ evaluate variables in error messages.}
 \code{\link[rlang:abort]{rlang::inform()}}.}
 }
 \value{
-\code{NULL}, invisibly (called for message side effect).
+(\code{NULL}, invisibly) Called for message side effect.
 }
 \description{
 Signal a package-scoped message

@@ -2,17 +2,27 @@
 % Please edit documentation in R/utils.R
 \name{.flatten_df}
 \alias{.flatten_df}
+\alias{.flatten_df,data.frame-method}
+\alias{.flatten_df,list-method}
 \title{Flatten a data frame or list of data frames}
 \usage{
+.flatten_df(x, ...)
+
+## S7 method for class <data.frame>
+.flatten_df(x, ...)
+
+## S7 method for class <list>
 .flatten_df(x, ...)
 }
 \arguments{
 \item{x}{(\code{data.frame}, \code{list}, or \code{NULL}) The object to flatten.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
-A single \code{data.frame}. Lists of data frames are flattened with
-\code{\link[purrr:list_rbind]{purrr::list_rbind()}}, and \code{NULL} values are converted to empty data
-frames.
+(\code{data.frame}) A single data frame. Lists of data frames are
+flattened with \code{\link[purrr:list_rbind]{purrr::list_rbind()}}, and \code{NULL} values are converted to
+empty data frames.
 }
 \description{
 Flatten a data frame or list of data frames

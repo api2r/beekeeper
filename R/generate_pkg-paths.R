@@ -1,3 +1,8 @@
+#' Generate files for API paths
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Generated file paths.
+#' @keywords internal
 .generate_paths <- function(
   paths,
   api_abbr,
@@ -26,7 +31,9 @@
 
 # reshape data -----------------------------------------------------------------
 
-S7::method(as_bk_data, class_paths) <- function(x) {
+#' @rdname as_bk_data
+#' @keywords internal
+S7::method(as_bk_data, class_paths) <- function(x, ...) {
   if (!length(x)) {
     return(list())
   }
@@ -36,6 +43,12 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   result
 }
 
+#' Convert API paths to an operations data frame
+#'
+#' @inheritParams .shared-params
+#' @returns (`tibble`) A [tibble::tibble()] with one row per non-deprecated
+#'   operation.
+#' @keywords internal
 .paths_to_clean_df <- function(paths) {
   operations_df <- tibble::as_tibble(paths) |>
     tidyr::unnest("operations")
@@ -70,22 +83,42 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 ### fill data ------------------------------------------------------------------
 
+#' Fill missing operation tags
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Snake-case tag names.
+#' @keywords internal
 .paths_fill_tags <- function(tags) {
   tags[lengths(tags) == 0] <- "general"
   tags <- purrr::map_chr(tags, 1)
   return(.to_snake(tags))
 }
 
+#' Fill missing operation identifiers
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Operation identifiers.
+#' @keywords internal
 .paths_fill_operation_id <- function(operation_ids, endpoints, methods) {
   .to_snake(operation_ids) %|% glue::glue("{methods}_{.to_snake(endpoints)}")
 }
 
+#' Fill missing operation summaries
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Human-readable operation summaries.
+#' @keywords internal
 .paths_fill_summary <- function(operation_summaries, endpoints, methods) {
   endpoints_spaced <- stringr::str_replace_all(.to_snake(endpoints), "_", " ")
   stringr::str_squish(operation_summaries) %|%
     stringr::str_to_sentence(glue::glue("{methods} {endpoints_spaced}"))
 }
 
+#' Fill missing operation descriptions
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Operation descriptions.
+#' @keywords internal
 .paths_fill_descriptions <- function(
   operation_descriptions,
   operation_summaries
@@ -101,6 +134,12 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 ### create template data -------------------------------------------------------
 
+#' Convert one operation row to template data
+#'
+#' @param ... Additional columns, ignored.
+#' @inheritParams .shared-params
+#' @returns (`list`) One operation description.
+#' @keywords internal
 .path_row_to_list <- function(
   operation_id,
   endpoint,
@@ -125,6 +164,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+#' Prepare parameter metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`data.frame`) Prepared parameter metadata.
+#' @keywords internal
 .prepare_params_df <- function(params_df) {
   params_df <- .flatten_params_df(params_df)
   if (nrow(params_df)) {
@@ -144,6 +188,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(params_df)
 }
 
+#' Flatten parameter metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`data.frame`) Flattened parameter metadata.
+#' @keywords internal
 .flatten_params_df <- function(params_df) {
   params_df <- .flatten_df(params_df)
   if (nrow(params_df)) {
@@ -152,6 +201,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(params_df)
 }
 
+#' Convert parameter rows to a list
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Parameter metadata entries.
+#' @keywords internal
 .params_to_list <- function(params_df) {
   if (!nrow(params_df)) {
     return(list())
@@ -169,6 +223,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+#' Extract parameter names by location
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Parameter names for the requested location.
+#' @keywords internal
 .extract_params_by_location <- function(params_df, filter_in) {
   if (!nrow(params_df)) {
     return(character())
@@ -176,6 +235,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(params_df$name[params_df$`in` == filter_in])
 }
 
+#' Describe parameter classes
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Display strings for parameter classes.
+#' @keywords internal
 .describe_param_classes <- function(params_schema, allow_empty, required) {
   # TODO: Use enum and/or description when available.
   #
@@ -197,6 +261,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(.compile_param_class_descriptions(type, allow_empty, required))
 }
 
+#' Map parameter schemas to `stbl` helpers
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Coercion helper names.
+#' @keywords internal
 .param_schema_to_r <- function(params_schema) {
   type <- dplyr::left_join(
     dplyr::select(params_schema, "type", "format"),
@@ -206,6 +275,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   type$to_r
 }
 
+#' Compile parameter class descriptions
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Parameter class descriptions.
+#' @keywords internal
 .compile_param_class_descriptions <- function(type, allow_empty, required) {
   r_class_descriptions <- glue::glue("length-1 `{type$r_class_name}`") |>
     .paste0_if(
@@ -220,6 +294,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(r_class_descriptions)
 }
 
+#' Convert a path to a request argument
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) Code for the request path argument.
+#' @keywords internal
 .path_as_arg <- function(path, params_df) {
   if (!nrow(params_df) || !any(params_df$`in` == "path")) {
     return(glue::glue('"{path}"'))
@@ -231,6 +310,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
 
 # generate files ---------------------------------------------------------------
 
+#' Generate files for all operations
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Generated file paths.
+#' @keywords internal
 .generate_paths_files <- function(
   paths_by_operation,
   api_abbr,
@@ -280,14 +364,29 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   return(c(r_files, test_files))
 }
 
+#' Convert parameters to a signature string
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) A comma-separated parameter string.
+#' @keywords internal
 .params_to_args <- function(params) {
   .collapse_comma(purrr::map_chr(params, "name")) %|a|% character()
 }
 
+#' Convert parameters to named arguments
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) A comma-separated named-argument string.
+#' @keywords internal
 .params_to_named_args <- function(params) {
   .collapse_comma_self_equal(purrr::map_chr(params, "name")) %|a|% character()
 }
 
+#' Remove security parameters
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Non-security parameters.
+#' @keywords internal
 .remove_security_args <- function(params, security_args) {
   purrr::discard(
     params,
@@ -297,10 +396,20 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+#' Prepare parameter arguments
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) A comma-separated named-argument string.
+#' @keywords internal
 .prep_param_args <- function(params, security_args) {
   .collapse_comma_self_equal(setdiff(params, security_args)) %|a|% character()
 }
 
+#' Convert parameters to validation metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Validation metadata.
+#' @keywords internal
 .params_to_validations <- function(params) {
   checks <- purrr::keep(
     params,
@@ -318,6 +427,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+#' Determine whether generated paths need `stbl`
+#'
+#' @inheritParams .shared-params
+#' @returns (`logical(1)`) `TRUE` if any path needs `stbl`.
+#' @keywords internal
 .paths_need_stbl <- function(paths, security_arg_names = character()) {
   ops <- as_bk_data(paths)
   if (!length(ops)) {
@@ -329,6 +443,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   }))
 }
 
+#' Generate one operation file
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated file path.
+#' @keywords internal
 .generate_paths_file <- function(
   path_operation,
   operation_id,
@@ -352,6 +471,11 @@ S7::method(as_bk_data, class_paths) <- function(x) {
   )
 }
 
+#' Generate one tag-level test file
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated test file path.
+#' @keywords internal
 .generate_paths_test_file <- function(tag_operations, tag_name, api_abbr) {
   paths_list <- unname(purrr::imap(tag_operations, function(op, op_id) {
     list(

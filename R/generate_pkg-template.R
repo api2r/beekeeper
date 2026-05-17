@@ -1,12 +1,9 @@
 #' Use a template in this package
 #'
+#' @inheritParams .shared-params
 #' @inheritParams rlang::args_dots_empty
-#' @param template The name of the template.
-#' @param data A list of variables to apply to the template.
-#' @param target The name of the file to create.
-#' @param dir The directory where the file should be created.
-#'
-#' @returns The path to the generated or updated file, invisibly.
+#' @returns (`character(1)`, invisibly) The path to the generated or updated
+#'   file.
 #' @keywords internal
 .bk_use_template <- function(
   template,
@@ -21,6 +18,11 @@
   return(invisible(target))
 }
 
+#' Write a rendered template to disk
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The generated file path.
+#' @keywords internal
 .bk_use_template_impl <- function(template, data, target, dir) {
   target <- usethis::proj_path(dir, target)
   save_as <- fs::path_rel(target, usethis::proj_path())

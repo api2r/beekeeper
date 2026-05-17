@@ -1,8 +1,7 @@
 #' Default value for `NULL`
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for `x`.
-#' @returns If `x` is `NULL`, will return `y`; otherwise returns `x`.
+#' @inheritParams .shared-params
+#' @returns (`any`) If `x` is `NULL`, returns `y`; otherwise returns `x`.
 #' @name op-null-default
 #' @family empty operators
 #' @keywords internal
@@ -17,9 +16,8 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for non-`NULL`
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for non-`NULL` `x`.
-#' @returns If `x` is `NULL`, will return `x`; otherwise returns `y`.
+#' @inheritParams .shared-params
+#' @returns (`any`) If `x` is `NULL`, returns `x`; otherwise returns `y`.
 #' @name op-null-continuation
 #' @family empty operators
 #' @keywords internal
@@ -29,9 +27,8 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for length 0
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`any`) Default value for `x`.
-#' @returns If `!length(x)`, will return `x`; otherwise returns `y`.
+#' @inheritParams .shared-params
+#' @returns (`any`) If `!length(x)`, returns `x`; otherwise returns `y`.
 #' @keywords internal
 #' @name op-lengthless-default
 #' @family empty operators
@@ -42,9 +39,9 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for empty strings
 #'
-#' @param x (`any`) Object to check.
-#' @param y (`character`) Default value for `x`.
-#' @returns If `!nzchar(x)`, will return `y`; otherwise returns `x`.
+#' @param y (`character`) The default value.
+#' @inheritParams .shared-params
+#' @returns (`character`) If `!nzchar(x)`, returns `y`; otherwise returns `x`.
 #' @keywords internal
 #' @name op-no-char-default
 #' @family empty operators
@@ -59,11 +56,11 @@ if (exists("%||%", envir = baseenv())) {
 
 #' Default value for NA elements in vectors
 #'
-#' @param x (`any`) A vector that may contain `NA` elements.
 #' @param y (`any`, coercible to the same class as `x`) A value or vector to
 #'   replace `NA` elements in `x`. Will be recycled to the same length as `x`.
-#' @returns A vector of the same length as `x`, where each `NA` element in `x`
-#'   is replaced by the corresponding element in `y`.
+#' @inheritParams .shared-params
+#' @returns (`vector`) A vector of the same length as `x`, where each `NA`
+#'   element in `x` is replaced by the corresponding element in `y`.
 #' @keywords internal
 #' @name op-na-coalesce
 #' @family empty operators
@@ -75,7 +72,7 @@ if (exists("%||%", envir = baseenv())) {
 #' Collapse to a comma-separated string
 #'
 #' @inheritParams .shared-params
-#' @returns A length-1, comma-separated glue object.
+#' @returns (`glue`) A length-1, comma-separated glue object.
 #' @keywords internal
 .collapse_comma <- function(to_collapse) {
   glue::glue_collapse(to_collapse, sep = ", ")
@@ -84,7 +81,7 @@ if (exists("%||%", envir = baseenv())) {
 #' Collapse to a comma-separated vertical string
 #'
 #' @inheritParams .shared-params
-#' @returns A length-1, comma-separated glue object with newlines.
+#' @returns (`glue`) A length-1, comma-separated glue object with newlines.
 #' @keywords internal
 .collapse_comma_newline <- function(to_collapse) {
   glue::glue_collapse(to_collapse, sep = ",\n")
@@ -93,7 +90,7 @@ if (exists("%||%", envir = baseenv())) {
 #' Collapse to a comma-separated quoted string
 #'
 #' @inheritParams .shared-params
-#' @returns A length-1, comma-separated glue object.
+#' @returns (`glue`) A length-1, comma-separated glue object.
 #' @keywords internal
 .collapse_quote_comma <- function(to_collapse) {
   stringr::str_flatten_comma(paste0('"', to_collapse, '"'))
@@ -102,20 +99,36 @@ if (exists("%||%", envir = baseenv())) {
 #' Collapse to a comma-separated x = x string
 #'
 #' @inheritParams .shared-params
-#' @returns A length-1, comma-separated glue object.
+#' @returns (`glue`) A length-1, comma-separated glue object.
 #' @keywords internal
-.collapse_comma_self_equal <- function(x) {
-  .collapse_comma(glue::glue("{x} = {x}"))
+.collapse_comma_self_equal <- function(to_collapse) {
+  .collapse_comma(glue::glue("{to_collapse} = {to_collapse}"))
 }
 
+#' Append text conditionally
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) The updated text.
+#' @keywords internal
 .paste0_if <- function(original, test, addition) {
   ifelse(test, paste0(original, addition), original)
 }
 
+#' Interpolate glue with pipe braces
+#'
+#' @param ... Expressions passed to [glue::glue()].
+#' @param .envir (`environment`) The environment in which to evaluate `...`.
+#' @returns (`glue`) A glue object.
+#' @keywords internal
 .glue_pipe_brace <- function(..., .envir = rlang::caller_env()) {
   glue::glue(..., .open = "|{", .close = "}|", .envir = .envir)
 }
 
+#' Convert text to snake case
+#'
+#' @param x (`character`) Text to convert.
+#' @returns (`character`) Snake-case text.
+#' @keywords internal
 .to_snake <- function(x) {
   snakecase::to_snake_case(x, parsing_option = 3)
 }
@@ -123,14 +136,19 @@ if (exists("%||%", envir = baseenv())) {
 #' Flatten a data frame or list of data frames
 #'
 #' @param x (`data.frame`, `list`, or `NULL`) The object to flatten.
-#' @returns A single `data.frame`. Lists of data frames are flattened with
-#'   [purrr::list_rbind()], and `NULL` values are converted to empty data
-#'   frames.
+#' @inheritParams rlang::args_dots_empty
+#' @returns (`data.frame`) A single data frame. Lists of data frames are
+#'   flattened with [purrr::list_rbind()], and `NULL` values are converted to
+#'   empty data frames.
 #' @keywords internal
 .flatten_df <- S7::new_generic(".flatten_df", dispatch_args = "x")
 
-S7::method(.flatten_df, class_data.frame) <- function(x) x
+#' @rdname dot-flatten_df
+#' @keywords internal
+S7::method(.flatten_df, class_data.frame) <- function(x, ...) x
 
-S7::method(.flatten_df, class_list) <- function(x) purrr::list_rbind(x)
+#' @rdname dot-flatten_df
+#' @keywords internal
+S7::method(.flatten_df, class_list) <- function(x, ...) purrr::list_rbind(x)
 
-S7::method(.flatten_df, NULL) <- function(x) data.frame()
+S7::method(.flatten_df, NULL) <- function(x, ...) data.frame()

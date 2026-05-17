@@ -23,7 +23,7 @@ guru_get_api <- function(provider, api, max_reqs = Inf, max_tries_per_req = 3) {
 }
 
 #' @rdname guru_get_api
-#' @returns `req_guru_get_api()`: A `httr2_request` request object.
+#' @returns `req_guru_get_api()`: (`httr2_request`) A [httr2::request()] object.
 req_guru_get_api <- function(provider, api) {
   provider <- stbl::to_chr_scalar(provider)
   api <- stbl::to_chr_scalar(api)

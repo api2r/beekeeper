@@ -97,7 +97,7 @@ fec_get_schedules_schedule_d <- function(
 }
 
 #' @rdname fec_get_schedules_schedule_d
-#' @returns `req_fec_get_schedules_schedule_d()`: A `httr2_request` request object.
+#' @returns `req_fec_get_schedules_schedule_d()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_schedules_schedule_d <- function(
   creditor_debtor_name,
   max_image_number,

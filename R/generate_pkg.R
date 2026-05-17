@@ -6,8 +6,7 @@
 #'
 #' @inheritParams .shared-params
 #'
-#' @returns A character vector of paths to files that were added or updated,
-#'   invisibly.
+#' @returns (`character`, invisibly) Paths to files that were added or updated.
 #' @export
 generate_pkg <- function(
   api_abbr = NULL,
@@ -41,6 +40,11 @@ generate_pkg <- function(
   return(invisible(touched_files))
 }
 
+#' Generate package files from prepared inputs
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`, invisibly) Generated file paths.
+#' @keywords internal
 .generate_pkg_impl <- function(config, api_definition, security_data) {
   prep_files <- .generate_prepare(config, api_definition, security_data)
   pagination_data <- .generate_pagination()
