@@ -72,7 +72,7 @@
 #' @returns (`character(1)` or `NULL`, invisibly) "stbl" if stbl is used, `NULL`
 #'   otherwise.
 #' @keywords internal
-.maybe_setup_stbl <- function(pkg_dir, paths, security_arg_names) {
+.maybe_use_stbl <- function(pkg_dir, paths, security_arg_names) {
   if (.paths_need_stbl(paths, security_arg_names)) {
     .use_package("stbl", "Imports", pkg_dir)
   }

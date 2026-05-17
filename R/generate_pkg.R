@@ -33,7 +33,7 @@ generate_pkg <- function(
   )
   security_arg_names <- security_data$security_arg_names %|0|% character()
   .setup_r(pkg_dir)
-  .maybe_setup_stbl(pkg_dir, api_definition@paths, security_arg_names)
+  .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
   touched_files <- .generate_pkg_impl(config, api_definition, security_data)
   return(invisible(touched_files))
 }

@@ -38,7 +38,7 @@ test_that(".setup_r() sets up dependencies (#16)", {
   )
 })
 
-test_that(".maybe_setup_stbl() can include stbl in imports (#69)", {
+test_that(".maybe_use_stbl() can add stbl to imports (#69)", {
   local_mocked_bindings(
     .use_package = function(pkg, type, pkg_dir) {
       if (pkg == "stbl") {
@@ -53,10 +53,10 @@ test_that(".maybe_setup_stbl() can include stbl in imports (#69)", {
     }
   )
   expect_equal(
-    .maybe_setup_stbl("DIR", "INSTALL", "SECURITY_ARG_NAMES"),
+    .maybe_use_stbl("DIR", "INSTALL", "SECURITY_ARG_NAMES"),
     "stbl"
   )
   expect_null(
-    .maybe_setup_stbl("DIR", "DONOTINSTALL", "SECURITY_ARG_NAMES")
+    .maybe_use_stbl("DIR", "DONOTINSTALL", "SECURITY_ARG_NAMES")
   )
 })
