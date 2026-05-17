@@ -23,7 +23,7 @@ fec_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"
 }
 
 #' @rdname fec_get_names_audit_candidates
-#' @returns `req_fec_get_names_audit_candidates()`: A `httr2_request` request object.
+#' @returns `req_fec_get_names_audit_candidates()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY")) {
   fec_req_prepare(
     path = "/names/audit_candidates/",

@@ -24,7 +24,7 @@ token = Sys.getenv("TRELLO_TOKEN"), max_reqs = Inf, max_tries_per_req = 3) {
 }
 
 #' @rdname trello_add_boards
-#' @returns `req_trello_add_boards()`: A `httr2_request` request object.
+#' @returns `req_trello_add_boards()`: (`httr2_request`) A [httr2::request()] object.
 req_trello_add_boards <- function(key = Sys.getenv("TRELLO_KEY"),
 token = Sys.getenv("TRELLO_TOKEN")) {
   trello_req_prepare(

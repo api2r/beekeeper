@@ -21,7 +21,7 @@ guru_get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
 }
 
 #' @rdname guru_get_providers
-#' @returns `req_guru_get_providers()`: A `httr2_request` request object.
+#' @returns `req_guru_get_providers()`: (`httr2_request`) A [httr2::request()] object.
 req_guru_get_providers <- function() {
   guru_req_prepare(
     path = "/providers.json",

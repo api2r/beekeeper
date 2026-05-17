@@ -29,7 +29,7 @@ fec_get_names_audit_committees <- function(
 }
 
 #' @rdname fec_get_names_audit_committees
-#' @returns `req_fec_get_names_audit_committees()`: A `httr2_request` request object.
+#' @returns `req_fec_get_names_audit_committees()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_names_audit_committees <- function(
   q,
   api_key = Sys.getenv("FEC_API_KEY")

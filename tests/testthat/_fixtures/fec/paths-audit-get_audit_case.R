@@ -85,7 +85,7 @@ fec_get_audit_case <- function(
 }
 
 #' @rdname fec_get_audit_case
-#' @returns `req_fec_get_audit_case()`: A `httr2_request` request object.
+#' @returns `req_fec_get_audit_case()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_audit_case <- function(
   audit_case_id,
   cycle,

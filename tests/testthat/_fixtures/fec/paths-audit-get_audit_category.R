@@ -52,7 +52,7 @@ fec_get_audit_category <- function(
 }
 
 #' @rdname fec_get_audit_category
-#' @returns `req_fec_get_audit_category()`: A `httr2_request` request object.
+#' @returns `req_fec_get_audit_category()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_audit_category <- function(
   sort_nulls_last,
   page,

@@ -154,7 +154,7 @@ fec_get_legal_search <- function(
 }
 
 #' @rdname fec_get_legal_search
-#' @returns `req_fec_get_legal_search()`: A `httr2_request` request object.
+#' @returns `req_fec_get_legal_search()`: (`httr2_request`) A [httr2::request()] object.
 req_fec_get_legal_search <- function(
   hits_returned,
   af_report_year,
