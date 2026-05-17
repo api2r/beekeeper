@@ -1,7 +1,6 @@
 #' Error if not in package
 #'
-#' @inheritParams .is_pkg
-#'
+#' @inheritParams .shared-params
 #' @returns (`NULL`, invisibly) Called for error side effect.
 #' @keywords internal
 .assert_is_pkg <- function(pkg_dir = usethis::proj_get()) {
@@ -18,6 +17,7 @@
 #'
 #' Inspired by usethis:::is_package.
 #'
+#' @inheritParams .shared-params
 #' @returns (`logical(1)`) `TRUE` if the project is a package, `FALSE` if not.
 #' @keywords internal
 .is_pkg <- function(pkg_dir = usethis::proj_get()) {

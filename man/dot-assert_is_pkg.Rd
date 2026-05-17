@@ -6,6 +6,10 @@
 \usage{
 .assert_is_pkg(pkg_dir = usethis::proj_get())
 }
+\arguments{
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
+}
 \value{
 (\code{NULL}, invisibly) Called for error side effect.
 }

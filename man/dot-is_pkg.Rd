@@ -6,6 +6,10 @@
 \usage{
 .is_pkg(pkg_dir = usethis::proj_get())
 }
+\arguments{
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
+}
 \value{
 (\code{logical(1)}) \code{TRUE} if the project is a package, \code{FALSE} if not.
 }
