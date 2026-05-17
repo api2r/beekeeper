@@ -20,4 +20,4 @@ Set up package directories and dependencies
 
 ## Value
 
-`NULL` (invisibly).
+(`NULL`, invisibly) Called for setup side effects.

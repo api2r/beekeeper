@@ -25,4 +25,4 @@ Generate prepare files
 
 ## Value
 
-A `character` vector of generated file paths.
+(`character`) Generated file paths.

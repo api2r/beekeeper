@@ -40,4 +40,4 @@ Generate files for API paths
 
 ## Value
 
-A `character` vector of generated file paths.
+(`character`) Generated file paths.

@@ -34,4 +34,4 @@ Generate files for all operations
 
 ## Value
 
-A `character` vector of generated file paths.
+(`character`) Generated file paths.

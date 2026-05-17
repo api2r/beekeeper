@@ -20,4 +20,4 @@ Format one security argument help entry
 
 ## Value
 
-A named `list` with `name` and `description`.
+(`list`) A named list with `name` and `description`.

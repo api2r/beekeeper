@@ -10,4 +10,4 @@ Inspired by usethis:::is_package.
 
 ## Value
 
-`TRUE` if the project is a package, `FALSE` if not.
+(`logical(1)`) `TRUE` if the project is a package, `FALSE` if not.

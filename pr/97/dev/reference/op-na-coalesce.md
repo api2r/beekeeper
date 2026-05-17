@@ -22,8 +22,8 @@ x %|% y
 
 ## Value
 
-A vector of the same length as `x`, where each `NA` element in `x` is
-replaced by the corresponding element in `y`.
+(`vector`) A vector of the same length as `x`, where each `NA` element
+in `x` is replaced by the corresponding element in `y`.
 
 ## See also
 

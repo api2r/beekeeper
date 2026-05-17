@@ -39,4 +39,4 @@ Use a template in this package
 
 ## Value
 
-The path to the generated or updated file, invisibly.
+(`character(1)`, invisibly) The path to the generated or updated file.

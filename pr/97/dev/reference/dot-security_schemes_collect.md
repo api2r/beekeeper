@@ -17,4 +17,4 @@ Collect security scheme metadata
 
 ## Value
 
-A `list` of security scheme metadata.
+(`list`) Security scheme metadata.

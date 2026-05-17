@@ -25,4 +25,4 @@ Generate package files from prepared inputs
 
 ## Value
 
-A `character` vector of generated file paths, invisibly.
+(`character`, invisibly) Generated file paths.

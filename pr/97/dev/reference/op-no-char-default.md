@@ -20,7 +20,7 @@ x %|a|% y
 
 ## Value
 
-If `!nzchar(x)`, will return `y`; otherwise returns `x`.
+(`character`) If `!nzchar(x)`, returns `y`; otherwise returns `x`.
 
 ## See also
 

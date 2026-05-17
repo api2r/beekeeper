@@ -20,7 +20,7 @@ x %&&% y
 
 ## Value
 
-If `x` is `NULL`, will return `x`; otherwise returns `y`.
+(`any`) If `x` is `NULL`, returns `x`; otherwise returns `y`.
 
 ## See also
 

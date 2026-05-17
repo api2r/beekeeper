@@ -22,4 +22,4 @@ Generate security files and metadata
 
 ## Value
 
-A `list` of generated security metadata.
+(`list`) Generated security metadata.

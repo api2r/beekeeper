@@ -53,4 +53,4 @@ Signal a package-scoped warning
 
 ## Value
 
-`NULL`, invisibly (called for warning side effect).
+(`NULL`, invisibly) Called for warning side effect.

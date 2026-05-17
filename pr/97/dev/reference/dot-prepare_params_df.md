@@ -16,4 +16,4 @@ Prepare parameter metadata
 
 ## Value
 
-A `data.frame` of prepared parameter metadata.
+(`data.frame`) Prepared parameter metadata.

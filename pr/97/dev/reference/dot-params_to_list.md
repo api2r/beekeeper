@@ -16,4 +16,4 @@ Convert parameter rows to a list
 
 ## Value
 
-A `list` of parameter metadata entries.
+(`list`) Parameter metadata entries.

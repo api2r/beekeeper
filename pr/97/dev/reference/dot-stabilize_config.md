@@ -16,4 +16,4 @@ Stabilize beekeeper config values
 
 ## Value
 
-A stabilized `list`.
+(`list`) A stabilized config list.

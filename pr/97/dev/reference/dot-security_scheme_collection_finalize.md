@@ -16,4 +16,4 @@ Finalize collected security scheme data
 
 ## Value
 
-A `list` of finalized security metadata.
+(`list`) Finalized security metadata.

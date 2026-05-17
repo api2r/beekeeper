@@ -20,7 +20,7 @@ x %|0|% y
 
 ## Value
 
-If `!length(x)`, will return `x`; otherwise returns `y`.
+(`any`) If `!length(x)`, returns `x`; otherwise returns `y`.
 
 ## See also
 

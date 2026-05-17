@@ -16,4 +16,4 @@ Convert parameters to validation metadata
 
 ## Value
 
-A `list` of validation metadata.
+(`list`) Validation metadata.

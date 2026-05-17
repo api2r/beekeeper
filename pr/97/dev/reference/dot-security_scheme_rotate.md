@@ -30,4 +30,4 @@ Convert one security scheme to a list
 
 ## Value
 
-A `list` describing one security scheme.
+(`list`) One security scheme description.

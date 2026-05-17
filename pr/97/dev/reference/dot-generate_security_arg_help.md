@@ -21,4 +21,4 @@ Build security argument help entries
 
 ## Value
 
-A `list` of template-ready parameter help entries.
+(`list`) Template-ready parameter help entries.

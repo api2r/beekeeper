@@ -21,4 +21,4 @@ Interpolate glue with pipe braces
 
 ## Value
 
-A glue object.
+(`glue`) A glue object.

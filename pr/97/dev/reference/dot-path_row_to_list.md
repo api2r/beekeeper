@@ -54,4 +54,4 @@ Convert one operation row to template data
 
 ## Value
 
-A `list` describing one operation.
+(`list`) One operation description.

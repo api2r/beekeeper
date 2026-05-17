@@ -16,4 +16,4 @@ Flatten parameter metadata
 
 ## Value
 
-A `data.frame` of flattened parameter metadata.
+(`data.frame`) Flattened parameter metadata.

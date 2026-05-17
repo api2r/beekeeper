@@ -53,4 +53,4 @@ Signal a package-scoped message
 
 ## Value
 
-`NULL`, invisibly (called for message side effect).
+(`NULL`, invisibly) Called for message side effect.

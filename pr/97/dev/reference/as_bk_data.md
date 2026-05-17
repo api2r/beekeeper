@@ -36,4 +36,4 @@ as_bk_data(x, ...)
 
 ## Value
 
-A list.
+(`list`) A list.

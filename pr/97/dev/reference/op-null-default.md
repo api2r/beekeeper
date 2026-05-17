@@ -20,7 +20,7 @@ x %||% y
 
 ## Value
 
-If `x` is `NULL`, will return `y`; otherwise returns `x`.
+(`any`) If `x` is `NULL`, returns `y`; otherwise returns `x`.
 
 ## See also
 

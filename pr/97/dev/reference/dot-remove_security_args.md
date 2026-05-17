@@ -21,4 +21,4 @@ Remove security parameters
 
 ## Value
 
-A `list` of non-security parameters.
+(`list`) Non-security parameters.

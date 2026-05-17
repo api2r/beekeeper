@@ -17,6 +17,6 @@ Convert API paths to an operations data frame
 
 ## Value
 
-A
+(`tibble`) A
 [`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
 with one row per non-deprecated operation.

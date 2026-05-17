@@ -10,4 +10,4 @@ Error if not in package
 
 ## Value
 
-`NULL`, invisibly.
+(`NULL`, invisibly) Called for error side effect.

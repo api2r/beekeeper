@@ -16,4 +16,4 @@ Compile security argument metadata
 
 ## Value
 
-A `list` of compiled security argument values.
+(`list`) Compiled security argument values.
