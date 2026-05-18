@@ -54,7 +54,7 @@ jobs:
           strOwner <- tolower(qcthat::GetGHOwner())
           strRepo <- qcthat::GetGHRepo()
           strURL <- glue::glue(
-            "https://{strOwner}.github.io/{strRepo}/pr/{intPRNumber}"
+            "https://{strOwner}.github.io/{strRepo}/pr/{intPRNumber}/dev"
           )
           print(paste("🌐 URL:", strURL))
           qcthat::CommentIssue(
