@@ -11,9 +11,10 @@ changes.
     [{rapid}](https://rapid.api2r.org). That package is being developed
     parallel to this one, and contains all of the *R API
     D*efinition-specific functionality.
-  - I also realized I need a package for wrapping {httr2} calls. That
-    package is called [{nectar}](https://nectar.api2r.org), and is also
-    being developed parallel to this one.
+  - I also realized I need a package for wrapping
+    [{httr2}](https://httr2.r-lib.org) calls. That package is called
+    [{nectar}](https://nectar.api2r.org), and is also being developed
+    parallel to this one.
 - **0.1.0: Basic authentication and endpoint calls.**
   - Proposal wording:
     - Export a function to generate `R/*.R` and `tests/testthat/*.R`
