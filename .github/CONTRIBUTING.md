@@ -26,8 +26,6 @@ If you’ve found a bug, please file an issue that illustrates the bug with a mi
     The title of your PR should briefly describe the change.
     The body of your PR should contain `Fixes #issue-number`.
 
-*  For user-facing changes, add a bullet to the top of `NEWS.md` (i.e. just below the first header). Follow the style described in <https://style.tidyverse.org/news.html>.
-
 ### Code style
 
 *   New code should follow the tidyverse [style guide](https://style.tidyverse.org). 

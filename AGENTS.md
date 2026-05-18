@@ -28,7 +28,6 @@ beekeeper/
 ├── AGENTS.md                   # Main agent setup file
 ├── DESCRIPTION                 # Package metadata
 ├── NAMESPACE                   # Auto-generated export information
-├── NEWS.md                     # Changelog
 └── Various config files        # .gitignore, codecov.yml, etc.
 
 ---
