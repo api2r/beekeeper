@@ -22,8 +22,8 @@ issue templates │ ├── skills/ \# Agent skill definitions │ └──
 workflows/ \# CI/CD configurations ├── tests/testthat/ \# Test suite ├──
 man/ \# Generated documentation ├── AGENTS.md \# Main agent setup file
 ├── DESCRIPTION \# Package metadata ├── NAMESPACE \# Auto-generated
-export information ├── NEWS.md \# Changelog └── Various config files \#
-.gitignore, codecov.yml, etc.
+export information └── Various config files \# .gitignore, codecov.yml,
+etc.
 
 ------------------------------------------------------------------------
 
