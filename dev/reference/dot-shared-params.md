@@ -157,6 +157,11 @@ to make them easier to import and to find.
 
   (`logical`) Whether each parameter is required.
 
+- save_security_data:
+
+  (`logical(1)`) Whether to save generated security metadata to a file
+  and record that file in the beekeeper config.
+
 - security_arg_description:
 
   (`character(1)`) The argument description.
@@ -205,6 +210,11 @@ to make them easier to import and to find.
 
   ([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
   Security schemes from the API definition.
+
+- security_data_filename:
+
+  (`character(1)` or `fs_path`) The path to the saved security metadata
+  file (relative to the package root).
 
 - tag_operations:
 
