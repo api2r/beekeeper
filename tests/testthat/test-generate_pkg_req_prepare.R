@@ -29,3 +29,29 @@ test_that(".generate_prepare() generates prepare file.", {
   ))
   expect_identical(t_prepare_result, t_prepare_expected)
 })
+
+test_that("generate_pkg_req_prepare() reads saved inputs from config (#101)", {
+  skip_on_cran()
+  config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
+  prepare_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "010-prepare.R"
+  ))
+
+  create_local_package()
+  writeLines(config_text, "_beekeeper.yml")
+  saveRDS(trello_api_definition, "_beekeeper_rapid.rds")
+  generate_pkg_auth()
+
+  test_result <- generate_pkg_req_prepare()
+
+  expect_identical(
+    basename(test_result),
+    c("010-prepare.R", "test-010-prepare.R")
+  )
+  expect_identical(
+    scrub_testpkg(readLines("R/010-prepare.R")),
+    prepare_expected
+  )
+})

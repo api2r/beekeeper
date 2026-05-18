@@ -29,3 +29,46 @@ test_that("use_beekeeper writes a yml config (#10)", {
   )
   expect_identical(test_result_file, expected_result_file)
 })
+
+test_that(".assert_config_exists errors informatively when config file is missing", {
+  create_local_package()
+  stbl::expect_pkg_error_snapshot(
+    {
+      .assert_config_exists(".", "_beekeeper.yml")
+    },
+    "beekeeper",
+    "setup",
+    "missing_config",
+    transform = scrub_tempdir
+  )
+})
+
+test_that(".write_config_field() updates an existing config file (#101)", {
+  withr::defer(memoise::forget(read_config))
+  create_local_package()
+  local_mocked_bindings(
+    use_build_ignore = function(...) {
+      invisible(TRUE)
+    },
+    with_project = function(...) {
+      invisible(NULL)
+    },
+    .package = "usethis"
+  )
+
+  use_beekeeper(guru_api_definition, api_abbr = "guru")
+  expect_null(read_config()[["security_data_filename"]])
+
+  result <- .write_config_field(
+    field = "security_data_filename",
+    value = "custom_security.yml",
+    config_filename = "_beekeeper.yml",
+    pkg_dir = "."
+  )
+
+  expect_identical(result, "_beekeeper.yml")
+  expect_identical(
+    read_security_data_filename(pkg_dir = ".", config_filename = result),
+    "custom_security.yml"
+  )
+})

@@ -1,5 +1,46 @@
 #' Generate files for API paths
 #'
+#' Generate operation functions and their tests from the API paths stored in the
+#' OpenAPI definition. This supports incremental package scaffolding when you
+#' want to review or customize endpoint wrappers separately from other package
+#' components.
+#'
+#' @inheritParams .shared-params
+#' @returns (`character`) Generated file paths. As a side effect, zero or more
+#'   `R/paths-*.R` files are generated from the paths in the `api_definition`,
+#'   as well as the associated test files as `tests/testthat/test-paths-*.R`.
+#' @export
+#' @family package generation functions
+generate_pkg_paths <- function(
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  api_definition = read_api_definition(
+    pkg_dir,
+    read_rapid_filename(pkg_dir, config_filename)
+  ),
+  security_data = read_security_data(pkg_dir, config_filename),
+  config_filename = "_beekeeper.yml",
+  pkg_dir = "."
+) {
+  .assert_is_pkg(pkg_dir)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
+  .use_r_directory(pkg_dir)
+  .use_testthat(pkg_dir)
+  .use_httptest2(pkg_dir)
+  .use_nectar(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
+  security_arg_names <- security_data$security_arg_names %|0|% character()
+  .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
+  .generate_paths(
+    paths = api_definition@paths,
+    api_abbr = api_abbr,
+    security_data = security_data,
+    pagination_data = .generate_pagination(),
+    base_url = api_definition@servers@url
+  )
+}
+
+#' Generate files for API paths
+#'
 #' @inheritParams .shared-params
 #' @returns (`character`) Generated file paths.
 #' @keywords internal

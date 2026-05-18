@@ -46,7 +46,7 @@ scrub_config <- function(input) {
 }
 
 scrub_tempdir <- function(input) {
-  sub("^.*Rtmp\\S+", "TMPDIR", input)
+  sub("\\S+Rtmp\\S+", "TMPDIR", input)
 }
 
 scrub_path <- function(input, keep_dirs = c("R", "tests")) {

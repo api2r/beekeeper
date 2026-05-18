@@ -1,7 +1,11 @@
 test_that(".assert_is_pkg() errors informatively for non-packages", {
-  expect_snapshot(
-    .assert_is_pkg(tempdir()),
-    error = TRUE,
+  stbl::expect_pkg_error_snapshot(
+    {
+      .assert_is_pkg(tempdir())
+    },
+    "beekeeper",
+    "setup",
+    "not_a_package",
     transform = scrub_tempdir
   )
 })

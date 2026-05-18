@@ -21,7 +21,7 @@ fec_apid$components$securitySchemes <- list(
   ApiKeyHeaderAuth = list(`in` = "header", name = "X-Api-Key", type = "apiKey"),
   ApiKeyQueryAuth = list(`in` = "query", name = "api_key", type = "apiKey")
 )
-cli::cli_warn("FEC APID manually cleaned to remove duplicate security scheme.")
+warning("FEC APID manually cleaned to remove duplicate security scheme.")
 fec_rapid <- rapid::as_rapid(fec_apid)
 fec_rapid |>
   use_beekeeper(
@@ -67,4 +67,4 @@ trello_rapid |>
     rapid_filename = "_beekeeper_rapid.rds"
   )
 
-cli::cli_warn("Revert .Rbuildignore")
+warning("Revert .Rbuildignore")

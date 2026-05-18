@@ -258,6 +258,29 @@ test_that(".paths_need_stbl() returns FALSE for empty paths (#69)", {
   expect_false(.paths_need_stbl(rapid::class_paths(), character()))
 })
 
+test_that("generate_pkg_paths() reads saved inputs from config (#101)", {
+  skip_on_cran()
+  config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
+  path_expected <- readLines(test_path(
+    "_fixtures",
+    "guru",
+    "paths-apis-list_apis.R"
+  ))
+
+  create_local_package()
+  writeLines(config_text, "_beekeeper.yml")
+  saveRDS(guru_api_definition, "_beekeeper_rapid.rds")
+  generate_pkg_auth()
+
+  test_result <- generate_pkg_paths()
+
+  expect_contains(basename(test_result), "setup.R")
+  expect_identical(
+    scrub_testpkg(readLines("R/paths-apis-list_apis.R")),
+    path_expected
+  )
+})
+
 test_that(".generate_paths_file() renders header and cookie params correctly (#84, #69)", {
   skip_on_cran()
   expected_content <- readLines(

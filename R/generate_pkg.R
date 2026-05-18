@@ -8,6 +8,7 @@
 #'
 #' @returns (`character`, invisibly) Paths to files that were added or updated.
 #' @export
+#' @family package generation functions
 generate_pkg <- function(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   api_definition = read_api_definition(
@@ -22,41 +23,37 @@ generate_pkg <- function(
   # if not, letting them know that this can be destructive. Skip this check in
   # tests.
   .assert_is_pkg(pkg_dir)
-  api_abbr <- stbl::stabilize_character_scalar(api_abbr)
-  api_title <- stbl::stabilize_character_scalar(api_title)
-  config <- list(api_abbr = api_abbr, api_title = api_title)
-  security_data <- .generate_security(
-    api_abbr,
-    api_definition@components@security_schemes
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
+  api_title <- stbl::stabilize_chr_scalar(api_title)
+  save_security_data <- fs::file_exists(fs::path(pkg_dir, config_filename))
+  security_data <- generate_pkg_auth(
+    api_abbr = api_abbr,
+    security_schemes = api_definition@components@security_schemes,
+    save_security_data = save_security_data,
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
   )
-  security_arg_names <- security_data$security_arg_names %|0|% character()
-  .setup_r(pkg_dir)
-  .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
-  touched_files <- .generate_pkg_impl(config, api_definition, security_data)
-  return(invisible(touched_files))
-}
-
-#' Generate package files from prepared inputs
-#'
-#' @inheritParams .shared-params
-#' @returns (`character`, invisibly) Generated file paths.
-#' @keywords internal
-.generate_pkg_impl <- function(config, api_definition, security_data) {
-  prep_files <- .generate_prepare(config, api_definition, security_data)
-  pagination_data <- .generate_pagination()
-  path_files <- .generate_paths(
-    paths = api_definition@paths,
-    api_abbr = config$api_abbr,
+  shared_file_path <- generate_pkg_shared_params(
     security_data = security_data,
-    pagination_data = pagination_data,
-    base_url = api_definition@servers@url
+    pkg_dir = pkg_dir
   )
-  shared_file_path <- .generate_shared_params(security_data)
+  prep_files <- generate_pkg_req_prepare(
+    api_abbr = api_abbr,
+    api_definition = api_definition,
+    api_title = api_title,
+    security_data = security_data,
+    pkg_dir = pkg_dir
+  )
+  path_files <- generate_pkg_paths(
+    api_abbr = api_abbr,
+    api_definition = api_definition,
+    security_data = security_data,
+    pkg_dir = pkg_dir
+  )
   touched_files <- c(
     shared_file_path,
     prep_files,
     security_data$security_file_path,
-    pagination_data$pagination_file_path,
     path_files
   )
   return(invisible(touched_files))

@@ -15,5 +15,6 @@
 #' @importFrom S7 class_data.frame
 #' @importFrom S7 class_list
 #' @importFrom rlang .data
+#' @importFrom rlang caller_env
 ## usethis namespace: end
 NULL

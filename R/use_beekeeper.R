@@ -39,13 +39,38 @@ use_beekeeper <- function(
   return(invisible(fs::path(pkg_dir, config_filename)))
 }
 
+#' Assert the beekeeper config file exists
+#'
+#' @inheritParams .shared-params
+#' @returns (`NULL`, invisibly) Called for side effect of asserting the config
+#'   file exists.
+#' @keywords internal
+.assert_config_exists <- function(
+  pkg_dir,
+  config_filename,
+  call = caller_env()
+) {
+  config_path <- fs::path_abs(fs::path(pkg_dir, config_filename))
+  if (!fs::file_exists(config_path)) {
+    .pkg_abort(
+      c(
+        "No beekeeper configuration found.",
+        i = "Expected to find a config file at {.code {config_path}}.",
+        i = "Use {.fn beekeeper::use_beekeeper} to create a configuration."
+      ),
+      c("setup", "missing_config"),
+      call = call
+    )
+  }
+}
+
 #' Write the rapid definition file
 #'
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The written file path.
 #' @keywords internal
 .write_rapid <- function(api_definition, rapid_filename, pkg_dir) {
-  rapid_filename <- stbl::stabilize_character_scalar(rapid_filename)
+  rapid_filename <- stbl::stabilize_chr_scalar(rapid_filename)
   saveRDS(api_definition, fs::path(pkg_dir, rapid_filename))
   usethis::with_project(pkg_dir, usethis::use_build_ignore(rapid_filename))
   return(rapid_filename)
@@ -63,18 +88,35 @@ use_beekeeper <- function(
   config_filename,
   pkg_dir
 ) {
-  config_filename <- stbl::stabilize_character_scalar(config_filename)
+  config_filename <- stbl::stabilize_chr_scalar(config_filename)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
   yaml::write_yaml(
     list(
       api_title = api_definition@info@title,
-      api_abbr = stbl::stabilize_character_scalar(api_abbr),
+      api_abbr = stbl::stabilize_chr_scalar(api_abbr),
       api_version = api_definition@info@version,
       rapid_filename = rapid_filename,
       updated_on = as.character(update_time)
     ),
     file = fs::path(pkg_dir, config_filename)
   )
+  memoise::forget(read_config)
+  usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
+  return(config_filename)
+}
+
+#' Update one config field
+#'
+#' @inheritParams .shared-params
+#' @param field (`character(1)`) The config field to write.
+#' @param value (`character(1)`) The value to write.
+#' @returns (`character(1)`) The written config filename.
+#' @keywords internal
+.write_config_field <- function(field, value, config_filename, pkg_dir) {
+  .assert_config_exists(pkg_dir, config_filename)
+  config <- yaml::read_yaml(fs::path(pkg_dir, config_filename))
+  config[[field]] <- value
+  yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
   memoise::forget(read_config)
   usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
   return(config_filename)

@@ -4,11 +4,13 @@
 \alias{.assert_is_pkg}
 \title{Error if not in package}
 \usage{
-.assert_is_pkg(pkg_dir = usethis::proj_get())
+.assert_is_pkg(pkg_dir = usethis::proj_get(), call = caller_env())
 }
 \arguments{
 \item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
 files.}
+
+\item{call}{(\code{environment}) The caller environment for error messages.}
 }
 \value{
 (\code{NULL}, invisibly) Called for error side effect.

@@ -1,3 +1,48 @@
+#' Generate authentication helpers
+#'
+#' Generate the authentication helper file for a package under development from
+#' the API security schemes stored in the OpenAPI definition. This supports
+#' incremental package scaffolding when you want to review or customize auth
+#' handling before generating the rest of the package files.
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Generated security metadata. `R/020-auth.R` is generated as
+#'   a side effect. When `save_security_data` is `TRUE` (strongly recommended
+#'   when calling this function as a stand-alone), the file designated by
+#'   `security_data_filename`, and the `security_data_filename` field in the
+#'   file designated by `config_filename` are generated as side effects.
+#' @export
+#' @family package generation functions
+generate_pkg_auth <- function(
+  api_abbr = read_api_abbr(pkg_dir, config_filename),
+  security_schemes = read_security_schemes(
+    pkg_dir,
+    read_rapid_filename(pkg_dir, config_filename)
+  ),
+  save_security_data = TRUE,
+  security_data_filename = "_beekeeper_security.yml",
+  config_filename = "_beekeeper.yml",
+  pkg_dir = "."
+) {
+  .assert_is_pkg(pkg_dir)
+  api_abbr <- stbl::stabilize_chr_scalar(api_abbr)
+  save_security_data <- stbl::to_lgl_scalar(save_security_data)
+  security_data_filename <- stbl::stabilize_chr_scalar(security_data_filename)
+  .use_r_directory(pkg_dir)
+  .use_nectar(pkg_dir)
+  .use_pkg_beekeeper(pkg_dir)
+  security_data <- .generate_security(api_abbr, security_schemes)
+  if (save_security_data) {
+    .write_security_data(
+      .without_security_file_path(security_data),
+      security_data_filename,
+      config_filename,
+      pkg_dir
+    )
+  }
+  return(security_data)
+}
+
 #' Generate security files and metadata
 #'
 #' @inheritParams .shared-params
@@ -16,6 +61,43 @@
     )
   }
   return(security_data)
+}
+
+#' Write saved security metadata and update the config
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) The saved security metadata filename.
+#' @keywords internal
+.write_security_data <- function(
+  security_data,
+  security_data_filename,
+  config_filename,
+  pkg_dir
+) {
+  yaml::write_yaml(
+    security_data,
+    file = fs::path(pkg_dir, security_data_filename)
+  )
+  usethis::with_project(
+    pkg_dir,
+    usethis::use_build_ignore(security_data_filename)
+  )
+  .write_config_field(
+    field = "security_data_filename",
+    value = security_data_filename,
+    config_filename = config_filename,
+    pkg_dir = pkg_dir
+  )
+  return(security_data_filename)
+}
+
+#' Remove generated file paths from saved security metadata
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) Security metadata suitable for serialization.
+#' @keywords internal
+.without_security_file_path <- function(security_data) {
+  security_data[names(security_data) != "security_file_path"]
 }
 
 #' Generate a security argument signature

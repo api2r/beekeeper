@@ -20,7 +20,7 @@ definition (rapid) file (relative to the package root).}
 (\code{rapid::class_rapid}) The definition of the API.
 }
 \description{
-Reads an RDS file (default name \verb{_beekeeper_rapid.rds}) with the API
+Read an RDS file (default name \verb{_beekeeper_rapid.rds}) with the API
 definition stored as a \code{\link[rapid:class_rapid]{rapid::class_rapid()}} object. This file is generated
 by \code{\link[=use_beekeeper]{use_beekeeper()}} based on an OpenAPI definition file.
 }
@@ -37,6 +37,9 @@ Other config readers:
 \code{\link[=read_api_abbr]{read_api_abbr()}},
 \code{\link[=read_api_title]{read_api_title()}},
 \code{\link[=read_config]{read_config()}},
-\code{\link[=read_rapid_filename]{read_rapid_filename()}}
+\code{\link[=read_rapid_filename]{read_rapid_filename()}},
+\code{\link[=read_security_data]{read_security_data()}},
+\code{\link[=read_security_data_filename]{read_security_data_filename()}},
+\code{\link[=read_security_schemes]{read_security_schemes()}}
 }
 \concept{config readers}
