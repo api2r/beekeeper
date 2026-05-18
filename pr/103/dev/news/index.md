@@ -10,5 +10,4 @@
   can now be run one step at a time, with
   [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
   supporting auth generation
-  ([@jonthegeek](https://github.com/jonthegeek),
-  [\#101](https://github.com/api2r/beekeeper/issues/101)).
+  ([\#101](https://github.com/api2r/beekeeper/issues/101)).

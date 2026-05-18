@@ -88,6 +88,95 @@ saved security metadata file (relative to the package root).</p></dd>
 <code><a href="read_security_schemes.html">read_security_schemes()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">read_security_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  pkg_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span><span class="st">"beekeeper"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  config_filename <span class="op">=</span> <span class="st">"example_config.yml"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $has_security</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "api_key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Example API authentication key used to authorize requests."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$parameter_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$arg_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "api_key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[1]]$api_key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "api_token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Example API token used to authorize requests."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$parameter_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$arg_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "api_key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_schemes[[2]]$api_key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key"   "token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_list</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key = key, token = token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[1]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[1]]$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Example API authentication key used to authorize requests."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[2]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "token"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_helps[[2]]$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Example API token used to authorize requests."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_arg_nulls</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key = NULL, token = NULL"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $security_signature</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "key = Sys.getenv(\"TRELLO_KEY\"),\ntoken = Sys.getenv(\"TRELLO_TOKEN\")"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -1,6 +1,9 @@
 # Generate authentication helpers
 
-Generate authentication helpers
+Generate the authentication helper file for a package under development
+from the API security schemes stored in the OpenAPI definition. This
+supports incremental package scaffolding when you want to review or
+customize auth handling before generating the rest of the package files.
 
 ## Usage
 
@@ -25,7 +28,7 @@ generate_pkg_auth(
 
 - security_schemes:
 
-  ([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
+  ([`rapid::class_security_schemes`](https://rdrr.io/pkg/rapid/man/class_security_schemes.html))
   Security schemes from the API definition.
 
 - save_security_data:
@@ -49,4 +52,16 @@ generate_pkg_auth(
 
 ## Value
 
-(`list`) Generated security metadata.
+(`list`) Generated security metadata. `R/020-auth.R` is generated as a
+side effect. When `save_security_data` is `TRUE` (strongly recommended
+when calling this function as a stand-alone), the file designated by
+`security_data_filename`, and the `security_data_filename` field in the
+file designated by `config_filename` are generated as side effects.
+
+## See also
+
+Other package generation functions:
+[`generate_pkg()`](https://beekeeper.api2r.org/dev/reference/generate_pkg.md),
+[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md),
+[`generate_pkg_req_prepare()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_req_prepare.md),
+[`generate_pkg_shared_params()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_shared_params.md)

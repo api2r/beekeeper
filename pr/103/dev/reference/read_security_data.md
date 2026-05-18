@@ -44,3 +44,93 @@ Other config readers:
 [`read_rapid_filename()`](https://beekeeper.api2r.org/dev/reference/read_rapid_filename.md),
 [`read_security_data_filename()`](https://beekeeper.api2r.org/dev/reference/read_security_data_filename.md),
 [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
+
+## Examples
+
+``` r
+read_security_data(
+  pkg_dir = fs::path_package("beekeeper"),
+  config_filename = "example_config.yml"
+)
+#> $has_security
+#> [1] TRUE
+#> 
+#> $security_schemes
+#> $security_schemes[[1]]
+#> $security_schemes[[1]]$name
+#> [1] "api_key"
+#> 
+#> $security_schemes[[1]]$description
+#> [1] "Example API authentication key used to authorize requests."
+#> 
+#> $security_schemes[[1]]$parameter_name
+#> [1] "key"
+#> 
+#> $security_schemes[[1]]$arg_name
+#> [1] "key"
+#> 
+#> $security_schemes[[1]]$location
+#> [1] "query"
+#> 
+#> $security_schemes[[1]]$type
+#> [1] "api_key"
+#> 
+#> $security_schemes[[1]]$api_key
+#> [1] TRUE
+#> 
+#> 
+#> $security_schemes[[2]]
+#> $security_schemes[[2]]$name
+#> [1] "api_token"
+#> 
+#> $security_schemes[[2]]$description
+#> [1] "Example API token used to authorize requests."
+#> 
+#> $security_schemes[[2]]$parameter_name
+#> [1] "token"
+#> 
+#> $security_schemes[[2]]$arg_name
+#> [1] "token"
+#> 
+#> $security_schemes[[2]]$location
+#> [1] "query"
+#> 
+#> $security_schemes[[2]]$type
+#> [1] "api_key"
+#> 
+#> $security_schemes[[2]]$api_key
+#> [1] TRUE
+#> 
+#> 
+#> 
+#> $security_arg_names
+#> [1] "key"   "token"
+#> 
+#> $security_arg_list
+#> [1] "key = key, token = token"
+#> 
+#> $security_arg_helps
+#> $security_arg_helps[[1]]
+#> $security_arg_helps[[1]]$name
+#> [1] "key"
+#> 
+#> $security_arg_helps[[1]]$description
+#> [1] "Example API authentication key used to authorize requests."
+#> 
+#> 
+#> $security_arg_helps[[2]]
+#> $security_arg_helps[[2]]$name
+#> [1] "token"
+#> 
+#> $security_arg_helps[[2]]$description
+#> [1] "Example API token used to authorize requests."
+#> 
+#> 
+#> 
+#> $security_arg_nulls
+#> [1] "key = NULL, token = NULL"
+#> 
+#> $security_signature
+#> [1] "key = Sys.getenv(\"TRELLO_KEY\"),\ntoken = Sys.getenv(\"TRELLO_TOKEN\")"
+#> 
+```

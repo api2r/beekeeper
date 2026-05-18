@@ -30,7 +30,7 @@ included in the grant proposal.
 - **0.1.0: Basic authentication and endpoint calls.**
   - Export a function or functions to generate `R/*.R` files to call an
     API, given the URL of an OpenAPI spec in YAML format (or a
-    [`rapid::class_rapid()`](https://rapid.api2r.org/reference/class_rapid.html)
+    [`rapid::class_rapid()`](https://rdrr.io/pkg/rapid/man/class_rapid.html)
     object). The generated files will follow and encourage best
     practices, and will serve as the core around which the rest of a
     package would be built.

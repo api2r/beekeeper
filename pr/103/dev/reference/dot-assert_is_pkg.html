@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.assert_is_pkg</span><span class="op">(</span>pkg_dir <span class="op">=</span> <span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">proj_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.assert_is_pkg</span><span class="op">(</span>pkg_dir <span class="op">=</span> <span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">proj_get</a></span><span class="op">(</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -53,6 +53,10 @@
 <dl><dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>
 <dd><p>(<code>character(1)</code> or <code>fs_path</code>) The directory containing package
 files.</p></dd>
+
+
+<dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
+<dd><p>(<code>environment</code>) The caller environment for error messages.</p></dd>
 
 </dl></div>
     <div class="section level2">

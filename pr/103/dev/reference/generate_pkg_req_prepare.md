@@ -1,6 +1,10 @@
 # Generate request-prepare helpers
 
-Generate request-prepare helpers
+Generate the core request helper and its initial test file for a package
+under development. This supports incremental package scaffolding when
+you want to review or customize the central request-construction helper
+used by generated endpoint wrappers separately from other package
+components.
 
 ## Usage
 
@@ -25,7 +29,7 @@ generate_pkg_req_prepare(
 
 - api_definition:
 
-  ([`rapid::class_rapid`](https://rapid.api2r.org/reference/class_rapid.html))
+  ([`rapid::class_rapid`](https://rdrr.io/pkg/rapid/man/class_rapid.html))
   The API definition to generate package code from.
 
 - api_title:
@@ -47,4 +51,13 @@ generate_pkg_req_prepare(
 
 ## Value
 
-(`character`) Generated file paths.
+(`character`) Generated file paths. As a side effect, `R/010-prepare.R`
+and `tests/testthat/test-010-prepare.R` are generated.
+
+## See also
+
+Other package generation functions:
+[`generate_pkg()`](https://beekeeper.api2r.org/dev/reference/generate_pkg.md),
+[`generate_pkg_auth()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_auth.md),
+[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md),
+[`generate_pkg_shared_params()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_shared_params.md)

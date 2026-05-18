@@ -1,7 +1,7 @@
 # Read security schemes from an API definition
 
 Read the security schemes from an API definition stored as a
-[`rapid::class_rapid()`](https://rapid.api2r.org/reference/class_rapid.html)
+[`rapid::class_rapid()`](https://rdrr.io/pkg/rapid/man/class_rapid.html)
 object.
 
 ## Usage
@@ -26,7 +26,7 @@ read_security_schemes(
 
 ## Value
 
-([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
+([`rapid::class_security_schemes`](https://rdrr.io/pkg/rapid/man/class_security_schemes.html))
 Security schemes from the API definition.
 
 ## See also

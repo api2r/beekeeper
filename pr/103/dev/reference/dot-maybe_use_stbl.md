@@ -16,7 +16,7 @@ Add stbl to dependencies if needed
 
 - paths:
 
-  ([`rapid::class_paths`](https://rapid.api2r.org/reference/class_paths.html))
+  ([`rapid::class_paths`](https://rdrr.io/pkg/rapid/man/class_paths.html))
   API path definitions.
 
 - security_arg_names:

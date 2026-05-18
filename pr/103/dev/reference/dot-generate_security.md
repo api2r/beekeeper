@@ -17,7 +17,7 @@ Generate security files and metadata
 
 - security_schemes:
 
-  ([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
+  ([`rapid::class_security_schemes`](https://rdrr.io/pkg/rapid/man/class_security_schemes.html))
   Security schemes from the API definition.
 
 ## Value

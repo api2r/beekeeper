@@ -149,7 +149,7 @@ to call the API.</p>
 <span>                         <span class="va">body</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>                         <span class="va">method</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>                         <span class="va">api_key</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"FEC_API_KEY"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/req_modify.html" class="external-link">req_modify</a></span><span class="op">(</span></span>
+<span>  <span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/req_modify.html" class="external-link">req_modify</a></span><span class="op">(</span></span>
 <span>    <span class="va">fec_req_base</span>,</span>
 <span>    path <span class="op">=</span> <span class="va">path</span>,</span>
 <span>    query <span class="op">=</span> <span class="va">query</span>,</span>
@@ -157,8 +157,8 @@ to call the API.</p>
 <span>    method <span class="op">=</span> <span class="va">method</span></span>
 <span>  <span class="op">)</span></span>
 <span>  <span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">.fec_req_auth</span><span class="op">(</span><span class="va">req</span>, api_key <span class="op">=</span> <span class="va">api_key</span><span class="op">)</span></span>
-<span>  <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/req_perform_opinionated.html" class="external-link">req_perform_opinionated</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span></span>
-<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/resp_parse.html" class="external-link">resp_parse</a></span><span class="op">(</span><span class="va">resp</span>, response_parser <span class="op">=</span> <span class="va">.fec_response_parser</span><span class="op">)</span></span>
+<span>  <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/req_perform_opinionated.html" class="external-link">req_perform_opinionated</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span></span>
+<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/resp_parse.html" class="external-link">resp_parse</a></span><span class="op">(</span><span class="va">resp</span>, response_parser <span class="op">=</span> <span class="va">.fec_response_parser</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Notice that the function includes API-key authentication arguments
 when appropriate!</p>
@@ -195,7 +195,7 @@ document.</p>
 <span><span class="co"># An API key provided by the API provider. This key is not clearly documented in</span></span>
 <span><span class="co"># the API description. Check the API documentation for details.</span></span>
 <span><span class="va">.fec_req_auth_api_key_header_auth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">req</span>, <span class="va">api_key</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
+<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
 <span>    <span class="va">req</span>,</span>
 <span>    location <span class="op">=</span> <span class="st">"header"</span>,</span>
 <span>    parameter_name <span class="op">=</span> <span class="st">"X-Api-Key"</span>,</span>
@@ -206,7 +206,7 @@ document.</p>
 <span><span class="co"># An API key provided by the API provider. This key is not clearly documented in</span></span>
 <span><span class="co"># the API description. Check the API documentation for details.</span></span>
 <span><span class="va">.fec_req_auth_api_key_query_auth</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">req</span>, <span class="va">api_key</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
+<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
 <span>    <span class="va">req</span>,</span>
 <span>    location <span class="op">=</span> <span class="st">"query"</span>,</span>
 <span>    parameter_name <span class="op">=</span> <span class="st">"api_key"</span>,</span>
@@ -217,7 +217,7 @@ document.</p>
 <span><span class="co"># An API key provided by the API provider. This key is not clearly documented in</span></span>
 <span><span class="co"># the API description. Check the API documentation for details.</span></span>
 <span><span class="va">.fec_req_auth_api_key</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">req</span>, <span class="va">api_key</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://nectar.api2r.org/reference/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
+<span>  <span class="fu">nectar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/nectar/man/req_auth_api_key.html" class="external-link">req_auth_api_key</a></span><span class="op">(</span></span>
 <span>    <span class="va">req</span>,</span>
 <span>    location <span class="op">=</span> <span class="st">"query"</span>,</span>
 <span>    parameter_name <span class="op">=</span> <span class="st">"api_key"</span>,</span>

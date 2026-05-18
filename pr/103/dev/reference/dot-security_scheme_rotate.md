@@ -20,7 +20,7 @@ Convert one security scheme to a list
 
 - security_scheme_details:
 
-  ([`rapid::class_security_scheme_details`](https://rapid.api2r.org/reference/class_security_scheme_details.html))
+  ([`rapid::class_security_scheme_details`](https://rdrr.io/pkg/rapid/man/class_security_scheme_details.html))
   The security scheme details.
 
 - security_scheme_description:

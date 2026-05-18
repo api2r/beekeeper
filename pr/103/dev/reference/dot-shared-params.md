@@ -21,7 +21,7 @@ to make them easier to import and to find.
 
 - api_definition:
 
-  ([`rapid::class_rapid`](https://rapid.api2r.org/reference/class_rapid.html))
+  ([`rapid::class_rapid`](https://rdrr.io/pkg/rapid/man/class_rapid.html))
   The API definition to generate package code from.
 
 - api_title:
@@ -137,7 +137,7 @@ to make them easier to import and to find.
 
 - paths:
 
-  ([`rapid::class_paths`](https://rapid.api2r.org/reference/class_paths.html))
+  ([`rapid::class_paths`](https://rdrr.io/pkg/rapid/man/class_paths.html))
   API path definitions.
 
 - paths_by_operation:
@@ -195,7 +195,7 @@ to make them easier to import and to find.
 
 - security_scheme_details:
 
-  ([`rapid::class_security_scheme_details`](https://rapid.api2r.org/reference/class_security_scheme_details.html))
+  ([`rapid::class_security_scheme_details`](https://rdrr.io/pkg/rapid/man/class_security_scheme_details.html))
   The security scheme details.
 
 - security_scheme_name:
@@ -208,7 +208,7 @@ to make them easier to import and to find.
 
 - security_schemes:
 
-  ([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
+  ([`rapid::class_security_schemes`](https://rdrr.io/pkg/rapid/man/class_security_schemes.html))
   Security schemes from the API definition.
 
 - security_data_filename:
