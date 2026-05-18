@@ -19,9 +19,9 @@
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/pagination.html">Pagination</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/milestones.html">R Consortium ISC Grant Milestones</a></li>
+    <li><a class="dropdown-item" href="articles/pagination.html">Pagination</a></li>
   </ul></li>
-<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/api2r/beekeeper/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -46,7 +46,7 @@
 <div class="section level3">
 <h3 id="overall-structure">Overall structure<a class="anchor" aria-label="anchor" href="#overall-structure"></a></h3>
 <p>The project follows standard R package conventions with these key directories:</p>
-<p>beekeeper/ ├── R/ # R source code │ ├── beekeeper-package.R # Auto-generated package docs │ └── *.R # Function definitions, 1 file ~= 1 exported function ├── .github/ │ ├── ISSUE_TEMPLATE/ # GitHub issue templates │ ├── skills/ # Agent skill definitions │ └── workflows/ # CI/CD configurations ├── tests/testthat/ # Test suite ├── man/ # Generated documentation ├── AGENTS.md # Main agent setup file ├── DESCRIPTION # Package metadata ├── NAMESPACE # Auto-generated export information ├── NEWS.md # Changelog └── Various config files # .gitignore, codecov.yml, etc.</p>
+<p>beekeeper/ ├── R/ # R source code │ ├── beekeeper-package.R # Auto-generated package docs │ └── *.R # Function definitions, 1 file ~= 1 exported function ├── .github/ │ ├── ISSUE_TEMPLATE/ # GitHub issue templates │ ├── skills/ # Agent skill definitions │ └── workflows/ # CI/CD configurations ├── tests/testthat/ # Test suite ├── man/ # Generated documentation ├── AGENTS.md # Main agent setup file ├── DESCRIPTION # Package metadata ├── NAMESPACE # Auto-generated export information └── Various config files # .gitignore, codecov.yml, etc.</p>
 <hr></div>
 </div>
 <div class="section level2">
@@ -69,17 +69,6 @@
 <strong>Document</strong> — document any new or changed exports.</li>
 <li>
 <strong>Verify</strong>: Run <code>devtools::test(reporter = "check")</code>, then <code>devtools::check(error_on = "warning")</code>. Resolve warnings, errors, and NOTEs.</li>
-<li>
-<strong>News</strong> — add bullet at top of <code>NEWS.md</code> (under dev heading):
-<ul><li>User-facing changes only. 1 line, end with <code>.</code>
-</li>
-<li>Present tense, positive framing, function names (backticks + <code>()</code>) near start: <code>* `fn()` now accepts ...</code> not <code>* Fixed ...</code>
-</li>
-<li>Issue/contributor before final period: <code>* `fn()` now accepts ... (@user, #N).</code> where <code>#N</code> is the GitHub issue number being implemented (e.g. <code>#42</code>).</li>
-<li>Get username: <code>gh api user --jq .login</code>; get issue number from the user’s prompt, the branch name (<code>git branch --show-current</code>), or <code>gh issue list</code>.</li>
-<li>
-<strong>Never guess or invent an issue number.</strong> Before writing it, verify: (1) you received it from the user or the branch name, OR (2) you looked it up with <code>gh</code>. If you cannot trace the number to a concrete source, use <code>#noissue</code>.</li>
-</ul></li>
 </ol><hr></div>
 <div class="section level2">
 <h2 id="general">General<a class="anchor" aria-label="anchor" href="#general"></a></h2>
