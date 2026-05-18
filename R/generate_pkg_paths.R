@@ -1,16 +1,16 @@
 #' Generate files for API paths
 #'
 #' Generate operation functions and their tests from the API paths stored in the
-#' OpenAPI definition. This is useful when you want to scaffold endpoint
-#' wrappers separately from the auth, request-preparation, or shared-parameter
-#' steps.
-#'
-#' The generated files include one or more `paths-*.R` files plus any required
-#' test helpers under `tests/testthat/`.
+#' OpenAPI definition. This supports incremental package scaffolding when you
+#' want to review or customize endpoint wrappers separately from other package
+#' components.
 #'
 #' @inheritParams .shared-params
-#' @returns (`character`) Generated file paths.
+#' @returns (`character`) Generated file paths. As a side effect, zero or more
+#'   `R/paths-*.R` files are generated from the paths in the `api_definition`,
+#'   as well as the associated test files as `tests/testthat/test-paths-*.R`.
 #' @export
+#' @family package generation functions
 generate_pkg_paths <- function(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   api_definition = read_api_definition(

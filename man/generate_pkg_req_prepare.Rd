@@ -33,15 +33,20 @@ yaml config file (relative to the package root).}
 files.}
 }
 \value{
-(\code{character}) Generated file paths.
+(\code{character}) Generated file paths. As a side effect,
+\code{R/010-prepare.R} and \code{tests/testthat/test-010-prepare.R} are generated.
 }
 \description{
-Generate the \verb{*_req_prepare()} helper and its initial test file for a package
-under development. This scaffolds the central request-construction helper
-used by generated endpoint wrappers, allowing you to inspect or customize it
-before generating path functions.
+Generate the core request helper and its initial test file for a package
+under development. This supports incremental package scaffolding when you
+want to review or customize the central request-construction helper used by
+generated endpoint wrappers separately from other package components.
 }
-\details{
-Saved security metadata from \code{\link[=generate_pkg_auth]{generate_pkg_auth()}} is used, when available,
-to include auth parameters in the generated request helper.
+\seealso{
+Other package generation functions:
+\code{\link[=generate_pkg]{generate_pkg()}},
+\code{\link[=generate_pkg_auth]{generate_pkg_auth()}},
+\code{\link[=generate_pkg_paths]{generate_pkg_paths()}},
+\code{\link[=generate_pkg_shared_params]{generate_pkg_shared_params()}}
 }
+\concept{package generation functions}

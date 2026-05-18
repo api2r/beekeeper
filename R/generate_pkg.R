@@ -8,6 +8,7 @@
 #'
 #' @returns (`character`, invisibly) Paths to files that were added or updated.
 #' @export
+#' @family package generation functions
 generate_pkg <- function(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   api_definition = read_api_definition(

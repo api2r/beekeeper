@@ -1,18 +1,17 @@
 #' Generate shared parameter docs
 #'
 #' Generate the shared roxygen parameter definitions used across scaffolded
-#' functions. This lets you regenerate or customize the shared parameter topic
-#' independently while iterating on the rest of the generated package files.
-#'
-#' Saved security metadata from [generate_pkg_auth()] is used, when available,
-#' to include auth-related shared parameter documentation.
+#' functions. This supports incremental package scaffolding when you want to
+#' review or customize the shared parameter topic independently while iterating
+#' on the rest of the generated package files.
 #'
 #' @inheritParams .shared-params
-#' @returns (`character(1)`) The generated file path.
+#' @returns (`character(1)`) The generated file path. As a side effect,
+#'   `R/000-shared.R` is generated.
 #' @export
+#' @family package generation functions
 generate_pkg_shared_params <- function(
-  security_data = read_security_data(pkg_dir, config_filename),
-  config_filename = "_beekeeper.yml",
+  security_data = read_security_data(pkg_dir, "_beekeeper.yml"),
   pkg_dir = "."
 ) {
   .assert_is_pkg(pkg_dir)

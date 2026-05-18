@@ -34,7 +34,11 @@ yaml config file (relative to the package root).}
 files.}
 }
 \value{
-(\code{list}) Generated security metadata.
+(\code{list}) Generated security metadata. \code{R/020-auth.R} is generated as
+a side effect. When \code{save_security_data} is \code{TRUE} (strongly recommended
+when calling this function as a stand-alone), the file designated by
+\code{security_data_filename}, and the \code{security_data_filename} field in the
+file designated by \code{config_filename} are generated as side effects.
 }
 \description{
 Generate the authentication helper file for a package under development from
@@ -42,8 +46,11 @@ the API security schemes stored in the OpenAPI definition. This supports
 incremental package scaffolding when you want to review or customize auth
 handling before generating the rest of the package files.
 }
-\details{
-When \code{save_security_data} is \code{TRUE}, the generated security metadata is saved
-to \code{security_data_filename} and that filename is recorded in the beekeeper
-config so later generation steps can reuse it.
+\seealso{
+Other package generation functions:
+\code{\link[=generate_pkg]{generate_pkg()}},
+\code{\link[=generate_pkg_paths]{generate_pkg_paths()}},
+\code{\link[=generate_pkg_req_prepare]{generate_pkg_req_prepare()}},
+\code{\link[=generate_pkg_shared_params]{generate_pkg_shared_params()}}
 }
+\concept{package generation functions}

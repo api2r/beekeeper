@@ -5,13 +5,14 @@
 #' incremental package scaffolding when you want to review or customize auth
 #' handling before generating the rest of the package files.
 #'
-#' When `save_security_data` is `TRUE`, the generated security metadata is saved
-#' to `security_data_filename` and that filename is recorded in the beekeeper
-#' config so later generation steps can reuse it.
-#'
 #' @inheritParams .shared-params
-#' @returns (`list`) Generated security metadata.
+#' @returns (`list`) Generated security metadata. `R/020-auth.R` is generated as
+#'   a side effect. When `save_security_data` is `TRUE` (strongly recommended
+#'   when calling this function as a stand-alone), the file designated by
+#'   `security_data_filename`, and the `security_data_filename` field in the
+#'   file designated by `config_filename` are generated as side effects.
 #' @export
+#' @family package generation functions
 generate_pkg_auth <- function(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   security_schemes = read_security_schemes(
@@ -88,22 +89,6 @@ generate_pkg_auth <- function(
     pkg_dir = pkg_dir
   )
   return(security_data_filename)
-}
-
-#' Update one config field
-#'
-#' @inheritParams .shared-params
-#' @param field (`character(1)`) The config field to write.
-#' @param value (`character(1)`) The value to write.
-#' @returns (`character(1)`) The written config filename.
-#' @keywords internal
-.write_config_field <- function(field, value, config_filename, pkg_dir) {
-  config <- yaml::read_yaml(fs::path(pkg_dir, config_filename))
-  config[[field]] <- value
-  yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
-  memoise::forget(read_config)
-  usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
-  return(config_filename)
 }
 
 #' Remove generated file paths from saved security metadata

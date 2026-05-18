@@ -29,15 +29,21 @@ yaml config file (relative to the package root).}
 files.}
 }
 \value{
-(\code{character}) Generated file paths.
+(\code{character}) Generated file paths. As a side effect, zero or more
+\verb{R/paths-*.R} files are generated from the paths in the \code{api_definition},
+as well as the associated test files as \verb{tests/testthat/test-paths-*.R}.
 }
 \description{
 Generate operation functions and their tests from the API paths stored in the
-OpenAPI definition. This is useful when you want to scaffold endpoint
-wrappers separately from the auth, request-preparation, or shared-parameter
-steps.
+OpenAPI definition. This supports incremental package scaffolding when you
+want to review or customize endpoint wrappers separately from other package
+components.
 }
-\details{
-The generated files include one or more \verb{paths-*.R} files plus any required
-test helpers under \verb{tests/testthat/}.
+\seealso{
+Other package generation functions:
+\code{\link[=generate_pkg]{generate_pkg()}},
+\code{\link[=generate_pkg_auth]{generate_pkg_auth()}},
+\code{\link[=generate_pkg_req_prepare]{generate_pkg_req_prepare()}},
+\code{\link[=generate_pkg_shared_params]{generate_pkg_shared_params()}}
 }
+\concept{package generation functions}

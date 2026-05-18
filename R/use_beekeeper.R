@@ -39,6 +39,31 @@ use_beekeeper <- function(
   return(invisible(fs::path(pkg_dir, config_filename)))
 }
 
+#' Assert the beekeeper config file exists
+#'
+#' @inheritParams .shared-params
+#' @returns (`NULL`, invisibly) Called for side effect of asserting the config
+#'   file exists.
+#' @keywords internal
+.assert_config_exists <- function(
+  pkg_dir,
+  config_filename,
+  call = caller_env()
+) {
+  config_path <- fs::path_abs(fs::path(pkg_dir, config_filename))
+  if (!fs::file_exists(config_path)) {
+    .pkg_abort(
+      c(
+        "No beekeeper configuration found.",
+        i = "Expected to find a config file at {.code {config_path}}.",
+        i = "Use {.fn beekeeper::use_beekeeper} to create a configuration."
+      ),
+      c("setup", "missing_config"),
+      call = call
+    )
+  }
+}
+
 #' Write the rapid definition file
 #'
 #' @inheritParams .shared-params
@@ -75,6 +100,23 @@ use_beekeeper <- function(
     ),
     file = fs::path(pkg_dir, config_filename)
   )
+  memoise::forget(read_config)
+  usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
+  return(config_filename)
+}
+
+#' Update one config field
+#'
+#' @inheritParams .shared-params
+#' @param field (`character(1)`) The config field to write.
+#' @param value (`character(1)`) The value to write.
+#' @returns (`character(1)`) The written config filename.
+#' @keywords internal
+.write_config_field <- function(field, value, config_filename, pkg_dir) {
+  .assert_config_exists(pkg_dir, config_filename)
+  config <- yaml::read_yaml(fs::path(pkg_dir, config_filename))
+  config[[field]] <- value
+  yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
   memoise::forget(read_config)
   usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
   return(config_filename)

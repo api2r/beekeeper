@@ -29,3 +29,16 @@ test_that("use_beekeeper writes a yml config (#10)", {
   )
   expect_identical(test_result_file, expected_result_file)
 })
+
+test_that(".assert_config_exists errors informatively when config file is missing", {
+  create_local_package()
+  stbl::expect_pkg_error_snapshot(
+    {
+      .assert_config_exists(".", "_beekeeper.yml")
+    },
+    "beekeeper",
+    "setup",
+    "missing_config",
+    transform = scrub_tempdir
+  )
+})

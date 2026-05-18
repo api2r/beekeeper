@@ -3,14 +3,18 @@
 #' @inheritParams .shared-params
 #' @returns (`NULL`, invisibly) Called for error side effect.
 #' @keywords internal
-.assert_is_pkg <- function(pkg_dir = usethis::proj_get()) {
+.assert_is_pkg <- function(pkg_dir = usethis::proj_get(), call = caller_env()) {
   if (.is_pkg(pkg_dir)) {
     return(invisible(NULL))
   }
-  cli::cli_abort(c(
-    "Can't generate package files outside of a package.",
-    x = "{.path {pkg_dir}} is not inside a package."
-  ))
+  .pkg_abort(
+    c(
+      "Can't generate package files outside of a package.",
+      x = "{.path {pkg_dir}} is not inside a package."
+    ),
+    c("setup", "not_a_package"),
+    call = call
+  )
 }
 
 #' Check whether we're in a package
