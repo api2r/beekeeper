@@ -44,12 +44,6 @@ For any feature, fix, or refactor:
 6. **Refactor** — clean up, keep tests green.
 7. **Document** — document any new or changed exports.
 8. **Verify**: Run `devtools::test(reporter = "check")`, then `devtools::check(error_on = "warning")`. Resolve warnings, errors, and NOTEs.
-9. **News** — add bullet at top of `NEWS.md` (under dev heading):
-   - User-facing changes only. 1 line, end with `.`
-   - Present tense, positive framing, function names (backticks + `()`) near start: `` * `fn()` now accepts ... `` not `* Fixed ...`
-   - Issue/contributor before final period: `` * `fn()` now accepts ... (@user, #N). `` where `#N` is the GitHub issue number being implemented (e.g. `#42`).
-   - Get username: `gh api user --jq .login`; get issue number from the user's prompt, the branch name (`git branch --show-current`), or `gh issue list`.
-   - **Never guess or invent an issue number.** Before writing it, verify: (1) you received it from the user or the branch name, OR (2) you looked it up with `gh`. If you cannot trace the number to a concrete source, use `#noissue`.
 
 ---
 

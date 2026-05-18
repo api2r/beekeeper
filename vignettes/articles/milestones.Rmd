@@ -47,8 +47,8 @@ To track the development toward that grant, here I log the milestones from the g
   - Changes:
     - This was actually developed *after* 0.4.0.
     - The wording I really wanted here was "pagination."
-    - This milestsone resulted in the [pagination](pagination.html) vignette.
-- [x] **0.4.0: Batching and rate limiting.**
+    - This milestone resulted in the [pagination](pagination.html) vignette.
+- [x] **0.4.0: Endpoint function scaffolding.**
   - Proposal wording:
     - Generate `R/*.R` and `tests/testthat/*.R` files for all endpoints ("paths") described in the given API specification.
     - The generated functions will work, but error checking, documentation, and tests will be minimal.
@@ -63,7 +63,7 @@ To track the development toward that grant, here I log the milestones from the g
     - Potential challenges: By this point I'll need an OAS definition document to use for testing that includes all of the possible parameter types.
     I'll likely need to generate a fake API specification that goes beyond a typical individual example.
   - Changes:
-    - Type checking is implemented for many parameter types (logical, character, integer, double), and infrastructure is in place to addd the rest as they become available in the spun-off [{stbl}](https://stbl.wrangle.zone) package.
+    - Type checking is implemented for many parameter types (logical, character, integer, double), and infrastructure is in place to add the rest as they become available in the spun-off [{stbl}](https://stbl.wrangle.zone) package.
     - I don't really *need* the grand API specification I envisioned for testing, so I did not create that.
 - [ ] **0.6.0: Expected results.**
   - Proposal wording:
