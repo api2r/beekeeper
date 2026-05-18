@@ -69,17 +69,6 @@
 <strong>Document</strong> — document any new or changed exports.</li>
 <li>
 <strong>Verify</strong>: Run <code>devtools::test(reporter = "check")</code>, then <code>devtools::check(error_on = "warning")</code>. Resolve warnings, errors, and NOTEs.</li>
-<li>
-<strong>News</strong> — add bullet at top of <code>NEWS.md</code> (under dev heading):
-<ul><li>User-facing changes only. 1 line, end with <code>.</code>
-</li>
-<li>Present tense, positive framing, function names (backticks + <code>()</code>) near start: <code>* `fn()` now accepts ...</code> not <code>* Fixed ...</code>
-</li>
-<li>Issue/contributor before final period: <code>* `fn()` now accepts ... (@user, #N).</code> where <code>#N</code> is the GitHub issue number being implemented (e.g. <code>#42</code>).</li>
-<li>Get username: <code>gh api user --jq .login</code>; get issue number from the user’s prompt, the branch name (<code>git branch --show-current</code>), or <code>gh issue list</code>.</li>
-<li>
-<strong>Never guess or invent an issue number.</strong> Before writing it, verify: (1) you received it from the user or the branch name, OR (2) you looked it up with <code>gh</code>. If you cannot trace the number to a concrete source, use <code>#noissue</code>.</li>
-</ul></li>
 </ol><hr></div>
 <div class="section level2">
 <h2 id="general">General<a class="anchor" aria-label="anchor" href="#general"></a></h2>

@@ -61,10 +61,10 @@ changes.
   - Changes:
     - This was actually developed *after* 0.4.0.
     - The wording I really wanted here was “pagination.”
-    - This milestsone resulted in the
+    - This milestone resulted in the
       [pagination](https://beekeeper.api2r.org/dev/articles/pagination.md)
       vignette.
-- **0.4.0: Batching and rate limiting.**
+- **0.4.0: Endpoint function scaffolding.**
   - Proposal wording:
     - Generate `R/*.R` and `tests/testthat/*.R` files for all endpoints
       (“paths”) described in the given API specification.
@@ -88,8 +88,8 @@ changes.
       specification that goes beyond a typical individual example.
   - Changes:
     - Type checking is implemented for many parameter types (logical,
-      character, integer, double), and infrastructure is in place to
-      addd the rest as they become available in the spun-off
+      character, integer, double), and infrastructure is in place to add
+      the rest as they become available in the spun-off
       [{stbl}](https://stbl.wrangle.zone) package.
     - I don’t really *need* the grand API specification I envisioned for
       testing, so I did not create that.
