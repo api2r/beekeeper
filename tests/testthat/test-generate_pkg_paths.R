@@ -79,7 +79,7 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
   api_definition <- guru_api_definition
   expected_path_contents <- load_expected_files("guru", "/paths-.+\\.R$")
   expected_test_contents <- load_expected_files("guru", "/test-paths-.+\\.R$")
-  expected_setup_content <- readLines(test_path("_fixtures", "guru", "setup.R"))
+  expected_setup_content <- readLines(test_path("_fixtures", "guru", "testthat", "setup.R"))
 
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
@@ -161,7 +161,7 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   config <- fec_config
   api_definition <- fec_api_definition
   expected_file_content <- readLines(
-    test_path("_fixtures", "fec", "paths-audit-get_names_audit_candidates.R")
+    test_path("_fixtures", "fec", "R", "paths-audit-get_names_audit_candidates.R")
   )
 
   tmp <- withr::local_tempdir()
@@ -190,7 +190,7 @@ test_that(".generate_paths() writes correct paths.R for trello (#65)", {
   config <- trello_config
   api_definition <- trello_api_definition
   expected_file_content <- readLines(
-    test_path("_fixtures", "trello", "paths-board-add_boards.R")
+    test_path("_fixtures", "trello", "R", "paths-board-add_boards.R")
   )
 
   tmp <- withr::local_tempdir()
@@ -264,6 +264,7 @@ test_that("generate_pkg_paths() reads saved inputs from config (#101)", {
   path_expected <- readLines(test_path(
     "_fixtures",
     "guru",
+    "R",
     "paths-apis-list_apis.R"
   ))
 

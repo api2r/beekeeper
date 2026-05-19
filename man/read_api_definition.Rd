@@ -25,10 +25,7 @@ definition stored as a \code{\link[rapid:class_rapid]{rapid::class_rapid()}} obj
 by \code{\link[=use_beekeeper]{use_beekeeper()}} based on an OpenAPI definition file.
 }
 \examples{
-api_definition <- read_api_definition(
-  pkg_dir = fs::path_package("beekeeper"),
-  rapid_filename = "example_beekeeper_rapid.rds"
-)
+api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
 class(api_definition)
 api_definition@info@origin@url
 }

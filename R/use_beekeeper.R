@@ -16,6 +16,23 @@
 #'   is also written, and the path to that file (relative to `pkg_dir`) is saved
 #'   in the config file.
 #' @export
+#' @examplesIf rlang::is_installed("withr")
+#' # Set up an empty package.
+#' pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+#' usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+#' usethis::local_project(pkg_dir)
+#'
+#' # Read an api definition. This could also simply be a URL to such a
+#' # definition.
+#' api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
+#'
+#' # Set up the package to use beekeeper with that definition.
+#' use_beekeeper(api_definition, "guru")
+#' read_config()
+#' expect_equal(read_api_definition(), api_definition)
+#'
+#' # Clean up.
+#' withr::deferred_run()
 use_beekeeper <- function(
   x,
   api_abbr,

@@ -5,7 +5,7 @@
 #' Get schedules schedule d sub id
 #'
 #' Schedule D, it shows debts and obligations owed to or by the committee that are required to be disclosed.
-#'
+#' 
 #' @param sort_nulls_last (length-1 `logical`, optional) Toggle that sorts null values last
 #' @param per_page (length-1 `list`, optional) The number of results returned per page. Defaults to 20.
 #' @param sort_null_only (length-1 `logical`, optional) Toggle that filters out all rows having sort column that is non-null
@@ -13,33 +13,13 @@
 #' @param sort (length-1 `character`, optional) Provide a field to sort by. Use `-` for descending order.
 #' @param api_key (length-1 `character`) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
 #' @param page (length-1 `list`, optional) For paginating through results, starting at page 1
-#' @param sub_id (length-1 `character`)
+#' @param sub_id (length-1 `character`) 
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_schedules_schedule_d_sub_id()`: The API response.
 #' @export
-fec_get_schedules_schedule_d_sub_id <- function(
-  sort_nulls_last,
-  per_page,
-  sort_null_only,
-  sort_hide_null,
-  sort,
-  page,
-  sub_id,
-  api_key = Sys.getenv("FEC_API_KEY"),
-  max_reqs = Inf,
-  max_tries_per_req = 3
-) {
-  req <- req_fec_get_schedules_schedule_d_sub_id(
-    sort_nulls_last = sort_nulls_last,
-    per_page = per_page,
-    sort_null_only = sort_null_only,
-    sort_hide_null = sort_hide_null,
-    sort = sort,
-    page = page,
-    sub_id = sub_id,
-    api_key = api_key
-  )
+fec_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_fec_get_schedules_schedule_d_sub_id(sort_nulls_last = sort_nulls_last, per_page = per_page, sort_null_only = sort_null_only, sort_hide_null = sort_hide_null, sort = sort, page = page, sub_id = sub_id, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -50,27 +30,16 @@ fec_get_schedules_schedule_d_sub_id <- function(
 
 #' @rdname fec_get_schedules_schedule_d_sub_id
 #' @returns `req_fec_get_schedules_schedule_d_sub_id()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_schedules_schedule_d_sub_id <- function(
-  sort_nulls_last,
-  per_page,
-  sort_null_only,
-  sort_hide_null,
-  sort,
-  page,
-  sub_id,
-  api_key = Sys.getenv("FEC_API_KEY")
-) {
+req_fec_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY")) {
+  sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
+  sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
+  sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
+  sort <- stbl::to_chr_scalar(sort)
+  sub_id <- stbl::to_chr_scalar(sub_id)
   fec_req_prepare(
     path = c("/schedules/schedule_d/{sub_id}/", sub_id = sub_id),
     method = "get",
     api_key = api_key,
-    query = list(
-      sort_nulls_last = sort_nulls_last,
-      per_page = per_page,
-      sort_null_only = sort_null_only,
-      sort_hide_null = sort_hide_null,
-      sort = sort,
-      page = page
-    )
+    query = list(sort_nulls_last = sort_nulls_last, per_page = per_page, sort_null_only = sort_null_only, sort_hide_null = sort_hide_null, sort = sort, page = page)
   )
 }

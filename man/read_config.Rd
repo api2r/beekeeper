@@ -41,6 +41,9 @@ last updated, in the format "YYYY-MM-DD HH:MM:SS" (UTC).
 to the package root) where generated security metadata is stored.
 }
 }
+\examples{
+read_config(pkg_dir = fs::path_package("beekeeper", "guru"))
+}
 \seealso{
 Other config readers:
 \code{\link[=read_api_abbr]{read_api_abbr()}},

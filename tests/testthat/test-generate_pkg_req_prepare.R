@@ -5,11 +5,13 @@ test_that(".generate_prepare() generates prepare file.", {
   prepare_expected <- readLines(test_path(
     "_fixtures",
     "guru",
+    "R",
     "010-prepare.R"
   ))
   t_prepare_expected <- readLines(test_path(
     "_fixtures",
     "guru",
+    "testthat",
     "test-010-prepare.R"
   ))
 
@@ -36,6 +38,7 @@ test_that("generate_pkg_req_prepare() reads saved inputs from config (#101)", {
   prepare_expected <- readLines(test_path(
     "_fixtures",
     "trello",
+    "R",
     "010-prepare.R"
   ))
 

@@ -44,3 +44,23 @@ Create a configuration file for a package to use beekeeper. The configuration
 file tracks information that will be used for generation of other functions,
 and the timestamp when the configuration was last updated or used.
 }
+\examples{
+\dontshow{if (rlang::is_installed("withr")) withAutoprint(\{ # examplesIf}
+# Set up an empty package.
+pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+usethis::local_project(pkg_dir)
+
+# Read an api definition. This could also simply be a URL to such a
+# definition.
+api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
+
+# Set up the package to use beekeeper with that definition.
+use_beekeeper(api_definition, "guru")
+read_config()
+expect_equal(read_api_definition(), api_definition)
+
+# Clean up.
+withr::deferred_run()
+\dontshow{\}) # examplesIf}
+}

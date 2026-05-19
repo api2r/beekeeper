@@ -33,13 +33,12 @@ for details about the development process.
 
 ## Installation
 
-<div class=".pkgdown-release">
+Install the latest release from [GitHub](https://github.com/):
 
-This package is not yet available on CRAN. See [the dev
-version](https://beekeeper.api2r.org/dev) for information about the
-in-progress version of the package.
-
-</div>
+``` r
+# install.packages("pak")
+pak::pak("api2r/beekeeper@*release")
+```
 
 <div class=".pkgdown-devel">
 

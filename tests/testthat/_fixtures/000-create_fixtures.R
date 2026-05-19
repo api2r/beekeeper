@@ -34,6 +34,7 @@ fec_rapid@paths <- rapid::as_paths({
   x <- fec_rapid@paths |>
     tibble::as_tibble() |>
     tidyr::hoist(operations, tags = "tags", .remove = FALSE)
+  x$tags <- unlist(x$tags)
   x <- x[x$tags %in% c("audit", "debts", "legal"), ]
   x$tags <- NULL
   x

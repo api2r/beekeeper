@@ -20,7 +20,12 @@ test_that(".generate_security() generates security file for trello", {
   skip_on_cran()
   config <- trello_config
   api_definition <- trello_api_definition
-  security_expected <- readLines(test_path("_fixtures", "trello", "020-auth.R"))
+  security_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "R",
+    "020-auth.R"
+  ))
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
   test_result <- .generate_security(
@@ -49,7 +54,12 @@ test_that(".generate_security() generates security file for trello", {
 test_that("generate_pkg_auth() writes auth files and saved security data (#101)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
-  security_expected <- readLines(test_path("_fixtures", "trello", "020-auth.R"))
+  security_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "R",
+    "020-auth.R"
+  ))
 
   create_local_package()
   writeLines(config_text, "_beekeeper.yml")

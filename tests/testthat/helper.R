@@ -60,7 +60,7 @@ scrub_path <- function(input, keep_dirs = c("R", "tests")) {
 # filenames.
 load_expected_files <- function(api_abbr, regexp) {
   test_dir <- test_path("_fixtures", api_abbr)
-  files <- fs::dir_ls(test_dir, regexp = regexp)
+  files <- fs::dir_ls(test_dir, regexp = regexp, recurse = TRUE)
   names(files) <- fs::path_file(files)
   purrr::map(files, readLines)
 }

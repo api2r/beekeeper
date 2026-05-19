@@ -5,7 +5,7 @@
 #' Get audit case
 #'
 #' This endpoint contains Final Audit Reports approved by the Commission since inception. The search can be based on information about the audited committee (Name, FEC ID Number, Type, Election Cycle) or the issues covered in the report.
-#'
+#' 
 #' @param audit_case_id (length-1 `list`, optional) Primary/foreign key for audit tables
 #' @param cycle (length-1 `list`, optional) Filter records to only those that are applicable to a given two-year period. This cycle follows the traditional House election cycle and subdivides the presidential and Senate elections into comparable two-year blocks. The cycle begins with an odd year and is named for its ending, even year.
 #' @param sub_category_id (length-1 `character`, optional) The finding id of an audit. Finding are a category of broader issues. Each category has an unique ID.
@@ -30,52 +30,8 @@
 #'
 #' @returns `fec_get_audit_case()`: The API response.
 #' @export
-fec_get_audit_case <- function(
-  audit_case_id,
-  cycle,
-  sub_category_id,
-  sort_nulls_last,
-  sort_hide_null,
-  min_election_cycle,
-  audit_id,
-  q,
-  per_page,
-  max_election_cycle,
-  candidate_id,
-  committee_type,
-  qq,
-  page,
-  committee_id,
-  committee_designation,
-  primary_category_id,
-  sort_null_only,
-  sort,
-  api_key = Sys.getenv("FEC_API_KEY"),
-  max_reqs = Inf,
-  max_tries_per_req = 3
-) {
-  req <- req_fec_get_audit_case(
-    audit_case_id = audit_case_id,
-    cycle = cycle,
-    sub_category_id = sub_category_id,
-    sort_nulls_last = sort_nulls_last,
-    sort_hide_null = sort_hide_null,
-    min_election_cycle = min_election_cycle,
-    audit_id = audit_id,
-    q = q,
-    per_page = per_page,
-    max_election_cycle = max_election_cycle,
-    candidate_id = candidate_id,
-    committee_type = committee_type,
-    qq = qq,
-    page = page,
-    committee_id = committee_id,
-    committee_designation = committee_designation,
-    primary_category_id = primary_category_id,
-    sort_null_only = sort_null_only,
-    sort = sort,
-    api_key = api_key
-  )
+fec_get_audit_case <- function(audit_case_id, cycle, sub_category_id, sort_nulls_last, sort_hide_null, min_election_cycle, audit_id, q, per_page, max_election_cycle, candidate_id, committee_type, qq, page, committee_id, committee_designation, primary_category_id, sort_null_only, sort, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_fec_get_audit_case(audit_case_id = audit_case_id, cycle = cycle, sub_category_id = sub_category_id, sort_nulls_last = sort_nulls_last, sort_hide_null = sort_hide_null, min_election_cycle = min_election_cycle, audit_id = audit_id, q = q, per_page = per_page, max_election_cycle = max_election_cycle, candidate_id = candidate_id, committee_type = committee_type, qq = qq, page = page, committee_id = committee_id, committee_designation = committee_designation, primary_category_id = primary_category_id, sort_null_only = sort_null_only, sort = sort, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -86,52 +42,17 @@ fec_get_audit_case <- function(
 
 #' @rdname fec_get_audit_case
 #' @returns `req_fec_get_audit_case()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_audit_case <- function(
-  audit_case_id,
-  cycle,
-  sub_category_id,
-  sort_nulls_last,
-  sort_hide_null,
-  min_election_cycle,
-  audit_id,
-  q,
-  per_page,
-  max_election_cycle,
-  candidate_id,
-  committee_type,
-  qq,
-  page,
-  committee_id,
-  committee_designation,
-  primary_category_id,
-  sort_null_only,
-  sort,
-  api_key = Sys.getenv("FEC_API_KEY")
-) {
+req_fec_get_audit_case <- function(audit_case_id, cycle, sub_category_id, sort_nulls_last, sort_hide_null, min_election_cycle, audit_id, q, per_page, max_election_cycle, candidate_id, committee_type, qq, page, committee_id, committee_designation, primary_category_id, sort_null_only, sort, api_key = Sys.getenv("FEC_API_KEY")) {
+  sub_category_id <- stbl::to_chr_scalar(sub_category_id)
+  sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
+  sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
+  committee_designation <- stbl::to_chr_scalar(committee_designation)
+  primary_category_id <- stbl::to_chr_scalar(primary_category_id)
+  sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
   fec_req_prepare(
     path = "/audit-case/",
     method = "get",
     api_key = api_key,
-    query = list(
-      audit_case_id = audit_case_id,
-      cycle = cycle,
-      sub_category_id = sub_category_id,
-      sort_nulls_last = sort_nulls_last,
-      sort_hide_null = sort_hide_null,
-      min_election_cycle = min_election_cycle,
-      audit_id = audit_id,
-      q = q,
-      per_page = per_page,
-      max_election_cycle = max_election_cycle,
-      candidate_id = candidate_id,
-      committee_type = committee_type,
-      qq = qq,
-      page = page,
-      committee_id = committee_id,
-      committee_designation = committee_designation,
-      primary_category_id = primary_category_id,
-      sort_null_only = sort_null_only,
-      sort = sort
-    )
+    query = list(audit_case_id = audit_case_id, cycle = cycle, sub_category_id = sub_category_id, sort_nulls_last = sort_nulls_last, sort_hide_null = sort_hide_null, min_election_cycle = min_election_cycle, audit_id = audit_id, q = q, per_page = per_page, max_election_cycle = max_election_cycle, candidate_id = candidate_id, committee_type = committee_type, qq = qq, page = page, committee_id = committee_id, committee_designation = committee_designation, primary_category_id = primary_category_id, sort_null_only = sort_null_only, sort = sort)
   )
 }
