@@ -5,7 +5,7 @@
 * `generate_pkg_paths()` now generates a separate R file for each endpoint, rather than a single file per tag (#65).
 * `generate_pkg_paths()` also includes parameter documentation, and parameter validation to prevent users from creating API calls that will fail due to passing the wrong parameter type (#69, #85).
 * Header and cookie parameters are handled properly by `generate_pkg_paths()` (#84).
-* All functions now have examples, and example configuration data is available in `fs::path_package("beekeeper", "guru")` and `fs::path_package("beekeeper", "trellor")` (#99).
+* All functions now have examples, and example configuration data is available in `fs::path_package("beekeeper", "guru")` and `fs::path_package("beekeeper", "trello")` (#99).
 
 # beekeeper 0.4.0
 
