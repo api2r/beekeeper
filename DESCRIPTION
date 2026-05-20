@@ -1,6 +1,6 @@
 Package: beekeeper
 Title: Rapidly Scaffold API Client Packages
-Version: 0.4.0.9000
+Version: 0.5.0
 Authors@R: c(
     person("Jon", "Harmon", , "jonthegeek@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-4781-4346")),
