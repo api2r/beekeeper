@@ -1,3 +1,5 @@
+# beekeeper (development version)
+
 # beekeeper 0.5.0
 
 * New generation functions `generate_pkg_auth()`, `generate_pkg_paths()`, `generate_pkg_req_prepare()`, and `generate_pkg_shared_params()` allow for more modular API-wrapping package generation (#101).
