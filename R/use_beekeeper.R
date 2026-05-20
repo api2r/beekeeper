@@ -29,7 +29,7 @@
 #' # Set up the package to use beekeeper with that definition.
 #' use_beekeeper(api_definition, "guru")
 #' read_config()
-#' expect_equal(read_api_definition(), api_definition)
+#' all.equal(read_api_definition(), api_definition)
 #'
 #' # Clean up.
 #' withr::deferred_run()

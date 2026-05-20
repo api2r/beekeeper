@@ -60,6 +60,14 @@ read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
   return(config)
 }
 
+#' Read a field from beekeeper config
+#'
+#' @param field (`character(1)`) The name of the config field to read.
+#' @param default (`any`) Default value to return if `field` is not in the
+#'   config.
+#' @inheritParams .shared-params
+#' @returns (`any`) The value of the requested field, or `default` if not found.
+#' @keywords internal
 .read_config_field <- function(
   field,
   pkg_dir,
