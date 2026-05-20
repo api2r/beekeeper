@@ -66,11 +66,11 @@ object is also written, and the path to that file (relative to
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/RtmpWtBtY5/file44c57dd26a2/.
-#> ✔ Setting active project to "/tmp/RtmpWtBtY5/file44c57dd26a2".
+#> ✔ Creating /tmp/RtmpEdHjqq/file44918f0597b/.
+#> ✔ Setting active project to "/tmp/RtmpEdHjqq/file44918f0597b".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file44c57dd26a2
+#> Package: file44918f0597b
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -84,7 +84,7 @@ usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
 #> ✔ Writing NAMESPACE.
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/RtmpWtBtY5/file44c57dd26a2".
+#> ✔ Setting active project to "/tmp/RtmpEdHjqq/file44918f0597b".
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
 
 # Read an api definition. This could also simply be a URL to such a
@@ -109,10 +109,10 @@ read_config()
 #> [1] "_beekeeper_rapid.rds"
 #> 
 #> $updated_on
-#> [1] "2026-05-20 14:01:10 UTC"
+#> [1] "2026-05-20 14:10:16 UTC"
 #> 
-expect_equal(read_api_definition(), api_definition)
-#> Error in expect_equal(read_api_definition(), api_definition): could not find function "expect_equal"
+all.equal(read_api_definition(), api_definition)
+#> [1] TRUE
 
 # Clean up.
 withr::deferred_run()

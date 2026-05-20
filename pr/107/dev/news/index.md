@@ -38,7 +38,7 @@
   ([\#84](https://github.com/api2r/beekeeper/issues/84)).
 - All functions now have examples, and example configuration data is
   available in `fs::path_package("beekeeper", "guru")` and
-  `fs::path_package("beekeeper", "trellor")`
+  `fs::path_package("beekeeper", "trello")`
   ([\#99](https://github.com/api2r/beekeeper/issues/99)).
 
 ## beekeeper 0.4.0

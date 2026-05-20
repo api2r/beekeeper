@@ -62,6 +62,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_warn.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-prep_param_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-prepare_params_df.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-read_config_field.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-remove_security_args.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-security_arg_description_clean.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-security_args_compile.html</loc></url>
