@@ -46,10 +46,7 @@ Other config readers:
 ## Examples
 
 ``` r
-api_definition <- read_api_definition(
-  pkg_dir = fs::path_package("beekeeper"),
-  rapid_filename = "example_beekeeper_rapid.rds"
-)
+api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
 class(api_definition)
 #> [1] "rapid::rapid" "S7_object"   
 api_definition@info@origin@url

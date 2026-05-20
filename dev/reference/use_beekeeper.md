@@ -59,3 +59,62 @@ use_beekeeper(
 config file is written as a side effect of this function. The rapid
 object is also written, and the path to that file (relative to
 `pkg_dir`) is saved in the config file.
+
+## Examples
+
+``` r
+# Set up an empty package.
+pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+#> ✔ Creating /tmp/Rtmps8I4DK/file4477a6d92ea/.
+#> ✔ Setting active project to "/tmp/Rtmps8I4DK/file4477a6d92ea".
+#> ✔ Creating R/.
+#> ✔ Writing DESCRIPTION.
+#> Package: file4477a6d92ea
+#> Title: What the Package Does (One Line, Title Case)
+#> Version: 0.0.0.9000
+#> Authors@R (parsed):
+#>     * First Last <first.last@example.com> [aut, cre]
+#> Description: What the package does (one paragraph).
+#> License: `use_mit_license()`, `use_gpl3_license()` or friends to
+#>     pick a license
+#> Encoding: UTF-8
+#> Roxygen: list(markdown = TRUE)
+#> RoxygenNote: 8.0.0
+#> ✔ Writing NAMESPACE.
+#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+usethis::local_project(pkg_dir)
+#> ✔ Setting active project to "/tmp/Rtmps8I4DK/file4477a6d92ea".
+#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+
+# Read an api definition. This could also simply be a URL to such a
+# definition.
+api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
+
+# Set up the package to use beekeeper with that definition.
+use_beekeeper(api_definition, "guru")
+#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+read_config()
+#> $api_title
+#> [1] "APIs.guru"
+#> 
+#> $api_abbr
+#> [1] "guru"
+#> 
+#> $api_version
+#> [1] "2.2.0"
+#> 
+#> $rapid_filename
+#> [1] "_beekeeper_rapid.rds"
+#> 
+#> $updated_on
+#> [1] "2026-05-20 14:14:46 UTC"
+#> 
+all.equal(read_api_definition(), api_definition)
+#> [1] TRUE
+
+# Clean up.
+withr::deferred_run()
+#> No deferred expressions to run
+```

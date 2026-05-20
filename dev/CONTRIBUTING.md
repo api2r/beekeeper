@@ -27,8 +27,8 @@ help you write a unit test, if needed).
   `usethis::create_from_github("api2r/beekeeper", fork = TRUE)`.
 
 - Install all development dependencies with
-  [`devtools::install_dev_deps()`](https://devtools.r-lib.org/reference/install_deps.html),
-  and then make sure the package passes R CMD check by running
+  [`pak::pak()`](https://pak.r-lib.org/reference/pak.html), and then
+  make sure the package passes R CMD check by running
   [`devtools::check()`](https://devtools.r-lib.org/reference/check.html).
   If R CMD check doesn’t pass cleanly, it’s a good idea to ask for help
   before continuing.
@@ -40,15 +40,16 @@ help you write a unit test, if needed).
   [`usethis::pr_push()`](https://usethis.r-lib.org/reference/pull-requests.html),
   and following the prompts in your browser. The title of your PR should
   briefly describe the change. The body of your PR should contain
-  `Fixes #issue-number`.
+  `Fixes #issue-number`, where `issue-number` is the number of the issue
+  your PR addresses (if there isn’t one, please create a new issue
+  before creating the PR).
 
 ### Code style
 
 - New code should follow the tidyverse [style
-  guide](https://style.tidyverse.org). You can use the
-  [styler](https://CRAN.R-project.org/package=styler) package to apply
-  these styles, but please don’t restyle code that has nothing to do
-  with your PR.
+  guide](https://style.tidyverse.org). We recommend using Posit
+  [Air](https://posit-dev.github.io/air/) to apply these styles, but
+  please don’t restyle code that has nothing to do with your PR.
 
 - We use [roxygen2](https://cran.r-project.org/package=roxygen2), with
   [Markdown
@@ -57,7 +58,15 @@ help you write a unit test, if needed).
 
 - We use [testthat](https://cran.r-project.org/package=testthat) for
   unit tests. Contributions with test cases included are easier to
-  accept.
+  accept. Tag your test descriptions (the first argument to
+  `test_that()`) with `"(#issue-number)"`, where `issue-number` is the
+  number of the issue the test confirms.
+
+- For user-facing changes, add a bullet to the top of `NEWS.md`
+  (i.e. just below the first header). Follow the style described in
+  <https://style.tidyverse.org/news.html>. Describe the changes made,
+  followed by your GitHub username and links to relevant issue(s)/PR(s)
+  in parentheses, eg `(@jonthegeek, #106)`.
 
 ## Code of Conduct
 

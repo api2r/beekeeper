@@ -16,7 +16,7 @@ changes.
     [{nectar}](https://nectar.api2r.org), and is also being developed
     parallel to this one.
 - **0.1.0: Basic authentication and endpoint calls.**
-  - Proposal wording:
+  - Proposal wording
     - Export a function to generate `R/*.R` and `tests/testthat/*.R`
       files to authenticate the user and make a call to the API, given
       the URL of an OpenAPI spec in YAML format. The generated files
@@ -28,13 +28,13 @@ changes.
       authentication requests, while others simply provide an API key. I
       will need to carefully navigate these complexities in the
       vignette.
-  - Changes:
+  - Changes from Proposal
     - The vignette about configuring authentication was folded into the
       main package vignette, since it turned out to be surprisingly
       straightforward (at least at this point).
     - At this point authentication covers API keys only.
 - **0.2.0: OAS definition discovery.**
-  - Proposal wording:
+  - Proposal wording
     - Add support for APIs using the OAS json format.
     - Streamline discovery of API definitions (with associated error
       handling).
@@ -44,11 +44,11 @@ changes.
       <https://APIs.guru> itself has a (simple) API to aid in API
       discovery, which might provide an opportunity to use api2r to
       generate parts of itself.
-  - Changes:
+  - Changes from Proposal
     - API discovery was spun off to a separate package,
       [{anyapi}](https://anyapi.api2r.org).
 - **0.3.0: Batching and rate limiting.**
-  - Proposal wording:
+  - Proposal wording
     - Add documentation for implementing batching and rate-limiting.
     - If possible, export functionality to help implement these
       processes, but standards seem to vary widely.
@@ -58,14 +58,14 @@ changes.
       different that it will be difficult to summarize them. For
       example, Slack has two separate batching systems in its API, with
       some functions moved to the newer system, and others not.
-  - Changes:
+  - Changes from Proposal
     - This was actually developed *after* 0.4.0.
     - The wording I really wanted here was “pagination.”
     - This milestone resulted in the
       [pagination](https://beekeeper.api2r.org/dev/articles/pagination.md)
       vignette.
 - **0.4.0: Endpoint function scaffolding.**
-  - Proposal wording:
+  - Proposal wording
     - Generate `R/*.R` and `tests/testthat/*.R` files for all endpoints
       (“paths”) described in the given API specification.
     - The generated functions will work, but error checking,
@@ -73,35 +73,35 @@ changes.
     - Potential challenges: I’ll need to strike a balance here between
       getting a basic working system and producing something that can be
       easily expanded later.
-  - Changes:
+  - Changes from Proposal
     - Generated `R/*.R` and `tests/testthat/*.R` files for all endpoints
       (“paths”) described in the given API specification.
     - The generated functions work, but error checking, documentation,
       and tests were minimal at this point.
 - **0.5.0: More robust scaffolding.**
-  - Proposal wording:
+  - Proposal wording
     - Add parameter documentation.
     - Also add parameter type checking.
     - Potential challenges: By this point I’ll need an OAS definition
       document to use for testing that includes all of the possible
       parameter types. I’ll likely need to generate a fake API
       specification that goes beyond a typical individual example.
-  - Changes:
-    - Type checking is implemented for many parameter types (logical,
-      character, integer, double), and infrastructure is in place to add
-      the rest as they become available in the spun-off
+  - Changes from Proposal
+    - Type checking is implemented for many parameter types (`logical`,
+      `character`, `integer`, `double`), and infrastructure is in place
+      to add the rest as they become available in the spun-off
       [{stbl}](https://stbl.wrangle.zone) package.
     - I don’t really *need* the grand API specification I envisioned for
       testing, so I did not create that.
 - **0.6.0: Expected results.**
-  - Proposal wording:
+  - Proposal wording
     - Add response (return value) documentation.
     - Use expected responses to generate better test scaffolds.
     - Potential challenges: Testing the generation of tests might
       present unique challenges. I’ll need to look into how testthat
       tests itself.
 - **0.7.0: Error messaging.**
-  - Proposal wording:
+  - Proposal wording
     - Add more robust error messaging for non-standard responses.
     - Potential challenges: Mocking cases where things fail can be
       tricky. Ideally this step will involve pushing the package to a

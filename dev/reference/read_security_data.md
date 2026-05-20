@@ -48,10 +48,7 @@ Other config readers:
 ## Examples
 
 ``` r
-read_security_data(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
+read_security_data(pkg_dir = fs::path_package("beekeeper", "trello"))
 #> $has_security
 #> [1] TRUE
 #> 

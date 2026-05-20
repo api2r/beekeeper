@@ -57,3 +57,49 @@ Other package generation functions:
 [`generate_pkg_auth()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_auth.md),
 [`generate_pkg_req_prepare()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_req_prepare.md),
 [`generate_pkg_shared_params()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_shared_params.md)
+
+## Examples
+
+``` r
+# Set up an empty package.
+pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+#> ✔ Creating /tmp/Rtmps8I4DK/file4473b89a023/.
+#> ✔ Setting active project to "/tmp/Rtmps8I4DK/file4473b89a023".
+#> ✔ Creating R/.
+#> ✔ Writing DESCRIPTION.
+#> Package: file4473b89a023
+#> Title: What the Package Does (One Line, Title Case)
+#> Version: 0.0.0.9000
+#> Authors@R (parsed):
+#>     * First Last <first.last@example.com> [aut, cre]
+#> Description: What the package does (one paragraph).
+#> License: `use_mit_license()`, `use_gpl3_license()` or friends to
+#>     pick a license
+#> Encoding: UTF-8
+#> Roxygen: list(markdown = TRUE)
+#> RoxygenNote: 8.0.0
+#> ✔ Writing NAMESPACE.
+#> ✔ Setting active project to "<no active project>".
+bk_files <- c("_beekeeper.yml", "_beekeeper_rapid.rds")
+fs::file_copy(
+  fs::path_package("beekeeper", "guru", bk_files),
+  fs::path(pkg_dir, bk_files)
+)
+usethis::local_project(pkg_dir)
+#> ✔ Setting active project to "/tmp/Rtmps8I4DK/file4473b89a023".
+#> ✔ Setting active project to "<no active project>".
+
+# Generate functions and tests for API paths.
+generate_pkg_paths()
+#> Warning: cannot open file '/__w/beekeeper/beekeeper/docs/dev/reference/_beekeeper.yml': No such file or directory
+#> Error in file(file, "rt", encoding = fileEncoding): cannot open the connection
+fs::dir_ls("R")
+#> Error: [ENOENT] Failed to search directory 'R': no such file or directory
+fs::dir_ls("tests/testthat")
+#> Error: [ENOENT] Failed to search directory 'tests/testthat': no such file or directory
+
+# Clean up.
+withr::deferred_run()
+#> No deferred expressions to run
+```

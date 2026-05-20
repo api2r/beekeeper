@@ -16,6 +16,13 @@ for details about the development process.
 
 ## Installation
 
+Install the latest release from [GitHub](https://github.com/):
+
+``` r
+# install.packages("pak")
+pak::pak("api2r/beekeeper@*release")
+```
+
 Install the development version of beekeeper from
 [GitHub](https://github.com/):
 

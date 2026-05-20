@@ -63,3 +63,27 @@ Other config readers:
 [`read_security_data()`](https://beekeeper.api2r.org/dev/reference/read_security_data.md),
 [`read_security_data_filename()`](https://beekeeper.api2r.org/dev/reference/read_security_data_filename.md),
 [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
+
+## Examples
+
+``` r
+read_config(pkg_dir = fs::path_package("beekeeper", "guru"))
+#> $api_title
+#> [1] "APIs.guru"
+#> 
+#> $api_abbr
+#> [1] "guru"
+#> 
+#> $api_version
+#> [1] "2.2.0"
+#> 
+#> $rapid_filename
+#> [1] "_beekeeper_rapid.rds"
+#> 
+#> $security_data_filename
+#> [1] "_beekeeper_security.yml"
+#> 
+#> $updated_on
+#> [1] "2026-05-12 07:57:02 UTC"
+#> 
+```

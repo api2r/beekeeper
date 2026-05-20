@@ -37,9 +37,6 @@ Other config readers:
 ## Examples
 
 ``` r
-read_api_abbr(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
+read_api_abbr(pkg_dir = fs::path_package("beekeeper", "guru"))
 #> [1] "guru"
 ```

@@ -38,9 +38,6 @@ Other config readers:
 ## Examples
 
 ``` r
-read_rapid_filename(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
-#> [1] "example_beekeeper_rapid.rds"
+read_rapid_filename(pkg_dir = fs::path_package("beekeeper", "guru"))
+#> [1] "_beekeeper_rapid.rds"
 ```
