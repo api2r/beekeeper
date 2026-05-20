@@ -26,8 +26,9 @@
 #'   `security_data_filename` when present.
 #' @export
 #' @family config readers
+#' @examples
+#' read_config(pkg_dir = fs::path_package("beekeeper", "guru"))
 read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
-  .assert_is_pkg(pkg_dir)
   config <- yaml::read_yaml(fs::path(pkg_dir, config_filename))
   return(.stabilize_config(config))
 }
@@ -59,6 +60,14 @@ read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
   return(config)
 }
 
+#' Read a field from beekeeper config
+#'
+#' @param field (`character(1)`) The name of the config field to read.
+#' @param default (`any`) Default value to return if `field` is not in the
+#'   config.
+#' @inheritParams .shared-params
+#' @returns (`any`) The value of the requested field, or `default` if not found.
+#' @keywords internal
 .read_config_field <- function(
   field,
   pkg_dir,
@@ -84,10 +93,7 @@ read_config <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
 #' @export
 #' @family config readers
 #' @examples
-#' read_rapid_filename(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   config_filename = "example_config.yml"
-#' )
+#' read_rapid_filename(pkg_dir = fs::path_package("beekeeper", "guru"))
 read_rapid_filename <- function(
   pkg_dir = ".",
   config_filename = "_beekeeper.yml"
@@ -106,10 +112,7 @@ read_rapid_filename <- function(
 #' @export
 #' @family config readers
 #' @examples
-#' read_api_abbr(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   config_filename = "example_config.yml"
-#' )
+#' read_api_abbr(pkg_dir = fs::path_package("beekeeper", "guru"))
 read_api_abbr <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
   .read_config_field("api_abbr", pkg_dir, config_filename)
 }
@@ -125,10 +128,7 @@ read_api_abbr <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
 #' @export
 #' @family config readers
 #' @examples
-#' read_api_title(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   config_filename = "example_config.yml"
-#' )
+#' read_api_title(pkg_dir = fs::path_package("beekeeper", "guru"))
 read_api_title <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
   .read_config_field("api_title", pkg_dir, config_filename)
 }
@@ -144,8 +144,7 @@ read_api_title <- function(pkg_dir = ".", config_filename = "_beekeeper.yml") {
 #' @family config readers
 #' @examples
 #' read_security_data_filename(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   config_filename = "example_config.yml"
+#'   pkg_dir = fs::path_package("beekeeper", "trello")
 #' )
 read_security_data_filename <- function(
   pkg_dir = ".",
@@ -170,10 +169,7 @@ read_security_data_filename <- function(
 #' @export
 #' @family config readers
 #' @examples
-#' api_definition <- read_api_definition(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   rapid_filename = "example_beekeeper_rapid.rds"
-#' )
+#' api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
 #' class(api_definition)
 #' api_definition@info@origin@url
 read_api_definition <- function(
@@ -181,7 +177,6 @@ read_api_definition <- function(
   rapid_filename = read_rapid_filename(pkg_dir)
 ) {
   pkg_dir <- fs::path_abs(pkg_dir)
-  .assert_is_pkg(pkg_dir)
   readRDS(fs::path(pkg_dir, rapid_filename))
 }
 
@@ -212,10 +207,7 @@ read_security_schemes <- function(
 #' @export
 #' @family config readers
 #' @examples
-#' read_security_data(
-#'   pkg_dir = fs::path_package("beekeeper"),
-#'   config_filename = "example_config.yml"
-#' )
+#' read_security_data(pkg_dir = fs::path_package("beekeeper", "trello"))
 read_security_data <- function(
   pkg_dir = ".",
   config_filename = "_beekeeper.yml",
@@ -225,7 +217,10 @@ read_security_data <- function(
   )
 ) {
   pkg_dir <- fs::path_abs(pkg_dir)
-  .assert_is_pkg(pkg_dir)
+  security_path <- fs::path(pkg_dir, security_data_filename)
+  if (!fs::file_exists(security_path)) {
+    return(list())
+  }
   security_data <- yaml::read_yaml(fs::path(pkg_dir, security_data_filename))
   if (is.null(security_data)) {
     return(list())

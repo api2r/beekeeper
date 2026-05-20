@@ -21,8 +21,7 @@ Read the \code{security_data_filename} field from a beekeeper config file.
 }
 \examples{
 read_security_data_filename(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
+  pkg_dir = fs::path_package("beekeeper", "trello")
 )
 }
 \seealso{

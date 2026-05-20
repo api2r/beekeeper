@@ -21,10 +21,7 @@ config file.
 Read the \code{rapid_filename} field from a beekeeper config file.
 }
 \examples{
-read_rapid_filename(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
+read_rapid_filename(pkg_dir = fs::path_package("beekeeper", "guru"))
 }
 \seealso{
 Other config readers:

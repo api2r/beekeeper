@@ -21,10 +21,7 @@ config file.
 Read the \code{api_abbr} field from a beekeeper config file.
 }
 \examples{
-read_api_abbr(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
+read_api_abbr(pkg_dir = fs::path_package("beekeeper", "guru"))
 }
 \seealso{
 Other config readers:

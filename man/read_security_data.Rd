@@ -28,10 +28,7 @@ Read prepared security metadata from a YAML file (default name
 \verb{_beekeeper_security.yml}) generated via \code{\link[=generate_pkg_auth]{generate_pkg_auth()}}.
 }
 \examples{
-read_security_data(
-  pkg_dir = fs::path_package("beekeeper"),
-  config_filename = "example_config.yml"
-)
+read_security_data(pkg_dir = fs::path_package("beekeeper", "trello"))
 }
 \seealso{
 Other config readers:

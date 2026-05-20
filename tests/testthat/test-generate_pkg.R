@@ -37,6 +37,7 @@ test_that("generate_pkg() generates call function with API keys (#17, #82)", {
   prepare_expected <- readLines(test_path(
     "_fixtures",
     "trello",
+    "R",
     "010-prepare.R"
   ))
 

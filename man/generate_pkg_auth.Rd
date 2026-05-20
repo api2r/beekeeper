@@ -46,6 +46,26 @@ the API security schemes stored in the OpenAPI definition. This supports
 incremental package scaffolding when you want to review or customize auth
 handling before generating the rest of the package files.
 }
+\examples{
+\dontshow{if (rlang::is_installed("withr")) withAutoprint(\{ # examplesIf}
+# Set up an empty package.
+pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+bk_files <- c("_beekeeper.yml", "_beekeeper_rapid.rds")
+fs::file_copy(
+  fs::path_package("beekeeper", "trello", bk_files),
+  fs::path(pkg_dir, bk_files)
+)
+usethis::local_project(pkg_dir)
+
+# Generate package authentication functions.
+generate_pkg_auth()
+fs::dir_ls("R")
+
+# Clean up.
+withr::deferred_run()
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 Other package generation functions:
 \code{\link[=generate_pkg]{generate_pkg()}},

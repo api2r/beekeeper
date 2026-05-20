@@ -39,12 +39,12 @@ See [R Consortium ISC Grant Milestones](https://beekeeper.api2r.org/dev/articles
 
 ## Installation
 
-::: .pkgdown-release
+Install the latest release from [GitHub](https://github.com/):
 
-This package is not yet available on CRAN.
-See [the dev version](https://beekeeper.api2r.org/dev) for information about the in-progress version of the package.
-
-:::
+```{r, eval = FALSE}
+# install.packages("pak")
+pak::pak("api2r/beekeeper@*release")
+```
 
 ::: .pkgdown-devel
 Install the development version of beekeeper from [GitHub](https://github.com/):

@@ -10,7 +10,12 @@ test_that(".generate_shared_params() returns file path for no-security API (#65)
 
 test_that(".generate_shared_params() writes correct content for no-security API (#65)", {
   skip_on_cran()
-  shared_expected <- readLines(test_path("_fixtures", "guru", "000-shared.R"))
+  shared_expected <- readLines(test_path(
+    "_fixtures",
+    "guru",
+    "R",
+    "000-shared.R"
+  ))
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
 
@@ -30,7 +35,12 @@ test_that(".generate_shared_params() writes security params for API with securit
     trello_config$api_abbr,
     trello_api_definition@components@security_schemes
   )
-  shared_expected <- readLines(test_path("_fixtures", "trello", "000-shared.R"))
+  shared_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "R",
+    "000-shared.R"
+  ))
   .generate_shared_params(security_data)
   expect_identical(
     readLines(fs::path(tmp, "R", "000-shared.R")),
@@ -41,7 +51,12 @@ test_that(".generate_shared_params() writes security params for API with securit
 test_that("generate_pkg_shared_params() reads saved security data (#101)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
-  shared_expected <- readLines(test_path("_fixtures", "trello", "000-shared.R"))
+  shared_expected <- readLines(test_path(
+    "_fixtures",
+    "trello",
+    "R",
+    "000-shared.R"
+  ))
 
   create_local_package()
   writeLines(config_text, "_beekeeper.yml")

@@ -10,6 +10,23 @@
 #'   `R/000-shared.R` is generated.
 #' @export
 #' @family package generation functions
+#' @examplesIf rlang::is_installed("withr")
+#' # Set up an empty package.
+#' pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+#' usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+#' bk_files <- c("_beekeeper.yml", "_beekeeper_rapid.rds")
+#' fs::file_copy(
+#'   fs::path_package("beekeeper", "trello", bk_files),
+#'   fs::path(pkg_dir, bk_files)
+#' )
+#' usethis::local_project(pkg_dir)
+#'
+#' # Generate shared parameters.
+#' generate_pkg_shared_params()
+#' fs::dir_ls("R")
+#'
+#' # Clean up.
+#' withr::deferred_run()
 generate_pkg_shared_params <- function(
   security_data = read_security_data(pkg_dir, "_beekeeper.yml"),
   pkg_dir = "."

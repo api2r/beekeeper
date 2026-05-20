@@ -2,10 +2,10 @@
 # element from the source API description. You should carefully review these
 # functions.
 
-#' Get audit category
+#' Get audit primary category
 #'
-#' This lists the options for the categories and subcategories available in the /audit-search/ endpoint.
-#'
+#' This lists the options for the primary categories available in the /audit-search/ endpoint.
+#' 
 #' @param sort_nulls_last (length-1 `logical`, optional) Toggle that sorts null values last
 #' @param page (length-1 `list`, optional) For paginating through results, starting at page 1
 #' @param primary_category_name (length-1 `list`, optional) Primary Audit Category - No Findings or Issues/Not a Committee - Net Outstanding Campaign/Convention Expenditures/Obligations - Payments/Disgorgements - Allocation Issues - Prohibited Contributions - Disclosure - Recordkeeping - Repayment to US Treasury - Other - Misstatement of Financial Activity - Excessive Contributions - Failure to File Reports/Schedules/Notices - Loans - Referred Findings Not Listed
@@ -17,32 +17,10 @@
 #' @param sort (length-1 `character`, optional) Provide a field to sort by. Use `-` for descending order.
 #' @inheritParams .shared-params
 #'
-#' @returns `fec_get_audit_category()`: The API response.
+#' @returns `fec_get_audit_primary_category()`: The API response.
 #' @export
-fec_get_audit_category <- function(
-  sort_nulls_last,
-  page,
-  primary_category_name,
-  sort_hide_null,
-  primary_category_id,
-  sort_null_only,
-  per_page,
-  sort,
-  api_key = Sys.getenv("FEC_API_KEY"),
-  max_reqs = Inf,
-  max_tries_per_req = 3
-) {
-  req <- req_fec_get_audit_category(
-    sort_nulls_last = sort_nulls_last,
-    page = page,
-    primary_category_name = primary_category_name,
-    sort_hide_null = sort_hide_null,
-    primary_category_id = primary_category_id,
-    sort_null_only = sort_null_only,
-    per_page = per_page,
-    sort = sort,
-    api_key = api_key
-  )
+fec_get_audit_primary_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_fec_get_audit_primary_category(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -51,32 +29,17 @@ fec_get_audit_category <- function(
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname fec_get_audit_category
-#' @returns `req_fec_get_audit_category()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_audit_category <- function(
-  sort_nulls_last,
-  page,
-  primary_category_name,
-  sort_hide_null,
-  primary_category_id,
-  sort_null_only,
-  per_page,
-  sort,
-  api_key = Sys.getenv("FEC_API_KEY")
-) {
+#' @rdname fec_get_audit_primary_category
+#' @returns `req_fec_get_audit_primary_category()`: (`httr2_request`) A [httr2::request()] object.
+req_fec_get_audit_primary_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY")) {
+  sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
+  sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
+  sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
+  sort <- stbl::to_chr_scalar(sort)
   fec_req_prepare(
-    path = "/audit-category/",
+    path = "/audit-primary-category/",
     method = "get",
     api_key = api_key,
-    query = list(
-      sort_nulls_last = sort_nulls_last,
-      page = page,
-      primary_category_name = primary_category_name,
-      sort_hide_null = sort_hide_null,
-      primary_category_id = primary_category_id,
-      sort_null_only = sort_null_only,
-      per_page = per_page,
-      sort = sort
-    )
+    query = list(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort)
   )
 }

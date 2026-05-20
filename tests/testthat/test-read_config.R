@@ -27,9 +27,7 @@ test_that("read_api_title() reads api titles (#99)", {
 
 test_that("read_security_schemes() reads security schemes (#101)", {
   withr::defer(memoise::forget(read_config))
-
   result <- read_security_schemes(test_path("_fixtures", "trello"))
-
   expect_s7_class(result, rapid::class_security_schemes)
   expect_identical(
     result@name,
@@ -39,7 +37,6 @@ test_that("read_security_schemes() reads security schemes (#101)", {
 
 test_that("read_security_data_filename() defaults when config omits it (#101)", {
   withr::defer(memoise::forget(read_config))
-
   expect_identical(
     read_security_data_filename(test_path("_fixtures", "guru")),
     "_beekeeper_security.yml"
@@ -48,48 +45,23 @@ test_that("read_security_data_filename() defaults when config omits it (#101)", 
 
 test_that("read_security_data_filename() reads configured filenames (#101)", {
   withr::defer(memoise::forget(read_config))
+  pkg_dir <- withr::local_tempdir()
   config_text <- c(
     readLines(test_path("_fixtures", "guru", "_beekeeper.yml")),
     "security_data_filename: custom_security.yml"
   )
-
-  create_local_package()
-  writeLines(config_text, "_beekeeper.yml")
-
-  expect_identical(read_security_data_filename(), "custom_security.yml")
+  writeLines(config_text, fs::path(pkg_dir, "_beekeeper.yml"))
+  expect_identical(read_security_data_filename(pkg_dir), "custom_security.yml")
 })
 
 test_that("read_security_data() reads saved security data (#101)", {
   withr::defer(memoise::forget(read_config))
-  config_text <- c(
-    readLines(test_path("_fixtures", "trello", "_beekeeper.yml")),
-    "security_data_filename: example_security_data.yml"
-  )
-  security_data_text <- readLines(system.file(
-    "example_security_data.yml",
-    package = "beekeeper"
-  ))
-
-  create_local_package()
-  writeLines(config_text, "_beekeeper.yml")
-  writeLines(security_data_text, "example_security_data.yml")
-
-  result <- read_security_data()
-
+  result <- read_security_data(fs::path_package("beekeeper", "trello"))
   expect_true(result$has_security)
   expect_identical(result$security_arg_names, c("key", "token"))
 })
 
-test_that("read_security_data() returns empty list for empty files (#101)", {
+test_that("read_security_data() returns empty list for missing files (#101)", {
   withr::defer(memoise::forget(read_config))
-  config_text <- c(
-    readLines(test_path("_fixtures", "guru", "_beekeeper.yml")),
-    "security_data_filename: empty_security.yml"
-  )
-
-  create_local_package()
-  writeLines(config_text, "_beekeeper.yml")
-  file.create("empty_security.yml")
-
-  expect_identical(read_security_data(), list())
+  expect_identical(read_security_data(test_path("_fixtures", "guru")), list())
 })

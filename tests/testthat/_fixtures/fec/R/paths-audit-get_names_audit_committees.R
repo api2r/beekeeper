@@ -5,20 +5,14 @@
 #' Get names audit committees
 #'
 #' Search for candidates or committees by name. If you're looking for information on a particular person or group, using a name to find the `candidate_id` or `committee_id` on this endpoint can be a helpful first step.
-#'
-#'
+#' 
 #' @param api_key (length-1 `character`) API key for https://api.data.gov. Get one at https://api.data.gov/signup.
 #' @param q (length-1 `list`) Name (candidate or committee) to search for
 #' @inheritParams .shared-params
 #'
 #' @returns `fec_get_names_audit_committees()`: The API response.
 #' @export
-fec_get_names_audit_committees <- function(
-  q,
-  api_key = Sys.getenv("FEC_API_KEY"),
-  max_reqs = Inf,
-  max_tries_per_req = 3
-) {
+fec_get_names_audit_committees <- function(q, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_fec_get_names_audit_committees(q = q, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
@@ -30,10 +24,7 @@ fec_get_names_audit_committees <- function(
 
 #' @rdname fec_get_names_audit_committees
 #' @returns `req_fec_get_names_audit_committees()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_names_audit_committees <- function(
-  q,
-  api_key = Sys.getenv("FEC_API_KEY")
-) {
+req_fec_get_names_audit_committees <- function(q, api_key = Sys.getenv("FEC_API_KEY")) {
   fec_req_prepare(
     path = "/names/audit_committees/",
     method = "get",

@@ -11,6 +11,24 @@
 #'   as well as the associated test files as `tests/testthat/test-paths-*.R`.
 #' @export
 #' @family package generation functions
+#' @examplesIf rlang::is_installed("withr")
+#' # Set up an empty package.
+#' pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
+#' usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
+#' bk_files <- c("_beekeeper.yml", "_beekeeper_rapid.rds")
+#' fs::file_copy(
+#'   fs::path_package("beekeeper", "guru", bk_files),
+#'   fs::path(pkg_dir, bk_files)
+#' )
+#' usethis::local_project(pkg_dir)
+#'
+#' # Generate functions and tests for API paths.
+#' generate_pkg_paths()
+#' fs::dir_ls("R")
+#' fs::dir_ls("tests/testthat")
+#'
+#' # Clean up.
+#' withr::deferred_run()
 generate_pkg_paths <- function(
   api_abbr = read_api_abbr(pkg_dir, config_filename),
   api_definition = read_api_definition(
@@ -93,11 +111,11 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 .paths_to_clean_df <- function(paths) {
   operations_df <- tibble::as_tibble(paths) |>
     tidyr::unnest("operations")
-  if (length(operations_df$deprecated)) {
+  if (length(operations_df[["deprecated"]])) {
     operations_df <- operations_df[!operations_df$deprecated, ]
   }
   operations_df$deprecated <- NULL
-  operations_df$tags <- .paths_fill_tags(operations_df$tags)
+  operations_df[["tags"]] <- .paths_fill_tags(operations_df[["tags"]])
   operations_df$operation_id <- .paths_fill_operation_id(
     operations_df$operation_id,
     operations_df$endpoint,
