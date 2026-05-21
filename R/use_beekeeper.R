@@ -107,19 +107,44 @@ use_beekeeper <- function(
 ) {
   config_filename <- stbl::stabilize_chr_scalar(config_filename)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-  yaml::write_yaml(
-    list(
-      api_title = api_definition@info@title,
-      api_abbr = stbl::stabilize_chr_scalar(api_abbr),
-      api_version = api_definition@info@version,
-      rapid_filename = rapid_filename,
-      updated_on = as.character(update_time)
-    ),
-    file = fs::path(pkg_dir, config_filename)
+  config <- list(
+    api_title = api_definition@info@title,
+    api_abbr = stbl::stabilize_chr_scalar(api_abbr),
+    api_version = api_definition@info@version,
+    rapid_filename = rapid_filename,
+    updated_on = as.character(update_time)
   )
+  config_origin <- .config_origin(api_definition)
+  if (!is.null(config_origin)) {
+    config$api_definition_origin <- config_origin
+  }
+  yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
   memoise::forget(read_config)
   usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
   return(config_filename)
+}
+
+.config_origin <- function(api_definition) {
+  origin <- api_definition@info@origin
+  config_origin <- Filter(
+    Negate(is.null),
+    list(
+      url = .optional_origin_field(origin@url),
+      format = .optional_origin_field(origin@format),
+      version = .optional_origin_field(origin@version)
+    )
+  )
+  if (!length(config_origin)) {
+    return(NULL)
+  }
+  config_origin
+}
+
+.optional_origin_field <- function(field) {
+  if (!is.character(field) || !length(field) || !nzchar(field[[1]])) {
+    return(NULL)
+  }
+  field[[1]]
 }
 
 #' Update one config field
