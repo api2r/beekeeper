@@ -1,4 +1,4 @@
-test_that("use_beekeeper writes a yml config (#10)", {
+test_that("use_beekeeper writes a yml config (#10, #108)", {
   pkg_tempdir <- withr::local_tempdir()
   local_mocked_bindings(
     use_build_ignore = function(...) {
