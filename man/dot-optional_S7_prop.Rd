@@ -7,7 +7,7 @@
 .optional_S7_prop(obj, prop)
 }
 \arguments{
-\item{obj}{(\code{character}) The S7 object from which the property should be
+\item{obj}{(\code{any}) The S7 object from which the property should be
 extracted.}
 
 \item{prop}{(\code{character}) The name of the property to extract.}
