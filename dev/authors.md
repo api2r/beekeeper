@@ -13,12 +13,12 @@ Source:
 [`DESCRIPTION`](https://github.com/api2r/beekeeper/blob/main/DESCRIPTION)
 
 Harmon J (2026). *beekeeper: Rapidly Scaffold API Client Packages*. R
-package version 0.4.0.9000, <https://beekeeper.api2r.org>.
+package version 0.5.0.9000, <https://beekeeper.api2r.org>.
 
     @Manual{,
       title = {beekeeper: Rapidly Scaffold API Client Packages},
       author = {Jon Harmon},
       year = {2026},
-      note = {R package version 0.4.0.9000},
+      note = {R package version 0.5.0.9000},
       url = {https://beekeeper.api2r.org},
     }

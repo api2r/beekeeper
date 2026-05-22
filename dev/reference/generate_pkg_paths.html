@@ -13,7 +13,7 @@ components."><meta property="og:image" content="https://beekeeper.api2r.org/logo
 
     <a class="navbar-brand me-2" href="../index.html">beekeeper</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,11 +111,11 @@ as well as the associated test files as <code>tests/testthat/test-paths-*.R</cod
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set up an empty package.</span></span></span>
 <span class="r-in"><span><span class="va">pkg_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">path_norm</a></span><span class="op">(</span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">local_tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_package</a></span><span class="op">(</span><span class="va">pkg_dir</span>, open <span class="op">=</span> <span class="cn">FALSE</span>, check_name <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating <span style="color: #0000BB;">/tmp/Rtmps8I4DK/file4473b89a023/</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/Rtmps8I4DK/file4473b89a023"</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating <span style="color: #0000BB;">/tmp/Rtmp4cPLOS/file44a233fc66d/</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/Rtmp4cPLOS/file44a233fc66d"</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating <span style="color: #0000BB;">R/</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing <span style="color: #0000BB;">DESCRIPTION</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Package</span>: file4473b89a023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Package</span>: file44a233fc66d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Title</span>: What the Package Does (One Line, Title Case)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Version</span>: 0.0.0.9000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Authors@R</span> (parsed):</span>
@@ -134,7 +134,7 @@ as well as the associated test files as <code>tests/testthat/test-paths-*.R</cod
 <span class="r-in"><span>  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">pkg_dir</span>, <span class="va">bk_files</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">local_project</a></span><span class="op">(</span><span class="va">pkg_dir</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/Rtmps8I4DK/file4473b89a023"</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/Rtmp4cPLOS/file44a233fc66d"</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"&lt;no active project&gt;"</span>.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Generate functions and tests for API paths.</span></span></span>
