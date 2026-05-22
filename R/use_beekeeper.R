@@ -156,7 +156,7 @@ use_beekeeper <- function(
 
 #' Get an S7 property if it exists
 #'
-#' @param obj (`character`) The S7 object from which the property should be
+#' @param obj (`any`) The S7 object from which the property should be
 #'   extracted.
 #' @param prop (`character`) The name of the property to extract.
 #'
