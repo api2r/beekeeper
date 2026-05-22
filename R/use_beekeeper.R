@@ -107,19 +107,68 @@ use_beekeeper <- function(
 ) {
   config_filename <- stbl::stabilize_chr_scalar(config_filename)
   update_time <- strptime(Sys.time(), format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-  yaml::write_yaml(
-    list(
-      api_title = api_definition@info@title,
-      api_abbr = stbl::stabilize_chr_scalar(api_abbr),
-      api_version = api_definition@info@version,
-      rapid_filename = rapid_filename,
-      updated_on = as.character(update_time)
-    ),
-    file = fs::path(pkg_dir, config_filename)
+  config <- list(
+    api_title = api_definition@info@title,
+    api_abbr = stbl::stabilize_chr_scalar(api_abbr),
+    api_version = api_definition@info@version,
+    rapid_filename = rapid_filename,
+    updated_on = as.character(update_time),
+    api_definition_origin = .config_origin(api_definition)
   )
+  yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
   memoise::forget(read_config)
   usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
   return(config_filename)
+}
+
+#' Extract the origin from an api definition
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) The `url`, `format`, and `version` (if known) of the API
+#'   definition.
+#' @keywords internal
+.config_origin <- function(api_definition) {
+  list(
+    url = .optional_origin_field(api_definition, "url"),
+    format = .optional_origin_field(api_definition, "format"),
+    version = .optional_origin_field(api_definition, "version")
+  )
+}
+
+#' Get an origin field if it exists
+#'
+#' @param field (`character`) The name of the field to extract.
+#' @inheritParams .shared-params
+#'
+#' @returns (`any`, most likely `character(1)` or `NULL`) The value of the
+#'   field, if it exists in the `origin` property of the `info` property of
+#'   `api_definition` object.
+#' @keywords internal
+.optional_origin_field <- function(api_definition, field) {
+  info <- .optional_S7_prop(api_definition, "info")
+  if (length(info)) {
+    origin <- .optional_S7_prop(info, "origin")
+    if (length(origin)) {
+      .optional_S7_prop(origin, field)
+    }
+  }
+}
+
+#' Get an S7 property if it exists
+#'
+#' @param obj (`any`) The S7 object from which the property should be
+#'   extracted.
+#' @param prop (`character`) The name of the property to extract.
+#'
+#' @returns (`any`) The value of the property, if it exists in `obj` (`NULL`
+#'   invisibly otherwise).
+#' @keywords internal
+.optional_S7_prop <- function(obj, prop) {
+  S7::check_is_S7(obj)
+  stbl::to_chr_scalar(prop)
+  if (S7::prop_exists(obj, prop)) {
+    S7::prop(obj, prop)
+  }
 }
 
 #' Update one config field

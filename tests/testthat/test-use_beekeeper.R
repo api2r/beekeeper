@@ -1,4 +1,4 @@
-test_that("use_beekeeper writes a yml config (#10)", {
+test_that("use_beekeeper writes a yml config (#10, #108)", {
   pkg_tempdir <- withr::local_tempdir()
   local_mocked_bindings(
     use_build_ignore = function(...) {
@@ -23,6 +23,15 @@ test_that("use_beekeeper writes a yml config (#10)", {
   expect_identical(test_result, fs::path(pkg_tempdir, "_beekeeper.yml"))
   reread_rapid <- readRDS(fs::path(pkg_tempdir, "_beekeeper_rapid.rds"))
   expect_identical(guru_api_definition, reread_rapid)
+  config <- yaml::read_yaml(test_result)
+  expect_identical(
+    config$api_definition_origin,
+    list(
+      url = "https://api.apis.guru/v2/openapi.yaml",
+      format = "openapi",
+      version = "3.0"
+    )
+  )
   test_result_file <- scrub_config(readLines(test_result))
   expected_result_file <- scrub_config(
     readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
