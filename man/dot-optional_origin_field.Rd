@@ -14,8 +14,8 @@ package code from.}
 }
 \value{
 (\code{any}, most likely \code{character(1)} or \code{NULL}) The value of the
-field, if it exists in the \code{origin} property of the \code{api_definition}
-object.
+field, if it exists in the \code{origin} property of the \code{info} property of
+\code{api_definition} object.
 }
 \description{
 Get an origin field if it exists

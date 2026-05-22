@@ -141,13 +141,16 @@ use_beekeeper <- function(
 #' @inheritParams .shared-params
 #'
 #' @returns (`any`, most likely `character(1)` or `NULL`) The value of the
-#'   field, if it exists in the `origin` property of the `api_definition`
-#'   object.
+#'   field, if it exists in the `origin` property of the `info` property of
+#'   `api_definition` object.
 #' @keywords internal
 .optional_origin_field <- function(api_definition, field) {
-  origin <- .optional_S7_prop(api_definition, "origin")
-  if (length(origin)) {
-    .optional_S7_prop(origin, field)
+  info <- .optional_S7_prop(api_definition, "info")
+  if (length(info)) {
+    origin <- .optional_S7_prop(info, "origin")
+    if (length(origin)) {
+      .optional_S7_prop(origin, field)
+    }
   }
 }
 
