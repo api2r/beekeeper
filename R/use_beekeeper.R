@@ -113,8 +113,8 @@ use_beekeeper <- function(
     api_version = api_definition@info@version,
     rapid_filename = rapid_filename,
     updated_on = as.character(update_time),
-    config$api_definition_origin = .config_origin(api_definition)
-  }
+    api_definition_origin = .config_origin(api_definition)
+  )
   yaml::write_yaml(config, file = fs::path(pkg_dir, config_filename))
   memoise::forget(read_config)
   usethis::with_project(pkg_dir, usethis::use_build_ignore(config_filename))
@@ -124,7 +124,8 @@ use_beekeeper <- function(
 #' Extract the origin from an api definition
 #'
 #' @inheritParams .shared-params
-#' @returns (`list`) The `url`, `format`, and `version` (if known) of the API definition.
+#' @returns (`list`) The `url`, `format`, and `version` (if known) of the API
+#'   definition.
 #' @keywords internal
 .config_origin <- function(api_definition) {
   list(
