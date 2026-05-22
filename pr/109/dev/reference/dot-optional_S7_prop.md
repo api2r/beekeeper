@@ -12,8 +12,7 @@ Get an S7 property if it exists
 
 - obj:
 
-  (`character`) The S7 object from which the property should be
-  extracted.
+  (`any`) The S7 object from which the property should be extracted.
 
 - prop:
 
