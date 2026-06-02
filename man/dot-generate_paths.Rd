@@ -9,7 +9,8 @@
   api_abbr,
   security_data,
   pagination_data = list(),
-  base_url
+  base_url,
+  use_prefix = FALSE
 )
 }
 \arguments{
@@ -24,6 +25,12 @@ the API, for use in function names and environment variables.}
 path files.}
 
 \item{base_url}{(\code{character(1)}) The base URL used in generated test helpers.}
+
+\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix
+in generated path function names. When \code{FALSE} (the default), functions
+are named \code{{{operation_id}}} and \verb{req_\{\{operation_id\}\}}. When \code{TRUE},
+functions are named \verb{\{\{api_abbr\}\}_\{\{operation_id\}\}} and
+\verb{req_\{\{api_abbr\}\}_\{\{operation_id\}\}}.}
 }
 \value{
 (\code{character}) Generated file paths.

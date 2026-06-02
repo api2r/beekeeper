@@ -8,7 +8,8 @@
   paths_by_operation,
   api_abbr,
   security_data,
-  pagination_data
+  pagination_data,
+  use_prefix = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,12 @@ the API, for use in function names and environment variables.}
 
 \item{pagination_data}{(\code{list}) Pagination metadata used while generating
 path files.}
+
+\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix
+in generated path function names. When \code{FALSE} (the default), functions
+are named \code{{{operation_id}}} and \verb{req_\{\{operation_id\}\}}. When \code{TRUE},
+functions are named \verb{\{\{api_abbr\}\}_\{\{operation_id\}\}} and
+\verb{req_\{\{api_abbr\}\}_\{\{operation_id\}\}}.}
 }
 \value{
 (\code{character}) Generated file paths.

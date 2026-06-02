@@ -4,51 +4,51 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/apis", {
-  test_that("guru_list_apis() returns expected result", {
+  test_that("list_apis() returns expected result", {
     expect_snapshot({
-      test_result <- guru_list_apis()
+      test_result <- list_apis()
       test_result
     })
   })
 
-  test_that("guru_get_metrics() returns expected result", {
+  test_that("get_metrics() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_metrics()
+      test_result <- get_metrics()
       test_result
     })
   })
 
-  test_that("guru_get_providers() returns expected result", {
+  test_that("get_providers() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_providers()
+      test_result <- get_providers()
       test_result
     })
   })
 
-  test_that("guru_get_api() returns expected result", {
+  test_that("get_api() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_api(provider, api)
+      test_result <- get_api(provider, api)
       test_result
     })
   })
 
-  test_that("guru_get_service_api() returns expected result", {
+  test_that("get_service_api() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_service_api(provider, service, api)
+      test_result <- get_service_api(provider, service, api)
       test_result
     })
   })
 
-  test_that("guru_get_provider() returns expected result", {
+  test_that("get_provider() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_provider(provider)
+      test_result <- get_provider(provider)
       test_result
     })
   })
 
-  test_that("guru_get_services() returns expected result", {
+  test_that("get_services() returns expected result", {
     expect_snapshot({
-      test_result <- guru_get_services(provider)
+      test_result <- get_services(provider)
       test_result
     })
   })

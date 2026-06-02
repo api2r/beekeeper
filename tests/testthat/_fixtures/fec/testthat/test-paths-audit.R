@@ -4,37 +4,37 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/audit", {
-  test_that("fec_get_audit_case() returns expected result", {
+  test_that("get_audit_case() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_audit_case(audit_case_id, cycle, sub_category_id, sort_nulls_last, sort_hide_null, min_election_cycle, audit_id, q, per_page, max_election_cycle, candidate_id, committee_type, qq, page, committee_id, committee_designation, primary_category_id, sort_null_only, sort)
+      test_result <- get_audit_case(audit_case_id, cycle, sub_category_id, sort_nulls_last, sort_hide_null, min_election_cycle, audit_id, q, per_page, max_election_cycle, candidate_id, committee_type, qq, page, committee_id, committee_designation, primary_category_id, sort_null_only, sort)
       test_result
     })
   })
 
-  test_that("fec_get_audit_category() returns expected result", {
+  test_that("get_audit_category() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_audit_category(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort)
+      test_result <- get_audit_category(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort)
       test_result
     })
   })
 
-  test_that("fec_get_audit_primary_category() returns expected result", {
+  test_that("get_audit_primary_category() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_audit_primary_category(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort)
+      test_result <- get_audit_primary_category(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort)
       test_result
     })
   })
 
-  test_that("fec_get_names_audit_candidates() returns expected result", {
+  test_that("get_names_audit_candidates() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_names_audit_candidates(q)
+      test_result <- get_names_audit_candidates(q)
       test_result
     })
   })
 
-  test_that("fec_get_names_audit_committees() returns expected result", {
+  test_that("get_names_audit_committees() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_names_audit_committees(q)
+      test_result <- get_names_audit_committees(q)
       test_result
     })
   })

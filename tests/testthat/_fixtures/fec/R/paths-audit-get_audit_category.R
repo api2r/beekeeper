@@ -17,10 +17,10 @@
 #' @param sort (length-1 `character`, optional) Provide a field to sort by. Use `-` for descending order.
 #' @inheritParams .shared-params
 #'
-#' @returns `fec_get_audit_category()`: The API response.
+#' @returns `get_audit_category()`: The API response.
 #' @export
-fec_get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_fec_get_audit_category(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort, api_key = api_key)
+get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_audit_category(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -29,9 +29,9 @@ fec_get_audit_category <- function(sort_nulls_last, page, primary_category_name,
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname fec_get_audit_category
-#' @returns `req_fec_get_audit_category()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY")) {
+#' @rdname get_audit_category
+#' @returns `req_get_audit_category()`: (`httr2_request`) A [httr2::request()] object.
+req_get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY")) {
   sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
   sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
   sort_null_only <- stbl::to_lgl_scalar(sort_null_only)

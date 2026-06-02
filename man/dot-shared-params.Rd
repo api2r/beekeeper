@@ -137,6 +137,12 @@ saved security metadata file (relative to the package root).}
 
 \item{test}{(\code{logical}) A condition for each element of \code{original}.}
 
+\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix
+in generated path function names. When \code{FALSE} (the default), functions
+are named \code{{{operation_id}}} and \verb{req_\{\{operation_id\}\}}. When \code{TRUE},
+functions are named \verb{\{\{api_abbr\}\}_\{\{operation_id\}\}} and
+\verb{req_\{\{api_abbr\}\}_\{\{operation_id\}\}}.}
+
 \item{to_collapse}{(\code{character}) The character vector to collapse.}
 
 \item{type}{(\code{data.frame}) Joined parameter type metadata.}

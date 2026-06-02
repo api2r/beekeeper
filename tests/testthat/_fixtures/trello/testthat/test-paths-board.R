@@ -4,9 +4,9 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/board", {
-  test_that("trello_add_boards() returns expected result", {
+  test_that("add_boards() returns expected result", {
     expect_snapshot({
-      test_result <- trello_add_boards()
+      test_result <- add_boards()
       test_result
     })
   })

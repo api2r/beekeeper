@@ -9,10 +9,10 @@
 #' @param {{name}} ({{{class}}}) {{{description}}}{{/params}}
 #' @inheritParams .shared-params
 #'
-#' @returns `{{api_abbr}}_{{operation_id}}()`: The API response.
+#' @returns `{{fn_prefix}}{{operation_id}}()`: The API response.
 #' @export
-{{api_abbr}}_{{operation_id}} <- function({{#args}}{{{args}}}, {{/args}}{{#has_security}}{{{security_signature}}}, {{/has_security}}max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_{{api_abbr}}_{{operation_id}}({{#args_named}}{{{args_named}}}{{/args_named}}{{#has_security}}{{#args_named}}, {{/args_named}}{{{security_arg_list}}}{{/has_security}})
+{{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}, {{/args}}{{#has_security}}{{{security_signature}}}, {{/has_security}}max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_{{fn_prefix}}{{operation_id}}({{#args_named}}{{{args_named}}}{{/args_named}}{{#has_security}}{{#args_named}}, {{/args_named}}{{{security_arg_list}}}{{/has_security}})
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -21,9 +21,9 @@
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname {{api_abbr}}_{{operation_id}}
-#' @returns `req_{{api_abbr}}_{{operation_id}}()`: (`httr2_request`) A [httr2::request()] object.
-req_{{api_abbr}}_{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has_security}}{{#args}}, {{/args}}{{{security_signature}}}{{/has_security}}) {
+#' @rdname {{fn_prefix}}{{operation_id}}
+#' @returns `req_{{fn_prefix}}{{operation_id}}()`: (`httr2_request`) A [httr2::request()] object.
+req_{{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has_security}}{{#args}}, {{/args}}{{{security_signature}}}{{/has_security}}) {
 {{#validations}}
   {{name}} <- stbl::{{to_r}}({{name}})
 {{/validations}}
