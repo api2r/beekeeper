@@ -16,7 +16,7 @@ test_that("as_bk_data() returns empty list for empty api_key_security_scheme", {
   expect_identical(as_bk_data(rapid::class_api_key_security_scheme()), list())
 })
 
-test_that(".generate_security() generates security file for trello", {
+test_that(".generate_security() generates security file for trello (#111)", {
   skip_on_cran()
   config <- trello_config
   api_definition <- trello_api_definition
@@ -51,7 +51,7 @@ test_that(".generate_security() generates security file for trello", {
   )
 })
 
-test_that("generate_pkg_auth() writes auth files and saved security data (#101)", {
+test_that("generate_pkg_auth() writes auth files and saved security data (#101, #111)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
   security_expected <- readLines(test_path(
