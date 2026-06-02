@@ -81,11 +81,10 @@
 #' @param target (`character(1)`) The name of the generated file.
 #' @param template (`character(1)`) The template file name to render.
 #' @param test (`logical`) A condition for each element of `original`.
-#' @param use_prefix (`logical(1)`) Whether to include `api_abbr` as a prefix
-#'   in generated path function names. When `FALSE` (the default), functions
-#'   are named `{{operation_id}}` and `req_{{operation_id}}`. When `TRUE`,
-#'   functions are named `{{api_abbr}}_{{operation_id}}` and
-#'   `req_{{api_abbr}}_{{operation_id}}`.
+#' @param use_prefix (`logical(1)`) Whether to include `api_abbr` as a prefix in
+#'   generated path function names. When `FALSE` (the default), functions are
+#'   named `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
+#'   named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 #' @param to_collapse (`character`) The character vector to collapse.
 #' @param type (`data.frame`) Joined parameter type metadata.
 #' @param x (`any`) The object to check or coerce.

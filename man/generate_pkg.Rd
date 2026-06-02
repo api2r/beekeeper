@@ -24,11 +24,10 @@ package code from.}
 \item{api_title}{(\code{character(1)}) The API title used in generated package
 files.}
 
-\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix
-in generated path function names. When \code{FALSE} (the default), functions
-are named \code{{{operation_id}}} and \verb{req_\{\{operation_id\}\}}. When \code{TRUE},
-functions are named \verb{\{\{api_abbr\}\}_\{\{operation_id\}\}} and
-\verb{req_\{\{api_abbr\}\}_\{\{operation_id\}\}}.}
+\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix in
+generated path function names. When \code{FALSE} (the default), functions are
+named \code{{operation_id}} and \verb{req_\{operation_id\}}. When \code{TRUE}, functions are
+named \verb{\{api_abbr\}_\{operation_id\}} and \verb{req_\{api_abbr\}_\{operation_id\}}.}
 
 \item{config_filename}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper
 yaml config file (relative to the package root).}
