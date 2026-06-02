@@ -44,7 +44,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generate_paths_test_file</span><span class="op">(</span><span class="va">tag_operations</span>, <span class="va">tag_name</span>, <span class="va">api_abbr</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generate_paths_test_file</span><span class="op">(</span></span>
+<span>  <span class="va">tag_operations</span>,</span>
+<span>  <span class="va">tag_name</span>,</span>
+<span>  <span class="va">api_abbr</span>,</span>
+<span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -62,6 +67,13 @@
 <dt id="arg-api-abbr">api_abbr<a class="anchor" aria-label="anchor" href="#arg-api-abbr"></a></dt>
 <dd><p>(<code>character(1)</code>) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.</p></dd>
+
+
+<dt id="arg-use-prefix">use_prefix<a class="anchor" aria-label="anchor" href="#arg-use-prefix"></a></dt>
+<dd><p>(<code>logical(1)</code>) Whether to include <code>api_abbr</code> as a prefix in
+generated path function names. When <code>FALSE</code> (the default), functions are
+named <code>{operation_id}</code> and <code>req_{operation_id}</code>. When <code>TRUE</code>, functions are
+named <code>{api_abbr}_{operation_id}</code> and <code>req_{api_abbr}_{operation_id}</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

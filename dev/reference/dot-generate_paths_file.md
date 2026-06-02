@@ -5,7 +5,13 @@ Generate one operation file
 ## Usage
 
 ``` r
-.generate_paths_file(path_operation, operation_id, api_abbr, security_data)
+.generate_paths_file(
+  path_operation,
+  operation_id,
+  api_abbr,
+  security_data,
+  use_prefix = FALSE
+)
 ```
 
 ## Arguments
@@ -27,6 +33,13 @@ Generate one operation file
 - security_data:
 
   (`list`) Generated security metadata.
+
+- use_prefix:
+
+  (`logical(1)`) Whether to include `api_abbr` as a prefix in generated
+  path function names. When `FALSE` (the default), functions are named
+  `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
+  named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 
 ## Value
 

@@ -293,6 +293,13 @@ saved security metadata file (relative to the package root).</p></dd>
 <dd><p>(<code>logical</code>) A condition for each element of <code>original</code>.</p></dd>
 
 
+<dt id="arg-use-prefix">use_prefix<a class="anchor" aria-label="anchor" href="#arg-use-prefix"></a></dt>
+<dd><p>(<code>logical(1)</code>) Whether to include <code>api_abbr</code> as a prefix in
+generated path function names. When <code>FALSE</code> (the default), functions are
+named <code>{operation_id}</code> and <code>req_{operation_id}</code>. When <code>TRUE</code>, functions are
+named <code>{api_abbr}_{operation_id}</code> and <code>req_{api_abbr}_{operation_id}</code>.</p></dd>
+
+
 <dt id="arg-to-collapse">to_collapse<a class="anchor" aria-label="anchor" href="#arg-to-collapse"></a></dt>
 <dd><p>(<code>character</code>) The character vector to collapse.</p></dd>
 

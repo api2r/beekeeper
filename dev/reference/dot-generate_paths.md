@@ -10,7 +10,8 @@ Generate files for API paths
   api_abbr,
   security_data,
   pagination_data = list(),
-  base_url
+  base_url,
+  use_prefix = FALSE
 )
 ```
 
@@ -37,6 +38,13 @@ Generate files for API paths
 - base_url:
 
   (`character(1)`) The base URL used in generated test helpers.
+
+- use_prefix:
+
+  (`logical(1)`) Whether to include `api_abbr` as a prefix in generated
+  path function names. When `FALSE` (the default), functions are named
+  `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
+  named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 
 ## Value
 

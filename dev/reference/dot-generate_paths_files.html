@@ -48,7 +48,8 @@
 <span>  <span class="va">paths_by_operation</span>,</span>
 <span>  <span class="va">api_abbr</span>,</span>
 <span>  <span class="va">security_data</span>,</span>
-<span>  <span class="va">pagination_data</span></span>
+<span>  <span class="va">pagination_data</span>,</span>
+<span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -73,6 +74,13 @@ the API, for use in function names and environment variables.</p></dd>
 <dt id="arg-pagination-data">pagination_data<a class="anchor" aria-label="anchor" href="#arg-pagination-data"></a></dt>
 <dd><p>(<code>list</code>) Pagination metadata used while generating
 path files.</p></dd>
+
+
+<dt id="arg-use-prefix">use_prefix<a class="anchor" aria-label="anchor" href="#arg-use-prefix"></a></dt>
+<dd><p>(<code>logical(1)</code>) Whether to include <code>api_abbr</code> as a prefix in
+generated path function names. When <code>FALSE</code> (the default), functions are
+named <code>{operation_id}</code> and <code>req_{operation_id}</code>. When <code>TRUE</code>, functions are
+named <code>{api_abbr}_{operation_id}</code> and <code>req_{api_abbr}_{operation_id}</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

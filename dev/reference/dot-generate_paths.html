@@ -49,7 +49,8 @@
 <span>  <span class="va">api_abbr</span>,</span>
 <span>  <span class="va">security_data</span>,</span>
 <span>  pagination_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="va">base_url</span></span>
+<span>  <span class="va">base_url</span>,</span>
+<span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -77,6 +78,13 @@ path files.</p></dd>
 
 <dt id="arg-base-url">base_url<a class="anchor" aria-label="anchor" href="#arg-base-url"></a></dt>
 <dd><p>(<code>character(1)</code>) The base URL used in generated test helpers.</p></dd>
+
+
+<dt id="arg-use-prefix">use_prefix<a class="anchor" aria-label="anchor" href="#arg-use-prefix"></a></dt>
+<dd><p>(<code>logical(1)</code>) Whether to include <code>api_abbr</code> as a prefix in
+generated path function names. When <code>FALSE</code> (the default), functions are
+named <code>{operation_id}</code> and <code>req_{operation_id}</code>. When <code>TRUE</code>, functions are
+named <code>{api_abbr}_{operation_id}</code> and <code>req_{api_abbr}_{operation_id}</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

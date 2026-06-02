@@ -14,6 +14,7 @@ generate_pkg(
   api_definition = read_api_definition(pkg_dir, read_rapid_filename(pkg_dir,
     config_filename)),
   api_title = read_api_title(pkg_dir, config_filename),
+  use_prefix = FALSE,
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )
@@ -34,6 +35,13 @@ generate_pkg(
 - api_title:
 
   (`character(1)`) The API title used in generated package files.
+
+- use_prefix:
+
+  (`logical(1)`) Whether to include `api_abbr` as a prefix in generated
+  path function names. When `FALSE` (the default), functions are named
+  `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
+  named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 
 - config_filename:
 
@@ -62,11 +70,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/Rtmp4cPLOS/file44a38f5d5a2/.
-#> ✔ Setting active project to "/tmp/Rtmp4cPLOS/file44a38f5d5a2".
+#> ✔ Creating /tmp/Rtmp15QJdL/file5032e44c041/.
+#> ✔ Setting active project to "/tmp/Rtmp15QJdL/file5032e44c041".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file44a38f5d5a2
+#> Package: file5032e44c041
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -85,7 +93,7 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/Rtmp4cPLOS/file44a38f5d5a2".
+#> ✔ Setting active project to "/tmp/Rtmp15QJdL/file5032e44c041".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate a package.

@@ -9,7 +9,8 @@ Generate files for all operations
   paths_by_operation,
   api_abbr,
   security_data,
-  pagination_data
+  pagination_data,
+  use_prefix = FALSE
 )
 ```
 
@@ -31,6 +32,13 @@ Generate files for all operations
 - pagination_data:
 
   (`list`) Pagination metadata used while generating path files.
+
+- use_prefix:
+
+  (`logical(1)`) Whether to include `api_abbr` as a prefix in generated
+  path function names. When `FALSE` (the default), functions are named
+  `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
+  named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 
 ## Value
 
