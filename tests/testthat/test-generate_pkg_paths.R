@@ -9,7 +9,7 @@ test_that(".generate_paths() returns empty character for empty paths (#65)", {
   expect_identical(result, character())
 })
 
-test_that(".generate_paths() calls correct templates for guru (#65)", {
+test_that(".generate_paths() calls correct templates for guru (#65, #112)", {
   # 1 tag, no security
   skip_on_cran()
   config <- guru_config
@@ -72,7 +72,7 @@ test_that(".generate_paths() calls correct templates for guru (#65)", {
   expect_identical(setup_call$data$base_url, api_definition@servers@url)
 })
 
-test_that(".generate_paths() writes correct templates for guru (#65)", {
+test_that(".generate_paths() writes correct templates for guru (#65, #112)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
   config <- guru_config
@@ -111,7 +111,7 @@ test_that(".generate_paths() writes correct templates for guru (#65)", {
   )
 })
 
-test_that(".generate_paths() calls correct templates for fec (#65)", {
+test_that(".generate_paths() calls correct templates for fec (#65, #112)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
   config <- fec_config
@@ -160,7 +160,7 @@ test_that(".generate_paths() calls correct templates for fec (#65)", {
   expect_identical(first_path$api_abbr, "fec")
 })
 
-test_that(".generate_paths() writes correct paths.R for fec (#65)", {
+test_that(".generate_paths() writes correct paths.R for fec (#65, #112)", {
   # Visual confirmation: 3 tags, complicated security
   skip_on_cran()
   config <- fec_config
@@ -194,7 +194,7 @@ test_that(".generate_paths() writes correct paths.R for fec (#65)", {
   )
 })
 
-test_that(".generate_paths() writes correct paths.R for trello (#65)", {
+test_that(".generate_paths() writes correct paths.R for trello (#65, #112)", {
   # Visual confirmation: more complicated security
   skip_on_cran()
   config <- trello_config

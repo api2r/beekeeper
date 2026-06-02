@@ -16,10 +16,10 @@
 #' @param sub_id (length-1 `character`) 
 #' @inheritParams .shared-params
 #'
-#' @returns `fec_get_schedules_schedule_d_sub_id()`: The API response.
+#' @returns `get_schedules_schedule_d_sub_id()`: The API response.
 #' @export
-fec_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_fec_get_schedules_schedule_d_sub_id(sort_nulls_last = sort_nulls_last, per_page = per_page, sort_null_only = sort_null_only, sort_hide_null = sort_hide_null, sort = sort, page = page, sub_id = sub_id, api_key = api_key)
+get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_schedules_schedule_d_sub_id(sort_nulls_last = sort_nulls_last, per_page = per_page, sort_null_only = sort_null_only, sort_hide_null = sort_hide_null, sort = sort, page = page, sub_id = sub_id, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -28,9 +28,9 @@ fec_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname fec_get_schedules_schedule_d_sub_id
-#' @returns `req_fec_get_schedules_schedule_d_sub_id()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY")) {
+#' @rdname get_schedules_schedule_d_sub_id
+#' @returns `req_get_schedules_schedule_d_sub_id()`: (`httr2_request`) A [httr2::request()] object.
+req_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY")) {
   sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
   sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
   sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)

@@ -4,7 +4,12 @@
 \alias{.generate_paths_test_file}
 \title{Generate one tag-level test file}
 \usage{
-.generate_paths_test_file(tag_operations, tag_name, api_abbr)
+.generate_paths_test_file(
+  tag_operations,
+  tag_name,
+  api_abbr,
+  use_prefix = FALSE
+)
 }
 \arguments{
 \item{tag_operations}{(\code{list}) Operations grouped under one tag.}
@@ -13,6 +18,11 @@
 
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.}
+
+\item{use_prefix}{(\code{logical(1)}) Whether to include \code{api_abbr} as a prefix in
+generated path function names. When \code{FALSE} (the default), functions are
+named \code{{operation_id}} and \verb{req_\{operation_id\}}. When \code{TRUE}, functions are
+named \verb{\{api_abbr\}_\{operation_id\}} and \verb{req_\{api_abbr\}_\{operation_id\}}.}
 }
 \value{
 (\code{character(1)}) The generated test file path.

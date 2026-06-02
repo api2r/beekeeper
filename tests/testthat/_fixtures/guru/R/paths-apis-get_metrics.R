@@ -8,10 +8,10 @@
 #' 
 #' @inheritParams .shared-params
 #'
-#' @returns `guru_get_metrics()`: The API response.
+#' @returns `get_metrics()`: The API response.
 #' @export
-guru_get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_guru_get_metrics()
+get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_metrics()
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -20,9 +20,9 @@ guru_get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname guru_get_metrics
-#' @returns `req_guru_get_metrics()`: (`httr2_request`) A [httr2::request()] object.
-req_guru_get_metrics <- function() {
+#' @rdname get_metrics
+#' @returns `req_get_metrics()`: (`httr2_request`) A [httr2::request()] object.
+req_get_metrics <- function() {
   guru_req_prepare(
     path = "/metrics.json",
     method = "get"

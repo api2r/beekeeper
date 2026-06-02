@@ -9,10 +9,10 @@
 #' @param provider (length-1 `character`) 
 #' @inheritParams .shared-params
 #'
-#' @returns `guru_get_provider()`: The API response.
+#' @returns `get_provider()`: The API response.
 #' @export
-guru_get_provider <- function(provider, max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_guru_get_provider(provider = provider)
+get_provider <- function(provider, max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_provider(provider = provider)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -21,9 +21,9 @@ guru_get_provider <- function(provider, max_reqs = Inf, max_tries_per_req = 3) {
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname guru_get_provider
-#' @returns `req_guru_get_provider()`: (`httr2_request`) A [httr2::request()] object.
-req_guru_get_provider <- function(provider) {
+#' @rdname get_provider
+#' @returns `req_get_provider()`: (`httr2_request`) A [httr2::request()] object.
+req_get_provider <- function(provider) {
   provider <- stbl::to_chr_scalar(provider)
   guru_req_prepare(
     path = c("/{provider}.json", provider = provider),

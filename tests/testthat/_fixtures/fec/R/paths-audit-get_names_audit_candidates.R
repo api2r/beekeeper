@@ -10,10 +10,10 @@
 #' @param q (length-1 `list`) Name (candidate or committee) to search for
 #' @inheritParams .shared-params
 #'
-#' @returns `fec_get_names_audit_candidates()`: The API response.
+#' @returns `get_names_audit_candidates()`: The API response.
 #' @export
-fec_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_fec_get_names_audit_candidates(q = q, api_key = api_key)
+get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_names_audit_candidates(q = q, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -22,9 +22,9 @@ fec_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname fec_get_names_audit_candidates
-#' @returns `req_fec_get_names_audit_candidates()`: (`httr2_request`) A [httr2::request()] object.
-req_fec_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY")) {
+#' @rdname get_names_audit_candidates
+#' @returns `req_get_names_audit_candidates()`: (`httr2_request`) A [httr2::request()] object.
+req_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY")) {
   fec_req_prepare(
     path = "/names/audit_candidates/",
     method = "get",

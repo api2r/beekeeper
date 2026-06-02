@@ -8,10 +8,10 @@
 #' 
 #' @inheritParams .shared-params
 #'
-#' @returns `guru_list_apis()`: The API response.
+#' @returns `list_apis()`: The API response.
 #' @export
-guru_list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_guru_list_apis()
+list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_list_apis()
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -20,9 +20,9 @@ guru_list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname guru_list_apis
-#' @returns `req_guru_list_apis()`: (`httr2_request`) A [httr2::request()] object.
-req_guru_list_apis <- function() {
+#' @rdname list_apis
+#' @returns `req_list_apis()`: (`httr2_request`) A [httr2::request()] object.
+req_list_apis <- function() {
   guru_req_prepare(
     path = "/list.json",
     method = "get"

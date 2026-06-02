@@ -11,10 +11,10 @@
 #' @param q (length-1 `character`) Search query
 #' @inheritParams .shared-params
 #'
-#' @returns `test_search_things()`: The API response.
+#' @returns `search_things()`: The API response.
 #' @export
-test_search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_test_search_things(x_auth_token = x_auth_token, session_id = session_id, q = q)
+search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_search_things(x_auth_token = x_auth_token, session_id = session_id, q = q)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -23,9 +23,9 @@ test_search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname test_search_things
-#' @returns `req_test_search_things()`: (`httr2_request`) A [httr2::request()] object.
-req_test_search_things <- function(x_auth_token, session_id, q) {
+#' @rdname search_things
+#' @returns `req_search_things()`: (`httr2_request`) A [httr2::request()] object.
+req_search_things <- function(x_auth_token, session_id, q) {
   x_auth_token <- stbl::to_chr_scalar(x_auth_token)
   session_id <- stbl::to_chr_scalar(session_id)
   q <- stbl::to_chr_scalar(q)

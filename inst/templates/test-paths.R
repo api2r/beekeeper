@@ -5,9 +5,9 @@
 
 with_mock_dir("api/path/{{tag}}", {
 {{#paths}}
-  test_that("{{api_abbr}}_{{operation_id}}() returns expected result", {
+  test_that("{{fn_prefix}}{{operation_id}}() returns expected result", {
     expect_snapshot({
-      test_result <- {{api_abbr}}_{{operation_id}}({{{test_args}}})
+      test_result <- {{fn_prefix}}{{operation_id}}({{{test_args}}})
       test_result
     })
   })
