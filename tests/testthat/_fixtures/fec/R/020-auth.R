@@ -16,7 +16,7 @@
   return(req)
 }
 
-# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+# (length-1 `character`) An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
 .fec_req_auth_api_key_header_auth <- function(req, api_key) {
   nectar::req_auth_api_key(
     req,
@@ -26,7 +26,7 @@
   )
 }
 
-# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+# (length-1 `character`) An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
 .fec_req_auth_api_key_query_auth <- function(req, api_key) {
   nectar::req_auth_api_key(
     req,

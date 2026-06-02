@@ -8,7 +8,7 @@ test_that(".generate_shared_params() returns file path for no-security API (#65)
   expect_identical(result, fs::path(tmp, "R", "000-shared.R"))
 })
 
-test_that(".generate_shared_params() writes correct content for no-security API (#65)", {
+test_that(".generate_shared_params() writes correct content for no-security API (#65, #111)", {
   skip_on_cran()
   shared_expected <- readLines(test_path(
     "_fixtures",
@@ -27,7 +27,7 @@ test_that(".generate_shared_params() writes correct content for no-security API 
   )
 })
 
-test_that(".generate_shared_params() writes security params for API with security (#65)", {
+test_that(".generate_shared_params() writes security params for API with security (#65, #111)", {
   skip_on_cran()
   tmp <- withr::local_tempdir()
   local_mocked_bindings(.bk_use_template_impl = make_writing_impl(tmp))
@@ -48,7 +48,7 @@ test_that(".generate_shared_params() writes security params for API with securit
   )
 })
 
-test_that("generate_pkg_shared_params() reads saved security data (#101)", {
+test_that("generate_pkg_shared_params() reads saved security data (#101, #111)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "trello", "_beekeeper.yml"))
   shared_expected <- readLines(test_path(

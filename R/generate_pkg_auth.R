@@ -204,6 +204,7 @@ S7::method(as_bk_data, class_security_schemes) <- function(x, ...) {
 }
 
 .security_scheme_description_api_key <- paste(
+  "(length-1 `character`)",
   "An API key provided by the API provider.",
   "This key is not clearly documented in the API description.",
   "Check the API documentation for details."
