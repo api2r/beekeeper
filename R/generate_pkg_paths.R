@@ -36,6 +36,7 @@ generate_pkg_paths <- function(
     read_rapid_filename(pkg_dir, config_filename)
   ),
   security_data = read_security_data(pkg_dir, config_filename),
+  use_prefix = FALSE,
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
@@ -53,7 +54,8 @@ generate_pkg_paths <- function(
     api_abbr = api_abbr,
     security_data = security_data,
     pagination_data = .generate_pagination(),
-    base_url = api_definition@servers@url
+    base_url = api_definition@servers@url,
+    use_prefix = use_prefix
   )
 }
 
@@ -67,7 +69,8 @@ generate_pkg_paths <- function(
   api_abbr,
   security_data,
   pagination_data = list(),
-  base_url
+  base_url,
+  use_prefix = FALSE
 ) {
   paths_by_operation <- as_bk_data(paths)
   paths_file_paths <- character()
@@ -76,7 +79,8 @@ generate_pkg_paths <- function(
       paths_by_operation,
       api_abbr,
       security_data,
-      pagination_data
+      pagination_data,
+      use_prefix = use_prefix
     )
     setup_file <- .bk_use_template(
       template = "setup.R",
@@ -378,7 +382,8 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   paths_by_operation,
   api_abbr,
   security_data,
-  pagination_data
+  pagination_data,
+  use_prefix = FALSE
 ) {
   security_arg_names <- security_data$security_arg_names %|0|% character()
 
@@ -408,7 +413,13 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
   # One R file per operation
   r_files <- unname(unlist(purrr::imap(prepped, function(op, op_id) {
-    .generate_paths_file(op, op_id, api_abbr, security_data)
+    .generate_paths_file(
+      op,
+      op_id,
+      api_abbr,
+      security_data,
+      use_prefix = use_prefix
+    )
   })))
 
   # One test file per tag (operations grouped by tag, preserving encounter
@@ -417,7 +428,12 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   unique_tags <- unique(tags)
   test_files <- unname(unlist(lapply(unique_tags, function(tag_name) {
     tag_ops <- prepped[tags == tag_name]
-    .generate_paths_test_file(tag_ops, tag_name, api_abbr)
+    .generate_paths_test_file(
+      tag_ops,
+      tag_name,
+      api_abbr,
+      use_prefix = use_prefix
+    )
   })))
 
   return(c(r_files, test_files))
@@ -511,14 +527,17 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   path_operation,
   operation_id,
   api_abbr,
-  security_data
+  security_data,
+  use_prefix = FALSE
 ) {
+  fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
   .bk_use_template(
     template = "paths.R",
     data = c(
       path_operation,
       list(
         api_abbr = api_abbr,
+        fn_prefix = fn_prefix,
         has_security = security_data$has_security %|0|% FALSE,
         security_signature = security_data$security_signature %|0|% "",
         security_arg_list = security_data$security_arg_list %|0|% "",
@@ -535,9 +554,16 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated test file path.
 #' @keywords internal
-.generate_paths_test_file <- function(tag_operations, tag_name, api_abbr) {
+.generate_paths_test_file <- function(
+  tag_operations,
+  tag_name,
+  api_abbr,
+  use_prefix = FALSE
+) {
+  fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
   paths_list <- unname(purrr::imap(tag_operations, function(op, op_id) {
     list(
+      fn_prefix = fn_prefix,
       operation_id = op_id,
       test_args = op$test_args %|0|% ""
     )

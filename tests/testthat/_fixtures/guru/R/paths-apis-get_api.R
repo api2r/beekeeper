@@ -10,10 +10,10 @@
 #' @param api (length-1 `character`) 
 #' @inheritParams .shared-params
 #'
-#' @returns `guru_get_api()`: The API response.
+#' @returns `get_api()`: The API response.
 #' @export
-guru_get_api <- function(provider, api, max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_guru_get_api(provider = provider, api = api)
+get_api <- function(provider, api, max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_api(provider = provider, api = api)
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -22,9 +22,9 @@ guru_get_api <- function(provider, api, max_reqs = Inf, max_tries_per_req = 3) {
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname guru_get_api
-#' @returns `req_guru_get_api()`: (`httr2_request`) A [httr2::request()] object.
-req_guru_get_api <- function(provider, api) {
+#' @rdname get_api
+#' @returns `req_get_api()`: (`httr2_request`) A [httr2::request()] object.
+req_get_api <- function(provider, api) {
   provider <- stbl::to_chr_scalar(provider)
   api <- stbl::to_chr_scalar(api)
   guru_req_prepare(

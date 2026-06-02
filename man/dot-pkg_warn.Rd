@@ -28,8 +28,8 @@ prefixed by "\{package\}-warning-".}
 \item{message_env}{(\code{environment}) The execution environment to use to
 evaluate variables in error messages.}
 
-\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_warn()}} and on to
-\code{\link[rlang:abort]{rlang::warn()}}.}
+\item{...}{Additional parameters passed to \code{\link[cli:cli_warn]{cli::cli_warn()}} and on to
+\code{\link[rlang:warn]{rlang::warn()}}.}
 }
 \value{
 (\code{NULL}, invisibly) Called for warning side effect.

@@ -8,10 +8,10 @@
 #' 
 #' @inheritParams .shared-params
 #'
-#' @returns `guru_get_providers()`: The API response.
+#' @returns `get_providers()`: The API response.
 #' @export
-guru_get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
-  req <- req_guru_get_providers()
+get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_get_providers()
   resps <- nectar::req_perform_opinionated(
     req,
     max_reqs = max_reqs,
@@ -20,9 +20,9 @@ guru_get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
   return(nectar::resp_parse(resps))
 }
 
-#' @rdname guru_get_providers
-#' @returns `req_guru_get_providers()`: (`httr2_request`) A [httr2::request()] object.
-req_guru_get_providers <- function() {
+#' @rdname get_providers
+#' @returns `req_get_providers()`: (`httr2_request`) A [httr2::request()] object.
+req_get_providers <- function() {
   guru_req_prepare(
     path = "/providers.json",
     method = "get"

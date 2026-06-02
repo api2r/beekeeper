@@ -28,8 +28,8 @@ prefixed by "\{package\}-message-".}
 \item{message_env}{(\code{environment}) The execution environment to use to
 evaluate variables in error messages.}
 
-\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_inform()}} and on to
-\code{\link[rlang:abort]{rlang::inform()}}.}
+\item{...}{Additional parameters passed to \code{\link[cli:cli_inform]{cli::cli_inform()}} and on to
+\code{\link[rlang:inform]{rlang::inform()}}.}
 }
 \value{
 (\code{NULL}, invisibly) Called for message side effect.

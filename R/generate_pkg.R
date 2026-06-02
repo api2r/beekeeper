@@ -34,6 +34,7 @@ generate_pkg <- function(
     read_rapid_filename(pkg_dir, config_filename)
   ),
   api_title = read_api_title(pkg_dir, config_filename),
+  use_prefix = FALSE,
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
@@ -66,6 +67,7 @@ generate_pkg <- function(
     api_abbr = api_abbr,
     api_definition = api_definition,
     security_data = security_data,
+    use_prefix = use_prefix,
     pkg_dir = pkg_dir
   )
   touched_files <- c(

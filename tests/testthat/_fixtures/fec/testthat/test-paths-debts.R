@@ -4,16 +4,16 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/debts", {
-  test_that("fec_get_schedules_schedule_d() returns expected result", {
+  test_that("get_schedules_schedule_d() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_schedules_schedule_d(creditor_debtor_name, max_image_number, sort_nulls_last, max_amount_outstanding_beginning, sort_hide_null, min_payment_period, max_amount_incurred, nature_of_debt, per_page, max_amount_outstanding_close, candidate_id, page, min_date, committee_id, min_amount_outstanding_close, max_payment_period, min_image_number, min_amount_incurred, sort_null_only, image_number, sort, min_amount_outstanding_beginning, max_date)
+      test_result <- get_schedules_schedule_d(creditor_debtor_name, max_image_number, sort_nulls_last, max_amount_outstanding_beginning, sort_hide_null, min_payment_period, max_amount_incurred, nature_of_debt, per_page, max_amount_outstanding_close, candidate_id, page, min_date, committee_id, min_amount_outstanding_close, max_payment_period, min_image_number, min_amount_incurred, sort_null_only, image_number, sort, min_amount_outstanding_beginning, max_date)
       test_result
     })
   })
 
-  test_that("fec_get_schedules_schedule_d_sub_id() returns expected result", {
+  test_that("get_schedules_schedule_d_sub_id() returns expected result", {
     expect_snapshot({
-      test_result <- fec_get_schedules_schedule_d_sub_id(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id)
+      test_result <- get_schedules_schedule_d_sub_id(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id)
       test_result
     })
   })
