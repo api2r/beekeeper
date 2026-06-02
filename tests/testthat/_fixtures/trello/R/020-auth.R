@@ -16,7 +16,7 @@
   return(req)
 }
 
-# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+# (length-1 `character`) An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
 .trello_req_auth_api_key <- function(req, key) {
   nectar::req_auth_api_key(
     req,
@@ -26,7 +26,7 @@
   )
 }
 
-# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+# (length-1 `character`) An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
 .trello_req_auth_api_token <- function(req, token) {
   nectar::req_auth_api_key(
     req,
