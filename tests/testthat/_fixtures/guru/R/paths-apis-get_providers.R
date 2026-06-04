@@ -32,7 +32,7 @@ req_get_providers <- function() {
 
 tidy_policy_get_providers <- function() {
   spec <- tibblify::tspec_row(
-    tibblify::tib_chr_vec("data", .required = FALSE),
-  )
+  tibblify::tib_chr_vec("data", .required = FALSE),
+)
   nectar::tidy_policy_json(spec = spec)
 }

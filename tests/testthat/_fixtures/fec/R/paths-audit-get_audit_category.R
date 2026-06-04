@@ -47,26 +47,26 @@ req_get_audit_category <- function(sort_nulls_last, page, primary_category_name,
 
 tidy_policy_get_audit_category <- function() {
   spec <- tibblify::tspec_row(
-    tibblify::tib_row(
-      "pagination",
-      .required = FALSE,
-      tibblify::tib_int("count", .required = FALSE),
-      tibblify::tib_int("page", .required = FALSE),
-      tibblify::tib_int("pages", .required = FALSE),
-      tibblify::tib_int("per_page", .required = FALSE),
-    ),
+  tibblify::tib_row(
+    "pagination",
+    .required = FALSE,
+    tibblify::tib_int("count", .required = FALSE),
+    tibblify::tib_int("page", .required = FALSE),
+    tibblify::tib_int("pages", .required = FALSE),
+    tibblify::tib_int("per_page", .required = FALSE),
+  ),
+  tibblify::tib_df(
+    "results",
+    .required = FALSE,
+    tibblify::tib_chr("primary_category_id", .required = FALSE),
+    tibblify::tib_chr("primary_category_name", .required = FALSE),
     tibblify::tib_df(
-      "results",
+      "sub_category_list",
       .required = FALSE,
-      tibblify::tib_chr("primary_category_id", .required = FALSE),
-      tibblify::tib_chr("primary_category_name", .required = FALSE),
-      tibblify::tib_df(
-        "sub_category_list",
-        .required = FALSE,
-        tibblify::tib_chr("sub_category_id", .required = FALSE),
-        tibblify::tib_chr("sub_category_name", .required = FALSE),
-      ),
+      tibblify::tib_chr("sub_category_id", .required = FALSE),
+      tibblify::tib_chr("sub_category_name", .required = FALSE),
     ),
-  )
+  ),
+)
   nectar::tidy_policy_json(spec = spec)
 }

@@ -50,7 +50,8 @@ VignetteBuilder:
 Remotes:
     api2r/nectar,
     api2r/rapid,
-    wranglezone/stbl
+    wranglezone/stbl,
+    wranglezone/tibblify
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8

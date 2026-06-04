@@ -36,24 +36,24 @@ req_get_api <- function(provider, api) {
 
 tidy_policy_get_api <- function() {
   spec <- tibblify::tspec_row(
+  tibblify::tib_chr("added"),
+  tibblify::tib_chr("preferred"),
+  tibblify::tib_row(
+    "versions",
     tibblify::tib_chr("added"),
-    tibblify::tib_chr("preferred"),
     tibblify::tib_row(
-      "versions",
-      tibblify::tib_chr("added"),
-      tibblify::tib_row(
-        "externalDocs",
-        .required = FALSE,
-      ),
-      tibblify::tib_row(
-        "info",
-      ),
-      tibblify::tib_chr("link", .required = FALSE),
-      tibblify::tib_chr("openapiVer"),
-      tibblify::tib_chr("swaggerUrl"),
-      tibblify::tib_chr("swaggerYamlUrl"),
-      tibblify::tib_chr("updated"),
+      "externalDocs",
+      .required = FALSE,
     ),
-  )
+    tibblify::tib_row(
+      "info",
+    ),
+    tibblify::tib_chr("link", .required = FALSE),
+    tibblify::tib_chr("openapiVer"),
+    tibblify::tib_chr("swaggerUrl"),
+    tibblify::tib_chr("swaggerYamlUrl"),
+    tibblify::tib_chr("updated"),
+  ),
+)
   nectar::tidy_policy_json(spec = spec)
 }

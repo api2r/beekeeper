@@ -278,12 +278,12 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
     return(list(tidy_policy_body = tidy_policy_body, description = description))
   }
 
-  spec_str <- format(spec, width = 78, fully_qualify = TRUE)
-  spec_lines <- strsplit(spec_str, "\n", fixed = TRUE)[[1]]
-  if (length(spec_lines) > 1) {
-    spec_lines[-1] <- paste0("  ", spec_lines[-1])
-  }
-  indented_spec <- paste(spec_lines, collapse = "\n")
+  indented_spec <- format(
+    spec,
+    width = 78,
+    fully_qualify = TRUE,
+    nchar_indent = 2
+  )
   tidy_policy_body <- paste0(
     "spec <- ",
     indented_spec,
