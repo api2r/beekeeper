@@ -135,3 +135,24 @@
     .use_package("stbl", "Imports", pkg_dir)
   }
 }
+
+#' Add tibblify to imports
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`, invisibly) The package name.
+#' @keywords internal
+.use_tibblify <- function(pkg_dir = ".") {
+  .use_package("tibblify", "Imports", pkg_dir)
+}
+
+#' Add tibblify to dependencies if needed
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)` or `NULL`, invisibly) "tibblify" if tibblify is
+#'   used, `NULL` otherwise.
+#' @keywords internal
+.maybe_use_tibblify <- function(pkg_dir, paths) {
+  if (.paths_need_tibblify(paths)) {
+    .use_tibblify(pkg_dir)
+  }
+}

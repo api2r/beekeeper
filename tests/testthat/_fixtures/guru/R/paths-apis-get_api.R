@@ -29,6 +29,31 @@ req_get_api <- function(provider, api) {
   api <- stbl::to_chr_scalar(api)
   guru_req_prepare(
     path = c("/specs/{provider}/{api}.json", provider = provider, api = api),
-    method = "get"
+    method = "get",
+    tidy_policy = tidy_policy_get_api()
   )
+}
+
+tidy_policy_get_api <- function() {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_chr("added"),
+    tibblify::tib_chr("preferred"),
+    tibblify::tib_row(
+      "versions",
+      tibblify::tib_chr("added"),
+      tibblify::tib_row(
+        "externalDocs",
+        .required = FALSE,
+      ),
+      tibblify::tib_row(
+        "info",
+      ),
+      tibblify::tib_chr("link", .required = FALSE),
+      tibblify::tib_chr("openapiVer"),
+      tibblify::tib_chr("swaggerUrl"),
+      tibblify::tib_chr("swaggerYamlUrl"),
+      tibblify::tib_chr("updated"),
+    ),
+  )
+  nectar::tidy_policy_json(spec = spec)
 }

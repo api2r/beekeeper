@@ -30,6 +30,11 @@ token = Sys.getenv("TRELLO_TOKEN")) {
   trello_req_prepare(
     path = "/boards",
     method = "post",
-    key = key, token = token
+    key = key, token = token,
+    tidy_policy = tidy_policy_add_boards()
   )
+}
+
+tidy_policy_add_boards <- function() {
+  nectar::tidy_policy_body_auto()
 }

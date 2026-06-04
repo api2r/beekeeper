@@ -340,7 +340,8 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     ),
     test_args = "x_auth_token, session_id, q",
     pagination = FALSE,
-    pagination_fn = ""
+    pagination_fn = "",
+    tidy_policy_body = "nectar::tidy_policy_body_auto()"
   )
   .generate_paths_file(op, "search_things", "test", list())
 

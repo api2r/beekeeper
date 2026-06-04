@@ -34,7 +34,11 @@ req_{{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has
     query = list({{params_query}}){{/params_query}}{{#params_header}},
     header = list({{params_header}}){{/params_header}}{{#params_cookie}},
     cookie = list({{params_cookie}}){{/params_cookie}}{{#pagination}},
-    pagination_fn = {{pagination_fn}}{{/pagination}}{{#tidy}},
-    tidy_policy = {{tidy_policy}}{{/tidy}}
+    pagination_fn = {{pagination_fn}}{{/pagination}},
+    tidy_policy = tidy_policy_{{fn_prefix}}{{operation_id}}()
   )
+}
+
+tidy_policy_{{fn_prefix}}{{operation_id}} <- function() {
+  {{{tidy_policy_body}}}
 }

@@ -49,6 +49,7 @@ generate_pkg_paths <- function(
   .use_pkg_beekeeper(pkg_dir)
   security_arg_names <- security_data$security_arg_names %|0|% character()
   .maybe_use_stbl(pkg_dir, api_definition@paths, security_arg_names)
+  .maybe_use_tibblify(pkg_dir, api_definition@paths)
   .generate_paths(
     paths = api_definition@paths,
     api_abbr = api_abbr,
@@ -211,8 +212,10 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   operation_description,
   tags,
   parameters,
+  responses,
   ...
 ) {
+  response_info <- .extract_response_info(responses)
   list(
     operation_id = operation_id,
     tag = tags,
@@ -223,8 +226,71 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
     params = .params_to_list(parameters),
     params_query_raw = .extract_params_by_location(parameters, "query"),
     params_header_raw = .extract_params_by_location(parameters, "header"),
-    params_cookie_raw = .extract_params_by_location(parameters, "cookie")
+    params_cookie_raw = .extract_params_by_location(parameters, "cookie"),
+    tidy_policy_body = response_info$tidy_policy_body,
+    response_description = response_info$description
   )
+}
+
+#' Extract response information for template use
+#'
+#' Finds the JSON response (preferring `status_code == "200"`, falling back to
+#' `"default"`) and extracts the tibblify spec and description.
+#'
+#' @inheritParams .shared-params
+#' @returns (`list`) A list with `tidy_policy_body` (character) and
+#'   `description` (character).
+#' @importFrom tibblify tspec_row
+#' @keywords internal
+.extract_response_info <- function(responses) {
+  description <- ""
+  tidy_policy_body <- "nectar::tidy_policy_body_auto()"
+
+  if (is.null(responses) || !nrow(responses)) {
+    return(list(tidy_policy_body = tidy_policy_body, description = description))
+  }
+
+  idx_200 <- which(responses$status_code == "200")
+  idx_default <- which(responses$status_code == "default")
+
+  if (length(idx_200) > 0) {
+    response_row <- responses[idx_200[[1]], ]
+  } else if (length(idx_default) > 0) {
+    response_row <- responses[idx_default[[1]], ]
+  } else {
+    return(list(tidy_policy_body = tidy_policy_body, description = description))
+  }
+
+  description <- response_row$description[[1]] %|% ""
+
+  content <- response_row$content[[1]]
+  if (is.null(content) || !nrow(content)) {
+    return(list(tidy_policy_body = tidy_policy_body, description = description))
+  }
+
+  json_row <- content[content$media_type == "application/json", ]
+  if (!nrow(json_row)) {
+    return(list(tidy_policy_body = tidy_policy_body, description = description))
+  }
+
+  spec <- json_row$spec[[1]]
+  if (is.null(spec)) {
+    return(list(tidy_policy_body = tidy_policy_body, description = description))
+  }
+
+  spec_str <- format(spec, width = 78, fully_qualify = TRUE)
+  spec_lines <- strsplit(spec_str, "\n", fixed = TRUE)[[1]]
+  if (length(spec_lines) > 1) {
+    spec_lines[-1] <- paste0("  ", spec_lines[-1])
+  }
+  indented_spec <- paste(spec_lines, collapse = "\n")
+  tidy_policy_body <- paste0(
+    "spec <- ",
+    indented_spec,
+    "\n  nectar::tidy_policy_json(spec = spec)"
+  )
+
+  list(tidy_policy_body = tidy_policy_body, description = description)
 }
 
 #' Prepare parameter metadata
@@ -518,6 +584,21 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   }))
 }
 
+#' Determine whether generated paths need `tibblify`
+#'
+#' @inheritParams .shared-params
+#' @returns (`logical(1)`) `TRUE` if any path has a JSON response spec.
+#' @keywords internal
+.paths_need_tibblify <- function(paths) {
+  ops <- as_bk_data(paths)
+  if (!length(ops)) {
+    return(FALSE)
+  }
+  any(purrr::map_lgl(ops, function(op) {
+    op$tidy_policy_body != "nectar::tidy_policy_body_auto()"
+  }))
+}
+
 #' Generate one operation file
 #'
 #' @inheritParams .shared-params
@@ -531,6 +612,8 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   use_prefix = FALSE
 ) {
   fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
+  tidy_policy_body <-
+    path_operation$tidy_policy_body %||% "nectar::tidy_policy_body_auto()"
   .bk_use_template(
     template = "paths.R",
     data = c(
@@ -538,6 +621,7 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
       list(
         api_abbr = api_abbr,
         fn_prefix = fn_prefix,
+        tidy_policy_body = tidy_policy_body,
         has_security = security_data$has_security %|0|% FALSE,
         security_signature = security_data$security_signature %|0|% "",
         security_arg_list = security_data$security_arg_list %|0|% "",

@@ -25,6 +25,32 @@ get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
 req_get_metrics <- function() {
   guru_req_prepare(
     path = "/metrics.json",
-    method = "get"
+    method = "get",
+    tidy_policy = tidy_policy_get_metrics()
   )
+}
+
+tidy_policy_get_metrics <- function() {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_variant("datasets", .required = FALSE),
+    tibblify::tib_int("fixedPct", .required = FALSE),
+    tibblify::tib_int("fixes", .required = FALSE),
+    tibblify::tib_int("invalid", .required = FALSE),
+    tibblify::tib_int("issues", .required = FALSE),
+    tibblify::tib_int("numAPIs"),
+    tibblify::tib_int("numDrivers", .required = FALSE),
+    tibblify::tib_int("numEndpoints"),
+    tibblify::tib_int("numProviders", .required = FALSE),
+    tibblify::tib_int("numSpecs"),
+    tibblify::tib_int("stars", .required = FALSE),
+    tibblify::tib_row(
+      "thisWeek",
+      .required = FALSE,
+      tibblify::tib_int("added", .required = FALSE),
+      tibblify::tib_int("updated", .required = FALSE),
+    ),
+    tibblify::tib_int("unofficial", .required = FALSE),
+    tibblify::tib_int("unreachable", .required = FALSE),
+  )
+  nectar::tidy_policy_json(spec = spec)
 }

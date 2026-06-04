@@ -12,6 +12,7 @@
   operation_description,
   tags,
   parameters,
+  responses,
   ...
 )
 }

@@ -53,6 +53,49 @@ req_get_audit_case <- function(audit_case_id, cycle, sub_category_id, sort_nulls
     path = "/audit-case/",
     method = "get",
     api_key = api_key,
-    query = list(audit_case_id = audit_case_id, cycle = cycle, sub_category_id = sub_category_id, sort_nulls_last = sort_nulls_last, sort_hide_null = sort_hide_null, min_election_cycle = min_election_cycle, audit_id = audit_id, q = q, per_page = per_page, max_election_cycle = max_election_cycle, candidate_id = candidate_id, committee_type = committee_type, qq = qq, page = page, committee_id = committee_id, committee_designation = committee_designation, primary_category_id = primary_category_id, sort_null_only = sort_null_only, sort = sort)
+    query = list(audit_case_id = audit_case_id, cycle = cycle, sub_category_id = sub_category_id, sort_nulls_last = sort_nulls_last, sort_hide_null = sort_hide_null, min_election_cycle = min_election_cycle, audit_id = audit_id, q = q, per_page = per_page, max_election_cycle = max_election_cycle, candidate_id = candidate_id, committee_type = committee_type, qq = qq, page = page, committee_id = committee_id, committee_designation = committee_designation, primary_category_id = primary_category_id, sort_null_only = sort_null_only, sort = sort),
+    tidy_policy = tidy_policy_get_audit_case()
   )
+}
+
+tidy_policy_get_audit_case <- function() {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("count", .required = FALSE),
+      tibblify::tib_int("page", .required = FALSE),
+      tibblify::tib_int("pages", .required = FALSE),
+      tibblify::tib_int("per_page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("audit_case_id", .required = FALSE),
+      tibblify::tib_int("audit_id", .required = FALSE),
+      tibblify::tib_chr("candidate_id", .required = FALSE),
+      tibblify::tib_chr("candidate_name", .required = FALSE),
+      tibblify::tib_chr("committee_description", .required = FALSE),
+      tibblify::tib_chr("committee_designation", .required = FALSE),
+      tibblify::tib_chr("committee_id", .required = FALSE),
+      tibblify::tib_chr("committee_name", .required = FALSE),
+      tibblify::tib_chr("committee_type", .required = FALSE),
+      tibblify::tib_int("cycle", .required = FALSE),
+      tibblify::tib_chr("far_release_date", .required = FALSE),
+      tibblify::tib_chr("link_to_report", .required = FALSE),
+      tibblify::tib_df(
+        "primary_category_list",
+        .required = FALSE,
+        tibblify::tib_chr("primary_category_id", .required = FALSE),
+        tibblify::tib_chr("primary_category_name", .required = FALSE),
+        tibblify::tib_df(
+          "sub_category_list",
+          .required = FALSE,
+          tibblify::tib_chr("sub_category_id", .required = FALSE),
+          tibblify::tib_chr("sub_category_name", .required = FALSE),
+        ),
+      ),
+    ),
+  )
+  nectar::tidy_policy_json(spec = spec)
 }

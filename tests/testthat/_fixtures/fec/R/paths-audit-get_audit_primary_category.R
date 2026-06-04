@@ -40,6 +40,27 @@ req_get_audit_primary_category <- function(sort_nulls_last, page, primary_catego
     path = "/audit-primary-category/",
     method = "get",
     api_key = api_key,
-    query = list(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort)
+    query = list(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort),
+    tidy_policy = tidy_policy_get_audit_primary_category()
   )
+}
+
+tidy_policy_get_audit_primary_category <- function() {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("count", .required = FALSE),
+      tibblify::tib_int("page", .required = FALSE),
+      tibblify::tib_int("pages", .required = FALSE),
+      tibblify::tib_int("per_page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("primary_category_id", .required = FALSE),
+      tibblify::tib_chr("primary_category_name", .required = FALSE),
+    ),
+  )
+  nectar::tidy_policy_json(spec = spec)
 }

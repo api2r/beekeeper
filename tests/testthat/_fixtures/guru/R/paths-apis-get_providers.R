@@ -25,6 +25,14 @@ get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
 req_get_providers <- function() {
   guru_req_prepare(
     path = "/providers.json",
-    method = "get"
+    method = "get",
+    tidy_policy = tidy_policy_get_providers()
   )
+}
+
+tidy_policy_get_providers <- function() {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_chr_vec("data", .required = FALSE),
+  )
+  nectar::tidy_policy_json(spec = spec)
 }
