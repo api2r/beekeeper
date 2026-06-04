@@ -27,6 +27,12 @@ req_get_provider <- function(provider) {
   provider <- stbl::to_chr_scalar(provider)
   guru_req_prepare(
     path = c("/{provider}.json", provider = provider),
-    method = "get"
+    method = "get",
+    tidy_policy = tidy_policy_get_provider()
   )
+}
+
+tidy_policy_get_provider <- function() {
+  spec <- tibblify::tspec_row()
+  nectar::tidy_policy_json(spec = spec)
 }

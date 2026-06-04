@@ -25,6 +25,12 @@ list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
 req_list_apis <- function() {
   guru_req_prepare(
     path = "/list.json",
-    method = "get"
+    method = "get",
+    tidy_policy = tidy_policy_list_apis()
   )
+}
+
+tidy_policy_list_apis <- function() {
+  spec <- tibblify::tspec_row()
+  nectar::tidy_policy_json(spec = spec)
 }

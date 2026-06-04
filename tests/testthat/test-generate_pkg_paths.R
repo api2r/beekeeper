@@ -340,7 +340,8 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     ),
     test_args = "x_auth_token, session_id, q",
     pagination = FALSE,
-    pagination_fn = ""
+    pagination_fn = "",
+    tidy_policy_body = "nectar::tidy_policy_body_auto()"
   )
   .generate_paths_file(op, "search_things", "test", list())
 
@@ -348,4 +349,142 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     readLines(fs::path(tmp, "R", "paths-things-search_things.R")),
     expected_content
   )
+})
+
+test_that(".extract_response_info() returns body_auto for NULL responses (#115)", {
+  result <- .extract_response_info(NULL)
+  expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
+  expect_identical(result$description, "")
+})
+
+test_that(".extract_response_info() returns body_auto for empty responses (#115)", {
+  result <- .extract_response_info(
+    tibble::tibble(status_code = character())
+  )
+  expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
+})
+
+test_that(".extract_response_info() returns body_auto when no 200 or default status (#115)", {
+  responses <- tibble::tibble(
+    status_code = "404",
+    description = "Not found",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(tibblify::tspec_row(tibblify::tib_chr("msg")))
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
+})
+
+test_that(".extract_response_info() returns body_auto when 200 has no JSON content (#115)", {
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "XML only",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/xml",
+      spec = list(NULL)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
+})
+
+test_that(".extract_response_info() returns body_auto when JSON spec is NULL (#115)", {
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "No schema",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(NULL)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
+})
+
+test_that(".extract_response_info() builds spec-based tidy_policy for 200 JSON response (#115)", {
+  spec <- tibblify::tspec_row(tibblify::tib_chr("id", .required = FALSE))
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$description, "Success")
+  expect_match(result$tidy_policy_body, "tibblify::tspec_row")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+  expect_match(result$tidy_policy_body, "tib_chr")
+})
+
+test_that(".extract_response_info() falls back to default when no 200 status (#115)", {
+  spec <- tibblify::tspec_row(tibblify::tib_chr("fallback", .required = FALSE))
+  responses <- tibble::tibble(
+    status_code = "default",
+    description = "Default response",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$description, "Default response")
+  expect_match(result$tidy_policy_body, "fallback")
+})
+
+test_that(".extract_response_info() prefers 200 over default (#115)", {
+  spec_200 <- tibblify::tspec_row(tibblify::tib_chr(
+    "from_200",
+    .required = FALSE
+  ))
+  spec_default <- tibblify::tspec_row(tibblify::tib_chr(
+    "from_default",
+    .required = FALSE
+  ))
+  responses <- tibble::tibble(
+    status_code = c("default", "200"),
+    description = c("Default", "OK"),
+    headers = list(NULL, NULL),
+    content = list(
+      tibble::tibble(
+        media_type = "application/json",
+        spec = list(spec_default)
+      ),
+      tibble::tibble(media_type = "application/json", spec = list(spec_200))
+    ),
+    links = list(NULL, NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(result$description, "OK")
+  expect_match(result$tidy_policy_body, "from_200")
+  expect_no_match(result$tidy_policy_body, "from_default")
+})
+
+test_that(".paths_need_tibblify() returns TRUE when paths have JSON specs (#115)", {
+  expect_true(.paths_need_tibblify(fec_api_definition@paths))
+})
+
+test_that(".paths_need_tibblify() returns TRUE for empty tspec_row specs (#115)", {
+  expect_true(.paths_need_tibblify(guru_api_definition@paths))
+})
+
+test_that(".paths_need_tibblify() returns FALSE when no paths have JSON specs (#115)", {
+  expect_false(.paths_need_tibblify(trello_api_definition@paths))
+})
+
+test_that(".paths_need_tibblify() returns FALSE for empty paths (#115)", {
+  expect_false(.paths_need_tibblify(rapid::class_paths()))
 })

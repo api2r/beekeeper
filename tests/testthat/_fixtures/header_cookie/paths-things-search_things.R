@@ -34,6 +34,11 @@ req_search_things <- function(x_auth_token, session_id, q) {
     method = "get",
     query = list(q = q),
     header = list(x_auth_token = x_auth_token),
-    cookie = list(session_id = session_id)
+    cookie = list(session_id = session_id),
+    tidy_policy = tidy_policy_search_things()
   )
+}
+
+tidy_policy_search_things <- function() {
+  nectar::tidy_policy_body_auto()
 }

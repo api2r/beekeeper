@@ -29,6 +29,19 @@ req_get_names_audit_committees <- function(q, api_key = Sys.getenv("FEC_API_KEY"
     path = "/names/audit_committees/",
     method = "get",
     api_key = api_key,
-    query = list(q = q)
+    query = list(q = q),
+    tidy_policy = tidy_policy_get_names_audit_committees()
   )
+}
+
+tidy_policy_get_names_audit_committees <- function() {
+  spec <- tibblify::tspec_row(
+  tibblify::tib_df(
+    "results",
+    .required = FALSE,
+    tibblify::tib_chr("id", .required = FALSE),
+    tibblify::tib_chr("name", .required = FALSE),
+  ),
+)
+  nectar::tidy_policy_json(spec = spec)
 }
