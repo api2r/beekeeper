@@ -66,11 +66,11 @@ object is also written, and the path to that file (relative to
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/RtmpQDRE6y/file5072dbf5a49/.
-#> ✔ Setting active project to "/tmp/RtmpQDRE6y/file5072dbf5a49".
+#> ✔ Creating /tmp/Rtmp2dcgwH/file50318ffb228/.
+#> ✔ Setting active project to "/tmp/Rtmp2dcgwH/file50318ffb228".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file5072dbf5a49
+#> Package: file50318ffb228
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -84,7 +84,7 @@ usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
 #> ✔ Writing NAMESPACE.
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/RtmpQDRE6y/file5072dbf5a49".
+#> ✔ Setting active project to "/tmp/Rtmp2dcgwH/file50318ffb228".
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
 
 # Read an api definition. This could also simply be a URL to such a
@@ -109,7 +109,7 @@ read_config()
 #> [1] "_beekeeper_rapid.rds"
 #> 
 #> $updated_on
-#> [1] "2026-06-04 17:01:40 UTC"
+#> [1] "2026-06-04 17:56:20 UTC"
 #> 
 #> $api_definition_origin
 #> $api_definition_origin$url
