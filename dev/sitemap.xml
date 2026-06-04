@@ -27,6 +27,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-config_origin.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-describe_param_classes.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-extract_params_by_location.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-extract_response_info.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_params_df.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_pagination.html</loc></url>
@@ -44,6 +45,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-glue_pipe_brace.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-is_pkg.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-maybe_use_stbl.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-maybe_use_tibblify.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-optional_S7_prop.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-optional_origin_field.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-param_schema_to_r.html</loc></url>
@@ -59,6 +61,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-paths_fill_summary.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-paths_fill_tags.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-paths_need_stbl.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-paths_need_tibblify.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-paths_to_clean_df.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_abort.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-pkg_inform.html</loc></url>
@@ -83,6 +86,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_pkg_beekeeper.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_r_directory.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_testthat.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-use_tibblify.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-without_security_file_path.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-write_config.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-write_config_field.html</loc></url>

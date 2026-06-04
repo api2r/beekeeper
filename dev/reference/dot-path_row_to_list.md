@@ -13,6 +13,7 @@ Convert one operation row to template data
   operation_description,
   tags,
   parameters,
+  responses,
   ...
 )
 ```
