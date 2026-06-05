@@ -4,7 +4,14 @@
 \alias{.extract_response_info}
 \title{Extract response information for template use}
 \usage{
-.extract_response_info(responses)
+.extract_response_info(responses, exclude_from_response = character())
+}
+\arguments{
+\item{exclude_from_response}{(\code{character}) Field names to remove from response
+specs before generating parsers. Fields matching these names will be
+dropped from the response spec. If only one field remains after exclusion
+and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
+simplified so that the response parser targets that field directly.}
 }
 \value{
 (\code{list}) A list with \code{tidy_policy_body} (character) and

@@ -37,6 +37,7 @@ generate_pkg_paths <- function(
   ),
   security_data = read_security_data(pkg_dir, config_filename),
   use_prefix = FALSE,
+  exclude_from_response = character(),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
@@ -56,7 +57,8 @@ generate_pkg_paths <- function(
     security_data = security_data,
     pagination_data = .generate_pagination(),
     base_url = api_definition@servers@url,
-    use_prefix = use_prefix
+    use_prefix = use_prefix,
+    exclude_from_response = exclude_from_response
   )
 }
 
@@ -71,9 +73,13 @@ generate_pkg_paths <- function(
   security_data,
   pagination_data = list(),
   base_url,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  exclude_from_response = character()
 ) {
-  paths_by_operation <- as_bk_data(paths)
+  paths_by_operation <- as_bk_data(
+    paths,
+    exclude_from_response = exclude_from_response
+  )
   paths_file_paths <- character()
   if (length(paths_by_operation)) {
     paths_file_paths <- .generate_paths_files(
@@ -97,12 +103,20 @@ generate_pkg_paths <- function(
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_paths) <- function(x, ...) {
+S7::method(as_bk_data, class_paths) <- function(
+  x,
+  exclude_from_response = character(),
+  ...
+) {
   if (!length(x)) {
     return(list())
   }
   operations_df <- .paths_to_clean_df(x)
-  result <- purrr::pmap(operations_df, .path_row_to_list)
+  result <- purrr::pmap(
+    operations_df,
+    .path_row_to_list,
+    exclude_from_response = exclude_from_response
+  )
   names(result) <- operations_df$operation_id
   result
 }
@@ -213,9 +227,10 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
   tags,
   parameters,
   responses,
+  exclude_from_response = character(),
   ...
 ) {
-  response_info <- .extract_response_info(responses)
+  response_info <- .extract_response_info(responses, exclude_from_response)
   list(
     operation_id = operation_id,
     tag = tags,
@@ -242,7 +257,10 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 #'   `description` (character).
 #' @importFrom tibblify tspec_row
 #' @keywords internal
-.extract_response_info <- function(responses) {
+.extract_response_info <- function(
+  responses,
+  exclude_from_response = character()
+) {
   description <- ""
   tidy_policy_body <- "nectar::tidy_policy_body_auto()"
 
@@ -278,17 +296,40 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
     return(list(tidy_policy_body = tidy_policy_body, description = description))
   }
 
+  spec[["fields"]][exclude_from_response] <- NULL
+
+  spec_field_name <- NULL
+  if (
+    length(exclude_from_response) > 0 &&
+      length(names(spec$fields)) == 1 &&
+      spec$fields[[1]]$type %in% c("df", "row", "recursive")
+  ) {
+    spec_field_name <- names(spec$fields)
+    spec <- tibblify::field_to_tspec(spec, spec_field_name)
+  }
+
   indented_spec <- format(
     spec,
     width = 78,
     fully_qualify = TRUE,
     nchar_indent = 2
   )
-  tidy_policy_body <- paste0(
-    "spec <- ",
-    indented_spec,
-    "\n  nectar::tidy_policy_json(spec = spec)"
-  )
+
+  if (!is.null(spec_field_name)) {
+    tidy_policy_body <- paste0(
+      "spec <- ",
+      indented_spec,
+      '\n  nectar::tidy_policy_json(spec = spec, subset_path = "',
+      spec_field_name,
+      '")'
+    )
+  } else {
+    tidy_policy_body <- paste0(
+      "spec <- ",
+      indented_spec,
+      "\n  nectar::tidy_policy_json(spec = spec)"
+    )
+  }
 
   list(tidy_policy_body = tidy_policy_body, description = description)
 }
