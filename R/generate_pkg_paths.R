@@ -103,14 +103,11 @@ generate_pkg_paths <- function(
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_paths) <- function(
-  x,
-  exclude_from_response = character(),
-  ...
-) {
+S7::method(as_bk_data, class_paths) <- function(x, ...) {
   if (!length(x)) {
     return(list())
   }
+  exclude_from_response <- list(...)$exclude_from_response %||% character()
   operations_df <- .paths_to_clean_df(x)
   result <- purrr::pmap(
     operations_df,
@@ -308,12 +305,12 @@ S7::method(as_bk_data, class_paths) <- function(
     spec <- tibblify::field_to_tspec(spec, spec_field_name)
   }
 
-  indented_spec <- format(
+  indented_spec <- cli::ansi_strip(format(
     spec,
     width = 78,
     fully_qualify = TRUE,
     nchar_indent = 2
-  )
+  ))
 
   if (!is.null(spec_field_name)) {
     tidy_policy_body <- paste0(
