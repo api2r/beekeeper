@@ -16,6 +16,7 @@ BugReports: https://github.com/api2r/beekeeper/issues
 Depends:
     R (>= 4.1.0)
 Imports:
+    cli,
     dplyr,
     fs,
     glue,
