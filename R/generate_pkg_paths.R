@@ -278,12 +278,12 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
     return(list(tidy_policy_body = tidy_policy_body, description = description))
   }
 
-  indented_spec <- format(
+  indented_spec <- cli::ansi_strip(format(
     spec,
     width = 78,
     fully_qualify = TRUE,
     nchar_indent = 2
-  )
+  ))
   tidy_policy_body <- paste0(
     "spec <- ",
     indented_spec,
