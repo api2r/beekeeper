@@ -14,6 +14,7 @@ Convert one operation row to template data
   tags,
   parameters,
   responses,
+  exclude_from_response = character(),
   ...
 )
 ```
@@ -48,6 +49,14 @@ Convert one operation row to template data
 - parameters:
 
   (`data.frame`) Operation parameters.
+
+- exclude_from_response:
+
+  (`character`) Field names to remove from response specs before
+  generating parsers. Fields matching these names will be dropped from
+  the response spec. If only one field remains after exclusion and it is
+  of type `"df"`, `"row"`, or `"recursive"`, the spec is simplified so
+  that the response parser targets that field directly.
 
 - ...:
 

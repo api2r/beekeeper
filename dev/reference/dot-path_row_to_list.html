@@ -53,6 +53,7 @@
 <span>  <span class="va">tags</span>,</span>
 <span>  <span class="va">parameters</span>,</span>
 <span>  <span class="va">responses</span>,</span>
+<span>  exclude_from_response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -88,6 +89,14 @@ generated file names.</p></dd>
 
 <dt id="arg-parameters">parameters<a class="anchor" aria-label="anchor" href="#arg-parameters"></a></dt>
 <dd><p>(<code>data.frame</code>) Operation parameters.</p></dd>
+
+
+<dt id="arg-exclude-from-response">exclude_from_response<a class="anchor" aria-label="anchor" href="#arg-exclude-from-response"></a></dt>
+<dd><p>(<code>character</code>) Field names to remove from response
+specs before generating parsers. Fields matching these names will be
+dropped from the response spec. If only one field remains after exclusion
+and it is of type <code>"df"</code>, <code>"row"</code>, or <code>"recursive"</code>, the spec is
+simplified so that the response parser targets that field directly.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -11,7 +11,8 @@ Generate files for API paths
   security_data,
   pagination_data = list(),
   base_url,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  exclude_from_response = character()
 )
 ```
 
@@ -45,6 +46,14 @@ Generate files for API paths
   path function names. When `FALSE` (the default), functions are named
   `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
   named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
+
+- exclude_from_response:
+
+  (`character`) Field names to remove from response specs before
+  generating parsers. Fields matching these names will be dropped from
+  the response spec. If only one field remains after exclusion and it is
+  of type `"df"`, `"row"`, or `"recursive"`, the spec is simplified so
+  that the response parser targets that field directly.
 
 ## Value
 

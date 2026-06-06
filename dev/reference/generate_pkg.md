@@ -15,6 +15,7 @@ generate_pkg(
     config_filename)),
   api_title = read_api_title(pkg_dir, config_filename),
   use_prefix = FALSE,
+  exclude_from_response = character(),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 )
@@ -43,6 +44,14 @@ generate_pkg(
   `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
   named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
 
+- exclude_from_response:
+
+  (`character`) Field names to remove from response specs before
+  generating parsers. Fields matching these names will be dropped from
+  the response spec. If only one field remains after exclusion and it is
+  of type `"df"`, `"row"`, or `"recursive"`, the spec is simplified so
+  that the response parser targets that field directly.
+
 - config_filename:
 
   (`character(1)` or `fs_path`) The path to a beekeeper yaml config file
@@ -70,11 +79,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/Rtmp7uGNtp/file5072bb26831/.
-#> ✔ Setting active project to "/tmp/Rtmp7uGNtp/file5072bb26831".
+#> ✔ Creating /tmp/RtmpvKEm8W/file50c25d2c1b5/.
+#> ✔ Setting active project to "/tmp/RtmpvKEm8W/file50c25d2c1b5".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file5072bb26831
+#> Package: file50c25d2c1b5
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -93,7 +102,7 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/Rtmp7uGNtp/file5072bb26831".
+#> ✔ Setting active project to "/tmp/RtmpvKEm8W/file50c25d2c1b5".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate a package.
