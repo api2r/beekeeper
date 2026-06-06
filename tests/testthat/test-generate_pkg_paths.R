@@ -488,3 +488,189 @@ test_that(".paths_need_tibblify() returns FALSE when no paths have JSON specs (#
 test_that(".paths_need_tibblify() returns FALSE for empty paths (#115)", {
   expect_false(.paths_need_tibblify(rapid::class_paths()))
 })
+
+# exclude_from_response --------------------------------------------------------
+
+test_that(".extract_response_info() excludes named fields from the spec (#120)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("id", .required = FALSE),
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(
+    responses,
+    exclude_from_response = "pagination"
+  )
+  expect_no_match(result$tidy_policy_body, "pagination")
+  expect_match(result$tidy_policy_body, "results")
+})
+
+test_that(".extract_response_info() simplifies to tspec_df when 1 df field remains after exclusion (#120)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("id", .required = FALSE),
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(
+    responses,
+    exclude_from_response = "pagination"
+  )
+  expect_match(result$tidy_policy_body, "tibblify::tspec_df")
+  expect_match(result$tidy_policy_body, 'subset_path = "results"')
+  expect_no_match(result$tidy_policy_body, "tspec_row")
+})
+
+test_that(".extract_response_info() simplifies when 1 field remains but no exclusions (#120)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("id", .required = FALSE),
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_match(result$tidy_policy_body, "tspec_df")
+  expect_match(result$tidy_policy_body, 'subset_path = "results"')
+  expect_no_match(result$tidy_policy_body, "tspec_row")
+})
+
+test_that(".extract_response_info() does not simplify when >1 field remains after exclusion (#120)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("id", .required = FALSE),
+    ),
+    tibblify::tib_chr("status", .required = FALSE),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(
+    responses,
+    exclude_from_response = "pagination"
+  )
+  expect_match(result$tidy_policy_body, "tspec_row")
+  expect_no_match(result$tidy_policy_body, "pagination")
+  expect_match(result$tidy_policy_body, "results")
+  expect_match(result$tidy_policy_body, "status")
+  expect_no_match(result$tidy_policy_body, "subset_path")
+})
+
+test_that(".extract_response_info() does not simplify when 1 non-nested field remains after exclusion (#120)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("page", .required = FALSE),
+    ),
+    tibblify::tib_chr("status", .required = FALSE),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(
+    responses,
+    exclude_from_response = "pagination"
+  )
+  expect_match(result$tidy_policy_body, "tspec_row")
+  expect_no_match(result$tidy_policy_body, "pagination")
+  expect_match(result$tidy_policy_body, "status")
+  expect_no_match(result$tidy_policy_body, "subset_path")
+})
+
+test_that(".generate_paths() applies exclude_from_response to fec-like spec (#120)", {
+  skip_on_cran()
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "pagination",
+      .required = FALSE,
+      tibblify::tib_int("page", .required = FALSE),
+    ),
+    tibblify::tib_df(
+      "results",
+      .required = FALSE,
+      tibblify::tib_chr("id", .required = FALSE),
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(
+    responses,
+    exclude_from_response = "pagination"
+  )
+  expect_match(result$tidy_policy_body, 'subset_path = "results"')
+  expect_no_match(result$tidy_policy_body, "tspec_row")
+  expect_match(result$tidy_policy_body, "tspec_df")
+})

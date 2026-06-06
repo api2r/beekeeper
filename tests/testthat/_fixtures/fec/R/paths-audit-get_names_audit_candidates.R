@@ -35,13 +35,9 @@ req_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"
 }
 
 tidy_policy_get_names_audit_candidates <- function() {
-  spec <- tibblify::tspec_row(
-  tibblify::tib_df(
-    "results",
-    .required = FALSE,
-    tibblify::tib_chr("id", .required = FALSE),
-    tibblify::tib_chr("name", .required = FALSE),
-  ),
+  spec <- tibblify::tspec_df(
+  tibblify::tib_chr("id", .required = FALSE),
+  tibblify::tib_chr("name", .required = FALSE),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json(spec = spec, subset_path = "results")
 }

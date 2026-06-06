@@ -35,6 +35,7 @@ generate_pkg <- function(
   ),
   api_title = read_api_title(pkg_dir, config_filename),
   use_prefix = FALSE,
+  exclude_from_response = character(),
   config_filename = "_beekeeper.yml",
   pkg_dir = "."
 ) {
@@ -68,6 +69,7 @@ generate_pkg <- function(
     api_definition = api_definition,
     security_data = security_data,
     use_prefix = use_prefix,
+    exclude_from_response = exclude_from_response,
     pkg_dir = pkg_dir
   )
   touched_files <- c(
