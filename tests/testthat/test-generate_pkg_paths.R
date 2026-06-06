@@ -491,7 +491,7 @@ test_that(".paths_need_tibblify() returns FALSE for empty paths (#115)", {
 
 # exclude_from_response --------------------------------------------------------
 
-test_that(".extract_response_info() excludes named fields from the spec", {
+test_that(".extract_response_info() excludes named fields from the spec (#120)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -522,7 +522,7 @@ test_that(".extract_response_info() excludes named fields from the spec", {
   expect_match(result$tidy_policy_body, "results")
 })
 
-test_that(".extract_response_info() simplifies to tspec_df when 1 df field remains after exclusion", {
+test_that(".extract_response_info() simplifies to tspec_df when 1 df field remains after exclusion (#120)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -554,7 +554,7 @@ test_that(".extract_response_info() simplifies to tspec_df when 1 df field remai
   expect_no_match(result$tidy_policy_body, "tspec_row")
 })
 
-test_that(".extract_response_info() does not simplify when 1 field remains but no exclusions", {
+test_that(".extract_response_info() simplifies when 1 field remains but no exclusions (#120)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_df(
       "results",
@@ -573,11 +573,12 @@ test_that(".extract_response_info() does not simplify when 1 field remains but n
     links = list(NULL)
   )
   result <- .extract_response_info(responses)
-  expect_match(result$tidy_policy_body, "tspec_row")
-  expect_no_match(result$tidy_policy_body, "subset_path")
+  expect_match(result$tidy_policy_body, "tspec_df")
+  expect_match(result$tidy_policy_body, 'subset_path = "results"')
+  expect_no_match(result$tidy_policy_body, "tspec_row")
 })
 
-test_that(".extract_response_info() does not simplify when >1 field remains after exclusion", {
+test_that(".extract_response_info() does not simplify when >1 field remains after exclusion (#120)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -612,7 +613,7 @@ test_that(".extract_response_info() does not simplify when >1 field remains afte
   expect_no_match(result$tidy_policy_body, "subset_path")
 })
 
-test_that(".extract_response_info() does not simplify when 1 non-nested field remains after exclusion", {
+test_that(".extract_response_info() does not simplify when 1 non-nested field remains after exclusion (#120)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -641,7 +642,7 @@ test_that(".extract_response_info() does not simplify when 1 non-nested field re
   expect_no_match(result$tidy_policy_body, "subset_path")
 })
 
-test_that(".generate_paths() applies exclude_from_response to fec-like spec", {
+test_that(".generate_paths() applies exclude_from_response to fec-like spec (#120)", {
   skip_on_cran()
   spec <- tibblify::tspec_row(
     tibblify::tib_row(

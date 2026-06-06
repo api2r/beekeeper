@@ -103,11 +103,14 @@ generate_pkg_paths <- function(
 
 #' @rdname as_bk_data
 #' @keywords internal
-S7::method(as_bk_data, class_paths) <- function(x, ...) {
+S7::method(as_bk_data, class_paths) <- function(
+  x,
+  exclude_from_response = character(),
+  ...
+) {
   if (!length(x)) {
     return(list())
   }
-  exclude_from_response <- list(...)$exclude_from_response %||% character()
   operations_df <- .paths_to_clean_df(x)
   result <- purrr::pmap(
     operations_df,
@@ -295,14 +298,14 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
 
   spec[["fields"]][exclude_from_response] <- NULL
 
-  spec_field_name <- NULL
-  if (
-    length(exclude_from_response) > 0 &&
-      length(names(spec$fields)) == 1 &&
+  subset_path <- character()
+  while (
+    length(names(spec$fields)) == 1 &&
       spec$fields[[1]]$type %in% c("df", "row", "recursive")
   ) {
-    spec_field_name <- names(spec$fields)
-    spec <- tibblify::field_to_tspec(spec, spec_field_name)
+    field_name <- names(spec$fields)
+    subset_path <- c(subset_path, field_name)
+    spec <- tibblify::field_to_tspec(spec, field_name)
   }
 
   indented_spec <- cli::ansi_strip(format(
@@ -312,13 +315,18 @@ S7::method(as_bk_data, class_paths) <- function(x, ...) {
     nchar_indent = 2
   ))
 
-  if (!is.null(spec_field_name)) {
+  if (length(subset_path) > 0) {
+    subset_path_str <- if (length(subset_path) == 1) {
+      paste0('"', subset_path, '"')
+    } else {
+      paste0('c(', paste0('"', subset_path, '"', collapse = ", "), ')')
+    }
     tidy_policy_body <- paste0(
       "spec <- ",
       indented_spec,
-      '\n  nectar::tidy_policy_json(spec = spec, subset_path = "',
-      spec_field_name,
-      '")'
+      "\n  nectar::tidy_policy_json(spec = spec, subset_path = ",
+      subset_path_str,
+      ")"
     )
   } else {
     tidy_policy_body <- paste0(
