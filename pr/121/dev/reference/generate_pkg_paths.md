@@ -81,11 +81,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/RtmpHIwNSv/file50716eeafca/.
-#> ✔ Setting active project to "/tmp/RtmpHIwNSv/file50716eeafca".
+#> ✔ Creating /tmp/Rtmp3LvHit/file50956b369b9/.
+#> ✔ Setting active project to "/tmp/Rtmp3LvHit/file50956b369b9".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file50716eeafca
+#> Package: file50956b369b9
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -104,7 +104,7 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/RtmpHIwNSv/file50716eeafca".
+#> ✔ Setting active project to "/tmp/Rtmp3LvHit/file50956b369b9".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate functions and tests for API paths.
