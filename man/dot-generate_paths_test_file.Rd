@@ -2,19 +2,20 @@
 % Please edit documentation in R/generate_pkg_paths.R
 \name{.generate_paths_test_file}
 \alias{.generate_paths_test_file}
-\title{Generate one tag-level test file}
+\title{Generate one operation-level test file}
 \usage{
 .generate_paths_test_file(
-  tag_operations,
-  tag_name,
+  path_operation,
+  operation_id,
   api_abbr,
   use_prefix = FALSE
 )
 }
 \arguments{
-\item{tag_operations}{(\code{list}) Operations grouped under one tag.}
+\item{path_operation}{(\code{list}) Template data for one operation.}
 
-\item{tag_name}{(\code{character(1)}) The tag name.}
+\item{operation_id}{(\code{character(1)}) The operation identifier used in
+generated file names.}
 
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.}
@@ -28,6 +29,6 @@ named \verb{\{api_abbr\}_\{operation_id\}} and \verb{req_\{api_abbr\}_\{operatio
 (\code{character(1)}) The generated test file path.
 }
 \description{
-Generate one tag-level test file
+Generate one operation-level test file
 }
 \keyword{internal}
