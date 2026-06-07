@@ -567,7 +567,7 @@ For example, this is the generated
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/audit/fec_get_audit_case", {
-  test_that("fec_get_audit_case() returns expected result (#123)", {
+  test_that("fec_get_audit_case() returns expected result", {
     expect_snapshot({
       test_result <- fec_get_audit_case(
         audit_case_id,

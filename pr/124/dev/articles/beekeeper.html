@@ -604,7 +604,7 @@ OpenFEC API:</p>
 <span><span class="co"># check for specific expectations, rather than simply using a snapshot.</span></span>
 <span></span>
 <span><span class="fu">with_mock_dir</span><span class="op">(</span><span class="st">"api/path/audit/fec_get_audit_case"</span>, <span class="op">{</span></span>
-<span>  <span class="fu">test_that</span><span class="op">(</span><span class="st">"fec_get_audit_case() returns expected result (#123)"</span>, <span class="op">{</span></span>
+<span>  <span class="fu">test_that</span><span class="op">(</span><span class="st">"fec_get_audit_case() returns expected result"</span>, <span class="op">{</span></span>
 <span>    <span class="fu">expect_snapshot</span><span class="op">(</span><span class="op">{</span></span>
 <span>      <span class="va">test_result</span> <span class="op">&lt;-</span> <span class="fu">fec_get_audit_case</span><span class="op">(</span></span>
 <span>        <span class="va">audit_case_id</span>,</span>
