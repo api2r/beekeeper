@@ -3,10 +3,10 @@
 # arguments for the tests to succeed. We recommend expanding these tests to
 # check for specific expectations, rather than simply using a snapshot.
 
-with_mock_dir("api/path/{{tag}}/{{fn_prefix}}{{operation_id}}", {
-  test_that("{{fn_prefix}}{{operation_id}}() returns expected result (#123)", {
+with_mock_dir("api/path/audit/get_audit_category", {
+  test_that("get_audit_category() returns expected result (#123)", {
     expect_snapshot({
-      test_result <- {{fn_prefix}}{{operation_id}}({{{test_args}}})
+      test_result <- get_audit_category(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort)
       test_result
     })
   })

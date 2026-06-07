@@ -534,15 +534,11 @@ S7::method(as_bk_data, class_paths) <- function(
     )
   })))
 
-  # One test file per tag (operations grouped by tag, preserving encounter
-  # order)
-  tags <- purrr::map_chr(prepped, "tag")
-  unique_tags <- unique(tags)
-  test_files <- unname(unlist(lapply(unique_tags, function(tag_name) {
-    tag_ops <- prepped[tags == tag_name]
+  # One test file per operation
+  test_files <- unname(unlist(purrr::imap(prepped, function(op, op_id) {
     .generate_paths_test_file(
-      tag_ops,
-      tag_name,
+      op,
+      op_id,
       api_abbr,
       use_prefix = use_prefix
     )
@@ -679,33 +675,28 @@ S7::method(as_bk_data, class_paths) <- function(
   )
 }
 
-#' Generate one tag-level test file
+#' Generate one operation-level test file
 #'
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated test file path.
 #' @keywords internal
 .generate_paths_test_file <- function(
-  tag_operations,
-  tag_name,
+  path_operation,
+  operation_id,
   api_abbr,
   use_prefix = FALSE
 ) {
   fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
-  paths_list <- unname(purrr::imap(tag_operations, function(op, op_id) {
-    list(
-      fn_prefix = fn_prefix,
-      operation_id = op_id,
-      test_args = op$test_args %|0|% ""
-    )
-  }))
   .bk_use_template(
     template = "test-paths.R",
     data = list(
-      paths = paths_list,
-      tag = tag_name,
-      api_abbr = api_abbr
+      tag = path_operation$tag,
+      api_abbr = api_abbr,
+      fn_prefix = fn_prefix,
+      operation_id = operation_id,
+      test_args = path_operation$test_args %|0|% ""
     ),
     dir = "tests/testthat",
-    target = glue::glue("test-paths-{tag_name}.R")
+    target = glue::glue("test-paths-{path_operation$tag}-{operation_id}.R")
   )
 }

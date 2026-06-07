@@ -1,4 +1,4 @@
-test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82, #112)", {
+test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82, #112, #123)", {
   skip_on_cran()
   create_local_package()
 
@@ -8,7 +8,7 @@ test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82,
     api_title = guru_config$api_title
   )
   test_result <- scrub_path(test_result)
-  # 7 guru operations all in "apis" tag: 7 R files + 1 test file + setup
+  # 7 guru operations all in "apis" tag: 7 R files + 7 test files + setup
   expected_result <- c(
     "/R/000-shared.R",
     "/R/010-prepare.R",
@@ -20,7 +20,13 @@ test_that("generate_pkg() returns a vector of created files (#15, #16, #35, #82,
     "/R/paths-apis-get_service_api.R",
     "/R/paths-apis-get_provider.R",
     "/R/paths-apis-get_services.R",
-    "/tests/testthat/test-paths-apis.R",
+    "/tests/testthat/test-paths-apis-list_apis.R",
+    "/tests/testthat/test-paths-apis-get_metrics.R",
+    "/tests/testthat/test-paths-apis-get_providers.R",
+    "/tests/testthat/test-paths-apis-get_api.R",
+    "/tests/testthat/test-paths-apis-get_service_api.R",
+    "/tests/testthat/test-paths-apis-get_provider.R",
+    "/tests/testthat/test-paths-apis-get_services.R",
     "/tests/testthat/setup.R"
   )
 
