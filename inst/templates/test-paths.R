@@ -4,7 +4,7 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/{{tag}}/{{fn_prefix}}{{operation_id}}", {
-  test_that("{{fn_prefix}}{{operation_id}}() returns expected result (#123)", {
+  test_that("{{fn_prefix}}{{operation_id}}() returns expected result", {
     expect_snapshot({
       test_result <- {{fn_prefix}}{{operation_id}}({{{test_args}}})
       test_result
