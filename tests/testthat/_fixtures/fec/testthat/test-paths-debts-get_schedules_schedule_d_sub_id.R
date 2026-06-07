@@ -4,7 +4,7 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/debts/get_schedules_schedule_d_sub_id", {
-  test_that("get_schedules_schedule_d_sub_id() returns expected result (#123)", {
+  test_that("get_schedules_schedule_d_sub_id() returns expected result", {
     expect_snapshot({
       test_result <- get_schedules_schedule_d_sub_id(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id)
       test_result

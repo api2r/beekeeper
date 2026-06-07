@@ -4,7 +4,7 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/board/add_boards", {
-  test_that("add_boards() returns expected result (#123)", {
+  test_that("add_boards() returns expected result", {
     expect_snapshot({
       test_result <- add_boards()
       test_result

@@ -4,7 +4,7 @@
 # check for specific expectations, rather than simply using a snapshot.
 
 with_mock_dir("api/path/apis/get_providers", {
-  test_that("get_providers() returns expected result (#123)", {
+  test_that("get_providers() returns expected result", {
     expect_snapshot({
       test_result <- get_providers()
       test_result
