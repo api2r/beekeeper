@@ -713,6 +713,9 @@ test_that(".extract_response_info() uses a vector subset_path for nested simplif
 
   result <- .extract_response_info(responses)
 
-  expect_match(result$tidy_policy_body, 'subset_path = c\\("response", "results"\\)')
+  expect_match(
+    result$tidy_policy_body,
+    'subset_path = c\\("response", "results"\\)'
+  )
   expect_match(result$tidy_policy_body, "tspec_df")
 })
