@@ -9,7 +9,7 @@ test_that(".generate_paths() returns empty character for empty paths (#65)", {
   expect_identical(result, character())
 })
 
-test_that(".generate_paths() calls correct templates for guru (#65, #112)", {
+test_that(".generate_paths() calls correct templates for guru (#65, #112, #123)", {
   # 1 tag, no security
   skip_on_cran()
   config <- guru_config
@@ -36,16 +36,22 @@ test_that(".generate_paths() calls correct templates for guru (#65, #112)", {
       "paths-apis-get_service_api.R",
       "paths-apis-get_provider.R",
       "paths-apis-get_services.R",
-      "test-paths-apis.R",
+      "test-paths-apis-list_apis.R",
+      "test-paths-apis-get_metrics.R",
+      "test-paths-apis-get_providers.R",
+      "test-paths-apis-get_api.R",
+      "test-paths-apis-get_service_api.R",
+      "test-paths-apis-get_provider.R",
+      "test-paths-apis-get_services.R",
       "setup.R"
     )
   )
 
-  # 7 paths.R calls + 1 test-paths.R call + 1 setup.R call
-  expect_length(calls, 9L)
+  # 7 paths.R calls + 7 test-paths.R calls + 1 setup.R call
+  expect_length(calls, 15L)
   expect_identical(
     purrr::map_chr(calls, "template"),
-    c(rep("paths.R", 7L), "test-paths.R", "setup.R")
+    c(rep("paths.R", 7L), rep("test-paths.R", 7L), "setup.R")
   )
 
   # Spot-check data for the first (simplest) path call
@@ -63,16 +69,18 @@ test_that(".generate_paths() calls correct templates for guru (#65, #112)", {
   # Check test-paths.R data
   test_call <- calls[[8]]
   expect_identical(test_call$dir, "tests/testthat")
-  expect_identical(test_call$target, "test-paths-apis.R")
-  expect_length(test_call$data$paths, 7L)
+  expect_identical(test_call$target, "test-paths-apis-list_apis.R")
+  expect_identical(test_call$data$tag, "apis")
+  expect_identical(test_call$data$operation_id, "list_apis")
+  expect_identical(test_call$data$fn_prefix, "")
 
   # Check setup.R data
-  setup_call <- calls[[9]]
+  setup_call <- calls[[15]]
   expect_identical(setup_call$dir, "tests/testthat")
   expect_identical(setup_call$data$base_url, api_definition@servers@url)
 })
 
-test_that(".generate_paths() writes correct templates for guru (#65, #112)", {
+test_that(".generate_paths() writes correct templates for guru (#65, #112, #123)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
   config <- guru_config
@@ -111,7 +119,7 @@ test_that(".generate_paths() writes correct templates for guru (#65, #112)", {
   )
 })
 
-test_that(".generate_paths() calls correct templates for fec (#65, #112)", {
+test_that(".generate_paths() calls correct templates for fec (#65, #112, #123)", {
   # 3 tags (audit, debts, legal), more complicated security
   skip_on_cran()
   config <- fec_config
@@ -143,15 +151,20 @@ test_that(".generate_paths() calls correct templates for fec (#65, #112)", {
       "paths-audit-get_names_audit_committees.R",
       "paths-debts-get_schedules_schedule_d.R",
       "paths-debts-get_schedules_schedule_d_sub_id.R",
-      "test-paths-audit.R",
-      "test-paths-legal.R",
-      "test-paths-debts.R",
+      "test-paths-audit-get_audit_case.R",
+      "test-paths-audit-get_audit_category.R",
+      "test-paths-audit-get_audit_primary_category.R",
+      "test-paths-legal-get_legal_search.R",
+      "test-paths-audit-get_names_audit_candidates.R",
+      "test-paths-audit-get_names_audit_committees.R",
+      "test-paths-debts-get_schedules_schedule_d.R",
+      "test-paths-debts-get_schedules_schedule_d_sub_id.R",
       "setup.R"
     )
   )
 
-  # 1 auth + 8 path R files + 3 test files + 1 setup = 13 calls
-  expect_length(calls, 13L)
+  # 1 auth + 8 path R files + 8 test files + 1 setup = 18 calls
+  expect_length(calls, 18L)
 
   # Security data should be threaded through to paths (.generate_security()
   # wrote the auth file as calls[[1]], so paths start at calls[[2]])
@@ -672,5 +685,37 @@ test_that(".generate_paths() applies exclude_from_response to fec-like spec (#12
   )
   expect_match(result$tidy_policy_body, 'subset_path = "results"')
   expect_no_match(result$tidy_policy_body, "tspec_row")
+  expect_match(result$tidy_policy_body, "tspec_df")
+})
+
+test_that(".extract_response_info() uses a vector subset_path for nested simplification (#123)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "response",
+      .required = FALSE,
+      tibblify::tib_df(
+        "results",
+        .required = FALSE,
+        tibblify::tib_chr("id", .required = FALSE),
+      ),
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+
+  result <- .extract_response_info(responses)
+
+  expect_match(
+    result$tidy_policy_body,
+    'subset_path = c\\("response", "results"\\)'
+  )
   expect_match(result$tidy_policy_body, "tspec_df")
 })

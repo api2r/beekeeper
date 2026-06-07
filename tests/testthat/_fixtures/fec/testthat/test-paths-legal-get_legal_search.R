@@ -3,13 +3,12 @@
 # arguments for the tests to succeed. We recommend expanding these tests to
 # check for specific expectations, rather than simply using a snapshot.
 
-with_mock_dir("api/path/legal", {
+with_mock_dir("api/path/legal/get_legal_search", {
   test_that("get_legal_search() returns expected result", {
     expect_snapshot({
       test_result <- get_legal_search(hits_returned, af_report_year, case_max_open_date, ao_max_issue_date, case_statutory_citation, case_respondents, q, ao_min_issue_date, af_max_fd_date, from_hit, af_fd_fine_amount, type, af_name, ao_requestor_type, ao_statutory_citation, ao_entity_name, mur_type, ao_regulatory_citation, af_committee_id, ao_requestor, case_citation_require_all, af_min_fd_date, ao_is_pending, af_rtb_fine_amount, case_election_cycles, ao_category, ao_citation_require_all, case_dispositions, af_max_rtb_date, case_min_open_date, case_max_close_date, ao_min_request_date, ao_status, case_doc_category_id, af_min_rtb_date, ao_name, case_regulatory_citation, ao_no, case_min_close_date, sort, ao_max_request_date, case_no)
       test_result
     })
   })
-
 
 })
