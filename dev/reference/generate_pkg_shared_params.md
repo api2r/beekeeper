@@ -43,11 +43,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/Rtmpaueteo/file5077cce2027/.
-#> ✔ Setting active project to "/tmp/Rtmpaueteo/file5077cce2027".
+#> ✔ Creating /tmp/Rtmp0av4RZ/file50c58812bce/.
+#> ✔ Setting active project to "/tmp/Rtmp0av4RZ/file50c58812bce".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file5077cce2027
+#> Package: file50c58812bce
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -66,7 +66,7 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/Rtmpaueteo/file5077cce2027".
+#> ✔ Setting active project to "/tmp/Rtmp0av4RZ/file50c58812bce".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate shared parameters.

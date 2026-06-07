@@ -1,13 +1,13 @@
-# Generate one tag-level test file
+# Generate one operation-level test file
 
-Generate one tag-level test file
+Generate one operation-level test file
 
 ## Usage
 
 ``` r
 .generate_paths_test_file(
-  tag_operations,
-  tag_name,
+  path_operation,
+  operation_id,
   api_abbr,
   use_prefix = FALSE
 )
@@ -15,13 +15,14 @@ Generate one tag-level test file
 
 ## Arguments
 
-- tag_operations:
+- path_operation:
 
-  (`list`) Operations grouped under one tag.
+  (`list`) Template data for one operation.
 
-- tag_name:
+- operation_id:
 
-  (`character(1)`) The tag name.
+  (`character(1)`) The operation identifier used in generated file
+  names.
 
 - api_abbr:
 
