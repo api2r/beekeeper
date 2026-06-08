@@ -1,5 +1,7 @@
 # beekeeper (development version)
 
+* `generate_pkg_paths()` now generates `nectar::tidy_policy_json(simplifyVector = TRUE)` (with `subset_path` when applicable) instead of `nectar::tidy_policy_json_tibblify()` when the response spec has zero fields or a single non-nested field (#125).
+
 # beekeeper 0.5.0
 
 * New generation functions `generate_pkg_auth()`, `generate_pkg_paths()`, `generate_pkg_req_prepare()`, and `generate_pkg_shared_params()` allow for more modular API-wrapping package generation (#101).

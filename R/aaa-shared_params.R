@@ -23,10 +23,10 @@
 #'   written.
 #' @param endpoint (`character(1)`) The operation endpoint.
 #' @param endpoints (`character`) Endpoint paths paired with operations.
-#' @param exclude_from_response (`character`) Field names to remove from response
-#'   specs before generating parsers. Fields matching these names will be
-#'   dropped from the response spec. If only one field remains after exclusion
-#'   and it is of type `"df"`, `"row"`, or `"recursive"`, the spec is
+#' @param exclude_from_response (`character`) Field names to remove from
+#'   response specs before generating parsers. Fields matching these names will
+#'   be dropped from the response spec. If only one field remains after
+#'   exclusion and it is of type `"df"`, `"row"`, or `"recursive"`, the spec is
 #'   simplified so that the response parser targets that field directly.
 #' @param filter_in (`character(1)`) The parameter location to keep.
 #' @param methods (`character`) HTTP methods paired with endpoints.

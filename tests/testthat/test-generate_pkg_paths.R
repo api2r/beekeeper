@@ -80,7 +80,7 @@ test_that(".generate_paths() calls correct templates for guru (#65, #112, #123)"
   expect_identical(setup_call$data$base_url, api_definition@servers@url)
 })
 
-test_that(".generate_paths() writes correct templates for guru (#65, #112, #123)", {
+test_that(".generate_paths() writes correct templates for guru (#65, #112, #123, #125)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
   config <- guru_config
@@ -422,7 +422,7 @@ test_that(".extract_response_info() returns body_auto when JSON spec is NULL (#1
   expect_identical(result$tidy_policy_body, "nectar::tidy_policy_body_auto()")
 })
 
-test_that(".extract_response_info() builds spec-based tidy_policy for 200 JSON response (#115)", {
+test_that(".extract_response_info() uses tidy_policy_json for single simple field in 200 JSON response (#115, #125)", {
   spec <- tibblify::tspec_row(tibblify::tib_chr("id", .required = FALSE))
   responses <- tibble::tibble(
     status_code = "200",
@@ -436,9 +436,9 @@ test_that(".extract_response_info() builds spec-based tidy_policy for 200 JSON r
   )
   result <- .extract_response_info(responses)
   expect_identical(result$description, "Success")
-  expect_match(result$tidy_policy_body, "tibblify::tspec_row")
-  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json_tibblify")
-  expect_match(result$tidy_policy_body, "tib_chr")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+  expect_match(result$tidy_policy_body, 'subset_path = "id"')
+  expect_no_match(result$tidy_policy_body, "tibblify")
 })
 
 test_that(".extract_response_info() falls back to default when no 200 status (#115)", {
@@ -490,7 +490,7 @@ test_that(".paths_need_tibblify() returns TRUE when paths have JSON specs (#115)
   expect_true(.paths_need_tibblify(fec_api_definition@paths))
 })
 
-test_that(".paths_need_tibblify() returns TRUE for empty tspec_row specs (#115)", {
+test_that(".paths_need_tibblify() returns TRUE when any path has a complex JSON spec (#115, #125)", {
   expect_true(.paths_need_tibblify(guru_api_definition@paths))
 })
 
@@ -535,7 +535,7 @@ test_that(".extract_response_info() excludes named fields from the spec (#120)",
   expect_match(result$tidy_policy_body, "results")
 })
 
-test_that(".extract_response_info() simplifies to tspec_df when 1 df field remains after exclusion (#120)", {
+test_that(".extract_response_info() simplifies to tidy_policy_json when 1 df field with single sub-field remains after exclusion (#120, #125)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -562,12 +562,12 @@ test_that(".extract_response_info() simplifies to tspec_df when 1 df field remai
     responses,
     exclude_from_response = "pagination"
   )
-  expect_match(result$tidy_policy_body, "tibblify::tspec_df")
-  expect_match(result$tidy_policy_body, 'subset_path = "results"')
-  expect_no_match(result$tidy_policy_body, "tspec_row")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+  expect_match(result$tidy_policy_body, 'subset_path = c\\("results", "id"\\)')
+  expect_no_match(result$tidy_policy_body, "tibblify")
 })
 
-test_that(".extract_response_info() simplifies when 1 field remains but no exclusions (#120)", {
+test_that(".extract_response_info() simplifies to tidy_policy_json when 1 df field with single sub-field and no exclusions (#120, #125)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_df(
       "results",
@@ -586,9 +586,9 @@ test_that(".extract_response_info() simplifies when 1 field remains but no exclu
     links = list(NULL)
   )
   result <- .extract_response_info(responses)
-  expect_match(result$tidy_policy_body, "tspec_df")
-  expect_match(result$tidy_policy_body, 'subset_path = "results"')
-  expect_no_match(result$tidy_policy_body, "tspec_row")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+  expect_match(result$tidy_policy_body, 'subset_path = c\\("results", "id"\\)')
+  expect_no_match(result$tidy_policy_body, "tibblify")
 })
 
 test_that(".extract_response_info() does not simplify when >1 field remains after exclusion (#120)", {
@@ -626,7 +626,7 @@ test_that(".extract_response_info() does not simplify when >1 field remains afte
   expect_no_match(result$tidy_policy_body, "subset_path")
 })
 
-test_that(".extract_response_info() does not simplify when 1 non-nested field remains after exclusion (#120)", {
+test_that(".extract_response_info() simplifies to tidy_policy_json when 1 simple field remains after exclusion (#120, #125)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "pagination",
@@ -649,13 +649,13 @@ test_that(".extract_response_info() does not simplify when 1 non-nested field re
     responses,
     exclude_from_response = "pagination"
   )
-  expect_match(result$tidy_policy_body, "tspec_row")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
   expect_no_match(result$tidy_policy_body, "pagination")
-  expect_match(result$tidy_policy_body, "status")
-  expect_no_match(result$tidy_policy_body, "subset_path")
+  expect_match(result$tidy_policy_body, 'subset_path = "status"')
+  expect_no_match(result$tidy_policy_body, "tspec_row")
 })
 
-test_that(".generate_paths() applies exclude_from_response to fec-like spec (#120)", {
+test_that(".generate_paths() applies exclude_from_response to fec-like spec (#120, #125)", {
   skip_on_cran()
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
@@ -683,12 +683,12 @@ test_that(".generate_paths() applies exclude_from_response to fec-like spec (#12
     responses,
     exclude_from_response = "pagination"
   )
-  expect_match(result$tidy_policy_body, 'subset_path = "results"')
+  expect_match(result$tidy_policy_body, 'subset_path = c\\("results", "id"\\)')
   expect_no_match(result$tidy_policy_body, "tspec_row")
-  expect_match(result$tidy_policy_body, "tspec_df")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
 })
 
-test_that(".extract_response_info() uses a vector subset_path for nested simplification (#123)", {
+test_that(".extract_response_info() uses tidy_policy_json with full vector subset_path for nested simplification (#123, #125)", {
   spec <- tibblify::tspec_row(
     tibblify::tib_row(
       "response",
@@ -715,7 +715,50 @@ test_that(".extract_response_info() uses a vector subset_path for nested simplif
 
   expect_match(
     result$tidy_policy_body,
-    'subset_path = c\\("response", "results"\\)'
+    'subset_path = c\\("response", "results", "id"\\)'
   )
-  expect_match(result$tidy_policy_body, "tspec_df")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+})
+
+test_that(".extract_response_info() uses tidy_policy_json for empty spec (#125)", {
+  spec <- tibblify::tspec_row()
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Empty spec",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(
+    result$tidy_policy_body,
+    "nectar::tidy_policy_json(simplifyVector = TRUE)"
+  )
+})
+
+test_that(".extract_response_info() uses tidy_policy_json for spec with empty fields after drill-down (#125)", {
+  spec <- tibblify::tspec_row(
+    tibblify::tib_row(
+      "data",
+      .required = FALSE,
+    ),
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(tibble::tibble(
+      media_type = "application/json",
+      spec = list(spec)
+    )),
+    links = list(NULL)
+  )
+  result <- .extract_response_info(responses)
+  expect_identical(
+    result$tidy_policy_body,
+    'nectar::tidy_policy_json(subset_path = "data", simplifyVector = TRUE)'
+  )
 })
