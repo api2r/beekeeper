@@ -130,7 +130,14 @@ if (exists("%||%", envir = baseenv())) {
 #' @returns (`character`) Snake-case text.
 #' @keywords internal
 .to_snake <- function(x) {
-  snakecase::to_snake_case(x, parsing_option = 3)
+  x |>
+    stringr::str_replace_all("([a-z])([A-Z])", "\\1_\\2") |>
+    stringr::str_replace_all("([a-zA-Z])([0-9])", "\\1_\\2") |>
+    stringr::str_replace_all("([0-9])([a-zA-Z])", "\\1_\\2") |>
+    stringr::str_replace_all("[^a-zA-Z0-9]+", "_") |>
+    stringr::str_replace_all("^_+|_+$", "") |>
+    stringr::str_replace_all("_+", "_") |>
+    tolower()
 }
 
 #' Flatten a data frame or list of data frames
