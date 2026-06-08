@@ -813,11 +813,6 @@ test_that(".path_row_to_list() uses response_description from spec (#66)", {
   expect_identical(result$response_description, "A list of things")
 })
 
-test_that("meaningless_response_descriptions contains expected values (#66)", {
-  expect_in("ok", meaningless_response_descriptions)
-  expect_in("success", meaningless_response_descriptions)
-})
-
 test_that(".path_row_to_list() treats 'ok' as meaningless response_description (#66)", {
   empty_params <- tibble::tibble(
     name = character(),

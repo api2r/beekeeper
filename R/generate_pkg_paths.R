@@ -99,10 +99,6 @@ generate_pkg_paths <- function(
   return(paths_file_paths)
 }
 
-# constants ------------------------------------------------------------------
-
-meaningless_response_descriptions <- c("ok", "success")
-
 # reshape data -----------------------------------------------------------------
 
 S7::method(as_bk_data, class_paths) <- function(
@@ -232,6 +228,7 @@ S7::method(as_bk_data, class_paths) <- function(
   exclude_from_response = character(),
   ...
 ) {
+  meaningless_response_descriptions <- c("ok", "success")
   response_info <- .extract_response_info(responses, exclude_from_response)
   list(
     operation_id = operation_id,
