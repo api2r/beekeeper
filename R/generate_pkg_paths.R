@@ -228,6 +228,7 @@ S7::method(as_bk_data, class_paths) <- function(
   exclude_from_response = character(),
   ...
 ) {
+  meaningless_response_descriptions <- c("ok", "success")
   response_info <- .extract_response_info(responses, exclude_from_response)
   list(
     operation_id = operation_id,
@@ -241,7 +242,10 @@ S7::method(as_bk_data, class_paths) <- function(
     params_header_raw = .extract_params_by_location(parameters, "header"),
     params_cookie_raw = .extract_params_by_location(parameters, "cookie"),
     tidy_policy_body = response_info$tidy_policy_body,
-    response_description = response_info$description
+    response_description = response_info$description[
+      !tolower(response_info$description) %in% meaningless_response_descriptions
+    ] %|a|%
+      "The API response."
   )
 }
 
