@@ -13,9 +13,13 @@ test_that("%|0|% works (#noissue)", {
   expect_identical("foo" %|0|% "bar", "foo")
 })
 
-test_that("%|\"|% works (#noissue)", {
+test_that("%|a|% works (#noissue)", {
   expect_identical("" %|a|% "foo", "foo")
   expect_identical("foo" %|a|% "bar", "foo")
+})
+
+test_that("%|a|% returns default for character() (#66)", {
+  expect_identical(character() %|a|% "foo", "foo")
 })
 
 test_that("%|% works (#52)", {

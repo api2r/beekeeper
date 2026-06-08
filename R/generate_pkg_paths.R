@@ -99,6 +99,10 @@ generate_pkg_paths <- function(
   return(paths_file_paths)
 }
 
+# constants ------------------------------------------------------------------
+
+meaningless_response_descriptions <- c("ok", "success")
+
 # reshape data -----------------------------------------------------------------
 
 S7::method(as_bk_data, class_paths) <- function(
@@ -241,7 +245,10 @@ S7::method(as_bk_data, class_paths) <- function(
     params_header_raw = .extract_params_by_location(parameters, "header"),
     params_cookie_raw = .extract_params_by_location(parameters, "cookie"),
     tidy_policy_body = response_info$tidy_policy_body,
-    response_description = response_info$description
+    response_description = response_info$description[
+      !tolower(response_info$description) %in% meaningless_response_descriptions
+    ] %|a|%
+      "The API response."
   )
 }
 

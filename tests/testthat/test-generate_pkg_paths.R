@@ -354,7 +354,8 @@ test_that(".generate_paths_file() renders header and cookie params correctly (#8
     test_args = "x_auth_token, session_id, q",
     pagination = FALSE,
     pagination_fn = "",
-    tidy_policy_body = "nectar::tidy_policy_body_auto()"
+    tidy_policy_body = "nectar::tidy_policy_body_auto()",
+    response_description = "The API response."
   )
   .generate_paths_file(op, "search_things", "test", list())
 
@@ -761,4 +762,114 @@ test_that(".extract_response_info() uses tidy_policy_json for spec with empty fi
     result$tidy_policy_body,
     'nectar::tidy_policy_json(subset_path = "data", simplifyVector = TRUE)'
   )
+})
+
+test_that(".path_row_to_list() defaults response_description to 'The API response.' (#66)", {
+  empty_params <- tibble::tibble(
+    name = character(),
+    `in` = character(),
+    class = character(),
+    description = character(),
+    to_r = character()
+  )
+  result <- .path_row_to_list(
+    operation_id = "get_things",
+    endpoint = "/things",
+    operation = "get",
+    operation_summary = "Get things",
+    operation_description = "Get all things.",
+    tags = "things",
+    parameters = empty_params,
+    responses = NULL
+  )
+  expect_identical(result$response_description, "The API response.")
+})
+
+test_that(".path_row_to_list() uses response_description from spec (#66)", {
+  empty_params <- tibble::tibble(
+    name = character(),
+    `in` = character(),
+    class = character(),
+    description = character(),
+    to_r = character()
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "A list of things",
+    headers = list(NULL),
+    content = list(NULL),
+    links = list(NULL)
+  )
+  result <- .path_row_to_list(
+    operation_id = "get_things",
+    endpoint = "/things",
+    operation = "get",
+    operation_summary = "Get things",
+    operation_description = "Get all things.",
+    tags = "things",
+    parameters = empty_params,
+    responses = responses
+  )
+  expect_identical(result$response_description, "A list of things")
+})
+
+test_that("meaningless_response_descriptions contains expected values (#66)", {
+  expect_in("ok", meaningless_response_descriptions)
+  expect_in("success", meaningless_response_descriptions)
+})
+
+test_that(".path_row_to_list() treats 'ok' as meaningless response_description (#66)", {
+  empty_params <- tibble::tibble(
+    name = character(),
+    `in` = character(),
+    class = character(),
+    description = character(),
+    to_r = character()
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "OK",
+    headers = list(NULL),
+    content = list(NULL),
+    links = list(NULL)
+  )
+  result <- .path_row_to_list(
+    operation_id = "get_things",
+    endpoint = "/things",
+    operation = "get",
+    operation_summary = "Get things",
+    operation_description = "Get all things.",
+    tags = "things",
+    parameters = empty_params,
+    responses = responses
+  )
+  expect_identical(result$response_description, "The API response.")
+})
+
+test_that(".path_row_to_list() treats 'success' as meaningless response_description (#66)", {
+  empty_params <- tibble::tibble(
+    name = character(),
+    `in` = character(),
+    class = character(),
+    description = character(),
+    to_r = character()
+  )
+  responses <- tibble::tibble(
+    status_code = "200",
+    description = "Success",
+    headers = list(NULL),
+    content = list(NULL),
+    links = list(NULL)
+  )
+  result <- .path_row_to_list(
+    operation_id = "get_things",
+    endpoint = "/things",
+    operation = "get",
+    operation_summary = "Get things",
+    operation_description = "Get all things.",
+    tags = "things",
+    parameters = empty_params,
+    responses = responses
+  )
+  expect_identical(result$response_description, "The API response.")
 })

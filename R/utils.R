@@ -47,7 +47,7 @@ if (exists("%||%", envir = baseenv())) {
 #' @family empty operators
 #' @keywords internal
 `%|a|%` <- function(x, y) {
-  if (!is.character(x) || !nzchar(x)) {
+  if (!is.character(x) || !length(x) || !nzchar(x)) {
     stbl::to_chr(y)
   } else {
     x

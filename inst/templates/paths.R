@@ -9,7 +9,7 @@
 #' @param {{name}} ({{{class}}}) {{{description}}}{{/params}}
 #' @inheritParams .shared-params
 #'
-#' @returns `{{fn_prefix}}{{operation_id}}()`: The API response.
+#' @returns `{{fn_prefix}}{{operation_id}}()`: {{response_description}}
 #' @export
 {{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}, {{/args}}{{#has_security}}{{{security_signature}}}, {{/has_security}}max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_{{fn_prefix}}{{operation_id}}({{#args_named}}{{{args_named}}}{{/args_named}}{{#has_security}}{{#args_named}}, {{/args_named}}{{{security_arg_list}}}{{/has_security}})
