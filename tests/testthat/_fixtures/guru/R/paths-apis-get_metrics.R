@@ -52,5 +52,5 @@ tidy_policy_get_metrics <- function() {
   tibblify::tib_int("unofficial", .required = FALSE),
   tibblify::tib_int("unreachable", .required = FALSE),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

@@ -34,5 +34,5 @@ tidy_policy_get_providers <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_chr_vec("data", .required = FALSE),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

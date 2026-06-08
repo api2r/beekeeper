@@ -39,5 +39,5 @@ tidy_policy_get_names_audit_candidates <- function() {
   tibblify::tib_chr("id", .required = FALSE),
   tibblify::tib_chr("name", .required = FALSE),
 )
-  nectar::tidy_policy_json(spec = spec, subset_path = "results")
+  nectar::tidy_policy_json_tibblify(spec = spec, subset_path = "results")
 }

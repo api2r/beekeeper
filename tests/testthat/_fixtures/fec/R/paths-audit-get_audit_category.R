@@ -68,5 +68,5 @@ tidy_policy_get_audit_category <- function() {
     ),
   ),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

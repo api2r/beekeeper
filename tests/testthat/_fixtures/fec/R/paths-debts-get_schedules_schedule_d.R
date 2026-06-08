@@ -181,5 +181,5 @@ tidy_policy_get_schedules_schedule_d <- function() {
     tibblify::tib_chr("transaction_id", .required = FALSE),
   ),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

@@ -324,7 +324,7 @@ S7::method(as_bk_data, class_paths) <- function(
     tidy_policy_body <- paste0(
       "spec <- ",
       indented_spec,
-      "\n  nectar::tidy_policy_json(spec = spec, subset_path = ",
+      "\n  nectar::tidy_policy_json_tibblify(spec = spec, subset_path = ",
       subset_path_str,
       ")"
     )
@@ -332,7 +332,7 @@ S7::method(as_bk_data, class_paths) <- function(
     tidy_policy_body <- paste0(
       "spec <- ",
       indented_spec,
-      "\n  nectar::tidy_policy_json(spec = spec)"
+      "\n  nectar::tidy_policy_json_tibblify(spec = spec)"
     )
   }
 

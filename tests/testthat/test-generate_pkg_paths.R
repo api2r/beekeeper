@@ -437,7 +437,7 @@ test_that(".extract_response_info() builds spec-based tidy_policy for 200 JSON r
   result <- .extract_response_info(responses)
   expect_identical(result$description, "Success")
   expect_match(result$tidy_policy_body, "tibblify::tspec_row")
-  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json")
+  expect_match(result$tidy_policy_body, "nectar::tidy_policy_json_tibblify")
   expect_match(result$tidy_policy_body, "tib_chr")
 })
 

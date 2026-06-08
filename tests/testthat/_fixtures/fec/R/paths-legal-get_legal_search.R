@@ -348,5 +348,5 @@ tidy_policy_get_legal_search <- function() {
   tibblify::tib_int("total_regulations", .required = FALSE),
   tibblify::tib_int("total_statutes", .required = FALSE),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }
