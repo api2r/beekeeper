@@ -281,7 +281,7 @@ test_that(".paths_need_stbl() returns FALSE for empty paths (#69)", {
   expect_false(.paths_need_stbl(rapid::class_paths(), character()))
 })
 
-test_that("generate_pkg_paths() reads saved inputs from config (#101, #125)", {
+test_that("generate_pkg_paths() reads saved inputs from config (#101)", {
   skip_on_cran()
   config_text <- readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   path_expected <- readLines(test_path(
