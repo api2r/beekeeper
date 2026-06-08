@@ -30,6 +30,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-extract_response_info.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_df.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-flatten_params_df.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/dot-format_subset_path_str.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_pagination.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_paths.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/dot-generate_paths_file.html</loc></url>

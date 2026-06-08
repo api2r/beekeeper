@@ -39,7 +39,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="beekeeper-development-version">beekeeper (development version)<a class="anchor" aria-label="anchor" href="#beekeeper-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="../reference/generate_pkg_paths.html">generate_pkg_paths()</a></code> now generates <code>nectar::tidy_policy_json(simplifyVector = TRUE)</code> (with <code>subset_path</code> when applicable) instead of <code><a href="https://nectar.api2r.org/reference/tidy_policy_json_tibblify.html" class="external-link">nectar::tidy_policy_json_tibblify()</a></code> when the response spec has zero fields or a single non-nested field (<a href="https://github.com/api2r/beekeeper/issues/125" class="external-link">#125</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="beekeeper-050">beekeeper 0.5.0<a class="anchor" aria-label="anchor" href="#beekeeper-050"></a></h2>
 <ul><li>New generation functions <code><a href="../reference/generate_pkg_auth.html">generate_pkg_auth()</a></code>, <code><a href="../reference/generate_pkg_paths.html">generate_pkg_paths()</a></code>, <code><a href="../reference/generate_pkg_req_prepare.html">generate_pkg_req_prepare()</a></code>, and <code><a href="../reference/generate_pkg_shared_params.html">generate_pkg_shared_params()</a></code> allow for more modular API-wrapping package generation (<a href="https://github.com/api2r/beekeeper/issues/101" class="external-link">#101</a>).</li>

@@ -2,6 +2,13 @@
 
 ## beekeeper (development version)
 
+- [`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md)
+  now generates `nectar::tidy_policy_json(simplifyVector = TRUE)` (with
+  `subset_path` when applicable) instead of
+  [`nectar::tidy_policy_json_tibblify()`](https://nectar.api2r.org/reference/tidy_policy_json_tibblify.html)
+  when the response spec has zero fields or a single non-nested field
+  ([\#125](https://github.com/api2r/beekeeper/issues/125)).
+
 ## beekeeper 0.5.0
 
 - New generation functions
