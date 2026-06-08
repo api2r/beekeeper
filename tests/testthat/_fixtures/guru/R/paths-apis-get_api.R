@@ -55,5 +55,5 @@ tidy_policy_get_api <- function() {
     tibblify::tib_chr("updated"),
   ),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

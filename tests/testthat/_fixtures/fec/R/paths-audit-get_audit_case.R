@@ -97,5 +97,5 @@ tidy_policy_get_audit_case <- function() {
     ),
   ),
 )
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }

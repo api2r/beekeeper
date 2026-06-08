@@ -32,5 +32,5 @@ req_list_apis <- function() {
 
 tidy_policy_list_apis <- function() {
   spec <- tibblify::tspec_row()
-  nectar::tidy_policy_json(spec = spec)
+  nectar::tidy_policy_json_tibblify(spec = spec)
 }
