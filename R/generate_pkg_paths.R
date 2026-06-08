@@ -101,12 +101,10 @@ generate_pkg_paths <- function(
 
 # reshape data -----------------------------------------------------------------
 
-#' @rdname as_bk_data
-#' @keywords internal
 S7::method(as_bk_data, class_paths) <- function(
   x,
-  exclude_from_response = character(),
-  ...
+  ...,
+  exclude_from_response = character()
 ) {
   if (!length(x)) {
     return(list())
@@ -308,35 +306,61 @@ S7::method(as_bk_data, class_paths) <- function(
     spec <- tibblify::field_to_tspec(spec, field_name)
   }
 
-  indented_spec <- cli::ansi_strip(format(
-    spec,
-    width = 78,
-    fully_qualify = TRUE,
-    nchar_indent = 2
-  ))
+  use_simple_json <- length(names(spec$fields)) == 0 ||
+    (length(names(spec$fields)) == 1 &&
+      !spec$fields[[1]]$type %in% c("df", "row", "recursive"))
 
-  if (length(subset_path) > 0) {
-    subset_path_str <- if (length(subset_path) == 1) {
-      paste0('"', subset_path, '"')
-    } else {
-      paste0('c(', paste0('"', subset_path, '"', collapse = ", "), ')')
+  if (use_simple_json) {
+    if (length(names(spec$fields)) == 1) {
+      subset_path <- c(subset_path, names(spec$fields))
     }
-    tidy_policy_body <- paste0(
-      "spec <- ",
-      indented_spec,
-      "\n  nectar::tidy_policy_json_tibblify(spec = spec, subset_path = ",
-      subset_path_str,
-      ")"
-    )
+    tidy_policy_body <- if (length(subset_path) > 0) {
+      subset_path_str <- .format_subset_path_str(subset_path)
+      glue::glue(
+        "nectar::tidy_policy_json(subset_path = {subset_path_str}, simplifyVector = TRUE)"
+      )
+    } else {
+      "nectar::tidy_policy_json(simplifyVector = TRUE)"
+    }
   } else {
-    tidy_policy_body <- paste0(
-      "spec <- ",
-      indented_spec,
-      "\n  nectar::tidy_policy_json_tibblify(spec = spec)"
-    )
+    indented_spec <- cli::ansi_strip(format(
+      spec,
+      width = 78,
+      fully_qualify = TRUE,
+      nchar_indent = 2
+    ))
+    tidy_policy_body <- if (length(subset_path) > 0) {
+      subset_path_str <- .format_subset_path_str(subset_path)
+      paste0(
+        "spec <- ",
+        indented_spec,
+        "\n  nectar::tidy_policy_json_tibblify(spec = spec, subset_path = ",
+        subset_path_str,
+        ")"
+      )
+    } else {
+      paste0(
+        "spec <- ",
+        indented_spec,
+        "\n  nectar::tidy_policy_json_tibblify(spec = spec)"
+      )
+    }
   }
 
   list(tidy_policy_body = tidy_policy_body, description = description)
+}
+
+#' Format a subset_path vector as an R string literal
+#'
+#' @inheritParams .shared-params
+#' @returns (`character(1)`) Either `'"name"'` or `'c("a", "b")'`.
+#' @keywords internal
+.format_subset_path_str <- function(subset_path) {
+  if (length(subset_path) == 1) {
+    paste0('"', subset_path, '"')
+  } else {
+    paste0('c(', paste0('"', subset_path, '"', collapse = ", "), ')')
+  }
 }
 
 #' Prepare parameter metadata

@@ -30,10 +30,10 @@ generated path function names. When \code{FALSE} (the default), functions are
 named \code{{operation_id}} and \verb{req_\{operation_id\}}. When \code{TRUE}, functions are
 named \verb{\{api_abbr\}_\{operation_id\}} and \verb{req_\{api_abbr\}_\{operation_id\}}.}
 
-\item{exclude_from_response}{(\code{character}) Field names to remove from response
-specs before generating parsers. Fields matching these names will be
-dropped from the response spec. If only one field remains after exclusion
-and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
+\item{exclude_from_response}{(\code{character}) Field names to remove from
+response specs before generating parsers. Fields matching these names will
+be dropped from the response spec. If only one field remains after
+exclusion and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
 simplified so that the response parser targets that field directly.}
 
 \item{config_filename}{(\code{character(1)} or \code{fs_path}) The path to a beekeeper

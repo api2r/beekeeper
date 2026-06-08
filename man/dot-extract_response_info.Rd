@@ -7,10 +7,10 @@
 .extract_response_info(responses, exclude_from_response = character())
 }
 \arguments{
-\item{exclude_from_response}{(\code{character}) Field names to remove from response
-specs before generating parsers. Fields matching these names will be
-dropped from the response spec. If only one field remains after exclusion
-and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
+\item{exclude_from_response}{(\code{character}) Field names to remove from
+response specs before generating parsers. Fields matching these names will
+be dropped from the response spec. If only one field remains after
+exclusion and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
 simplified so that the response parser targets that field directly.}
 }
 \value{
