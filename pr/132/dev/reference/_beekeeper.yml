@@ -1,9 +1,0 @@
-api_title: APIs.guru
-api_abbr: guru
-api_version: 2.2.0
-rapid_filename: _beekeeper_rapid.rds
-updated_on: 2026-06-09 12:44:59
-api_definition_origin:
-  url: https://api.apis.guru/v2/openapi.yaml
-  format: openapi
-  version: '3.0'
