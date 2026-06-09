@@ -20,7 +20,7 @@ Imports:
     dplyr,
     fs,
     glue,
-    httptest2,
+    httptest2 (>= 1.2.2.9000),
     memoise,
     nectar,
     purrr,
@@ -51,7 +51,8 @@ Remotes:
     api2r/nectar,
     api2r/rapid,
     wranglezone/stbl,
-    wranglezone/tibblify
+    wranglezone/tibblify,
+    httptest2=nealrichardson/httptest2#66
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
