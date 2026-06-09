@@ -56,6 +56,13 @@ test_that(".glue_pipe_brace() works (#noissue)", {
 
 test_that(".to_snake() works (#noissue)", {
   expect_identical(.to_snake("camelCase"), "camel_case")
+  expect_identical(.to_snake("caféBar"), "café_bar")
+  expect_identical(.to_snake("version2"), "version_2")
+  expect_identical(.to_snake("2fast"), "2_fast")
+  expect_identical(.to_snake("foo-bar"), "foo_bar")
+  expect_identical(.to_snake("-foo-"), "foo")
+  expect_identical(.to_snake("foo__bar"), "foo_bar")
+  expect_identical(.to_snake("FOO"), "foo")
   expect_identical(.to_snake("APIs"), "apis")
 })
 
