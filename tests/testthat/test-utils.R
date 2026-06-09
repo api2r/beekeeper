@@ -56,6 +56,7 @@ test_that(".glue_pipe_brace() works (#noissue)", {
 
 test_that(".to_snake() works (#noissue)", {
   expect_identical(.to_snake("camelCase"), "camel_case")
+  expect_identical(.to_snake("APIs"), "apis")
 })
 
 test_that(".flatten_df() returns data frame unchanged (#noissue)", {
