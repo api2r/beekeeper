@@ -131,10 +131,10 @@ if (exists("%||%", envir = baseenv())) {
 #' @keywords internal
 .to_snake <- function(x) {
   x |>
-    stringr::str_replace_all("([a-z])([A-Z])", "\\1_\\2") |>
-    stringr::str_replace_all("([a-zA-Z])([0-9])", "\\1_\\2") |>
-    stringr::str_replace_all("([0-9])([a-zA-Z])", "\\1_\\2") |>
-    stringr::str_replace_all("[^a-zA-Z0-9]+", "_") |>
+    stringr::str_replace_all("(\\p{Ll})(\\p{Lu})", "\\1_\\2") |>
+    stringr::str_replace_all("(\\p{L})(\\p{Nd})", "\\1_\\2") |>
+    stringr::str_replace_all("(\\p{Nd})(\\p{L})", "\\1_\\2") |>
+    stringr::str_replace_all("[^\\p{L}\\p{Nd}]+", "_") |>
     stringr::str_replace_all("^_+|_+$", "") |>
     stringr::str_replace_all("_+", "_") |>
     tolower()
