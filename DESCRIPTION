@@ -52,7 +52,7 @@ Remotes:
     api2r/rapid,
     wranglezone/stbl,
     wranglezone/tibblify,
-    httptest2=nealrichardson/httptest2#66
+    httptest2=nealrichardson/httptest2
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
