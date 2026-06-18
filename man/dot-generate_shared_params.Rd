@@ -4,10 +4,13 @@
 \alias{.generate_shared_params}
 \title{Generate shared parameter docs}
 \usage{
-.generate_shared_params(security_data)
+.generate_shared_params(security_data, pkg_dir = ".")
 }
 \arguments{
 \item{security_data}{(\code{list}) Generated security metadata.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character(1)}) The generated file path.

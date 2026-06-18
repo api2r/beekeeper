@@ -10,7 +10,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `{{fn_prefix}}{{operation_id}}()`: {{response_description}}
-#' @export
+#' @keywords internal
 {{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}, {{/args}}{{#has_security}}{{{security_signature}}}, {{/has_security}}max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_{{fn_prefix}}{{operation_id}}({{#args_named}}{{{args_named}}}{{/args_named}}{{#has_security}}{{#args_named}}, {{/args_named}}{{{security_arg_list}}}{{/has_security}})
   resps <- nectar::req_perform_opinionated(
@@ -23,6 +23,7 @@
 
 #' @rdname {{fn_prefix}}{{operation_id}}
 #' @returns `req_{{fn_prefix}}{{operation_id}}()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_{{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has_security}}{{#args}}, {{/args}}{{{security_signature}}}{{/has_security}}) {
 {{#validations}}
   {{name}} <- stbl::{{to_r}}({{name}})
@@ -39,6 +40,10 @@ req_{{fn_prefix}}{{operation_id}} <- function({{#args}}{{{args}}}{{/args}}{{#has
   )
 }
 
+#' @rdname {{fn_prefix}}{{operation_id}}
+#' @returns `tidy_policy_{{fn_prefix}}{{operation_id}}()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_{{fn_prefix}}{{operation_id}} <- function() {
   {{{tidy_policy_body}}}
 }

@@ -49,7 +49,8 @@ generate_pkg_req_prepare <- function(
   .generate_prepare(
     config = list(api_abbr = api_abbr, api_title = api_title),
     api_definition = api_definition,
-    security_data = security_data
+    security_data = security_data,
+    pkg_dir = pkg_dir
   )
 }
 
@@ -58,10 +59,15 @@ generate_pkg_req_prepare <- function(
 #' @inheritParams .shared-params
 #' @returns (`character`) Generated file paths.
 #' @keywords internal
-.generate_prepare <- function(config, api_definition, security_data) {
+.generate_prepare <- function(
+  config,
+  api_definition,
+  security_data,
+  pkg_dir = "."
+) {
   c(
-    .generate_prepare_r(config, api_definition, security_data),
-    .generate_prepare_test(config$api_abbr)
+    .generate_prepare_r(config, api_definition, security_data, pkg_dir),
+    .generate_prepare_test(config$api_abbr, pkg_dir)
   )
 }
 
@@ -70,7 +76,12 @@ generate_pkg_req_prepare <- function(
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated file path.
 #' @keywords internal
-.generate_prepare_r <- function(config, api_definition, security_data) {
+.generate_prepare_r <- function(
+  config,
+  api_definition,
+  security_data,
+  pkg_dir = "."
+) {
   .bk_use_template(
     template = "010-prepare.R",
     data = list(
@@ -81,7 +92,8 @@ generate_pkg_req_prepare <- function(
       security_arg_helps = security_data$security_arg_helps,
       security_signature = security_data$security_signature,
       security_arg_list = security_data$security_arg_list
-    )
+    ),
+    pkg_dir = pkg_dir
   )
 }
 
@@ -90,10 +102,11 @@ generate_pkg_req_prepare <- function(
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated test file path.
 #' @keywords internal
-.generate_prepare_test <- function(api_abbr) {
+.generate_prepare_test <- function(api_abbr, pkg_dir = ".") {
   .bk_use_template(
     template = "test-010-prepare.R",
     dir = "tests/testthat",
-    data = list(api_abbr = api_abbr)
+    data = list(api_abbr = api_abbr),
+    pkg_dir = pkg_dir
   )
 }

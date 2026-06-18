@@ -9,7 +9,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_providers()`: The API response.
-#' @export
+#' @keywords internal
 get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_providers()
   resps <- nectar::req_perform_opinionated(
@@ -22,6 +22,7 @@ get_providers <- function(max_reqs = Inf, max_tries_per_req = 3) {
 
 #' @rdname get_providers
 #' @returns `req_get_providers()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_providers <- function() {
   guru_req_prepare(
     path = "/providers.json",
@@ -30,6 +31,10 @@ req_get_providers <- function() {
   )
 }
 
+#' @rdname get_providers
+#' @returns `tidy_policy_get_providers()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_providers <- function() {
   nectar::tidy_policy_json(subset_path = "data", simplifyVector = TRUE)
 }

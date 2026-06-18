@@ -48,7 +48,7 @@ generate_pkg_auth <- function(
   .use_r_directory(pkg_dir)
   .use_nectar(pkg_dir)
   .use_pkg_beekeeper(pkg_dir)
-  security_data <- .generate_security(api_abbr, security_schemes)
+  security_data <- .generate_security(api_abbr, security_schemes, pkg_dir)
   if (save_security_data) {
     .write_security_data(
       .without_security_file_path(security_data),
@@ -65,12 +65,13 @@ generate_pkg_auth <- function(
 #' @inheritParams .shared-params
 #' @returns (`list`) Generated security metadata.
 #' @keywords internal
-.generate_security <- function(api_abbr, security_schemes) {
+.generate_security <- function(api_abbr, security_schemes, pkg_dir = ".") {
   security_data <- as_bk_data(security_schemes)
   if (length(security_data)) {
     security_data$security_file_path <- .bk_use_template(
       template = "020-auth.R",
-      data = c(security_data, api_abbr = api_abbr)
+      data = c(security_data, api_abbr = api_abbr),
+      pkg_dir = pkg_dir
     )
     security_data$security_signature <- .generate_security_signature(
       security_data$security_arg_names,

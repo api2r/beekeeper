@@ -9,7 +9,8 @@
   api_abbr,
   security_data,
   pagination_data,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  pkg_dir = "."
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ path files.}
 generated path function names. When \code{FALSE} (the default), functions are
 named \code{{operation_id}} and \verb{req_\{operation_id\}}. When \code{TRUE}, functions are
 named \verb{\{api_abbr\}_\{operation_id\}} and \verb{req_\{api_abbr\}_\{operation_id\}}.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character}) Generated file paths.

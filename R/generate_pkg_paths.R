@@ -58,7 +58,8 @@ generate_pkg_paths <- function(
     pagination_data = .generate_pagination(),
     base_url = api_definition@servers@url,
     use_prefix = use_prefix,
-    exclude_from_response = exclude_from_response
+    exclude_from_response = exclude_from_response,
+    pkg_dir = pkg_dir
   )
 }
 
@@ -74,7 +75,8 @@ generate_pkg_paths <- function(
   pagination_data = list(),
   base_url,
   use_prefix = FALSE,
-  exclude_from_response = character()
+  exclude_from_response = character(),
+  pkg_dir = "."
 ) {
   paths_by_operation <- as_bk_data(
     paths,
@@ -87,12 +89,14 @@ generate_pkg_paths <- function(
       api_abbr,
       security_data,
       pagination_data,
-      use_prefix = use_prefix
+      use_prefix = use_prefix,
+      pkg_dir = pkg_dir
     )
     setup_file <- .bk_use_template(
       template = "setup.R",
       data = list(base_url = base_url),
-      dir = "tests/testthat"
+      dir = "tests/testthat",
+      pkg_dir = pkg_dir
     )
     paths_file_paths <- c(paths_file_paths, setup_file)
   }
@@ -523,7 +527,8 @@ S7::method(as_bk_data, class_paths) <- function(
   api_abbr,
   security_data,
   pagination_data,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  pkg_dir = "."
 ) {
   security_arg_names <- security_data$security_arg_names %|0|% character()
 
@@ -558,7 +563,8 @@ S7::method(as_bk_data, class_paths) <- function(
       op_id,
       api_abbr,
       security_data,
-      use_prefix = use_prefix
+      use_prefix = use_prefix,
+      pkg_dir = pkg_dir
     )
   })))
 
@@ -568,7 +574,8 @@ S7::method(as_bk_data, class_paths) <- function(
       op,
       op_id,
       api_abbr,
-      use_prefix = use_prefix
+      use_prefix = use_prefix,
+      pkg_dir = pkg_dir
     )
   })))
 
@@ -679,7 +686,8 @@ S7::method(as_bk_data, class_paths) <- function(
   operation_id,
   api_abbr,
   security_data,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  pkg_dir = "."
 ) {
   fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
   tidy_policy_body <-
@@ -699,7 +707,8 @@ S7::method(as_bk_data, class_paths) <- function(
         pagination_fn = ""
       )
     ),
-    target = glue::glue("paths-{path_operation$tag}-{operation_id}.R")
+    target = glue::glue("paths-{path_operation$tag}-{operation_id}.R"),
+    pkg_dir = pkg_dir
   )
 }
 
@@ -712,7 +721,8 @@ S7::method(as_bk_data, class_paths) <- function(
   path_operation,
   operation_id,
   api_abbr,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  pkg_dir = "."
 ) {
   fn_prefix <- if (use_prefix) paste0(api_abbr, "_") else ""
   .bk_use_template(
@@ -725,6 +735,7 @@ S7::method(as_bk_data, class_paths) <- function(
       test_args = path_operation$test_args %|0|% ""
     ),
     dir = "tests/testthat",
-    target = glue::glue("test-paths-{path_operation$tag}-{operation_id}.R")
+    target = glue::glue("test-paths-{path_operation$tag}-{operation_id}.R"),
+    pkg_dir = pkg_dir
   )
 }

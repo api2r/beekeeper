@@ -12,7 +12,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `search_things()`: The API response.
-#' @export
+#' @keywords internal
 search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_search_things(x_auth_token = x_auth_token, session_id = session_id, q = q)
   resps <- nectar::req_perform_opinionated(
@@ -25,6 +25,7 @@ search_things <- function(x_auth_token, session_id, q, max_reqs = Inf, max_tries
 
 #' @rdname search_things
 #' @returns `req_search_things()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_search_things <- function(x_auth_token, session_id, q) {
   x_auth_token <- stbl::to_chr_scalar(x_auth_token)
   session_id <- stbl::to_chr_scalar(session_id)
@@ -39,6 +40,10 @@ req_search_things <- function(x_auth_token, session_id, q) {
   )
 }
 
+#' @rdname search_things
+#' @returns `tidy_policy_search_things()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_search_things <- function() {
   nectar::tidy_policy_body_auto()
 }

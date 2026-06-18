@@ -70,7 +70,7 @@ load_expected_files <- function(api_abbr, regexp) {
 make_spy_impl <- function() {
   calls <- list()
   list(
-    mock = function(template, data, target, dir) {
+    mock = function(template, data, target, dir, pkg_dir = ".") {
       calls[[length(calls) + 1]] <<- list(
         template = template,
         data = data,
@@ -86,7 +86,7 @@ make_spy_impl <- function() {
 # A mock that renders templates to a temp dir using whisker directly, so the
 # output can be visually confirmed against fixture files.
 make_writing_impl <- function(tmp) {
-  function(template, data, target, dir) {
+  function(template, data, target, dir, pkg_dir = ".") {
     template_path <- system.file("templates", template, package = "beekeeper")
     rendered <- whisker::whisker.render(
       readLines(template_path, warn = FALSE),

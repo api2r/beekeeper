@@ -36,6 +36,12 @@ test_that("use_beekeeper writes a yml config (#10, #108)", {
   expected_result_file <- scrub_config(
     readLines(test_path("_fixtures", "guru", "_beekeeper.yml"))
   )
+  # With just use_beekeeper(), the result won't have security info yet.
+  expected_result_file <- stringr::str_subset(
+    expected_result_file,
+    "^security_data_filename",
+    negate = TRUE
+  )
   expect_identical(test_result_file, expected_result_file)
 })
 

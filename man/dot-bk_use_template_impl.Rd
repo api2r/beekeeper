@@ -4,7 +4,7 @@
 \alias{.bk_use_template_impl}
 \title{Write a rendered template to disk}
 \usage{
-.bk_use_template_impl(template, data, target, dir)
+.bk_use_template_impl(template, data, target, dir, pkg_dir = ".")
 }
 \arguments{
 \item{template}{(\code{character(1)}) The template file name to render.}
@@ -15,6 +15,9 @@
 
 \item{dir}{(\code{character(1)}) The directory where a generated file should be
 written.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character(1)}) The generated file path.

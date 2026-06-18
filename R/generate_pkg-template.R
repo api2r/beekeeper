@@ -10,11 +10,12 @@
   data,
   ...,
   target = template,
-  dir = c("R", "tests/testthat")
+  dir = c("R", "tests/testthat"),
+  pkg_dir = "."
 ) {
   rlang::check_dots_empty()
   dir <- match.arg(dir)
-  target <- .bk_use_template_impl(template, data, target, dir)
+  target <- .bk_use_template_impl(template, data, target, dir, pkg_dir)
   return(invisible(target))
 }
 
@@ -23,18 +24,23 @@
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated file path.
 #' @keywords internal
-.bk_use_template_impl <- function(template, data, target, dir) {
-  target <- usethis::proj_path(dir, target)
-  save_as <- fs::path_rel(target, usethis::proj_path())
-  if (fs::file_exists(target)) {
-    # TODO: Intelligently prompt about this.
-    fs::file_delete(target)
-  }
-  usethis::use_template(
-    template = template,
-    save_as = save_as,
-    data = data,
-    package = "beekeeper"
+.bk_use_template_impl <- function(template, data, target, dir, pkg_dir = ".") {
+  usethis::with_project(
+    pkg_dir,
+    {
+      target <- usethis::proj_path(dir, target)
+      save_as <- fs::path_rel(target, usethis::proj_path())
+      if (fs::file_exists(target)) {
+        # TODO: Intelligently prompt about this.
+        fs::file_delete(target)
+      }
+      usethis::use_template(
+        template = template,
+        save_as = save_as,
+        data = data,
+        package = "beekeeper"
+      )
+    }
   )
   return(target)
 }

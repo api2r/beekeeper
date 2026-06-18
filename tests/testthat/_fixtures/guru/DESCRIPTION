@@ -1,0 +1,23 @@
+Package: apisguru
+Title: Client for 'apis.guru'
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Jon", "Harmon", , "jonthegeek@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0003-4781-4346"))
+  )
+Description: A sample package.
+License: MIT
+Config/roxygen2/version: 8.0.0
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Imports:
+    nectar,
+    stbl,
+    tibblify
+Suggests:
+    beekeeper,
+    httptest2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

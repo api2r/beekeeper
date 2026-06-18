@@ -18,7 +18,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_audit_category()`: The API response.
-#' @export
+#' @keywords internal
 get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_audit_category(sort_nulls_last = sort_nulls_last, page = page, primary_category_name = primary_category_name, sort_hide_null = sort_hide_null, primary_category_id = primary_category_id, sort_null_only = sort_null_only, per_page = per_page, sort = sort, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
@@ -31,6 +31,7 @@ get_audit_category <- function(sort_nulls_last, page, primary_category_name, sor
 
 #' @rdname get_audit_category
 #' @returns `req_get_audit_category()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_audit_category <- function(sort_nulls_last, page, primary_category_name, sort_hide_null, primary_category_id, sort_null_only, per_page, sort, api_key = Sys.getenv("FEC_API_KEY")) {
   sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
   sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
@@ -45,6 +46,10 @@ req_get_audit_category <- function(sort_nulls_last, page, primary_category_name,
   )
 }
 
+#' @rdname get_audit_category
+#' @returns `tidy_policy_get_audit_category()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_audit_category <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_row(

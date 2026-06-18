@@ -1,0 +1,29 @@
+has_security: yes
+security_schemes:
+- name: api_key_header_auth
+  description: (length-1 `character`) An API key provided by the API provider. This
+    key is not clearly documented in the API description. Check the API documentation
+    for details.
+  parameter_name: X-Api-Key
+  arg_name: api_key
+  location: header
+  type: api_key
+  api_key: yes
+- name: api_key_query_auth
+  description: (length-1 `character`) An API key provided by the API provider. This
+    key is not clearly documented in the API description. Check the API documentation
+    for details.
+  parameter_name: api_key
+  arg_name: api_key
+  location: query
+  type: api_key
+  api_key: yes
+security_arg_names: api_key
+security_arg_list: api_key = api_key
+security_arg_helps:
+- name: api_key
+  description: (length-1 `character`) An API key provided by the API provider. This
+    key is not clearly documented in the API description. Check the API documentation
+    for details.
+security_arg_nulls: api_key = NULL
+security_signature: api_key = Sys.getenv("FEC_API_KEY")

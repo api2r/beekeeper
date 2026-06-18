@@ -12,7 +12,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_service_api()`: The API response.
-#' @export
+#' @keywords internal
 get_service_api <- function(provider, service, api, max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_service_api(provider = provider, service = service, api = api)
   resps <- nectar::req_perform_opinionated(
@@ -25,6 +25,7 @@ get_service_api <- function(provider, service, api, max_reqs = Inf, max_tries_pe
 
 #' @rdname get_service_api
 #' @returns `req_get_service_api()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_service_api <- function(provider, service, api) {
   provider <- stbl::to_chr_scalar(provider)
   service <- stbl::to_chr_scalar(service)
@@ -36,6 +37,10 @@ req_get_service_api <- function(provider, service, api) {
   )
 }
 
+#' @rdname get_service_api
+#' @returns `tidy_policy_get_service_api()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_service_api <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_chr("added"),

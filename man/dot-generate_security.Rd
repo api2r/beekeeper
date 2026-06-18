@@ -4,7 +4,7 @@
 \alias{.generate_security}
 \title{Generate security files and metadata}
 \usage{
-.generate_security(api_abbr, security_schemes)
+.generate_security(api_abbr, security_schemes, pkg_dir = ".")
 }
 \arguments{
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
@@ -12,6 +12,9 @@ the API, for use in function names and environment variables.}
 
 \item{security_schemes}{(\code{rapid::class_security_schemes}) Security schemes
 from the API definition.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{list}) Generated security metadata.
