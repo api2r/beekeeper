@@ -10,7 +10,8 @@ Use a template in this package
   data,
   ...,
   target = template,
-  dir = c("R", "tests/testthat")
+  dir = c("R", "tests/testthat"),
+  pkg_dir = "."
 )
 ```
 
@@ -36,6 +37,10 @@ Use a template in this package
 
   (`character(1)`) The directory where a generated file should be
   written.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

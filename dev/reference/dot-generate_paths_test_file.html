@@ -48,7 +48,8 @@
 <span>  <span class="va">path_operation</span>,</span>
 <span>  <span class="va">operation_id</span>,</span>
 <span>  <span class="va">api_abbr</span>,</span>
-<span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pkg_dir <span class="op">=</span> <span class="st">"."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -75,6 +76,11 @@ the API, for use in function names and environment variables.</p></dd>
 generated path function names. When <code>FALSE</code> (the default), functions are
 named <code>{operation_id}</code> and <code>req_{operation_id}</code>. When <code>TRUE</code>, functions are
 named <code>{api_abbr}_{operation_id}</code> and <code>req_{api_abbr}_{operation_id}</code>.</p></dd>
+
+
+<dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The directory containing package
+files.</p></dd>
 
 </dl></div>
     <div class="section level2">

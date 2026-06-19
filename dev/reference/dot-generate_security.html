@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generate_security</span><span class="op">(</span><span class="va">api_abbr</span>, <span class="va">security_schemes</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.generate_security</span><span class="op">(</span><span class="va">api_abbr</span>, <span class="va">security_schemes</span>, pkg_dir <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -59,6 +59,11 @@ the API, for use in function names and environment variables.</p></dd>
 <dt id="arg-security-schemes">security_schemes<a class="anchor" aria-label="anchor" href="#arg-security-schemes"></a></dt>
 <dd><p>(<code><a href="https://rapid.api2r.org/reference/class_security_schemes.html" class="external-link">rapid::class_security_schemes</a></code>) Security schemes
 from the API definition.</p></dd>
+
+
+<dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The directory containing package
+files.</p></dd>
 
 </dl></div>
     <div class="section level2">

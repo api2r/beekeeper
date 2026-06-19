@@ -43,11 +43,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/RtmpSDx7gC/file5755d588fcb/.
-#> ✔ Setting active project to "/tmp/RtmpSDx7gC/file5755d588fcb".
+#> ✔ Creating /tmp/Rtmptfkzsh/file5558c024b/.
+#> ✔ Setting active project to "/tmp/Rtmptfkzsh/file5558c024b".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file5755d588fcb
+#> Package: file5558c024b
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -66,14 +66,15 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/RtmpSDx7gC/file5755d588fcb".
+#> ✔ Setting active project to "/tmp/Rtmptfkzsh/file5558c024b".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate shared parameters.
 generate_pkg_shared_params()
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
-#> Warning: cannot open file '/__w/beekeeper/beekeeper/docs/dev/reference/_beekeeper.yml': No such file or directory
+#> Warning: cannot open file '/__w/beekeeper/beekeeper/_beekeeper.yml': No such file or directory
 #> Error in file(file, "rt", encoding = fileEncoding): cannot open the connection
+#> ✔ Setting active project to "<no active project>".
 fs::dir_ls("R")
 #> Error: [ENOENT] Failed to search directory 'R': no such file or directory
 

@@ -12,7 +12,8 @@ Generate files for API paths
   pagination_data = list(),
   base_url,
   use_prefix = FALSE,
-  exclude_from_response = character()
+  exclude_from_response = character(),
+  pkg_dir = "."
 )
 ```
 
@@ -54,6 +55,10 @@ Generate files for API paths
   the response spec. If only one field remains after exclusion and it is
   of type `"df"`, `"row"`, or `"recursive"`, the spec is simplified so
   that the response parser targets that field directly.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

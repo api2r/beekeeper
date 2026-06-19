@@ -10,7 +10,8 @@ Generate one operation file
   operation_id,
   api_abbr,
   security_data,
-  use_prefix = FALSE
+  use_prefix = FALSE,
+  pkg_dir = "."
 )
 ```
 
@@ -40,6 +41,10 @@ Generate one operation file
   path function names. When `FALSE` (the default), functions are named
   `{operation_id}` and `req_{operation_id}`. When `TRUE`, functions are
   named `{api_abbr}_{operation_id}` and `req_{api_abbr}_{operation_id}`.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

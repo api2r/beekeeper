@@ -66,11 +66,11 @@ object is also written, and the path to that file (relative to
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/RtmpSDx7gC/file575484e53f7/.
-#> ✔ Setting active project to "/tmp/RtmpSDx7gC/file575484e53f7".
+#> ✔ Creating /tmp/Rtmptfkzsh/file5555c802d59/.
+#> ✔ Setting active project to "/tmp/Rtmptfkzsh/file5555c802d59".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file575484e53f7
+#> Package: file5555c802d59
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -82,10 +82,10 @@ usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
 #> Roxygen: list(markdown = TRUE)
 #> RoxygenNote: 8.0.0
 #> ✔ Writing NAMESPACE.
-#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+#> ✔ Setting active project to "<no active project>".
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/RtmpSDx7gC/file575484e53f7".
-#> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+#> ✔ Setting active project to "/tmp/Rtmptfkzsh/file5555c802d59".
+#> ✔ Setting active project to "<no active project>".
 
 # Read an api definition. This could also simply be a URL to such a
 # definition.
@@ -94,7 +94,9 @@ api_definition <- read_api_definition(fs::path_package("beekeeper", "guru"))
 # Set up the package to use beekeeper with that definition.
 use_beekeeper(api_definition, "guru")
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+#> ✔ Setting active project to "<no active project>".
 #> ✔ Setting active project to "/__w/beekeeper/beekeeper".
+#> ✔ Setting active project to "<no active project>".
 read_config()
 #> $api_title
 #> [1] "APIs.guru"
@@ -109,7 +111,7 @@ read_config()
 #> [1] "_beekeeper_rapid.rds"
 #> 
 #> $updated_on
-#> [1] "2026-06-14 18:24:12 UTC"
+#> [1] "2026-06-19 11:28:12 UTC"
 #> 
 #> $api_definition_origin
 #> $api_definition_origin$url

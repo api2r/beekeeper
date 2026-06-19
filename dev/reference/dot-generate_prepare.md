@@ -5,7 +5,7 @@ Generate prepare files
 ## Usage
 
 ``` r
-.generate_prepare(config, api_definition, security_data)
+.generate_prepare(config, api_definition, security_data, pkg_dir = ".")
 ```
 
 ## Arguments
@@ -22,6 +22,10 @@ Generate prepare files
 - security_data:
 
   (`list`) Generated security metadata.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

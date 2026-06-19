@@ -5,7 +5,7 @@ Generate shared parameter docs
 ## Usage
 
 ``` r
-.generate_shared_params(security_data)
+.generate_shared_params(security_data, pkg_dir = ".")
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ Generate shared parameter docs
 - security_data:
 
   (`list`) Generated security metadata.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

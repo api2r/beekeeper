@@ -5,7 +5,7 @@ Generate security files and metadata
 ## Usage
 
 ``` r
-.generate_security(api_abbr, security_schemes)
+.generate_security(api_abbr, security_schemes, pkg_dir = ".")
 ```
 
 ## Arguments
@@ -19,6 +19,10 @@ Generate security files and metadata
 
   ([`rapid::class_security_schemes`](https://rapid.api2r.org/reference/class_security_schemes.html))
   Security schemes from the API definition.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 

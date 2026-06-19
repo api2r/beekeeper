@@ -51,7 +51,8 @@
 <span>  pagination_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">base_url</span>,</span>
 <span>  use_prefix <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  exclude_from_response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  exclude_from_response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  pkg_dir <span class="op">=</span> <span class="st">"."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -94,6 +95,11 @@ response specs before generating parsers. Fields matching these names will
 be dropped from the response spec. If only one field remains after
 exclusion and it is of type <code>"df"</code>, <code>"row"</code>, or <code>"recursive"</code>, the spec is
 simplified so that the response parser targets that field directly.</p></dd>
+
+
+<dt id="arg-pkg-dir">pkg_dir<a class="anchor" aria-label="anchor" href="#arg-pkg-dir"></a></dt>
+<dd><p>(<code>character(1)</code> or <code>fs_path</code>) The directory containing package
+files.</p></dd>
 
 </dl></div>
     <div class="section level2">

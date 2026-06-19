@@ -5,7 +5,7 @@ Write a rendered template to disk
 ## Usage
 
 ``` r
-.bk_use_template_impl(template, data, target, dir)
+.bk_use_template_impl(template, data, target, dir, pkg_dir = ".")
 ```
 
 ## Arguments
@@ -26,6 +26,10 @@ Write a rendered template to disk
 
   (`character(1)`) The directory where a generated file should be
   written.
+
+- pkg_dir:
+
+  (`character(1)` or `fs_path`) The directory containing package files.
 
 ## Value
 
