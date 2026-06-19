@@ -5,6 +5,7 @@
 
 with_mock_dir("api/path/{{tag}}/{{fn_prefix}}{{operation_id}}", {
   test_that("{{fn_prefix}}{{operation_id}}() returns expected result", {
+    skip_if_not_exported("{{fn_prefix}}{{operation_id}}")
     expect_snapshot({
       test_result <- {{fn_prefix}}{{operation_id}}({{{test_args}}})
       test_result

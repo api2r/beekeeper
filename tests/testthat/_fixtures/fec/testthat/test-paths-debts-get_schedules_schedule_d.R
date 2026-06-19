@@ -5,6 +5,7 @@
 
 with_mock_dir("api/path/debts/get_schedules_schedule_d", {
   test_that("get_schedules_schedule_d() returns expected result", {
+    skip_if_not_exported("get_schedules_schedule_d")
     expect_snapshot({
       test_result <- get_schedules_schedule_d(creditor_debtor_name, max_image_number, sort_nulls_last, max_amount_outstanding_beginning, sort_hide_null, min_payment_period, max_amount_incurred, nature_of_debt, per_page, max_amount_outstanding_close, candidate_id, page, min_date, committee_id, min_amount_outstanding_close, max_payment_period, min_image_number, min_amount_incurred, sort_null_only, image_number, sort, min_amount_outstanding_beginning, max_date)
       test_result

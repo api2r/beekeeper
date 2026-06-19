@@ -23,6 +23,7 @@ Imports:
     httptest2 (>= 1.2.2.9000),
     memoise,
     nectar,
+    pkgload,
     purrr,
     rapid (>= 0.0.0.9003),
     rlang (>= 1.1.0),

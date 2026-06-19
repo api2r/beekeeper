@@ -80,7 +80,7 @@ test_that(".generate_paths() calls correct templates for guru (#65, #112, #123)"
   expect_identical(setup_call$data$base_url, api_definition@servers@url)
 })
 
-test_that(".generate_paths() writes correct templates for guru (#65, #112, #123, #125)", {
+test_that(".generate_paths() writes correct templates for guru (#65, #112, #123, #125, #133)", {
   # Visual confirmation that paths.R, test-paths.R, and setup.R render correctly
   skip_on_cran()
   config <- guru_config
@@ -90,7 +90,6 @@ test_that(".generate_paths() writes correct templates for guru (#65, #112, #123,
   expected_setup_content <- readLines(test_path(
     "_fixtures",
     "guru",
-    "tests",
     "testthat",
     "setup.R"
   ))
