@@ -9,7 +9,8 @@
   data,
   ...,
   target = template,
-  dir = c("R", "tests/testthat")
+  dir = c("R", "tests/testthat"),
+  pkg_dir = "."
 )
 }
 \arguments{
@@ -23,6 +24,9 @@
 
 \item{dir}{(\code{character(1)}) The directory where a generated file should be
 written.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character(1)}, invisibly) The path to the generated or updated

@@ -33,7 +33,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_schedules_schedule_d()`: The API response.
-#' @export
+#' @keywords internal
 get_schedules_schedule_d <- function(creditor_debtor_name, max_image_number, sort_nulls_last, max_amount_outstanding_beginning, sort_hide_null, min_payment_period, max_amount_incurred, nature_of_debt, per_page, max_amount_outstanding_close, candidate_id, page, min_date, committee_id, min_amount_outstanding_close, max_payment_period, min_image_number, min_amount_incurred, sort_null_only, image_number, sort, min_amount_outstanding_beginning, max_date, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_schedules_schedule_d(creditor_debtor_name = creditor_debtor_name, max_image_number = max_image_number, sort_nulls_last = sort_nulls_last, max_amount_outstanding_beginning = max_amount_outstanding_beginning, sort_hide_null = sort_hide_null, min_payment_period = min_payment_period, max_amount_incurred = max_amount_incurred, nature_of_debt = nature_of_debt, per_page = per_page, max_amount_outstanding_close = max_amount_outstanding_close, candidate_id = candidate_id, page = page, min_date = min_date, committee_id = committee_id, min_amount_outstanding_close = min_amount_outstanding_close, max_payment_period = max_payment_period, min_image_number = min_image_number, min_amount_incurred = min_amount_incurred, sort_null_only = sort_null_only, image_number = image_number, sort = sort, min_amount_outstanding_beginning = min_amount_outstanding_beginning, max_date = max_date, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
@@ -46,6 +46,7 @@ get_schedules_schedule_d <- function(creditor_debtor_name, max_image_number, sor
 
 #' @rdname get_schedules_schedule_d
 #' @returns `req_get_schedules_schedule_d()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_schedules_schedule_d <- function(creditor_debtor_name, max_image_number, sort_nulls_last, max_amount_outstanding_beginning, sort_hide_null, min_payment_period, max_amount_incurred, nature_of_debt, per_page, max_amount_outstanding_close, candidate_id, page, min_date, committee_id, min_amount_outstanding_close, max_payment_period, min_image_number, min_amount_incurred, sort_null_only, image_number, sort, min_amount_outstanding_beginning, max_date, api_key = Sys.getenv("FEC_API_KEY")) {
   max_image_number <- stbl::to_chr_scalar(max_image_number)
   sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
@@ -71,6 +72,10 @@ req_get_schedules_schedule_d <- function(creditor_debtor_name, max_image_number,
   )
 }
 
+#' @rdname get_schedules_schedule_d
+#' @returns `tidy_policy_get_schedules_schedule_d()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_schedules_schedule_d <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_row(

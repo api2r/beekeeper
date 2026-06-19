@@ -17,7 +17,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_schedules_schedule_d_sub_id()`: The API response.
-#' @export
+#' @keywords internal
 get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_schedules_schedule_d_sub_id(sort_nulls_last = sort_nulls_last, per_page = per_page, sort_null_only = sort_null_only, sort_hide_null = sort_hide_null, sort = sort, page = page, sub_id = sub_id, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
@@ -30,6 +30,7 @@ get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null
 
 #' @rdname get_schedules_schedule_d_sub_id
 #' @returns `req_get_schedules_schedule_d_sub_id()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id, api_key = Sys.getenv("FEC_API_KEY")) {
   sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
   sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
@@ -45,6 +46,10 @@ req_get_schedules_schedule_d_sub_id <- function(sort_nulls_last, per_page, sort_
   )
 }
 
+#' @rdname get_schedules_schedule_d_sub_id
+#' @returns `tidy_policy_get_schedules_schedule_d_sub_id()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_schedules_schedule_d_sub_id <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_row(

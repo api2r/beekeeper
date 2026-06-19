@@ -90,6 +90,7 @@ test_that(".generate_paths() writes correct templates for guru (#65, #112, #123,
   expected_setup_content <- readLines(test_path(
     "_fixtures",
     "guru",
+    "tests",
     "testthat",
     "setup.R"
   ))

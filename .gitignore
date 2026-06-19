@@ -9,5 +9,5 @@ inst/doc
 exploration
 /_beekeeper_rapid.rds
 _slackapi_rapid.rds
-.positai
+.posit/assistant
 conversation-export.json

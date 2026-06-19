@@ -11,7 +11,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `add_boards()`: The API response.
-#' @export
+#' @keywords internal
 add_boards <- function(key = Sys.getenv("TRELLO_KEY"),
 token = Sys.getenv("TRELLO_TOKEN"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_add_boards(key = key, token = token)
@@ -25,6 +25,7 @@ token = Sys.getenv("TRELLO_TOKEN"), max_reqs = Inf, max_tries_per_req = 3) {
 
 #' @rdname add_boards
 #' @returns `req_add_boards()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_add_boards <- function(key = Sys.getenv("TRELLO_KEY"),
 token = Sys.getenv("TRELLO_TOKEN")) {
   trello_req_prepare(
@@ -35,6 +36,10 @@ token = Sys.getenv("TRELLO_TOKEN")) {
   )
 }
 
+#' @rdname add_boards
+#' @returns `tidy_policy_add_boards()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_add_boards <- function() {
   nectar::tidy_policy_body_auto()
 }

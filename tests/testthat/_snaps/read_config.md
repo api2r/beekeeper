@@ -16,7 +16,7 @@
       [1] "_beekeeper_rapid.rds"
       
       $updated_on
-      [1] "2026-05-19 06:58:24 UTC"
+      [1] "2026-06-18 08:18:56 UTC"
       
       $api_definition_origin
       $api_definition_origin$url
@@ -28,5 +28,8 @@
       $api_definition_origin$version
       [1] "3.0"
       
+      
+      $security_data_filename
+      [1] "_beekeeper_security.yml"
       
 

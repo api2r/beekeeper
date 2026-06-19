@@ -35,7 +35,7 @@ generate_pkg_shared_params <- function(
   .use_r_directory(pkg_dir)
   .use_nectar(pkg_dir)
   .use_pkg_beekeeper(pkg_dir)
-  .generate_shared_params(security_data)
+  .generate_shared_params(security_data, pkg_dir)
 }
 
 #' Generate shared parameter docs
@@ -43,13 +43,14 @@ generate_pkg_shared_params <- function(
 #' @inheritParams .shared-params
 #' @returns (`character(1)`) The generated file path.
 #' @keywords internal
-.generate_shared_params <- function(security_data) {
+.generate_shared_params <- function(security_data, pkg_dir = ".") {
   shared_file_path <- .bk_use_template(
     template = "000-shared.R",
     data = list(
       shared_arg_helps = list(),
       security_arg_helps = security_data$security_arg_helps
-    )
+    ),
+    pkg_dir = pkg_dir
   )
   return(shared_file_path)
 }

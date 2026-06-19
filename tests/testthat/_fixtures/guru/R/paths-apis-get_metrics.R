@@ -9,7 +9,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_metrics()`: The API response.
-#' @export
+#' @keywords internal
 get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_metrics()
   resps <- nectar::req_perform_opinionated(
@@ -22,6 +22,7 @@ get_metrics <- function(max_reqs = Inf, max_tries_per_req = 3) {
 
 #' @rdname get_metrics
 #' @returns `req_get_metrics()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_metrics <- function() {
   guru_req_prepare(
     path = "/metrics.json",
@@ -30,6 +31,10 @@ req_get_metrics <- function() {
   )
 }
 
+#' @rdname get_metrics
+#' @returns `tidy_policy_get_metrics()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_metrics <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_variant("datasets", .required = FALSE),

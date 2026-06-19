@@ -52,7 +52,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_legal_search()`: Legal search results
-#' @export
+#' @keywords internal
 get_legal_search <- function(hits_returned, af_report_year, case_max_open_date, ao_max_issue_date, case_statutory_citation, case_respondents, q, ao_min_issue_date, af_max_fd_date, from_hit, af_fd_fine_amount, type, af_name, ao_requestor_type, ao_statutory_citation, ao_entity_name, mur_type, ao_regulatory_citation, af_committee_id, ao_requestor, case_citation_require_all, af_min_fd_date, ao_is_pending, af_rtb_fine_amount, case_election_cycles, ao_category, ao_citation_require_all, case_dispositions, af_max_rtb_date, case_min_open_date, case_max_close_date, ao_min_request_date, ao_status, case_doc_category_id, af_min_rtb_date, ao_name, case_regulatory_citation, ao_no, case_min_close_date, sort, ao_max_request_date, case_no, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_legal_search(hits_returned = hits_returned, af_report_year = af_report_year, case_max_open_date = case_max_open_date, ao_max_issue_date = ao_max_issue_date, case_statutory_citation = case_statutory_citation, case_respondents = case_respondents, q = q, ao_min_issue_date = ao_min_issue_date, af_max_fd_date = af_max_fd_date, from_hit = from_hit, af_fd_fine_amount = af_fd_fine_amount, type = type, af_name = af_name, ao_requestor_type = ao_requestor_type, ao_statutory_citation = ao_statutory_citation, ao_entity_name = ao_entity_name, mur_type = mur_type, ao_regulatory_citation = ao_regulatory_citation, af_committee_id = af_committee_id, ao_requestor = ao_requestor, case_citation_require_all = case_citation_require_all, af_min_fd_date = af_min_fd_date, ao_is_pending = ao_is_pending, af_rtb_fine_amount = af_rtb_fine_amount, case_election_cycles = case_election_cycles, ao_category = ao_category, ao_citation_require_all = ao_citation_require_all, case_dispositions = case_dispositions, af_max_rtb_date = af_max_rtb_date, case_min_open_date = case_min_open_date, case_max_close_date = case_max_close_date, ao_min_request_date = ao_min_request_date, ao_status = ao_status, case_doc_category_id = case_doc_category_id, af_min_rtb_date = af_min_rtb_date, ao_name = ao_name, case_regulatory_citation = case_regulatory_citation, ao_no = ao_no, case_min_close_date = case_min_close_date, sort = sort, ao_max_request_date = ao_max_request_date, case_no = case_no, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
@@ -65,6 +65,7 @@ get_legal_search <- function(hits_returned, af_report_year, case_max_open_date, 
 
 #' @rdname get_legal_search
 #' @returns `req_get_legal_search()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_legal_search <- function(hits_returned, af_report_year, case_max_open_date, ao_max_issue_date, case_statutory_citation, case_respondents, q, ao_min_issue_date, af_max_fd_date, from_hit, af_fd_fine_amount, type, af_name, ao_requestor_type, ao_statutory_citation, ao_entity_name, mur_type, ao_regulatory_citation, af_committee_id, ao_requestor, case_citation_require_all, af_min_fd_date, ao_is_pending, af_rtb_fine_amount, case_election_cycles, ao_category, ao_citation_require_all, case_dispositions, af_max_rtb_date, case_min_open_date, case_max_close_date, ao_min_request_date, ao_status, case_doc_category_id, af_min_rtb_date, ao_name, case_regulatory_citation, ao_no, case_min_close_date, sort, ao_max_request_date, case_no, api_key = Sys.getenv("FEC_API_KEY")) {
   af_report_year <- stbl::to_chr_scalar(af_report_year)
   case_respondents <- stbl::to_chr_scalar(case_respondents)
@@ -87,6 +88,10 @@ req_get_legal_search <- function(hits_returned, af_report_year, case_max_open_da
   )
 }
 
+#' @rdname get_legal_search
+#' @returns `tidy_policy_get_legal_search()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_legal_search <- function() {
   spec <- tibblify::tspec_row(
   tibblify::tib_df(

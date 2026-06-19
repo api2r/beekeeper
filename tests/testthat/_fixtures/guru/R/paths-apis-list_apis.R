@@ -9,7 +9,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `list_apis()`: The API response.
-#' @export
+#' @keywords internal
 list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_list_apis()
   resps <- nectar::req_perform_opinionated(
@@ -22,6 +22,7 @@ list_apis <- function(max_reqs = Inf, max_tries_per_req = 3) {
 
 #' @rdname list_apis
 #' @returns `req_list_apis()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_list_apis <- function() {
   guru_req_prepare(
     path = "/list.json",
@@ -30,6 +31,10 @@ req_list_apis <- function() {
   )
 }
 
+#' @rdname list_apis
+#' @returns `tidy_policy_list_apis()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_list_apis <- function() {
   nectar::tidy_policy_json(simplifyVector = TRUE)
 }

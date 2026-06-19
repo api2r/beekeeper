@@ -11,7 +11,7 @@
 #' @inheritParams .shared-params
 #'
 #' @returns `get_names_audit_candidates()`: The API response.
-#' @export
+#' @keywords internal
 get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"), max_reqs = Inf, max_tries_per_req = 3) {
   req <- req_get_names_audit_candidates(q = q, api_key = api_key)
   resps <- nectar::req_perform_opinionated(
@@ -24,6 +24,7 @@ get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"), m
 
 #' @rdname get_names_audit_candidates
 #' @returns `req_get_names_audit_candidates()`: (`httr2_request`) A [httr2::request()] object.
+#' @export
 req_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY")) {
   fec_req_prepare(
     path = "/names/audit_candidates/",
@@ -34,6 +35,10 @@ req_get_names_audit_candidates <- function(q, api_key = Sys.getenv("FEC_API_KEY"
   )
 }
 
+#' @rdname get_names_audit_candidates
+#' @returns `tidy_policy_get_names_audit_candidates()`: (`nectar_tidy_policy`) 
+#'   A list like the ones returned by [nectar::tidy_policy_prepare()].
+#' @export
 tidy_policy_get_names_audit_candidates <- function() {
   spec <- tibblify::tspec_df(
   tibblify::tib_chr("id", .required = FALSE),

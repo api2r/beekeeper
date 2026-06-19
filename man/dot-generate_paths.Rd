@@ -11,7 +11,8 @@
   pagination_data = list(),
   base_url,
   use_prefix = FALSE,
-  exclude_from_response = character()
+  exclude_from_response = character(),
+  pkg_dir = "."
 )
 }
 \arguments{
@@ -37,6 +38,9 @@ response specs before generating parsers. Fields matching these names will
 be dropped from the response spec. If only one field remains after
 exclusion and it is of type \code{"df"}, \code{"row"}, or \code{"recursive"}, the spec is
 simplified so that the response parser targets that field directly.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character}) Generated file paths.

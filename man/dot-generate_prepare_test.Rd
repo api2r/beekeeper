@@ -4,11 +4,14 @@
 \alias{.generate_prepare_test}
 \title{Generate prepare tests}
 \usage{
-.generate_prepare_test(api_abbr)
+.generate_prepare_test(api_abbr, pkg_dir = ".")
 }
 \arguments{
 \item{api_abbr}{(\code{character(1)}) A short (about 2-5 letter) abbreviation for
 the API, for use in function names and environment variables.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character(1)}) The generated test file path.

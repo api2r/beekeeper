@@ -4,7 +4,7 @@
 \alias{.generate_prepare}
 \title{Generate prepare files}
 \usage{
-.generate_prepare(config, api_definition, security_data)
+.generate_prepare(config, api_definition, security_data, pkg_dir = ".")
 }
 \arguments{
 \item{config}{(\code{list}) Package-generation configuration data.}
@@ -13,6 +13,9 @@
 package code from.}
 
 \item{security_data}{(\code{list}) Generated security metadata.}
+
+\item{pkg_dir}{(\code{character(1)} or \code{fs_path}) The directory containing package
+files.}
 }
 \value{
 (\code{character}) Generated file paths.
