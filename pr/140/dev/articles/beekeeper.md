@@ -1,0 +1,641 @@
+# Building an API Package
+
+``` r
+library(beekeeper)
+```
+
+The goal of beekeeper is to streamline and standardize the creation of
+high-quality API-wrapper packages.
+
+The process requires an API that follows the [OpenAPI
+Specification](https://spec.openapis.org/oas/v3.0.0) (the “OAS”). Some
+APIs that follow the OAS can be found on
+[APIs.guru](https://apis.guru/). We will use the [APIs.guru
+API](https://api.apis.guru/v2/openapi.yaml) (no authentication) and the
+[OpenFEC API](https://api.apis.guru/v2/specs/fec.gov/1.0/openapi.yaml)
+(authentication using an API key) as examples.
+
+## Step 0: Create your package
+
+Before you can use beekeeper, you need to create a basic package
+skeleton. We recommend that you start with
+[`usethis::create_package()`](https://usethis.r-lib.org/reference/create_package.html)
+to streamline the basic package-creation steps.
+
+You can then use beekeeper to get basic API calls working in that
+package through a two-step process.
+
+## Step 1: Configure your package
+
+If your target API follows the OAS, you can use your API’s OpenAPI
+Document to configure your package.
+
+``` r
+# Note: Running these commands will create or overwrite "_beekeeper.yml" in your
+# working directory.
+url("https://api.apis.guru/v2/openapi.yaml") |>
+  use_beekeeper(
+    api_abbr = "guru"
+  )
+
+# Or for the OpenFEC API
+url("https://api.apis.guru/v2/specs/fec.gov/1.0/openapi.yaml") |>
+  use_beekeeper(
+    api_abbr = "fec"
+  )
+```
+
+## Step 2: Generate your package skeleton
+
+With a valid `_beekeeper.yml` file, you can generate most of the rest of
+the package.
+
+``` r
+# Note: Running this command will create or overwrite files in your R and
+# tests/testthat directories.
+generate_pkg()
+```
+
+[`generate_pkg()`](https://beekeeper.api2r.org/dev/reference/generate_pkg.md)
+creates files defining the package in the `R` directory, and tests in
+the `tests/testthat` directory. If you do not already use
+[testthat](https://testthat.r-lib.org) in your package, it will set up
+[testthat](https://testthat.r-lib.org) for you. It also adds any
+necessary dependencies to your `DESCRIPTION` file. For example,
+beekeeper’s sister package [nectar](https://nectar.api2r.org) handles
+calls to APIs and processing of responses.
+
+## The generated package
+
+Behind the scenes,
+[`generate_pkg()`](https://beekeeper.api2r.org/dev/reference/generate_pkg.md)
+calls several helper functions to create the package files.
+
+Note: The files shown here are formatted for readability. The actual
+files sometimes have different line wrapping and spacing. We recommend
+that you use Posit’s [Air](https://posit-dev.github.io/air/) to
+automatically style your code. You will also want to review the
+generated code (especially documentation) to make sure it is accurate
+and matches your package’s style.
+
+### `generate_pkg_shared_params()`
+
+To make parameter documentation consistent across functions, the
+generated package includes a file `R/000-shared.R` (generated with
+[`generate_pkg_shared_params()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_shared_params.md))
+that defines shared parameter documentation.
+
+``` r
+#' Parameters used in multiple functions
+#'
+#' Reused parameter definitions are gathered here for easier editing.
+#'
+#' @param max_reqs (length-1 `integer`) The maximum number of separate requests to
+#'   perform. Passed on to [nectar::req_perform_opinionated()].
+#' @param max_tries_per_req (length-1 `integer`) The maximum number of times to attempt
+#'   each individual request. Passed on to [nectar::req_perform_opinionated()].
+#' @param req (`httr2_request`) The request object to modify.
+#' @param ... These dots are for future extensions and must be empty.
+#' @param api_key An API key provided by the API provider. This key is not
+#'   clearly documented in the API description. Check the API documentation for
+#'   details.
+#'
+#' @name .shared-params
+#' @keywords internal
+NULL
+```
+
+You will likely want to update the documentation for authentication
+parameters (e.g. `api_key` in the example above) to provide more
+specific instructions for users of your package. Updating the
+documentation once (in this file) updates the documentation for all
+functions that use these parameters.
+
+The file generated for the APIs.guru API is largely the same, but it
+does not include the `api_key` parameter, since that API does not
+require authentication.
+
+### `generate_pkg_req_prepare()`
+
+A `R/010-prepare.R` file is generated with
+[`generate_pkg_req_prepare()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_req_prepare.md).
+This file defines a function that can be used to create a request object
+([`httr2::request()`](https://httr2.r-lib.org/reference/request.html))
+for the API. We do not export this function by default. Instead, it is
+called by each endpoint function (see below).
+
+``` r
+#' Generate a request for the APIs.guru API
+#'
+#' Prepare a request for the APIs.guru API, using the opinionated framework
+#' defined in [nectar::req_init()], [nectar::req_modify()],
+#' [nectar::req_tidy_policy()], and [nectar::req_pagination_policy()].
+#'
+#' You may wish to export this function (if the API changes often or you do not
+#' fully implement the API, for example).
+#'
+#' @inheritParams nectar::req_prepare
+#' @inherit nectar::req_prepare return
+#' @keywords internal
+guru_req_prepare <- function(
+  path,
+  query = list(),
+  body = NULL,
+  header = list(),
+  cookie = list(),
+  method = NULL,
+  tidy_policy = nectar::tidy_policy_unknown(),
+  call = rlang::caller_env()
+) {
+  req <- nectar::req_prepare(
+    "https://api.apis.guru/v2",
+    path = path,
+    query = query,
+    body = body,
+    header = header,
+    cookie = cookie,
+    method = method,
+    tidy_policy = tidy_policy,
+    call = call
+  )
+
+  return(req)
+}
+```
+
+``` r
+#' Generate a request for the OpenFEC API
+#'
+#' Prepare a request for the OpenFEC API, using the opinionated framework
+#' defined in [nectar::req_init()], [nectar::req_modify()],
+#' [nectar::req_tidy_policy()], and [nectar::req_pagination_policy()].
+#'
+#' You may wish to export this function (if the API changes often or you do not
+#' fully implement the API, for example).
+#'
+#' @inheritParams .shared-params
+#' @inheritParams nectar::req_prepare
+#' @inherit nectar::req_prepare return
+#' @keywords internal
+fec_req_prepare <- function(
+  path,
+  query = list(),
+  body = NULL,
+  header = list(),
+  cookie = list(),
+  method = NULL,
+  tidy_policy = nectar::tidy_policy_unknown(),
+  api_key = Sys.getenv("FEC_API_KEY"),
+  call = rlang::caller_env()
+) {
+  req <- nectar::req_prepare(
+    "https://api.open.fec.gov/v1",
+    path = path,
+    query = query,
+    body = body,
+    header = header,
+    cookie = cookie,
+    method = method,
+    tidy_policy = tidy_policy,
+    call = call
+  )
+  req <- .fec_req_auth(req, api_key = api_key)
+  return(req)
+}
+```
+
+Notice that the function includes the authentication parameters
+(e.g. `api_key` in the example above) and calls the authentication
+function defined in `R/020-auth.R` (see below).
+
+[`generate_pkg_req_prepare()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_req_prepare.md)
+also generates a test file `tests/testthat/test-010-prepare.R` that
+tests the functionality of the prepare function (and sets up
+[testthat](https://testthat.r-lib.org) if your package is not already
+using it).
+
+``` r
+test_that("Can prepare a request without errors", {
+  test_result <- expect_no_error(guru_req_prepare("testing"))
+  expect_s3_class(test_result, c("nectar_request", "httr2_request"))
+  expect_named(
+    test_result,
+    c("url", "method", "headers", "body", "fields", "options", "policies")
+  )
+  expect_contains(
+    names(test_result$policies),
+    "resp_tidy"
+  )
+})
+```
+
+### `generate_pkg_auth()`
+
+If the API definition includes a “security” component, it is used to
+define authentication functions for the API in defined in `R/020-auth.R`
+(with
+[`generate_pkg_auth()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_auth.md)).
+The initial version of this file works, but you may want to edit the
+automatic output. In the case of the OpenFEC API, the description
+specifies three security schemes that overlap with one another: one that
+sets an `X-Api-Key` field in the header, and two that set an `api_key`
+in the query string. The names of the generated functions are based on
+the names of the security schemes in the OpenAPI document.
+
+``` r
+# These functions were generated by the {beekeeper} package, based on
+# components@security_schemes from the source API description. You may want to
+# delete unused options. In addition, APIs often have additional security
+# options that are not formally documented in the API description. For example,
+# for any `location = query` `api_key` options, it might be possible to instead
+# pass the same parameter in a header, possibly with a different name. Consult
+# the text description of authentication in your API documentation.
+
+.fec_req_auth <- function(req, api_key = NULL) {
+  if (!is.null(api_key)) {
+    req <- .fec_req_auth_api_key_header_auth(req, api_key)
+  }
+  if (!is.null(api_key)) {
+    req <- .fec_req_auth_api_key_query_auth(req, api_key)
+  }
+  if (!is.null(api_key)) {
+    req <- .fec_req_auth_api_key(req, api_key)
+  }
+  return(req)
+}
+
+# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+.fec_req_auth_api_key_header_auth <- function(req, api_key) {
+  nectar::req_auth_api_key(
+    req,
+    location = "header",
+    parameter_name = "X-Api-Key",
+    api_key = api_key
+  )
+}
+
+# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+.fec_req_auth_api_key_query_auth <- function(req, api_key) {
+  nectar::req_auth_api_key(
+    req,
+    location = "query",
+    parameter_name = "api_key",
+    api_key = api_key
+  )
+}
+
+# An API key provided by the API provider. This key is not clearly documented in the API description. Check the API documentation for details.
+.fec_req_auth_api_key <- function(req, api_key) {
+  nectar::req_auth_api_key(
+    req,
+    location = "query",
+    parameter_name = "api_key",
+    api_key = api_key
+  )
+}
+```
+
+For the real (in-progress)
+[`{fecapi}`](https://jonthegeek.github.io/fecapi/) package, I deleted
+the two `query` functions, since the `header` function is sufficient and
+slightly more secure. I also renamed the `header` function from
+`.fec_req_auth_api_key_header_auth` to `.fec_req_auth_api_key_header` to
+remove the redundant `_auth`.
+
+### `generate_pkg_paths()`
+
+For each endpoint defined in the “paths” component of the API
+definition,
+[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md)
+creates a file in `R/` that defines a function to call that endpoint.
+The functions are named based on the “tag” associated with the endpoint,
+and either the “operationId” (if available) or the HTTP method + path.
+
+This is one such path file, generated as `R/paths-apis-get_api.R` for
+the APIs.guru API:
+
+``` r
+# These functions were generated by the {beekeeper} package, based on the paths
+# element from the source API description. You should carefully review these
+# functions.
+
+#' Retrieve one version of a particular API
+#'
+#' Returns the API entry for one specific version of an API where there is no
+#' serviceName.
+#'
+#' @param provider (length-1 `character`)
+#' @param api (length-1 `character`)
+#' @inheritParams .shared-params
+#'
+#' @returns `guru_get_api()`: The API response.
+#' @export
+guru_get_api <- function(provider, api, max_reqs = Inf, max_tries_per_req = 3) {
+  req <- req_guru_get_api(provider = provider, api = api)
+  resps <- nectar::req_perform_opinionated(
+    req,
+    max_reqs = max_reqs,
+    max_tries_per_req = max_tries_per_req
+  )
+  return(nectar::resp_parse(resps))
+}
+
+#' @rdname guru_get_api
+#' @returns `req_guru_get_api()`: (`httr2_request`) A [httr2::request()] object.
+req_guru_get_api <- function(provider, api) {
+  provider <- stbl::to_chr_scalar(provider)
+  api <- stbl::to_chr_scalar(api)
+  guru_req_prepare(
+    path = c("/specs/{provider}/{api}.json", provider = provider, api = api),
+    method = "get"
+  )
+}
+```
+
+And this is `R/paths-audit-get_audit_case.R` for the OpenFEC API, the
+first of 91 generated path files:
+
+``` r
+# These functions were generated by the {beekeeper} package, based on the paths
+# element from the source API description. You should carefully review these
+# functions.
+
+#' Get audit case
+#'
+#' This endpoint contains Final Audit Reports approved by the Commission since
+#' inception. The search can be based on information about the audited committee
+#' (Name, FEC ID Number, Type, Election Cycle) or the issues covered in the
+#' report.
+#'
+#' @param audit_case_id (length-1 `list`, optional) Primary/foreign key for
+#'   audit tables
+#' @param cycle (length-1 `list`, optional) Filter records to only those that
+#'   are applicable to a given two-year period. This cycle follows the
+#'   traditional House election cycle and subdivides the presidential and Senate
+#'   elections into comparable two-year blocks. The cycle begins with an odd
+#'   year and is named for its ending, even year.
+#' @param sub_category_id (length-1 `character`, optional) The finding id of an
+#'   audit. Finding are a category of broader issues. Each category has an
+#'   unique ID.
+#' @param sort_nulls_last (length-1 `logical`, optional) Toggle that sorts null
+#'   values last
+#' @param sort_hide_null (length-1 `logical`, optional) Hide null values on
+#'   sorted column(s).
+#' @param min_election_cycle (length-1 `list`, optional) Filter records to only
+#'   those that are applicable to a given two-year period. This cycle follows
+#'   the traditional House election cycle and subdivides the presidential and
+#'   Senate elections into comparable two-year blocks. The cycle begins with an
+#'   odd year and is named for its ending, even year.
+#' @param audit_id (length-1 `list`, optional) The audit issue. Each subcategory
+#'   has an unique ID
+#' @param q (length-1 `list`, optional) The name of the committee. If a
+#'   committee changes its name, the most recent name will be shown. Committee
+#'   names are not unique. Use committee_id for looking up records.
+#' @param per_page (length-1 `list`, optional) The number of results returned
+#'   per page. Defaults to 20.
+#' @param max_election_cycle (length-1 `list`, optional) Filter records to only
+#'   those that are applicable to a given two-year period. This cycle follows
+#'   the traditional House election cycle and subdivides the presidential and
+#'   Senate elections into comparable two-year blocks. The cycle begins with an
+#'   odd year and is named for its ending, even year.
+#' @param candidate_id (length-1 `list`, optional) A unique identifier assigned
+#'   to each candidate registered with the FEC. If a person runs for several
+#'   offices, that person will have separate candidate IDs for each office.
+#' @param committee_type (length-1 `list`, optional) The one-letter type code of
+#'   the organization: - C communication cost - D delegate - E electioneering
+#'   communication - H House - I independent expenditure filer (not a committee)
+#'   - N PAC - nonqualified - O independent expenditure-only (super PACs) - P
+#'   presidential - Q PAC - qualified - S Senate - U single candidate
+#'   independent expenditure - V PAC with non-contribution account, nonqualified
+#'   - W PAC with non-contribution account, qualified - X party, nonqualified -
+#'   Y party, qualified - Z national party non-federal account
+#' @param qq (length-1 `list`, optional) Name of candidate running for office
+#' @param page (length-1 `list`, optional) For paginating through results,
+#'   starting at page 1
+#' @param committee_id (length-1 `list`, optional) A unique identifier assigned
+#'   to each committee or filer registered with the FEC. In general committee
+#'   id's begin with the letter C which is followed by eight digits.
+#' @param api_key (length-1 `character`) API key for https://api.data.gov. Get
+#'   one at https://api.data.gov/signup.
+#' @param committee_designation (length-1 `character`, optional) Type of
+#'   committee: - H or S - Congressional - P - Presidential - X or Y or Z -
+#'   Party - N or Q - PAC - I - Independent expenditure - O - Super PAC
+#' @param primary_category_id (length-1 `character`, optional) Audit category ID
+#'   (table PK)
+#' @param sort_null_only (length-1 `logical`, optional) Toggle that filters out
+#'   all rows having sort column that is non-null
+#' @param sort (length-1 `list`, optional) Provide a field to sort by. Use `-`
+#'   for descending order. ex: `-case_no`
+#' @inheritParams .shared-params
+#'
+#' @returns `fec_get_audit_case()`: The API response.
+#' @export
+fec_get_audit_case <- function(
+  audit_case_id,
+  cycle,
+  sub_category_id,
+  sort_nulls_last,
+  sort_hide_null,
+  min_election_cycle,
+  audit_id,
+  q,
+  per_page,
+  max_election_cycle,
+  candidate_id,
+  committee_type,
+  qq,
+  page,
+  committee_id,
+  committee_designation,
+  primary_category_id,
+  sort_null_only,
+  sort,
+  api_key = Sys.getenv("FEC_API_KEY"),
+  max_reqs = Inf,
+  max_tries_per_req = 3
+) {
+  req <- req_fec_get_audit_case(
+    audit_case_id = audit_case_id,
+    cycle = cycle,
+    sub_category_id = sub_category_id,
+    sort_nulls_last = sort_nulls_last,
+    sort_hide_null = sort_hide_null,
+    min_election_cycle = min_election_cycle,
+    audit_id = audit_id,
+    q = q,
+    per_page = per_page,
+    max_election_cycle = max_election_cycle,
+    candidate_id = candidate_id,
+    committee_type = committee_type,
+    qq = qq,
+    page = page,
+    committee_id = committee_id,
+    committee_designation = committee_designation,
+    primary_category_id = primary_category_id,
+    sort_null_only = sort_null_only,
+    sort = sort,
+    api_key = api_key
+  )
+  resps <- nectar::req_perform_opinionated(
+    req,
+    max_reqs = max_reqs,
+    max_tries_per_req = max_tries_per_req
+  )
+  return(nectar::resp_parse(resps))
+}
+
+#' @rdname fec_get_audit_case
+#' @returns `req_fec_get_audit_case()`: (`httr2_request`) A [httr2::request()] object.
+req_fec_get_audit_case <- function(
+  audit_case_id,
+  cycle,
+  sub_category_id,
+  sort_nulls_last,
+  sort_hide_null,
+  min_election_cycle,
+  audit_id,
+  q,
+  per_page,
+  max_election_cycle,
+  candidate_id,
+  committee_type,
+  qq,
+  page,
+  committee_id,
+  committee_designation,
+  primary_category_id,
+  sort_null_only,
+  sort,
+  api_key = Sys.getenv("FEC_API_KEY")
+) {
+  sub_category_id <- stbl::to_chr_scalar(sub_category_id)
+  sort_nulls_last <- stbl::to_lgl_scalar(sort_nulls_last)
+  sort_hide_null <- stbl::to_lgl_scalar(sort_hide_null)
+  committee_designation <- stbl::to_chr_scalar(committee_designation)
+  primary_category_id <- stbl::to_chr_scalar(primary_category_id)
+  sort_null_only <- stbl::to_lgl_scalar(sort_null_only)
+  fec_req_prepare(
+    path = "/audit-case/",
+    method = "get",
+    api_key = api_key,
+    query = list(
+      audit_case_id = audit_case_id,
+      cycle = cycle,
+      sub_category_id = sub_category_id,
+      sort_nulls_last = sort_nulls_last,
+      sort_hide_null = sort_hide_null,
+      min_election_cycle = min_election_cycle,
+      audit_id = audit_id,
+      q = q,
+      per_page = per_page,
+      max_election_cycle = max_election_cycle,
+      candidate_id = candidate_id,
+      committee_type = committee_type,
+      qq = qq,
+      page = page,
+      committee_id = committee_id,
+      committee_designation = committee_designation,
+      primary_category_id = primary_category_id,
+      sort_null_only = sort_null_only,
+      sort = sort
+    )
+  )
+}
+```
+
+You may want to edit the generated functions to provide more informative
+names and documentation. For example, several parameters in the OpenFEC
+API definition have unclear types that result in `length-1 list`
+parameters in the generated functions. You can edit the generated
+functions to provide more specific types and documentation for these
+parameters.
+
+[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md)
+also generates a test file for each path in `tests/testthat/`. Each file
+includes a basic snapshot test for one path, wrapped with
+[`httptest2::with_mock_dir()`](https://enpiar.com/httptest2/reference/with_mock_dir.html)
+(so it only hits the API the first time you run it with a given set of
+arguments).
+
+For example, this is the generated
+`tests/testthat/test-paths-audit-get_audit_case.R` for the OpenFEC API:
+
+``` r
+# These tests were generated by the {beekeeper} package, based on the paths
+# element from the source API description. You will likely need to supply
+# arguments for the tests to succeed. We recommend expanding these tests to
+# check for specific expectations, rather than simply using a snapshot.
+
+with_mock_dir("api/path/audit/fec_get_audit_case", {
+  test_that("fec_get_audit_case() returns expected result", {
+    expect_snapshot({
+      test_result <- fec_get_audit_case(
+        audit_case_id,
+        cycle,
+        sub_category_id,
+        sort_nulls_last,
+        sort_hide_null,
+        min_election_cycle,
+        audit_id,
+        q,
+        per_page,
+        max_election_cycle,
+        candidate_id,
+        committee_type,
+        qq,
+        page,
+        committee_id,
+        committee_designation,
+        primary_category_id,
+        sort_null_only,
+        sort
+      )
+      test_result
+    })
+  })
+})
+```
+
+Currently, you will need to fill in the arguments for these tests to run
+successfully.
+
+Finally,
+[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md)
+creates a file `tests/testthat/setup.R`, which sets up
+[httptest2](https://enpiar.com/httptest2/) for testing.
+
+``` r
+library(httptest2)
+
+# Don't repeat the base url in httptest2 recording paths. This helps avoid
+# issues with long paths on Windows.
+set_redactor(function(x) {
+  gsub_response(
+    x,
+    nectar::url_path_append("https://api.open.fec.gov/v1", "/"),
+    "",
+    fixed = TRUE
+  )
+})
+```
+
+Specifically,
+[`httptest2::set_redactor()`](https://enpiar.com/httptest2/reference/set_redactor.html)
+is configured with
+[`httptest2::gsub_response()`](https://enpiar.com/httptest2/reference/gsub_response.html)
+to remove the base URL from the recording paths, to avoid issues with
+long paths on Windows.
+
+## Next steps
+
+The generated package is a starting point, but you will need to edit the
+generated files to finalize your package. For example, you will need to
+update the tests to provide specific arguments. You may also want to
+provide more specific documentation and types for parameters, or to add
+additional tests.
+
+Since beekeeper is under active development, we encourage you to [report
+any issues you encounter with the generated
+code](https://github.com/api2r/beekeeper/issues), and to [contribute
+improvements to the
+package](https://beekeeper.api2r.org/CONTRIBUTING.html).
