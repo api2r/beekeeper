@@ -5,7 +5,7 @@
 
 with_mock_dir("api/path/debts/get_schedules_schedule_d_sub_id", {
   test_that("get_schedules_schedule_d_sub_id() returns expected result", {
-    skip_if_not_exported("get_schedules_schedule_d_sub_id")
+    beekeeper::skip_if_not_exported("get_schedules_schedule_d_sub_id")
     expect_snapshot({
       test_result <- get_schedules_schedule_d_sub_id(sort_nulls_last, per_page, sort_null_only, sort_hide_null, sort, page, sub_id)
       test_result

@@ -2,7 +2,7 @@ api_title: OpenFEC
 api_abbr: fec
 api_version: '1.0'
 rapid_filename: _beekeeper_rapid.rds
-updated_on: 2026-06-18 08:24:24
+updated_on: 2026-06-21 09:23:47
 api_definition_origin:
   url: https://api.open.fec.gov/swagger/
   format: openapi
