@@ -72,11 +72,11 @@ Other package generation functions:
 # Set up an empty package.
 pkg_dir <- unclass(fs::path_norm(withr::local_tempdir()))
 usethis::create_package(pkg_dir, open = FALSE, check_name = FALSE)
-#> ✔ Creating /tmp/Rtmp3emo7K/file5512e3bee2/.
-#> ✔ Setting active project to "/tmp/Rtmp3emo7K/file5512e3bee2".
+#> ✔ Creating /tmp/RtmpjheZ9b/file55558d58b9b/.
+#> ✔ Setting active project to "/tmp/RtmpjheZ9b/file55558d58b9b".
 #> ✔ Creating R/.
 #> ✔ Writing DESCRIPTION.
-#> Package: file5512e3bee2
+#> Package: file55558d58b9b
 #> Title: What the Package Does (One Line, Title Case)
 #> Version: 0.0.0.9000
 #> Authors@R (parsed):
@@ -95,7 +95,7 @@ fs::file_copy(
   fs::path(pkg_dir, bk_files)
 )
 usethis::local_project(pkg_dir)
-#> ✔ Setting active project to "/tmp/Rtmp3emo7K/file5512e3bee2".
+#> ✔ Setting active project to "/tmp/RtmpjheZ9b/file55558d58b9b".
 #> ✔ Setting active project to "<no active project>".
 
 # Generate package authentication functions.

@@ -1,11 +1,8 @@
 # Skip a test if a function is not exported
 
-Use this in generated test files to skip tests for functions that
-haven't been exported yet. By default,
-[`generate_pkg_paths()`](https://beekeeper.api2r.org/dev/reference/generate_pkg_paths.md)
-generates path functions with `@keywords internal` rather than
-`@export`. Tests for those functions will be skipped until you update
-the roxygen block to use `@export`.
+Skip tests when functions aren't exported by a package (yet). Useful for
+auto-generated tests, so the tests are not active until the function has
+been reviewed and exported.
 
 ## Usage
 
@@ -21,8 +18,11 @@ skip_if_not_exported(fn_name, pkg = testthat::testing_package())
 
 - pkg:
 
-  (`character(1)`) The name of the package to check. Defaults to
+  (`character(1)`) The name of the package to check. Defaults to the
+  name of the package being tested via
   [`testthat::testing_package()`](https://testthat.r-lib.org/reference/is_testing.html).
+  If the package is *not* the package currently being tested, it must be
+  installed on the testing system.
 
 ## Value
 
