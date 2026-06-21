@@ -5,7 +5,7 @@
 
 with_mock_dir("api/path/audit/get_names_audit_candidates", {
   test_that("get_names_audit_candidates() returns expected result", {
-    skip_if_not_exported("get_names_audit_candidates")
+    beekeeper::skip_if_not_exported("get_names_audit_candidates")
     expect_snapshot({
       test_result <- get_names_audit_candidates(q)
       test_result

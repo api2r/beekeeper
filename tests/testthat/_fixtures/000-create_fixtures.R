@@ -1,6 +1,10 @@
+pkgload::load_all()
 apid_url <- "https://api.apis.guru/v2/specs/apis.guru/2.2.0/openapi.yaml"
 api_abbr <- "guru"
 pkg_dir <- test_path("_fixtures", api_abbr)
+# Clean slate.
+fs::dir_delete(fs::path(pkg_dir, "R"))
+fs::dir_delete(fs::path(pkg_dir, "testthat"))
 apid_url |>
   url() |>
   use_beekeeper(
@@ -15,12 +19,16 @@ fs::file_move(
   fs::path(pkg_dir, "tests", "testthat"), 
   fs::path(pkg_dir, "testthat")
 )
+fs::dir_delete(fs::path(pkg_dir, "tests"))
 # R CMD check doesn't like the .Rbuildignore files, and we don't use them.
 fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))
 
 apid_url <- "https://api.apis.guru/v2/specs/fec.gov/1.0/openapi.yaml"
 api_abbr <- "fec"
 pkg_dir <- test_path("_fixtures", api_abbr)
+# Clean slate.
+fs::dir_delete(fs::path(pkg_dir, "R"))
+fs::dir_delete(fs::path(pkg_dir, "testthat"))
 fec_apid <- apid_url |>
   url() |>
   yaml::read_yaml()
@@ -62,12 +70,16 @@ fs::file_move(
   fs::path(pkg_dir, "tests", "testthat"), 
   fs::path(pkg_dir, "testthat")
 )
+fs::dir_delete(fs::path(pkg_dir, "tests"))
 # R CMD check doesn't like the .Rbuildignore files, and we don't use them.
 fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))
 
 apid_url <- "https://api.apis.guru/v2/specs/trello.com/1.0/openapi.yaml"
 api_abbr <- "trello"
 pkg_dir <- test_path("_fixtures", api_abbr)
+# Clean slate.
+fs::dir_delete(fs::path(pkg_dir, "R"))
+fs::dir_delete(fs::path(pkg_dir, "testthat"))
 trello_rapid <- apid_url |>
   url() |>
   rapid::as_rapid()
@@ -92,5 +104,6 @@ fs::file_move(
   fs::path(pkg_dir, "tests", "testthat"), 
   fs::path(pkg_dir, "testthat")
 )
+fs::dir_delete(fs::path(pkg_dir, "tests"))
 # R CMD check doesn't like the .Rbuildignore files, and we don't use them.
 fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))

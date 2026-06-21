@@ -5,7 +5,7 @@
 
 with_mock_dir("api/path/board/add_boards", {
   test_that("add_boards() returns expected result", {
-    skip_if_not_exported("add_boards")
+    beekeeper::skip_if_not_exported("add_boards")
     expect_snapshot({
       test_result <- add_boards()
       test_result

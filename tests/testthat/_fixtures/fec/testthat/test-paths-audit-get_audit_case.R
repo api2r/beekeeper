@@ -5,7 +5,7 @@
 
 with_mock_dir("api/path/audit/get_audit_case", {
   test_that("get_audit_case() returns expected result", {
-    skip_if_not_exported("get_audit_case")
+    beekeeper::skip_if_not_exported("get_audit_case")
     expect_snapshot({
       test_result <- get_audit_case(audit_case_id, cycle, sub_category_id, sort_nulls_last, sort_hide_null, min_election_cycle, audit_id, q, per_page, max_election_cycle, candidate_id, committee_type, qq, page, committee_id, committee_designation, primary_category_id, sort_null_only, sort)
       test_result

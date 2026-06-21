@@ -5,7 +5,7 @@
 
 with_mock_dir("api/path/apis/get_api", {
   test_that("get_api() returns expected result", {
-    skip_if_not_exported("get_api")
+    beekeeper::skip_if_not_exported("get_api")
     expect_snapshot({
       test_result <- get_api(provider, api)
       test_result

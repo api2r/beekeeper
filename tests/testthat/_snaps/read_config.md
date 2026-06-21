@@ -15,9 +15,6 @@
       $rapid_filename
       [1] "_beekeeper_rapid.rds"
       
-      $updated_on
-      [1] "2026-06-18 08:18:56 UTC"
-      
       $api_definition_origin
       $api_definition_origin$url
       [1] "https://api.apis.guru/v2/openapi.yaml"
