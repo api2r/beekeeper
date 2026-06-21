@@ -10,18 +10,18 @@ skip_if_not_exported(fn_name, pkg = testthat::testing_package())
 \item{fn_name}{(\code{character(1)}) The name of the function to check.}
 
 \item{pkg}{(\code{character(1)}) The name of the package to check. Defaults to
-\code{\link[testthat:testing_package]{testthat::testing_package()}}.}
+the name of the package being tested via \code{\link[testthat:testing_package]{testthat::testing_package()}}. If
+the package is \emph{not} the package currently being tested, it must be
+installed on the testing system.}
 }
 \value{
 (\code{NULL}, invisibly) Called for its side effect: skips the current
 test if \code{fn_name} is not exported by \code{pkg}.
 }
 \description{
-Use this in generated test files to skip tests for functions that haven't
-been exported yet. By default, \code{generate_pkg_paths()} generates path
-functions with \verb{@keywords internal} rather than \verb{@export}. Tests for those
-functions will be skipped until you update the roxygen block to use
-\verb{@export}.
+Skip tests when functions aren't exported by a package (yet). Useful for
+auto-generated tests, so the tests are not active until the function has been
+reviewed and exported.
 }
 \examples{
 # In a generated test file, place this at the top of the test_that() block:
