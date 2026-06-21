@@ -11,7 +11,6 @@ test_that(".generate_prepare() generates prepare file.", {
   t_prepare_expected <- readLines(test_path(
     "_fixtures",
     "guru",
-    "tests",
     "testthat",
     "test-010-prepare.R"
   ))

@@ -10,6 +10,13 @@ apid_url |>
     rapid_filename = "_beekeeper_rapid.rds"
   )
 generate_pkg(pkg_dir = pkg_dir)
+# testthat paths are too long for tarballs, so move them up a level.
+fs::file_move(
+  fs::path(pkg_dir, "tests", "testthat"), 
+  fs::path(pkg_dir, "testthat")
+)
+# R CMD check doesn't like the .Rbuildignore files, and we don't use them.
+fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))
 
 apid_url <- "https://api.apis.guru/v2/specs/fec.gov/1.0/openapi.yaml"
 api_abbr <- "fec"
@@ -50,6 +57,13 @@ fec_rapid |>
     rapid_filename = "fec_subset_rapid.rds"
   )
 generate_pkg(config_filename = "fec_subset_beekeeper.yml", pkg_dir = pkg_dir)
+# testthat paths are too long for tarballs, so move them up a level.
+fs::file_move(
+  fs::path(pkg_dir, "tests", "testthat"), 
+  fs::path(pkg_dir, "testthat")
+)
+# R CMD check doesn't like the .Rbuildignore files, and we don't use them.
+fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))
 
 apid_url <- "https://api.apis.guru/v2/specs/trello.com/1.0/openapi.yaml"
 api_abbr <- "trello"
@@ -73,3 +87,10 @@ trello_rapid |>
     rapid_filename = "_beekeeper_rapid.rds"
   )
 generate_pkg(pkg_dir = pkg_dir)
+# testthat paths are too long for tarballs, so move them up a level.
+fs::file_move(
+  fs::path(pkg_dir, "tests", "testthat"), 
+  fs::path(pkg_dir, "testthat")
+)
+# R CMD check doesn't like the .Rbuildignore files, and we don't use them.
+fs::file_delete(fs::path(pkg_dir, ".Rbuildignore"))

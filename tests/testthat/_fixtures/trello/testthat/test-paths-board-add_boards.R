@@ -3,10 +3,11 @@
 # arguments for the tests to succeed. We recommend expanding these tests to
 # check for specific expectations, rather than simply using a snapshot.
 
-with_mock_dir("api/path/audit/get_names_audit_committees", {
-  test_that("get_names_audit_committees() returns expected result", {
+with_mock_dir("api/path/board/add_boards", {
+  test_that("add_boards() returns expected result", {
+    skip_if_not_exported("add_boards")
     expect_snapshot({
-      test_result <- get_names_audit_committees(q)
+      test_result <- add_boards()
       test_result
     })
   })

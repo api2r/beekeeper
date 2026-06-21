@@ -20,3 +20,4 @@
 ^AGENTS\.md$
 ^conversation-export\.json$
 ^vignettes/articles$
+^\.posit$
