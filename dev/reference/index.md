@@ -28,5 +28,7 @@
   : Read saved security metadata filename
 - [`read_security_schemes()`](https://beekeeper.api2r.org/dev/reference/read_security_schemes.md)
   : Read security schemes from an API definition
+- [`skip_if_not_exported()`](https://beekeeper.api2r.org/dev/reference/skip_if_not_exported.md)
+  : Skip a test if a function is not exported
 - [`use_beekeeper()`](https://beekeeper.api2r.org/dev/reference/use_beekeeper.md)
   : Configure a package to use beekeeper

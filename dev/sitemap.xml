@@ -112,6 +112,7 @@
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_security_data.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_security_data_filename.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/read_security_schemes.html</loc></url>
+<url><loc>https://beekeeper.api2r.org/dev/reference/skip_if_not_exported.html</loc></url>
 <url><loc>https://beekeeper.api2r.org/dev/reference/use_beekeeper.html</loc></url>
 </urlset>
 
