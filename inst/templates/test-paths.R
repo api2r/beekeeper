@@ -3,7 +3,7 @@
 # arguments for the tests to succeed. We recommend expanding these tests to
 # check for specific expectations, rather than simply using a snapshot.
 
-with_mock_dir("api/path/{{tag}}/{{fn_prefix}}{{operation_id}}", {
+httptest2::with_mock_dir("api/path/{{tag}}/{{fn_prefix}}{{operation_id}}", {
   test_that("{{fn_prefix}}{{operation_id}}() returns expected result", {
     beekeeper::skip_if_not_exported("{{fn_prefix}}{{operation_id}}")
     expect_snapshot({
